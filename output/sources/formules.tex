@@ -1,0 +1,273 @@
+\documentclass[border=4pt,multi=preview]{standalone}
+\usepackage{amsmath,amssymb,mathtools,xcolor}
+\definecolor{ink}{HTML}{0A1047}
+\begin{document}
+% CONVENTIONS DE NOTATION
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\begin{aligned}x&\in\mathbb{R}^{d},\quad W_\ell\in\mathbb{R}^{d_\ell\times d_{\ell-1}}\\X&\in\mathbb{R}^{B\times d},\quad H_\ell=\phi(XW_\ell^\top+\mathbf{1}b_\ell^\top)\end{aligned}\end{gathered}$
+\end{preview}
+% APPRENDRE DES REPRÉSENTATIONS
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}f_\theta=f_L\circ f_{L-1}\circ\cdots\circ f_1\end{gathered}$
+\end{preview}
+% LE NEURONE DIFFÉRENTIABLE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}z=w^\top x+b,\qquad a=\phi(z)\end{gathered}$
+\end{preview}
+% POURQUOI LA NON-LINÉARITÉ ?
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}W_2(W_1x+b_1)+b_2=(W_2W_1)x+(W_2b_1+b_2)\end{gathered}$
+\end{preview}
+% DÉRIVÉES DES ACTIVATIONS
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\sigma'(z)=\sigma(z)(1-\sigma(z)),\quad\phi_{\rm ReLU}'(z)=\mathbf{1}_{z>0}\\\operatorname{GELU}(z)=z\Phi(z)\end{gathered}$
+\end{preview}
+% UNE COUCHE DENSE : FORMES ET CALCUL
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}a_\ell=\phi_\ell(W_\ell a_{\ell-1}+b_\ell),\qquad P_\ell=d_\ell(d_{\ell-1}+1)\end{gathered}$
+\end{preview}
+% PERTE DE RÉGRESSION
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\ell(\hat y,y)=\frac12\|\hat y-y\|_2^2,\qquad\nabla_{\hat y}\ell=\hat y-y\end{gathered}$
+\end{preview}
+% CLASSIFICATION : SOFTMAX ET ENTROPIE CROISÉE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}p_k=\frac{e^{z_k}}{\sum_j e^{z_j}},\qquad\ell(z,y)=-\sum_{k=1}^{K}y_k\log p_k\end{gathered}$
+\end{preview}
+% STABILITÉ NUMÉRIQUE DES LOGITS
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\ell(z,c)=-z_c+m+\log\sum_j e^{z_j-m},\qquad m=\max_j z_j\end{gathered}$
+\end{preview}
+% RISQUE EMPIRIQUE ET GÉNÉRALISATION
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\hat R(\theta)=\frac1N\sum_{i=1}^{N}\ell(f_\theta(x_i),y_i),\qquad\hat\theta\approx\arg\min_\theta\hat R(\theta)\end{gathered}$
+\end{preview}
+% DESCENTE DE GRADIENT
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\theta_{t+1}=\theta_t-\eta_t\nabla_\theta\hat R(\theta_t)\end{gathered}$
+\end{preview}
+% RÈGLE DE LA CHAÎNE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}z=g(x),\quad u=h(z),\quad \frac{\partial\ell}{\partial x}=\frac{\partial\ell}{\partial u}\frac{\partial u}{\partial z}\frac{\partial z}{\partial x}\end{gathered}$
+\end{preview}
+% EXEMPLE SCALAIRE : UN PAS COMPLET
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\ell=\tfrac12(a-y)^2,\quad a=\sigma(wx+b)\\\frac{\partial\ell}{\partial w}=(a-y)a(1-a)x\approx-0.1058\end{gathered}$
+\end{preview}
+% GRADIENT DE SOFTMAX + ENTROPIE CROISÉE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\frac{\partial p_i}{\partial z_j}=p_i(\delta_{ij}-p_j),\qquad\frac{\partial\ell}{\partial z}=p-y\end{gathered}$
+\end{preview}
+% RÉTROPROPAGATION D’UNE COUCHE DENSE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\delta_\ell=\frac{\partial\ell}{\partial z_\ell},\quad\nabla_{W_\ell}\ell=\delta_\ell a_{\ell-1}^{\top}\\\nabla_{b_\ell}\ell=\delta_\ell,\quad\frac{\partial\ell}{\partial a_{\ell-1}}=W_\ell^\top\delta_\ell\end{gathered}$
+\end{preview}
+% PROPAGER LE SIGNAL DANS LES COUCHES CACHÉES
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\delta_\ell=\left(W_{\ell+1}^\top\delta_{\ell+1}\right)\odot\phi_\ell'(z_\ell)\end{gathered}$
+\end{preview}
+% GRADIENTS VECTORISÉS SUR UN BATCH
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}Z=HW^\top+\mathbf1b^\top,\quad D=\frac{\partial\mathcal L}{\partial Z}\\\nabla_W\mathcal L=D^\top H,\quad\nabla_b\mathcal L=\sum_{i=1}^{B}D_{i,:},\quad\nabla_H\mathcal L=DW\end{gathered}$
+\end{preview}
+% VÉRIFIER UN GRADIENT NUMÉRIQUEMENT
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}g_j^{\rm num}=\frac{\mathcal L(\theta+\varepsilon e_j)-\mathcal L(\theta-\varepsilon e_j)}{2\varepsilon}\\r=\frac{\|g^{\rm num}-g\|_2}{\|g^{\rm num}\|_2+\|g\|_2+10^{-12}}\end{gathered}$
+\end{preview}
+% SGD ET MINI-BATCHES
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}g_t=\frac1B\sum_{i\in\mathcal B_t}\nabla_\theta\ell_i(\theta_t),\qquad\theta_{t+1}=\theta_t-\eta_tg_t\end{gathered}$
+\end{preview}
+% MOMENTUM : MÉMORISER UNE DIRECTION
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}v_t=\beta v_{t-1}+g_t,\qquad\theta_{t+1}=\theta_t-\eta v_t\end{gathered}$
+\end{preview}
+% ADAM : PREMIER ET SECOND MOMENTS
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\begin{aligned}m_t&=\beta_1m_{t-1}+(1-\beta_1)g_t\\v_t&=\beta_2v_{t-1}+(1-\beta_2)g_t^2\\\theta_{t+1}&=\theta_t-\eta\frac{m_t/(1-\beta_1^t)}{\sqrt{v_t/(1-\beta_2^t)}+\varepsilon}\end{aligned}\end{gathered}$
+\end{preview}
+% INITIALISATION ET PROPAGATION DES VARIANCES
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}W_{ij}\sim\mathcal N\!\left(0,\frac{2}{d_{\rm in}}\right)\quad\text{(ReLU)},\qquad\operatorname{Var}(W_{ij})\approx\frac{2}{d_{\rm in}+d_{\rm out}}\quad\text{(Xavier)}\end{gathered}$
+\end{preview}
+% GRADIENTS QUI DISPARAISSENT OU EXPLOSENT
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\frac{\partial\ell}{\partial a_0}=J_1^\top J_2^\top\cdots J_L^\top\frac{\partial\ell}{\partial a_L}\end{gathered}$
+\end{preview}
+% PÉNALISATION L2 ET WEIGHT DECAY
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\mathcal L_{\rm reg}=\mathcal L+\frac\lambda2\|\theta\|_2^2,\qquad\nabla\mathcal L_{\rm reg}=\nabla\mathcal L+\lambda\theta\end{gathered}$
+\end{preview}
+% DROPOUT : TRAIN ET ÉVALUATION
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}m_j\sim\operatorname{Bernoulli}(1-p),\qquad\tilde a_j=\frac{m_j}{1-p}a_j,\qquad\mathbb E[\tilde a_j]=a_j\end{gathered}$
+\end{preview}
+% NORMALISER LES ACTIVATIONS
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\hat x=\frac{x-\mu}{\sqrt{\sigma^2+\varepsilon}},\qquad y=\gamma\hat x+\beta\end{gathered}$
+\end{preview}
+% CONVOLUTION 2D : L’OPÉRATION LOCALE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}Y_{o,i,j}=b_o+\sum_{c=1}^{C_{\rm in}}\sum_{u=0}^{k_h-1}\sum_{v=0}^{k_w-1}W_{o,c,u,v}\,X_{c,i+u,j+v}\end{gathered}$
+\end{preview}
+% CONVOLUTION : EXEMPLE À LA MAIN
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}X=\begin{bmatrix}1&2&0\\0&1&3\\2&1&0\end{bmatrix},\quad W=\begin{bmatrix}1&0\\0&-1\end{bmatrix}\\Y=\begin{bmatrix}0&-1\\-1&1\end{bmatrix}\end{gathered}$
+\end{preview}
+% STRIDE, PADDING ET DILATION
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}H_{\rm out}=\left\lfloor\frac{H+2p-d(k-1)-1}{s}+1\right\rfloor\end{gathered}$
+\end{preview}
+% TAILLES ET NOMBRE DE PARAMÈTRES
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}P=C_{\rm out}(C_{\rm in}k_hk_w+1)\\\operatorname{MACs}\approx H_{\rm out}W_{\rm out}C_{\rm out}C_{\rm in}k_hk_w\end{gathered}$
+\end{preview}
+% POOLING : RÉDUIRE LA RÉSOLUTION
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\operatorname{maxpool}\!\begin{bmatrix}1&4\\2&3\end{bmatrix}=4,\qquad\operatorname{avgpool}\!\begin{bmatrix}1&4\\2&3\end{bmatrix}=2.5\end{gathered}$
+\end{preview}
+% CHAMP RÉCEPTIF : CALCUL RÉCURSIF
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}j_\ell=j_{\ell-1}s_\ell,\qquad r_\ell=r_{\ell-1}+(k_\ell-1)d_\ell j_{\ell-1}\\r_0=j_0=1\end{gathered}$
+\end{preview}
+% ÉQUIVARIANCE ET INVARIANCE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}f(Tx)=T f(x)\quad\text{(equivariance)},\qquad g(Tx)=g(x)\quad\text{(invariance)}\end{gathered}$
+\end{preview}
+% CONVOLUTION 1×1 ET AGRÉGATION GLOBALE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}Y_{o,i,j}=b_o+\sum_c W_{o,c}X_{c,i,j},\qquad g_c=\frac1{HW}\sum_{i,j}X_{c,i,j}\end{gathered}$
+\end{preview}
+% BATCHNORM DANS UN CNN
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\mu_c=\frac1{BHW}\sum_{b,i,j}X_{b,c,i,j},\quad\hat X_{b,c,i,j}=\frac{X_{b,c,i,j}-\mu_c}{\sqrt{\sigma_c^2+\varepsilon}}\end{gathered}$
+\end{preview}
+% CONNEXIONS RÉSIDUELLES
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}y=x+F(x),\qquad\frac{\partial y}{\partial x}=I+\frac{\partial F}{\partial x}\end{gathered}$
+\end{preview}
+% AUGMENTER SANS CHANGER LA CIBLE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\mathcal L_{\rm aug}=\mathbb E_{(x,y)}\,\mathbb E_{T\sim\mathcal A}\!\left[\ell(f_\theta(Tx),y)\right]\end{gathered}$
+\end{preview}
+% MÉTRIQUES ET MATRICE DE CONFUSION
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\operatorname{precision}=\frac{TP}{TP+FP},\quad\operatorname{rappel}=\frac{TP}{TP+FN},\quad F_1=\frac{2PR}{P+R}\end{gathered}$
+\end{preview}
+% TRANSFERT : RÉUTILISER UNE REPRÉSENTATION
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}f(x)=h_{\psi}(g_{\phi}(x)),\qquad\phi\leftarrow\phi_{\rm source},\quad\psi\leftarrow\psi_{\rm nouvelle}\end{gathered}$
+\end{preview}
+% UNE SÉQUENCE COMME TENSEUR
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}X\in\mathbb R^{B\times n\times d}\end{gathered}$
+\end{preview}
+% RÉCURRENCE ET DÉPENDANCES LONGUES
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}h_t=\phi(W_xx_t+W_hh_{t-1}+b)\end{gathered}$
+\end{preview}
+% EMBEDDINGS : DES IDENTIFIANTS AUX VECTEURS
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}E\in\mathbb R^{V\times d},\qquad x_t=E[\operatorname{id}(t),:]\end{gathered}$
+\end{preview}
+% INFORMATION DE POSITION
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}X_0=E[\text{tokens}]+P,\qquad\operatorname{SA}(\Pi X)=\Pi\operatorname{SA}(X)\end{gathered}$
+\end{preview}
+% ENCODAGE SINUSOÏDAL DES POSITIONS
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}PE_{t,2i}=\sin\!\left(\frac{t}{10000^{2i/d}}\right),\qquad PE_{t,2i+1}=\cos\!\left(\frac{t}{10000^{2i/d}}\right)\end{gathered}$
+\end{preview}
+% L’ATTENTION COMME SOMME PONDÉRÉE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}o_i=\sum_{j=1}^{n_k}\alpha_{ij}v_j,\qquad\sum_j\alpha_{ij}=1,\quad\alpha_{ij}\ge0\end{gathered}$
+\end{preview}
+% Q, K, V : PROJECTIONS APPRISES
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V\\W_Q,W_K\in\mathbb R^{d\times d_k},\quad W_V\in\mathbb R^{d\times d_v}\end{gathered}$
+\end{preview}
+% SCORES D’ATTENTION : TOUTES LES PAIRES
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}S=\frac{QK^\top}{\sqrt{d_k}},\qquad S_{ij}=\frac{q_i^\top k_j}{\sqrt{d_k}}\end{gathered}$
+\end{preview}
+% POURQUOI DIVISER PAR √dₖ ?
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\operatorname{Var}\!\left(\sum_{r=1}^{d_k}q_rk_r\right)\approx d_k\quad\Longrightarrow\quad\operatorname{Var}\!\left(\frac{q^\top k}{\sqrt{d_k}}\right)\approx1\end{gathered}$
+\end{preview}
+% SOFTMAX PUIS AGRÉGATION DES VALEURS
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}A=\operatorname{softmax}_{\rm lignes}(S),\qquad O=AV\in\mathbb R^{n_q\times d_v}\end{gathered}$
+\end{preview}
+% ATTENTION : EXEMPLE NUMÉRIQUE COMPLET
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}Q=K=\begin{bmatrix}1&0\\0&1\end{bmatrix},\quad V=\begin{bmatrix}1&0\\0&2\end{bmatrix}\\A\approx\begin{bmatrix}0.6698&0.3302\\0.3302&0.6698\end{bmatrix},\quad O\approx\begin{bmatrix}0.6698&0.6605\\0.3302&1.3395\end{bmatrix}\end{gathered}$
+\end{preview}
+% MASQUE CAUSAL ET MASQUE DE PADDING
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}M_{ij}=\begin{cases}0&j\le i\\-\infty&j>i\end{cases},\qquad A=\operatorname{softmax}(S+M)\end{gathered}$
+\end{preview}
+% MULTI-HEAD ATTENTION
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\operatorname{head}_r=\operatorname{Attn}(XW_Q^{(r)},XW_K^{(r)},XW_V^{(r)})\\\operatorname{MHA}(X)=\operatorname{Concat}(\operatorname{head}_1,\ldots,\operatorname{head}_h)W_O\end{gathered}$
+\end{preview}
+% LAYERNORM : NORMALISER CHAQUE TOKEN
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\mu_i=\frac1d\sum_{r=1}^{d}X_{ir},\quad\operatorname{LN}(X_i)=\gamma\odot\frac{X_i-\mu_i}{\sqrt{\sigma_i^2+\varepsilon}}+\beta\end{gathered}$
+\end{preview}
+% LE MLP POSITION PAR POSITION
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\operatorname{FFN}(x)=W_2\,\phi(W_1x+b_1)+b_2,\qquad d\rightarrow d_{\rm ff}\rightarrow d\end{gathered}$
+\end{preview}
+% UN BLOC TRANSFORMER PRE-LN
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}U=X+\operatorname{MHA}(\operatorname{LN}_1(X))\\Y=U+\operatorname{FFN}(\operatorname{LN}_2(U))\end{gathered}$
+\end{preview}
+% ENCODEUR : CONTEXTUALISER UNE SÉQUENCE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}X_L=\operatorname{Block}_L\circ\cdots\circ\operatorname{Block}_1(X_0)\end{gathered}$
+\end{preview}
+% CROSS-ATTENTION : RELIER DEUX SÉQUENCES
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}Q=X_{\rm cible}W_Q,\quad K=H_{\rm source}W_K,\quad V=H_{\rm source}W_V\end{gathered}$
+\end{preview}
+% COÛT DE L’ATTENTION DENSE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}T_{\rm attn}=O(n^2d),\quad T_{\rm proj+FFN}=O(nd^2)\\M_{\rm scores}=O(Bhn^2)\quad\text{si les scores sont materialises}\end{gathered}$
+\end{preview}
+% OBJECTIF AUTO-RÉGRESSIF
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}p_\theta(x_{1:T})=\prod_{t=1}^{T}p_\theta(x_t\mid x_{<t})\\\mathcal L=-\frac1T\sum_{t=1}^{T}\log p_\theta(x_t\mid x_{<t})\end{gathered}$
+\end{preview}
+% DÉCALER ENTRÉES ET CIBLES
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\text{inputs}=s_{0:T-1},\qquad\text{targets}=s_{1:T}\end{gathered}$
+\end{preview}
+% DÉCODAGE : ARGMAX, TEMPÉRATURE ET ÉCHANTILLONNAGE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}p_\tau(x_t=k\mid x_{<t})=\operatorname{softmax}(z/\tau)_k,\qquad\tau>0\end{gathered}$
+\end{preview}
+% PERPLEXITÉ ET NORMALISATION DE LA PERTE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\operatorname{PPL}=\exp\!\left(-\frac1M\sum_{t\in\mathcal V}\log p_\theta(x_t\mid x_{<t})\right),\quad M=|\mathcal V|\end{gathered}$
+\end{preview}
+% CACHE K/V À L’INFÉRENCE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}M_{KV}\approx2BLnd_{KV}\times\text{octets par element}\end{gathered}$
+\end{preview}
+% VISION TRANSFORMER : UNE IMAGE EN PATCHES
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}n=\frac{HW}{P^2},\qquad x_i\in\mathbb R^{P^2C},\qquad z_i=x_iW_E+p_i\end{gathered}$
+\end{preview}
+% PATCHES : CALCULER LE COÛT
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\left(\frac{224}{16}\right)^2=196,\qquad\left(\frac{224}{8}\right)^2=784\\\frac{784^2}{196^2}=16\end{gathered}$
+\end{preview}
+% TP 05 : LA TÂCHE ET SON PROTOCOLE
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\langle BOS\rangle,\ a,b,c,d,\ a,b,c,d,\ a,b,c,d,\ \langle EOS\rangle\end{gathered}$
+\end{preview}
+% SYNTHÈSE : UN MÊME CADRE, PLUSIEURS STRUCTURES
+\begin{preview}\color{ink}\fontsize{24}{30}\selectfont
+$\displaystyle \begin{gathered}\text{donnees}\ \longrightarrow\ f_\theta\ \longrightarrow\ \mathcal L\ \xrightarrow{\rm backprop}\ \nabla_\theta\mathcal L\ \xrightarrow{\rm optimiseur}\ \theta'\end{gathered}$
+\end{preview}
+\end{document}
