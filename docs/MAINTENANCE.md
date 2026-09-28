@@ -22,4 +22,6 @@ Préciser `--kernel cybersup-dl` pour utiliser le noyau local installé avec ce 
 
 Les présentations et leurs sources sont dans `output/`. Le générateur des packs ne reconstruit pas les slides. Le template original, les environnements locaux, les rapports, les clés et les fichiers `.env` restent hors de Git. Ne rendre public ce dépôt contenant les corrigés qu'après avoir préparé une distribution distincte adaptée.
 
+La version courante est `CYBERSUP-Deep-Learning-M2-35h-v3` (135 diapositives). Les diapositives 3 à 12 forment l'introduction, avec les extraits fournis aux diapositives 7 et 8. Les références et la provenance figurent dans `output/sources/illustrations.md`. Conserver les proportions des images et leurs attributions. Après une modification des slides, synchroniser le PPTX, son PDF, les notes du guide, `sources/cours.json` et les sources LaTeX, puis reconstruire les deux packs. Les tableaux quotidiens doivent toujours totaliser 420 minutes chacun.
+
 La CI s'exécute sur les poussées vers `main`, les pull requests et à la demande. Elle utilise Python 3.12 et les roues PyTorch CPU. L'artefact `notebooks-cpu` contient les notebooks exécutés et les résultats de cette exécution.

@@ -21,6 +21,7 @@
       "day": 0,
       "title": "SOMMAIRE",
       "body": [
+        "Histoire et comparaison ML / DL",
         "Réseaux profonds & rétropropagation",
         "Optimisation & convolutions",
         "CNN & transfert d’apprentissage",
@@ -28,7 +29,7 @@
         "Modèles causaux & mise en pratique"
       ],
       "math": "",
-      "notes": "Le cours suit cinq journées de sept heures de formation effective, hors pauses. Chaque journée contient un TP exécuté sur CPU, des exercices mathématiques et une restitution. Les supports de Bigot, Tavenard, du CNAM et de Geoffrey Daniel servent de lectures complémentaires. Les articles originaux complètent la partie architectures. Les exemples numériques, exercices et notebooks de ce support sont construits pour cette progression. Inviter les étudiants à conserver un carnet des dimensions, hypothèses et observations.",
+      "notes": "L’introduction situe le deep learning dans le machine learning et présente les deux boucles d’apprentissage du livre de Howard et Gugger. Elle est comprise dans le jour 1, et ne constitue pas une sixième journée. Le cours suit cinq journées de sept heures de formation effective, hors pauses. Chaque journée contient un TP exécuté sur CPU, des exercices mathématiques et une restitution. Les supports de Bigot, Tavenard, du CNAM et de Geoffrey Daniel servent de lectures complémentaires. Les articles originaux complètent la partie architectures. Les exemples numériques, exercices et notebooks de ce support sont construits pour cette progression. Inviter les étudiants à conserver un carnet des dimensions, hypothèses et observations.",
       "question": "",
       "answer": "",
       "refs": [
@@ -38,6 +39,293 @@
         "daniel"
       ],
       "type": "agenda"
+    },
+    {
+      "day": 0,
+      "body": [
+        "Histoire du deep learning et comparaison des approches"
+      ],
+      "math": "",
+      "question": "Dans un système de classification, quelles décisions relèvent des données et lesquelles relèvent du concepteur ?",
+      "answer": "Les paramètres sont estimés à partir des données selon un objectif. La tâche, la collecte, l’architecture, le protocole et les contraintes restent des choix de conception.",
+      "refs": [
+        "fastai",
+        "dlreview"
+      ],
+      "type": "section",
+      "title": "REPÈRES ET\nPRINCIPES",
+      "notes": "Cette introduction prend environ 35 à 40 minutes à l’intérieur du cadrage du jour 1. Partir d’un problème concret : reconnaître une catégorie à partir des pixels d’une image. Demander ce que l’algorithme doit ajuster et ce que le concepteur doit choisir. Le deep learning appartient au machine learning. Le point de comparaison utile porte sur la construction des représentations, l’architecture et les paramètres optimisés. Les deux schémas du livre décrivent une boucle d’apprentissage commune, à deux niveaux de détail. Ils permettront ensuite de situer précisément les CNN et les Transformers. Les repères historiques proposés sont sélectifs : ils expliquent les idées utilisées dans le cours sans prétendre raconter une succession exhaustive d’inventions."
+    },
+    {
+      "day": 0,
+      "body": [
+        "Le machine learning ajuste un modèle à partir de données.",
+        "Les réseaux profonds composent plusieurs niveaux de représentation.",
+        "La profondeur décrit cette composition, avec des paramètres appris."
+      ],
+      "math": "\\mathrm{Deep\\ learning}\\subset\\mathrm{Machine\\ learning}\\subset\\mathrm{IA}",
+      "question": "Un arbre de décision très profond est-il un réseau de deep learning ?",
+      "answer": "Non. Sa profondeur compte des décisions successives dans un arbre. Elle ne correspond pas à la composition de couches paramétrées d’un réseau.",
+      "refs": [
+        "dlreview",
+        "fastai"
+      ],
+      "title": "LE DEEP LEARNING DANS LE MACHINE LEARNING",
+      "notes": "Définir le machine learning comme un ensemble de méthodes qui tirent des régularités des données pour accomplir une tâche. Il comprend notamment les modèles linéaires, les arbres, les méthodes à noyaux et les réseaux de neurones. Dans ce cours, le deep learning désigne l’apprentissage avec des réseaux comportant plusieurs transformations paramétrées successives. L’inclusion affichée est une carte des domaines, pas une échelle de qualité. Il n’existe pas de seuil universel de couches qui rendrait un modèle efficace ou pertinent. La profondeur d’un arbre de décision ne suffit pas à en faire un modèle de deep learning. Les transformations internes peuvent être apprises avec ou sans étiquettes externes. Notre première comparaison utilise l’apprentissage supervisé pour rendre la cible et la perte explicites. Une représentation apprise n’est pas forcément interprétable par un nom d’objet ou de contour."
+    },
+    {
+      "day": 0,
+      "body": [],
+      "math": "",
+      "question": "Pourquoi l’existence d’une architecture expressive ne suffit-elle pas ?",
+      "answer": "Il faut trouver des paramètres utiles avec des données et un algorithme d’apprentissage réalisables. Expressivité et facilité d’optimisation sont différentes.",
+      "refs": [
+        "perceptron",
+        "backprop",
+        "lenet",
+        "dbn"
+      ],
+      "title": "REPÈRES HISTORIQUES : LES FONDEMENTS",
+      "table": [
+        [
+          "Date",
+          "Repère",
+          "Idée utile pour ce cours"
+        ],
+        [
+          "1958",
+          "Perceptron, Rosenblatt",
+          "Ajuster une règle de décision à partir d’exemples"
+        ],
+        [
+          "1986",
+          "Rétropropagation",
+          "Popularisation de l’apprentissage des couches cachées"
+        ],
+        [
+          "1998",
+          "LeNet-5",
+          "Convolutions et paramètres partagés pour les chiffres"
+        ],
+        [
+          "2006",
+          "Deep belief networks",
+          "Préentraînement couche par couche des réseaux profonds"
+        ]
+      ],
+      "widths": [
+        0.12,
+        0.29,
+        0.59
+      ],
+      "rowHeight": 72,
+      "caption": "Repères sélectifs. La rétropropagation possède des antécédents à l’article de 1986.",
+      "notes": "En 1958, Rosenblatt formalise le perceptron. Pour le cours, retenir l’idée d’une règle dont les paramètres changent avec les exemples. Le modèle linéaire simple ne résout pas tous les problèmes de séparation. L’article de Rumelhart, Hinton et Williams en 1986 montre comment l’erreur de sortie permet d’ajuster des unités cachées. Il popularise la rétropropagation dans les réseaux, sans constituer le début de toute différentiation inverse. LeNet-5, décrit en 1998, associe des connexions locales, le partage des poids et la réduction spatiale pour la reconnaissance de documents. Le travail de Hinton, Osindero et Teh en 2006 propose un entraînement des deep belief networks par étapes, puis un ajustement. Ce jalon rappelle que la difficulté ne se résume pas à écrire davantage de couches : il faut aussi réussir leur optimisation. Ces dates désignent les publications citées, pas une revendication d’invention exclusive."
+    },
+    {
+      "day": 0,
+      "body": [],
+      "math": "",
+      "question": "Peut-on comparer deux architectures uniquement à partir de leur année de publication ?",
+      "answer": "Non. Il faut comparer leurs résultats pour une tâche donnée, avec le protocole, les données et les budgets explicités.",
+      "refs": [
+        "alexnet",
+        "attention",
+        "vit"
+      ],
+      "title": "REPÈRES HISTORIQUES : LE PASSAGE À L’ÉCHELLE",
+      "table": [
+        [
+          "Publication",
+          "Architecture",
+          "Apport étudié"
+        ],
+        [
+          "2012",
+          "AlexNet",
+          "CNN, données ImageNet et entraînement sur GPU"
+        ],
+        [
+          "2017",
+          "Transformer",
+          "Attention pour relier les positions d’une séquence"
+        ],
+        [
+          "2020 / 2021",
+          "Vision Transformer",
+          "Images découpées en patches et préentraînement"
+        ]
+      ],
+      "widths": [
+        0.17,
+        0.25,
+        0.58
+      ],
+      "rowHeight": 83,
+      "caption": "ViT : prépublication en 2020, publication à ICLR en 2021.",
+      "notes": "AlexNet combine plusieurs facteurs en 2012 : un CNN, un grand jeu d’images annotées, une implémentation efficace sur GPU et des choix d’optimisation et de régularisation. Éviter d’attribuer le résultat à la profondeur seule. En 2017, le Transformer présenté pour la traduction utilise l’attention dans une architecture encodeur-décodeur, sans récurrence ni convolution pour traiter la séquence. L’attention existait auparavant : la nouveauté porte sur cette organisation complète du modèle. Le Vision Transformer transpose ensuite une architecture de type Transformer à des patches d’image. La prépublication est datée de 2020 et la publication de conférence de 2021. Les résultats du papier s’inscrivent dans un régime de préentraînement important. Ces repères motivent notre progression CNN puis attention. Une architecture plus récente ne remplace pas automatiquement une ancienne méthode pour chaque tâche. Le budget, les données, le préentraînement et le protocole conditionnent toute comparaison."
+    },
+    {
+      "day": 0,
+      "body": [
+        "Le modèle produit un résultat, un critère l’évalue et une règle ajuste les paramètres."
+      ],
+      "math": "",
+      "question": "Quelle partie du schéma cesse de fonctionner pendant une simple prédiction sur une nouvelle image ?",
+      "answer": "La mise à jour des paramètres. On conserve le calcul entrée-modèle-sortie avec les paramètres entraînés.",
+      "refs": [
+        "fastai",
+        "fastbook"
+      ],
+      "title": "LA BOUCLE D’APPRENTISSAGE",
+      "image": "oreilly-figure-1-6.png",
+      "imageOriginal": "IMG_9762.HEIC",
+      "figure": "1-6",
+      "caption": "Howard & Gugger, O’Reilly (2020), chapitre 1, figure 1-6. Extrait fourni par le formateur.",
+      "notes": "Lire le schéma fourni de gauche à droite. Inputs désigne les observations. Weights désigne les coefficients ajustables. Model combine l’entrée et ces coefficients pour produire Results. Performance fournit un signal qui guide la modification des poids. Revenir ensuite sur la flèche Update : elle appartient à l’entraînement, pendant lequel on cherche des paramètres utiles. Les auteurs présentent ici une abstraction du processus d’apprentissage, pas une architecture neuronale particulière. Dans une implémentation par gradient, le signal optimisé sera une perte numérique. Le mot performance reste volontairement général dans cette première figure. La métrique communiquée au métier, telle que l’accuracy, peut être différente du critère utilisé par l’optimiseur. Cette boucle s’applique aussi à des modèles peu profonds. Un algorithme d’arbre apprend également à partir des données, avec une procédure de construction différente de la rétropropagation. Ne pas présenter cette figure comme exclusivement réservée au machine learning classique."
+    },
+    {
+      "day": 0,
+      "body": [
+        "La perte compare prédictions et cibles. L’optimiseur utilise ce signal pour ajuster les paramètres."
+      ],
+      "math": "",
+      "question": "La rétropropagation et l’optimiseur jouent-ils le même rôle ?",
+      "answer": "Non. La rétropropagation calcule les gradients. L’optimiseur les utilise pour modifier les paramètres, avec son taux d’apprentissage et son éventuel état.",
+      "refs": [
+        "fastai",
+        "fastbook"
+      ],
+      "title": "LA PERTE ET LA MISE À JOUR DES PARAMÈTRES",
+      "image": "oreilly-figure-1-8.png",
+      "imageOriginal": "IMG_9763.HEIC",
+      "figure": "1-8",
+      "caption": "Howard & Gugger, O’Reilly (2020), chapitre 1, figure 1-8. Extrait fourni par le formateur.",
+      "notes": "Relier cette figure à la précédente : Architecture avec Parameters constitue le Model. Predictions précise le rôle de Results et Loss explicite le signal d’apprentissage. Labels représente les cibles du cas supervisé illustré. Les paramètres incluent les poids et les biais. L’architecture fixe les opérations et les connexions, tandis que l’entraînement ajuste leurs paramètres. Dans nos réseaux différentiables, le calcul direct produit la perte, la rétropropagation calcule ses dérivées par rapport aux paramètres et l’optimiseur effectue la mise à jour. Ces trois opérations sont distinctes. L’architecture et les hyperparamètres se choisissent généralement à l’aide d’une validation externe à cette boucle d’ajustement. À l’inférence, le modèle n’a pas besoin de l’étiquette inconnue de l’exemple à prédire. Une étiquette peut être recueillie plus tard pour évaluer la prédiction. La figure est compatible avec un modèle linéaire différentiable : elle ne définit donc pas à elle seule le deep learning. L’auto-supervision construit les cibles à partir des données selon un protocole adapté."
+    },
+    {
+      "day": 0,
+      "body": [
+        "Descripteur fixe : on ajuste le prédicteur sur des caractéristiques choisies.",
+        "Représentation apprise : la perte peut ajuster aussi l’extracteur.",
+        "Le transfert peut figer l’extracteur et n’entraîner que la tête."
+      ],
+      "math": "\\begin{aligned}\\text{Descripteur fixe :}\\quad &\\min_{\\theta}\\frac{1}{N}\\sum_{i=1}^{N}\\ell\\bigl(g_{\\theta}(\\phi(x_i)),y_i\\bigr)\\\\[8pt]\\text{Repr. apprise :}\\quad &\\min_{\\psi,\\theta}\\frac{1}{N}\\sum_{i=1}^{N}\\ell\\bigl(g_{\\theta}(h_{\\psi}(x_i)),y_i\\bigr)\\end{aligned}",
+      "question": "Que devient la seconde optimisation si l’extracteur préentraîné est gelé ?",
+      "answer": "Psi reste constant. On optimise seulement theta, même si le calcul des caractéristiques utilise un réseau profond.",
+      "refs": [
+        "dlreview",
+        "fastai"
+      ],
+      "title": "LE RÔLE DES REPRÉSENTATIONS",
+      "notes": "Définir N exemples étiquetés, x les observations, y les cibles et ell la perte. Dans la première ligne, phi est un descripteur fixé pour l’expérience. Seuls les paramètres theta du prédicteur g sont optimisés. Dans la seconde, h est un extracteur paramétré par psi. Si h et g sont différentiables, la règle de la chaîne permet d’ajuster psi et theta à partir d’un même objectif. Le gradient reçu par une couche dépend donc des transformations situées entre cette couche et la perte. C’est le sens de l’apprentissage de bout en bout. Cette comparaison concerne deux pipelines précis, pas toutes les méthodes de ML contre toutes les méthodes de DL. La PCA apprend déjà une représentation, les méthodes à noyaux changent l’espace de représentation, et un extracteur profond préentraîné peut être gelé. La formule du bas n’impose pas à elle seule la profondeur : celle-ci vient de la composition interne de h. Les prétraitements, la collecte et le choix de l’objectif restent nécessaires."
+    },
+    {
+      "day": 0,
+      "body": [],
+      "math": "",
+      "question": "Quelle expérience isole l’effet des représentations ?",
+      "answer": "Comparer des extracteurs avec une tête et un protocole contrôlés, puis expliciter ce qui change en dimension, préentraînement, données et coût.",
+      "refs": [
+        "hog",
+        "lenet",
+        "dlreview"
+      ],
+      "title": "DEUX PIPELINES POUR CLASSER UNE IMAGE",
+      "table": [
+        [
+          "Étape",
+          "Descripteur fixe + classifieur",
+          "CNN entraîné de bout en bout"
+        ],
+        [
+          "Entrée",
+          "Pixels, taille et normalisation",
+          "Pixels, taille et normalisation"
+        ],
+        [
+          "Représentation",
+          "HOG : gradients et histogrammes",
+          "Cartes calculées par des filtres appris"
+        ],
+        [
+          "Paramètres ajustés",
+          "Poids du classifieur",
+          "Filtres et tête de classification"
+        ],
+        [
+          "Choix humains",
+          "Descripteur et modèle",
+          "Architecture, perte et données"
+        ]
+      ],
+      "widths": [
+        0.2,
+        0.4,
+        0.4
+      ],
+      "rowHeight": 70,
+      "caption": "HOG : histogrammes de gradients orientés. Les deux pipelines exigent une validation séparée.",
+      "notes": "Prendre une même collection d’images annotées et fixer les partitions avant toute comparaison. Dans un pipeline utilisant HOG, on calcule des gradients locaux puis des histogrammes d’orientations avec des normalisations. La recette du descripteur est conçue à l’avance, puis un classifieur apprend sur les vecteurs obtenus. Le travail historique de Dalal et Triggs utilise notamment un SVM linéaire pour la détection de personnes. Le tableau transpose l’idée de représentation à un exemple pédagogique de classification d’images. Dans un CNN entraîné de bout en bout, les valeurs des filtres et les paramètres de la tête changent sous l’effet de la perte. Le concepteur choisit toujours la résolution, les transformations autorisées, l’architecture et le protocole. Le réseau ne supprime donc pas toute ingénierie. Pour une comparaison honnête, documenter aussi le préentraînement éventuel et le budget. Les niveaux internes d’un CNN n’ont pas nécessairement une interprétation sémantique simple ou universelle."
+    },
+    {
+      "day": 0,
+      "body": [],
+      "math": "",
+      "question": "Pourquoi un réseau préentraîné peut-il être utilisable avec peu d’étiquettes locales ?",
+      "answer": "Une partie des représentations a déjà été apprise sur d’autres données. Leur utilité pour la cible doit être vérifiée et le préentraînement doit être documenté.",
+      "refs": [
+        "fastai"
+      ],
+      "title": "LE CHOIX D’UNE APPROCHE",
+      "table": [
+        [
+          "Situation",
+          "Point de départ à comparer",
+          "Critère décisif"
+        ],
+        [
+          "Données tabulaires\npeu nombreuses",
+          "Modèle linéaire ou arbres",
+          "Validation, stabilité et coût"
+        ],
+        [
+          "Images ou texte\navec modèle adapté",
+          "Réseau préentraîné, puis adaptation",
+          "Gain observé et compatibilité du domaine"
+        ],
+        [
+          "Peu d’étiquettes\npour la tâche cible",
+          "Extracteur préentraîné gelé\net tête simple",
+          "Qualité des représentations transférées"
+        ]
+      ],
+      "widths": [
+        0.28,
+        0.38,
+        0.34
+      ],
+      "rowHeight": 88,
+      "caption": "Points de départ expérimentaux. Aucune famille ne garantit le meilleur résultat.",
+      "notes": "Présenter ce tableau comme une démarche de comparaison, pas comme un classement universel. Sur un petit tableau structuré, une méthode simple fournit un résultat de référence rapide à mesurer. Cela ne prouve pas que les réseaux échoueront : on demande un gain validé avant d’accepter leur coût supplémentaire. Sur des images ou du texte, un modèle préentraîné peut fournir des représentations utiles, si son domaine et ses entrées sont compatibles avec la tâche cible. Avec peu d’étiquettes, geler l’extracteur réduit le nombre de paramètres ajustés. Ce choix n’élimine pas le décalage de distribution. Distinguer le besoin en données du préentraînement initial et celui de l’adaptation locale. Il n’existe pas un nombre magique d’exemples à partir duquel le deep learning devient obligatoire. Pour chaque candidat, mesurer le score de validation, sa variabilité, la latence et la mémoire. Ces recommandations sont des points de départ pédagogiques à confirmer sur les données du projet."
+    },
+    {
+      "day": 0,
+      "body": [
+        "Définir la tâche et séparer entraînement, validation et test.",
+        "Ajuster sur le train les transformations apprises et les paramètres.",
+        "Choisir les configurations sur la validation, avec le coût mesuré.",
+        "Évaluer le choix final sur le test, puis surveiller les données réelles."
+      ],
+      "math": "",
+      "question": "Normaliser toutes les données avant le découpage est-il acceptable parce que les étiquettes ne sont pas utilisées ?",
+      "answer": "Non. Les statistiques des partitions de validation et de test influenceraient la transformation. Ajuster la normalisation sur le train puis l’appliquer aux autres partitions.",
+      "refs": [
+        "tavenard",
+        "fastai"
+      ],
+      "title": "UN PROTOCOLE EXPÉRIMENTAL COMMUN",
+      "notes": "Revenir au niveau du projet complet. Les diagrammes du livre décrivent la boucle d’ajustement du modèle, qui n’est qu’une partie du processus. Avant elle, il faut définir la population visée, les cibles et la manière de séparer les données. Une série temporelle ou des observations de plusieurs personnes ne se découpent pas forcément de façon aléatoire ligne par ligne. Les statistiques de normalisation et les représentations apprises pendant notre expérience doivent être ajustées sur le train, sauf préentraînement externe explicitement documenté. La validation permet les décisions d’architecture et d’hyperparamètres. Le test reste réservé au bilan du choix final. L’entropie croisée peut servir de perte tandis que l’accuracy ou le rappel répond à une question d’évaluation. Après déploiement, vérifier si les données et les erreurs changent. Ce cadre s’applique aux arbres, aux modèles linéaires, aux CNN et aux Transformers. Il servira de protocole commun aux cinq notebooks Colab."
     },
     {
       "day": 0,
@@ -115,7 +403,7 @@
         "Calcul direct, pertes et rétropropagation"
       ],
       "math": "",
-      "notes": "Cette journée articule les concepts et leur mise à l'épreuve. Commencer par une restitution de la séance précédente. Faire expliciter les dimensions avant toute exécution. Le déroulé représente 420 minutes de formation effective ; pauses et déjeuner sont à ajouter. Les durées des activités sont ajustables à l'intérieur de cette enveloppe. L'objectif est une compréhension justifiée par un calcul, une expérience contrôlée ou une vérification du code.",
+      "notes": "Cette journée articule les concepts et leur mise à l'épreuve. Relier les notions de la journée aux représentations et à la boucle d’apprentissage vues en introduction. Faire expliciter les dimensions avant toute exécution. Le déroulé représente 420 minutes de formation effective ; pauses et déjeuner sont à ajouter. Les durées des activités sont ajustables à l'intérieur de cette enveloppe. L'objectif est une compréhension justifiée par un calcul, une expérience contrôlée ou une vérification du code.",
       "question": "",
       "answer": "",
       "refs": [],
@@ -126,7 +414,7 @@
       "title": "JOUR 1 · DÉROULÉ DES 7 HEURES",
       "body": [],
       "math": "",
-      "notes": "Présenter les cinq séquences de la journée. Les activités de cours incluent les questions au tableau et les démonstrations. Le travail pratique se fait en binôme mais chaque étudiant conserve un compte rendu personnel. Dans le débrief, demander une prédiction avant de montrer une sortie de code et distinguer une observation expérimentale d'une propriété mathématique. La somme des cinq durées est exactement 420 minutes. Les pauses ne sont pas comprises dans ce total.",
+      "notes": "Présenter les cinq séquences de la journée. Les activités de cours incluent les questions au tableau et les démonstrations. Le travail pratique se fait en binôme mais chaque étudiant conserve un compte rendu personnel. Dans le débrief, demander une prédiction avant de montrer une sortie de code et distinguer une observation expérimentale d'une propriété mathématique. La somme des cinq durées est exactement 420 minutes. Les pauses ne sont pas comprises dans ce total. L’introduction de 65 minutes comprend environ 35 à 40 minutes pour les repères historiques et la comparaison ML / DL, puis le diagnostic des prérequis, la notation et la formulation du problème. Les 150 minutes du TP restent inchangées. Les autres séquences durent 80, 75 et 50 minutes.",
       "question": "",
       "answer": "",
       "refs": [],
@@ -137,14 +425,14 @@
           "Minutes"
         ],
         [
-          "Cadrage",
-          "Pré requis, notation et formulation du problème",
-          "45"
+          "Introduction",
+          "Histoire, comparaison ML / DL et prérequis",
+          "65"
         ],
         [
           "Modélisation",
           "MLP, activations et fonctions de perte",
-          "90"
+          "80"
         ],
         [
           "Dérivations",
@@ -159,7 +447,7 @@
         [
           "Restitution",
           "Autograd, exercices et synthèse",
-          "60"
+          "50"
         ]
       ],
       "widths": [
@@ -2509,6 +2797,42 @@
     "digits": [
       "scikit-learn — Jeu de données digits",
       "https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html"
+    ],
+    "fastai": [
+      "Jeremy Howard et Sylvain Gugger — Deep Learning for Coders with fastai and PyTorch, O’Reilly Media, 2020, chapitre 1",
+      "https://www.oreilly.com/library/view/deep-learning-for/9781492045519/"
+    ],
+    "fastbook": [
+      "Howard et Gugger — Chapitre 1, version des auteurs, figures Training a machine learning model et Detailed training loop",
+      "https://github.com/fastai/fastbook/blob/master/01_intro.ipynb"
+    ],
+    "dlreview": [
+      "LeCun, Bengio et Hinton — Deep learning, Nature, 2015",
+      "https://www.nature.com/articles/nature14539"
+    ],
+    "perceptron": [
+      "Rosenblatt — The perceptron: a probabilistic model for information storage and organization in the brain, 1958",
+      "https://doi.org/10.1037/h0042519"
+    ],
+    "backprop": [
+      "Rumelhart, Hinton et Williams — Learning representations by back-propagating errors, 1986",
+      "https://doi.org/10.1038/323533a0"
+    ],
+    "lenet": [
+      "LeCun, Bottou, Bengio et Haffner — Gradient-Based Learning Applied to Document Recognition, 1998",
+      "https://bottou.org/papers/lecun-98h"
+    ],
+    "dbn": [
+      "Hinton, Osindero et Teh — A fast learning algorithm for deep belief nets, 2006",
+      "https://www.cs.toronto.edu/~hinton/absps/fastnc.pdf"
+    ],
+    "alexnet": [
+      "Krizhevsky, Sutskever et Hinton — ImageNet Classification with Deep Convolutional Neural Networks, 2012",
+      "https://papers.nips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html"
+    ],
+    "hog": [
+      "Dalal et Triggs — Histograms of Oriented Gradients for Human Detection, 2005",
+      "https://doi.org/10.1109/CVPR.2005.177"
     ]
   }
 }

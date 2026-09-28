@@ -2,7 +2,7 @@
 
 Master 2 IA · Chrys NIONGOLO · 35 heures, cinq journées.
 
-Les mêmes explications figurent dans les notes de chaque diapositive du PowerPoint. Les équations sont rendues depuis LaTeX ; leur source est conservée ci-dessous et dans sources/formules.tex. Les pauses sont à ajouter aux 420 minutes quotidiennes.
+Les mêmes explications figurent dans les notes de chaque diapositive du PowerPoint. Les équations sont rendues depuis LaTeX et leur source est conservée dans sources/formules.tex. Les pauses sont à ajouter aux 420 minutes quotidiennes. L’introduction appartient au jour 1.
 
 ## 1. DEEP LEARNING
 
@@ -18,7 +18,7 @@ EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 DIAPOSITIVE 2 — SOMMAIRE
 
 EXPLICATION TECHNIQUE
-Le cours suit cinq journées de sept heures de formation effective, hors pauses. Chaque journée contient un TP exécuté sur CPU, des exercices mathématiques et une restitution. Les supports de Bigot, Tavenard, du CNAM et de Geoffrey Daniel servent de lectures complémentaires. Les articles originaux complètent la partie architectures. Les exemples numériques, exercices et notebooks de ce support sont construits pour cette progression. Inviter les étudiants à conserver un carnet des dimensions, hypothèses et observations.
+L’introduction situe le deep learning dans le machine learning et présente les deux boucles d’apprentissage du livre de Howard et Gugger. Elle est comprise dans le jour 1, et ne constitue pas une sixième journée. Le cours suit cinq journées de sept heures de formation effective, hors pauses. Chaque journée contient un TP exécuté sur CPU, des exercices mathématiques et une restitution. Les supports de Bigot, Tavenard, du CNAM et de Geoffrey Daniel servent de lectures complémentaires. Les articles originaux complètent la partie architectures. Les exemples numériques, exercices et notebooks de ce support sont construits pour cette progression. Inviter les étudiants à conserver un carnet des dimensions, hypothèses et observations.
 
 LECTURES ET RÉFÉRENCES
 Jérémie Bigot — Introduction au Deep Learning
@@ -33,7 +33,248 @@ https://cedric.cnam.fr/vertigo/Cours/ml2/docs/coursDeep1.pdf
 Geoffrey Daniel — Réseaux de neurones et deep learning : utilisation et méthodologie
 https://indico.in2p3.fr/event/17858/attachments/49454/65831/Deep_Learning_Seance_1.pdf
 
-## 3. OBJECTIFS ET PREUVES DE MAÎTRISE
+## 3. REPÈRES ET PRINCIPES
+
+DIAPOSITIVE 3 — REPÈRES ET PRINCIPES
+
+EXPLICATION TECHNIQUE
+Cette introduction prend environ 35 à 40 minutes à l’intérieur du cadrage du jour 1. Partir d’un problème concret : reconnaître une catégorie à partir des pixels d’une image. Demander ce que l’algorithme doit ajuster et ce que le concepteur doit choisir. Le deep learning appartient au machine learning. Le point de comparaison utile porte sur la construction des représentations, l’architecture et les paramètres optimisés. Les deux schémas du livre décrivent une boucle d’apprentissage commune, à deux niveaux de détail. Ils permettront ensuite de situer précisément les CNN et les Transformers. Les repères historiques proposés sont sélectifs : ils expliquent les idées utilisées dans le cours sans prétendre raconter une succession exhaustive d’inventions.
+
+QUESTION À POSER
+Dans un système de classification, quelles décisions relèvent des données et lesquelles relèvent du concepteur ?
+
+RÉPONSE ATTENDUE
+Les paramètres sont estimés à partir des données selon un objectif. La tâche, la collecte, l’architecture, le protocole et les contraintes restent des choix de conception.
+
+LECTURES ET RÉFÉRENCES
+Jeremy Howard et Sylvain Gugger — Deep Learning for Coders with fastai and PyTorch, O’Reilly Media, 2020, chapitre 1
+https://www.oreilly.com/library/view/deep-learning-for/9781492045519/
+
+LeCun, Bengio et Hinton — Deep learning, Nature, 2015
+https://www.nature.com/articles/nature14539
+
+## 4. LE DEEP LEARNING DANS LE MACHINE LEARNING
+
+DIAPOSITIVE 4 — LE DEEP LEARNING DANS LE MACHINE LEARNING
+
+EXPLICATION TECHNIQUE
+Définir le machine learning comme un ensemble de méthodes qui tirent des régularités des données pour accomplir une tâche. Il comprend notamment les modèles linéaires, les arbres, les méthodes à noyaux et les réseaux de neurones. Dans ce cours, le deep learning désigne l’apprentissage avec des réseaux comportant plusieurs transformations paramétrées successives. L’inclusion affichée est une carte des domaines, pas une échelle de qualité. Il n’existe pas de seuil universel de couches qui rendrait un modèle efficace ou pertinent. La profondeur d’un arbre de décision ne suffit pas à en faire un modèle de deep learning. Les transformations internes peuvent être apprises avec ou sans étiquettes externes. Notre première comparaison utilise l’apprentissage supervisé pour rendre la cible et la perte explicites. Une représentation apprise n’est pas forcément interprétable par un nom d’objet ou de contour.
+
+ÉQUATION — SOURCE LATEX
+\mathrm{Deep\ learning}\subset\mathrm{Machine\ learning}\subset\mathrm{IA}
+
+QUESTION À POSER
+Un arbre de décision très profond est-il un réseau de deep learning ?
+
+RÉPONSE ATTENDUE
+Non. Sa profondeur compte des décisions successives dans un arbre. Elle ne correspond pas à la composition de couches paramétrées d’un réseau.
+
+LECTURES ET RÉFÉRENCES
+LeCun, Bengio et Hinton — Deep learning, Nature, 2015
+https://www.nature.com/articles/nature14539
+
+Jeremy Howard et Sylvain Gugger — Deep Learning for Coders with fastai and PyTorch, O’Reilly Media, 2020, chapitre 1
+https://www.oreilly.com/library/view/deep-learning-for/9781492045519/
+
+## 5. REPÈRES HISTORIQUES : LES FONDEMENTS
+
+Date | Repère | Idée utile pour ce cours
+1958 | Perceptron, Rosenblatt | Ajuster une règle de décision à partir d’exemples
+1986 | Rétropropagation | Popularisation de l’apprentissage des couches cachées
+1998 | LeNet-5 | Convolutions et paramètres partagés pour les chiffres
+2006 | Deep belief networks | Préentraînement couche par couche des réseaux profonds
+
+DIAPOSITIVE 5 — REPÈRES HISTORIQUES : LES FONDEMENTS
+
+EXPLICATION TECHNIQUE
+En 1958, Rosenblatt formalise le perceptron. Pour le cours, retenir l’idée d’une règle dont les paramètres changent avec les exemples. Le modèle linéaire simple ne résout pas tous les problèmes de séparation. L’article de Rumelhart, Hinton et Williams en 1986 montre comment l’erreur de sortie permet d’ajuster des unités cachées. Il popularise la rétropropagation dans les réseaux, sans constituer le début de toute différentiation inverse. LeNet-5, décrit en 1998, associe des connexions locales, le partage des poids et la réduction spatiale pour la reconnaissance de documents. Le travail de Hinton, Osindero et Teh en 2006 propose un entraînement des deep belief networks par étapes, puis un ajustement. Ce jalon rappelle que la difficulté ne se résume pas à écrire davantage de couches : il faut aussi réussir leur optimisation. Ces dates désignent les publications citées, pas une revendication d’invention exclusive.
+
+QUESTION À POSER
+Pourquoi l’existence d’une architecture expressive ne suffit-elle pas ?
+
+RÉPONSE ATTENDUE
+Il faut trouver des paramètres utiles avec des données et un algorithme d’apprentissage réalisables. Expressivité et facilité d’optimisation sont différentes.
+
+LECTURES ET RÉFÉRENCES
+Rosenblatt — The perceptron: a probabilistic model for information storage and organization in the brain, 1958
+https://doi.org/10.1037/h0042519
+
+Rumelhart, Hinton et Williams — Learning representations by back-propagating errors, 1986
+https://doi.org/10.1038/323533a0
+
+LeCun, Bottou, Bengio et Haffner — Gradient-Based Learning Applied to Document Recognition, 1998
+https://bottou.org/papers/lecun-98h
+
+Hinton, Osindero et Teh — A fast learning algorithm for deep belief nets, 2006
+https://www.cs.toronto.edu/~hinton/absps/fastnc.pdf
+
+## 6. REPÈRES HISTORIQUES : LE PASSAGE À L’ÉCHELLE
+
+Publication | Architecture | Apport étudié
+2012 | AlexNet | CNN, données ImageNet et entraînement sur GPU
+2017 | Transformer | Attention pour relier les positions d’une séquence
+2020 / 2021 | Vision Transformer | Images découpées en patches et préentraînement
+
+DIAPOSITIVE 6 — REPÈRES HISTORIQUES : LE PASSAGE À L’ÉCHELLE
+
+EXPLICATION TECHNIQUE
+AlexNet combine plusieurs facteurs en 2012 : un CNN, un grand jeu d’images annotées, une implémentation efficace sur GPU et des choix d’optimisation et de régularisation. Éviter d’attribuer le résultat à la profondeur seule. En 2017, le Transformer présenté pour la traduction utilise l’attention dans une architecture encodeur-décodeur, sans récurrence ni convolution pour traiter la séquence. L’attention existait auparavant : la nouveauté porte sur cette organisation complète du modèle. Le Vision Transformer transpose ensuite une architecture de type Transformer à des patches d’image. La prépublication est datée de 2020 et la publication de conférence de 2021. Les résultats du papier s’inscrivent dans un régime de préentraînement important. Ces repères motivent notre progression CNN puis attention. Une architecture plus récente ne remplace pas automatiquement une ancienne méthode pour chaque tâche. Le budget, les données, le préentraînement et le protocole conditionnent toute comparaison.
+
+QUESTION À POSER
+Peut-on comparer deux architectures uniquement à partir de leur année de publication ?
+
+RÉPONSE ATTENDUE
+Non. Il faut comparer leurs résultats pour une tâche donnée, avec le protocole, les données et les budgets explicités.
+
+LECTURES ET RÉFÉRENCES
+Krizhevsky, Sutskever et Hinton — ImageNet Classification with Deep Convolutional Neural Networks, 2012
+https://papers.nips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html
+
+Vaswani et al. — Attention Is All You Need, 2017
+https://arxiv.org/abs/1706.03762
+
+Dosovitskiy et al. — An Image is Worth 16x16 Words, 2020
+https://arxiv.org/abs/2010.11929
+
+## 7. LA BOUCLE D’APPRENTISSAGE
+
+DIAPOSITIVE 7 — LA BOUCLE D’APPRENTISSAGE
+
+EXPLICATION TECHNIQUE
+Lire le schéma fourni de gauche à droite. Inputs désigne les observations. Weights désigne les coefficients ajustables. Model combine l’entrée et ces coefficients pour produire Results. Performance fournit un signal qui guide la modification des poids. Revenir ensuite sur la flèche Update : elle appartient à l’entraînement, pendant lequel on cherche des paramètres utiles. Les auteurs présentent ici une abstraction du processus d’apprentissage, pas une architecture neuronale particulière. Dans une implémentation par gradient, le signal optimisé sera une perte numérique. Le mot performance reste volontairement général dans cette première figure. La métrique communiquée au métier, telle que l’accuracy, peut être différente du critère utilisé par l’optimiseur. Cette boucle s’applique aussi à des modèles peu profonds. Un algorithme d’arbre apprend également à partir des données, avec une procédure de construction différente de la rétropropagation. Ne pas présenter cette figure comme exclusivement réservée au machine learning classique.
+
+QUESTION À POSER
+Quelle partie du schéma cesse de fonctionner pendant une simple prédiction sur une nouvelle image ?
+
+RÉPONSE ATTENDUE
+La mise à jour des paramètres. On conserve le calcul entrée-modèle-sortie avec les paramètres entraînés.
+
+LECTURES ET RÉFÉRENCES
+Jeremy Howard et Sylvain Gugger — Deep Learning for Coders with fastai and PyTorch, O’Reilly Media, 2020, chapitre 1
+https://www.oreilly.com/library/view/deep-learning-for/9781492045519/
+
+Howard et Gugger — Chapitre 1, version des auteurs, figures Training a machine learning model et Detailed training loop
+https://github.com/fastai/fastbook/blob/master/01_intro.ipynb
+
+## 8. LA PERTE ET LA MISE À JOUR DES PARAMÈTRES
+
+DIAPOSITIVE 8 — LA PERTE ET LA MISE À JOUR DES PARAMÈTRES
+
+EXPLICATION TECHNIQUE
+Relier cette figure à la précédente : Architecture avec Parameters constitue le Model. Predictions précise le rôle de Results et Loss explicite le signal d’apprentissage. Labels représente les cibles du cas supervisé illustré. Les paramètres incluent les poids et les biais. L’architecture fixe les opérations et les connexions, tandis que l’entraînement ajuste leurs paramètres. Dans nos réseaux différentiables, le calcul direct produit la perte, la rétropropagation calcule ses dérivées par rapport aux paramètres et l’optimiseur effectue la mise à jour. Ces trois opérations sont distinctes. L’architecture et les hyperparamètres se choisissent généralement à l’aide d’une validation externe à cette boucle d’ajustement. À l’inférence, le modèle n’a pas besoin de l’étiquette inconnue de l’exemple à prédire. Une étiquette peut être recueillie plus tard pour évaluer la prédiction. La figure est compatible avec un modèle linéaire différentiable : elle ne définit donc pas à elle seule le deep learning. L’auto-supervision construit les cibles à partir des données selon un protocole adapté.
+
+QUESTION À POSER
+La rétropropagation et l’optimiseur jouent-ils le même rôle ?
+
+RÉPONSE ATTENDUE
+Non. La rétropropagation calcule les gradients. L’optimiseur les utilise pour modifier les paramètres, avec son taux d’apprentissage et son éventuel état.
+
+LECTURES ET RÉFÉRENCES
+Jeremy Howard et Sylvain Gugger — Deep Learning for Coders with fastai and PyTorch, O’Reilly Media, 2020, chapitre 1
+https://www.oreilly.com/library/view/deep-learning-for/9781492045519/
+
+Howard et Gugger — Chapitre 1, version des auteurs, figures Training a machine learning model et Detailed training loop
+https://github.com/fastai/fastbook/blob/master/01_intro.ipynb
+
+## 9. LE RÔLE DES REPRÉSENTATIONS
+
+DIAPOSITIVE 9 — LE RÔLE DES REPRÉSENTATIONS
+
+EXPLICATION TECHNIQUE
+Définir N exemples étiquetés, x les observations, y les cibles et ell la perte. Dans la première ligne, phi est un descripteur fixé pour l’expérience. Seuls les paramètres theta du prédicteur g sont optimisés. Dans la seconde, h est un extracteur paramétré par psi. Si h et g sont différentiables, la règle de la chaîne permet d’ajuster psi et theta à partir d’un même objectif. Le gradient reçu par une couche dépend donc des transformations situées entre cette couche et la perte. C’est le sens de l’apprentissage de bout en bout. Cette comparaison concerne deux pipelines précis, pas toutes les méthodes de ML contre toutes les méthodes de DL. La PCA apprend déjà une représentation, les méthodes à noyaux changent l’espace de représentation, et un extracteur profond préentraîné peut être gelé. La formule du bas n’impose pas à elle seule la profondeur : celle-ci vient de la composition interne de h. Les prétraitements, la collecte et le choix de l’objectif restent nécessaires.
+
+ÉQUATION — SOURCE LATEX
+\begin{aligned}\text{Descripteur fixe :}\quad &\min_{\theta}\frac{1}{N}\sum_{i=1}^{N}\ell\bigl(g_{\theta}(\phi(x_i)),y_i\bigr)\\[8pt]\text{Repr. apprise :}\quad &\min_{\psi,\theta}\frac{1}{N}\sum_{i=1}^{N}\ell\bigl(g_{\theta}(h_{\psi}(x_i)),y_i\bigr)\end{aligned}
+
+QUESTION À POSER
+Que devient la seconde optimisation si l’extracteur préentraîné est gelé ?
+
+RÉPONSE ATTENDUE
+Psi reste constant. On optimise seulement theta, même si le calcul des caractéristiques utilise un réseau profond.
+
+LECTURES ET RÉFÉRENCES
+LeCun, Bengio et Hinton — Deep learning, Nature, 2015
+https://www.nature.com/articles/nature14539
+
+Jeremy Howard et Sylvain Gugger — Deep Learning for Coders with fastai and PyTorch, O’Reilly Media, 2020, chapitre 1
+https://www.oreilly.com/library/view/deep-learning-for/9781492045519/
+
+## 10. DEUX PIPELINES POUR CLASSER UNE IMAGE
+
+Étape | Descripteur fixe + classifieur | CNN entraîné de bout en bout
+Entrée | Pixels, taille et normalisation | Pixels, taille et normalisation
+Représentation | HOG : gradients et histogrammes | Cartes calculées par des filtres appris
+Paramètres ajustés | Poids du classifieur | Filtres et tête de classification
+Choix humains | Descripteur et modèle | Architecture, perte et données
+
+DIAPOSITIVE 10 — DEUX PIPELINES POUR CLASSER UNE IMAGE
+
+EXPLICATION TECHNIQUE
+Prendre une même collection d’images annotées et fixer les partitions avant toute comparaison. Dans un pipeline utilisant HOG, on calcule des gradients locaux puis des histogrammes d’orientations avec des normalisations. La recette du descripteur est conçue à l’avance, puis un classifieur apprend sur les vecteurs obtenus. Le travail historique de Dalal et Triggs utilise notamment un SVM linéaire pour la détection de personnes. Le tableau transpose l’idée de représentation à un exemple pédagogique de classification d’images. Dans un CNN entraîné de bout en bout, les valeurs des filtres et les paramètres de la tête changent sous l’effet de la perte. Le concepteur choisit toujours la résolution, les transformations autorisées, l’architecture et le protocole. Le réseau ne supprime donc pas toute ingénierie. Pour une comparaison honnête, documenter aussi le préentraînement éventuel et le budget. Les niveaux internes d’un CNN n’ont pas nécessairement une interprétation sémantique simple ou universelle.
+
+QUESTION À POSER
+Quelle expérience isole l’effet des représentations ?
+
+RÉPONSE ATTENDUE
+Comparer des extracteurs avec une tête et un protocole contrôlés, puis expliciter ce qui change en dimension, préentraînement, données et coût.
+
+LECTURES ET RÉFÉRENCES
+Dalal et Triggs — Histograms of Oriented Gradients for Human Detection, 2005
+https://doi.org/10.1109/CVPR.2005.177
+
+LeCun, Bottou, Bengio et Haffner — Gradient-Based Learning Applied to Document Recognition, 1998
+https://bottou.org/papers/lecun-98h
+
+LeCun, Bengio et Hinton — Deep learning, Nature, 2015
+https://www.nature.com/articles/nature14539
+
+## 11. LE CHOIX D’UNE APPROCHE
+
+Situation | Point de départ à comparer | Critère décisif
+Données tabulaires
+peu nombreuses | Modèle linéaire ou arbres | Validation, stabilité et coût
+Images ou texte
+avec modèle adapté | Réseau préentraîné, puis adaptation | Gain observé et compatibilité du domaine
+Peu d’étiquettes
+pour la tâche cible | Extracteur préentraîné gelé
+et tête simple | Qualité des représentations transférées
+
+DIAPOSITIVE 11 — LE CHOIX D’UNE APPROCHE
+
+EXPLICATION TECHNIQUE
+Présenter ce tableau comme une démarche de comparaison, pas comme un classement universel. Sur un petit tableau structuré, une méthode simple fournit un résultat de référence rapide à mesurer. Cela ne prouve pas que les réseaux échoueront : on demande un gain validé avant d’accepter leur coût supplémentaire. Sur des images ou du texte, un modèle préentraîné peut fournir des représentations utiles, si son domaine et ses entrées sont compatibles avec la tâche cible. Avec peu d’étiquettes, geler l’extracteur réduit le nombre de paramètres ajustés. Ce choix n’élimine pas le décalage de distribution. Distinguer le besoin en données du préentraînement initial et celui de l’adaptation locale. Il n’existe pas un nombre magique d’exemples à partir duquel le deep learning devient obligatoire. Pour chaque candidat, mesurer le score de validation, sa variabilité, la latence et la mémoire. Ces recommandations sont des points de départ pédagogiques à confirmer sur les données du projet.
+
+QUESTION À POSER
+Pourquoi un réseau préentraîné peut-il être utilisable avec peu d’étiquettes locales ?
+
+RÉPONSE ATTENDUE
+Une partie des représentations a déjà été apprise sur d’autres données. Leur utilité pour la cible doit être vérifiée et le préentraînement doit être documenté.
+
+LECTURES ET RÉFÉRENCES
+Jeremy Howard et Sylvain Gugger — Deep Learning for Coders with fastai and PyTorch, O’Reilly Media, 2020, chapitre 1
+https://www.oreilly.com/library/view/deep-learning-for/9781492045519/
+
+## 12. UN PROTOCOLE EXPÉRIMENTAL COMMUN
+
+DIAPOSITIVE 12 — UN PROTOCOLE EXPÉRIMENTAL COMMUN
+
+EXPLICATION TECHNIQUE
+Revenir au niveau du projet complet. Les diagrammes du livre décrivent la boucle d’ajustement du modèle, qui n’est qu’une partie du processus. Avant elle, il faut définir la population visée, les cibles et la manière de séparer les données. Une série temporelle ou des observations de plusieurs personnes ne se découpent pas forcément de façon aléatoire ligne par ligne. Les statistiques de normalisation et les représentations apprises pendant notre expérience doivent être ajustées sur le train, sauf préentraînement externe explicitement documenté. La validation permet les décisions d’architecture et d’hyperparamètres. Le test reste réservé au bilan du choix final. L’entropie croisée peut servir de perte tandis que l’accuracy ou le rappel répond à une question d’évaluation. Après déploiement, vérifier si les données et les erreurs changent. Ce cadre s’applique aux arbres, aux modèles linéaires, aux CNN et aux Transformers. Il servira de protocole commun aux cinq notebooks Colab.
+
+QUESTION À POSER
+Normaliser toutes les données avant le découpage est-il acceptable parce que les étiquettes ne sont pas utilisées ?
+
+RÉPONSE ATTENDUE
+Non. Les statistiques des partitions de validation et de test influenceraient la transformation. Ajuster la normalisation sur le train puis l’appliquer aux autres partitions.
+
+LECTURES ET RÉFÉRENCES
+Romain Tavenard — Introduction au Deep Learning, 2025
+https://rtavenar.github.io/deep_book/book_fr.pdf
+
+Jeremy Howard et Sylvain Gugger — Deep Learning for Coders with fastai and PyTorch, O’Reilly Media, 2020, chapitre 1
+https://www.oreilly.com/library/view/deep-learning-for/9781492045519/
+
+## 13. OBJECTIFS ET PREUVES DE MAÎTRISE
 
 Objectif | Preuve attendue
 Rétropropagation | Dérivation, dimensions et contrôle numérique
@@ -42,7 +283,7 @@ Transfert | Comparaison source / cible et stratégies de gel
 Transformer | Attention, masque causal et boucle autoregressive
 Démarche expérimentale | Validation séparée, ablations et limites explicites
 
-DIAPOSITIVE 3 — OBJECTIFS ET PREUVES DE MAÎTRISE
+DIAPOSITIVE 13 — OBJECTIFS ET PREUVES DE MAÎTRISE
 
 EXPLICATION TECHNIQUE
 Une compétence est acquise lorsque l'étudiant peut justifier son résultat et diagnostiquer un échec. Pour la rétropropagation, une dérivée mémorisée ne suffit pas : il faut relier chaque facteur à une opération du calcul direct. Pour les CNN, contrôler les tailles et le nombre de paramètres avant l'entraînement. Pour les Transformers, reconstruire le chemin Q, K, V et expliquer ce que le masque interdit. Les productions des TP seront évaluées sur la validité du protocole, la justesse technique et l'interprétation, sans seuil arbitraire de précision.
@@ -55,9 +296,9 @@ La capacité à ajuster ces exemples ; elle ne prouve pas la généralisation.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 4. PRÉREQUIS ET OUTILS
+## 14. PRÉREQUIS ET OUTILS
 
-DIAPOSITIVE 4 — PRÉREQUIS ET OUTILS
+DIAPOSITIVE 14 — PRÉREQUIS ET OUTILS
 
 EXPLICATION TECHNIQUE
 Faire un diagnostic rapide : demander la forme de AB lorsque A est de taille 4 × 3 et B de taille 3 × 2, puis la dérivée de log(1 + exp(z)). Le cours introduit PyTorch en parallèle des équations ; la bibliothèque ne remplace pas la compréhension des gradients. Les cinq notebooks sont autonomes et leur configuration de référence utilise le CPU. Prévoir un environnement Python 3.12 avec les dépendances du fichier requirements.txt. Une première exécution ne nécessite aucun téléchargement de données : digits est fourni par scikit-learn et les séquences sont synthétiques.
@@ -70,9 +311,9 @@ La sigmoïde : exp(z)/(1+exp(z)).
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 5. CONVENTIONS DE NOTATION
+## 15. CONVENTIONS DE NOTATION
 
-DIAPOSITIVE 5 — CONVENTIONS DE NOTATION
+DIAPOSITIVE 15 — CONVENTIONS DE NOTATION
 
 EXPLICATION TECHNIQUE
 Fixer les conventions dès le début évite la plupart des erreurs de transposition. Dans les dérivations portant sur un exemple, x et les activations sont des vecteurs colonnes ; W transforme une dimension d'entrée en une dimension de sortie. Dans les implémentations, le premier axe est le batch et chaque exemple est une ligne. La même transformation devient donc X W transposée. B désigne la taille du batch, n la longueur d'une séquence, d sa largeur, C le nombre de canaux et K le nombre de classes. Le symbole élément par élément est le produit de Hadamard.
@@ -88,34 +329,34 @@ Parce que les exemples sont stockés en lignes, alors que la dérivation utilise
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 6. RÉSEAUX PROFONDS
+## 16. RÉSEAUX PROFONDS
 
-DIAPOSITIVE 6 — RÉSEAUX PROFONDS
+DIAPOSITIVE 16 — RÉSEAUX PROFONDS
 
 EXPLICATION TECHNIQUE
-Cette journée articule les concepts et leur mise à l'épreuve. Commencer par une restitution de la séance précédente. Faire expliciter les dimensions avant toute exécution. Le déroulé représente 420 minutes de formation effective ; pauses et déjeuner sont à ajouter. Les durées des activités sont ajustables à l'intérieur de cette enveloppe. L'objectif est une compréhension justifiée par un calcul, une expérience contrôlée ou une vérification du code.
+Cette journée articule les concepts et leur mise à l'épreuve. Relier les notions de la journée aux représentations et à la boucle d’apprentissage vues en introduction. Faire expliciter les dimensions avant toute exécution. Le déroulé représente 420 minutes de formation effective ; pauses et déjeuner sont à ajouter. Les durées des activités sont ajustables à l'intérieur de cette enveloppe. L'objectif est une compréhension justifiée par un calcul, une expérience contrôlée ou une vérification du code.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 7. JOUR 1 · DÉROULÉ DES 7 HEURES
+## 17. JOUR 1 · DÉROULÉ DES 7 HEURES
 
 Séquence | Travail attendu | Minutes
-Cadrage | Pré requis, notation et formulation du problème | 45
-Modélisation | MLP, activations et fonctions de perte | 90
+Introduction | Histoire, comparaison ML / DL et prérequis | 65
+Modélisation | MLP, activations et fonctions de perte | 80
 Dérivations | Règle de la chaîne et gradients vectorisés | 75
 TP 01 | MLP NumPy, gradient numérique et généralisation | 150
-Restitution | Autograd, exercices et synthèse | 60
+Restitution | Autograd, exercices et synthèse | 50
 
-DIAPOSITIVE 7 — JOUR 1 · DÉROULÉ DES 7 HEURES
+DIAPOSITIVE 17 — JOUR 1 · DÉROULÉ DES 7 HEURES
 
 EXPLICATION TECHNIQUE
-Présenter les cinq séquences de la journée. Les activités de cours incluent les questions au tableau et les démonstrations. Le travail pratique se fait en binôme mais chaque étudiant conserve un compte rendu personnel. Dans le débrief, demander une prédiction avant de montrer une sortie de code et distinguer une observation expérimentale d'une propriété mathématique. La somme des cinq durées est exactement 420 minutes. Les pauses ne sont pas comprises dans ce total.
+Présenter les cinq séquences de la journée. Les activités de cours incluent les questions au tableau et les démonstrations. Le travail pratique se fait en binôme mais chaque étudiant conserve un compte rendu personnel. Dans le débrief, demander une prédiction avant de montrer une sortie de code et distinguer une observation expérimentale d'une propriété mathématique. La somme des cinq durées est exactement 420 minutes. Les pauses ne sont pas comprises dans ce total. L’introduction de 65 minutes comprend environ 35 à 40 minutes pour les repères historiques et la comparaison ML / DL, puis le diagnostic des prérequis, la notation et la formulation du problème. Les 150 minutes du TP restent inchangées. Les autres séquences durent 80, 75 et 50 minutes.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 8. APPRENDRE DES REPRÉSENTATIONS
+## 18. APPRENDRE DES REPRÉSENTATIONS
 
-DIAPOSITIVE 8 — APPRENDRE DES REPRÉSENTATIONS
+DIAPOSITIVE 18 — APPRENDRE DES REPRÉSENTATIONS
 
 EXPLICATION TECHNIQUE
 Partir d'un exemple de vision : les valeurs des pixels ne sont pas directement les catégories recherchées. Le réseau ajuste plusieurs transformations pour rendre la décision finale plus simple. Éviter l'affirmation systématique selon laquelle une couche représente des contours puis des objets : c'est une intuition possible, pas une garantie pour tous les modèles. Une représentation dépend des données, de la perte et des contraintes d'architecture. Comparer largeur et profondeur : augmenter l'une ou l'autre modifie la capacité, mais aussi l'optimisation et le coût. La qualité se juge sur des données distinctes.
@@ -133,9 +374,9 @@ LECTURES ET RÉFÉRENCES
 Jérémie Bigot — Introduction au Deep Learning
 https://www.math.u-bordeaux.fr/~jbigot/Site/Enseignement_files/Intro_DeepLearning.pdf
 
-## 9. LE NEURONE DIFFÉRENTIABLE
+## 19. LE NEURONE DIFFÉRENTIABLE
 
-DIAPOSITIVE 9 — LE NEURONE DIFFÉRENTIABLE
+DIAPOSITIVE 19 — LE NEURONE DIFFÉRENTIABLE
 
 EXPLICATION TECHNIQUE
 Distinguer le perceptron historique à seuil d'un neurone entraîné par gradient. Une fonction seuil n'a pas la dérivée utile souhaitée ; les réseaux modernes emploient des activations différentiables presque partout ou des conventions de sous-gradient. Le biais déplace la frontière sans imposer qu'elle passe par l'origine. Les poids ne sont pas des importances universelles : leur interprétation dépend de l'échelle des variables et des couches suivantes. Faire calculer z pour x=(2,-1), w=(0,5;1) et b=1 : z=1, puis appliquer une ReLU pour obtenir 1.
@@ -153,9 +394,9 @@ LECTURES ET RÉFÉRENCES
 Romain Tavenard — Introduction au Deep Learning, 2025
 https://rtavenar.github.io/deep_book/book_fr.pdf
 
-## 10. POURQUOI LA NON-LINÉARITÉ ?
+## 20. POURQUOI LA NON-LINÉARITÉ ?
 
-DIAPOSITIVE 10 — POURQUOI LA NON-LINÉARITÉ ?
+DIAPOSITIVE 20 — POURQUOI LA NON-LINÉARITÉ ?
 
 EXPLICATION TECHNIQUE
 Développer le produit au tableau pour montrer exactement ce que l'empilement affine peut exprimer. On peut absorber deux couches dans une seule matrice et un seul biais. La représentation du XOR constitue un contre-exemple classique à une séparation linéaire dans l'espace d'entrée : ses classes occupent des coins opposés. Une couche cachée non linéaire transforme cet espace. Ne pas confondre ce constat avec les effets d'une factorisation linéaire sur l'optimisation ; ici, on parle de la classe de fonctions représentables, pas de la trajectoire suivie pendant l'entraînement.
@@ -173,9 +414,9 @@ LECTURES ET RÉFÉRENCES
 Javiera Castillo Navarro — RCP 209, 2025–2026
 https://cedric.cnam.fr/vertigo/Cours/ml2/docs/coursDeep1.pdf
 
-## 11. ACTIVATIONS : VALEURS ET SATURATION
+## 21. ACTIVATIONS : VALEURS ET SATURATION
 
-DIAPOSITIVE 11 — ACTIVATIONS : VALEURS ET SATURATION
+DIAPOSITIVE 21 — ACTIVATIONS : VALEURS ET SATURATION
 
 EXPLICATION TECHNIQUE
 Lire les deux courbes comme des fonctions scalaires appliquées composante par composante. La sigmoïde est utile pour une probabilité binaire en sortie ; dans des couches cachées profondes, sa saturation peut réduire fortement les gradients. ReLU évite la saturation sur la branche positive mais peut laisser certaines unités inactives pour tous les exemples. Une activation n'est donc pas choisie seulement pour son coût : il faut considérer l'initialisation et la distribution des préactivations. Les courbes présentées sont calculées directement à partir des définitions, sans mesures d'entraînement.
@@ -188,9 +429,9 @@ RÉPONSE ATTENDUE
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 12. DÉRIVÉES DES ACTIVATIONS
+## 22. DÉRIVÉES DES ACTIVATIONS
 
-DIAPOSITIVE 12 — DÉRIVÉES DES ACTIVATIONS
+DIAPOSITIVE 22 — DÉRIVÉES DES ACTIVATIONS
 
 EXPLICATION TECHNIQUE
 Retrouver la dérivée de la sigmoïde par la dérivation d'un inverse et d'une exponentielle. Son maximum est 1/4, ce qui prépare l'analyse de l'atténuation des gradients, sans suffire à elle seule à décrire un réseau complet : les matrices de poids interviennent aussi. Pour ReLU, la dérivée n'existe pas au point zéro ; la valeur zéro utilisée dans nos calculs est une convention pratique. Φ est la fonction de répartition de la loi normale centrée réduite. GELU ne doit pas être confondue avec une probabilité de sortie : c'est une activation.
@@ -206,9 +447,9 @@ Non : elle vaut zéro sur les entrées négatives.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 13. UNE COUCHE DENSE : FORMES ET CALCUL
+## 23. UNE COUCHE DENSE : FORMES ET CALCUL
 
-DIAPOSITIVE 13 — UNE COUCHE DENSE : FORMES ET CALCUL
+DIAPOSITIVE 23 — UNE COUCHE DENSE : FORMES ET CALCUL
 
 EXPLICATION TECHNIQUE
 Écrire la forme de chaque objet : a précédent a d précédent composantes, W a d courant lignes et d précédent colonnes, b a d courant composantes. Le comptage inclut exactement un biais par neurone de sortie. Pour 784 entrées et 128 unités, la couche contient 784 × 128 + 128 = 100480 paramètres. Le nombre de paramètres ne dépend pas de B, même si la mémoire des activations et le coût du calcul en dépendent. Dans PyTorch, nn.Linear(in_features, out_features) stocke précisément une matrice out_features × in_features.
@@ -224,7 +465,7 @@ RÉPONSE ATTENDUE
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 14. MLP : ARCHITECTURE ET PARAMÈTRES
+## 24. MLP : ARCHITECTURE ET PARAMÈTRES
 
 Opération | Forme pour un batch B | Paramètres
 Entrée | B × 2 | 0
@@ -233,7 +474,7 @@ Dense : logits | B × 2 | 16×2 + 2 = 34
 Softmax pour lecture | B × 2 | 0
 Total | 2 classes | 82
 
-DIAPOSITIVE 14 — MLP : ARCHITECTURE ET PARAMÈTRES
+DIAPOSITIVE 24 — MLP : ARCHITECTURE ET PARAMÈTRES
 
 EXPLICATION TECHNIQUE
 Effectuer le comptage couche par couche, puis la somme. Pour l'exemple 2 → 16 → 2, la première couche comporte 32 poids et 16 biais ; la seconde 32 poids et 2 biais. Le réseau a donc 82 paramètres entraînables. Les activations ne portent pas de paramètres pour une ReLU ou une sigmoïde standard. Cette architecture sera utilisée dans le premier TP sur deux lunes. L'objectif est de relier les dimensions du code à une décision géométrique dans un espace de dimension deux, où le problème peut être visualisé sans réduction de dimension.
@@ -246,9 +487,9 @@ Non. Cela augmente le nombre d’activations conservées pendant le calcul.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 15. PERTE DE RÉGRESSION
+## 25. PERTE DE RÉGRESSION
 
-DIAPOSITIVE 15 — PERTE DE RÉGRESSION
+DIAPOSITIVE 25 — PERTE DE RÉGRESSION
 
 EXPLICATION TECHNIQUE
 Développer la somme des carrés composante par composante. Le gradient a la même dimension que la sortie. Si le modèle surestime y, le signe du gradient est positif et une descente réduit la prédiction localement. Sous une hypothèse de bruit gaussien de variance constante, la minimisation des carrés a une interprétation de maximum de vraisemblance ; cette hypothèse n'est pas universelle. Certains logiciels divisent aussi par le nombre de composantes de sortie. Il faut donc vérifier la réduction utilisée avant de comparer une dérivation et les gradients d'une bibliothèque.
@@ -266,9 +507,9 @@ LECTURES ET RÉFÉRENCES
 Romain Tavenard — Introduction au Deep Learning, 2025
 https://rtavenar.github.io/deep_book/book_fr.pdf
 
-## 16. CLASSIFICATION : SOFTMAX ET ENTROPIE CROISÉE
+## 26. CLASSIFICATION : SOFTMAX ET ENTROPIE CROISÉE
 
-DIAPOSITIVE 16 — CLASSIFICATION : SOFTMAX ET ENTROPIE CROISÉE
+DIAPOSITIVE 26 — CLASSIFICATION : SOFTMAX ET ENTROPIE CROISÉE
 
 EXPLICATION TECHNIQUE
 Pour une cible one-hot, un seul terme de la somme reste : moins le logarithme de la probabilité attribuée à la classe correcte. Deux sorties très différentes peuvent conduire à la même classe prédite mais à des pertes différentes, ce qui permet à l'optimiseur d'exploiter la confiance relative. Les probabilités produites ne sont pas automatiquement calibrées. Distinguer classification exclusive avec softmax et classification multi-label avec des sigmoïdes indépendantes. Les équations ci-dessus concernent des classes mutuellement exclusives et une distribution cible de somme un.
@@ -286,9 +527,9 @@ LECTURES ET RÉFÉRENCES
 PyTorch 2.8 — CrossEntropyLoss
 https://docs.pytorch.org/docs/2.8/generated/torch.nn.CrossEntropyLoss.html
 
-## 17. STABILITÉ NUMÉRIQUE DES LOGITS
+## 27. STABILITÉ NUMÉRIQUE DES LOGITS
 
-DIAPOSITIVE 17 — STABILITÉ NUMÉRIQUE DES LOGITS
+DIAPOSITIVE 27 — STABILITÉ NUMÉRIQUE DES LOGITS
 
 EXPLICATION TECHNIQUE
 Montrer l'invariance en multipliant numérateur et dénominateur par exp(-m). L'exemple z=(1000,1001) provoque un débordement si l'on calcule les exponentielles naïvement ; après translation, les arguments deviennent -1 et 0. En PyTorch, appliquer softmax avant CrossEntropyLoss change l'objet donné à la perte, qui attend déjà des logits et applique sa propre normalisation stable. Pour une classification binaire à une sortie, la version analogue est BCEWithLogitsLoss. La précision numérique est une contrainte d'implémentation qui doit être distinguée de la définition mathématique.
@@ -306,9 +547,9 @@ LECTURES ET RÉFÉRENCES
 PyTorch 2.8 — CrossEntropyLoss
 https://docs.pytorch.org/docs/2.8/generated/torch.nn.CrossEntropyLoss.html
 
-## 18. RISQUE EMPIRIQUE ET GÉNÉRALISATION
+## 28. RISQUE EMPIRIQUE ET GÉNÉRALISATION
 
-DIAPOSITIVE 18 — RISQUE EMPIRIQUE ET GÉNÉRALISATION
+DIAPOSITIVE 28 — RISQUE EMPIRIQUE ET GÉNÉRALISATION
 
 EXPLICATION TECHNIQUE
 La fonction minimisée est une approximation du risque attendu sur de nouvelles données. Une faible erreur empirique ne suffit donc pas : le modèle peut mémoriser le bruit ou exploiter une fuite d'information. Le symbole approximation rappelle qu'un réseau non convexe est généralement optimisé par un nombre fini de mises à jour sans garantie d'atteindre un minimum global. Expliquer le rôle de chaque partition et insister sur l'apprentissage du prétraitement à partir du train seul. Une augmentation de données doit respecter la sémantique de la cible et ne jamais relier les partitions.
@@ -329,9 +570,9 @@ https://www.math.u-bordeaux.fr/~jbigot/Site/Enseignement_files/Intro_DeepLearnin
 Geoffrey Daniel — Réseaux de neurones et deep learning : utilisation et méthodologie
 https://indico.in2p3.fr/event/17858/attachments/49454/65831/Deep_Learning_Seance_1.pdf
 
-## 19. DESCENTE DE GRADIENT
+## 29. DESCENTE DE GRADIENT
 
-DIAPOSITIVE 19 — DESCENTE DE GRADIENT
+DIAPOSITIVE 29 — DESCENTE DE GRADIENT
 
 EXPLICATION TECHNIQUE
 Faire dériver un risque quadratique simple avant de parler de réseau. La rétropropagation calcule les dérivées ; SGD ou Adam utilisent ces dérivées pour choisir une mise à jour. Un pas trop grand peut augmenter la perte même si le gradient est correct. Un pas trop petit peut rendre la progression indétectable au budget disponible. Le sens de descente est une propriété locale à l'ordre un et ne constitue pas une preuve d'amélioration pour un pas fini. Les conditions théoriques de convergence dépendent de la régularité de la fonction et de la suite des pas.
@@ -349,9 +590,9 @@ LECTURES ET RÉFÉRENCES
 Javiera Castillo Navarro — RCP 209, 2025–2026
 https://cedric.cnam.fr/vertigo/Cours/ml2/docs/coursDeep1.pdf
 
-## 20. RÈGLE DE LA CHAÎNE
+## 30. RÈGLE DE LA CHAÎNE
 
-DIAPOSITIVE 20 — RÈGLE DE LA CHAÎNE
+DIAPOSITIVE 30 — RÈGLE DE LA CHAÎNE
 
 EXPLICATION TECHNIQUE
 Dessiner au tableau le graphe d'un calcul scalaire, puis identifier la valeur transportée vers l'avant et la sensibilité transportée vers l'arrière. Le gradient arrière d'un nœud est la variation de la perte due à une petite variation de ce nœud. Si une variable intervient dans plusieurs opérations, toutes ses contributions doivent être additionnées. C'est ce qui rend nécessaire l'accumulation, en particulier dans les connexions résiduelles et le partage de paramètres. On ne calcule pas un gradient différent pour chaque branche puis on n'en conserve qu'un seul.
@@ -369,9 +610,9 @@ LECTURES ET RÉFÉRENCES
 Javiera Castillo Navarro — RCP 209, 2025–2026
 https://cedric.cnam.fr/vertigo/Cours/ml2/docs/coursDeep1.pdf
 
-## 21. EXEMPLE SCALAIRE : UN PAS COMPLET
+## 31. EXEMPLE SCALAIRE : UN PAS COMPLET
 
-DIAPOSITIVE 21 — EXEMPLE SCALAIRE : UN PAS COMPLET
+DIAPOSITIVE 31 — EXEMPLE SCALAIRE : UN PAS COMPLET
 
 EXPLICATION TECHNIQUE
 Calculer d'abord z=1, puis a=1/(1+exp(-1)). Le résidu est négatif car la sortie est inférieure à la cible. Sa multiplication par la dérivée de la sigmoïde, puis par x, donne un gradient d'environ -0,10575. Pour le biais, le même calcul omet le facteur x et donne environ -0,05288. La mise à jour produit w≈0,51058 et b≈0,00529. Recalculer ensuite la perte et vérifier qu'elle diminue pour ce pas précis. Cet exemple concerne une sigmoïde associée à une perte quadratique, et non la simplification softmax-entropie croisée présentée ensuite.
@@ -387,9 +628,9 @@ Le facteur x ; la dérivée de wx+b par rapport à b vaut 1.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 22. GRADIENT DE SOFTMAX + ENTROPIE CROISÉE
+## 32. GRADIENT DE SOFTMAX + ENTROPIE CROISÉE
 
-DIAPOSITIVE 22 — GRADIENT DE SOFTMAX + ENTROPIE CROISÉE
+DIAPOSITIVE 32 — GRADIENT DE SOFTMAX + ENTROPIE CROISÉE
 
 EXPLICATION TECHNIQUE
 Développer moins la somme y_i log(p_i), puis appliquer la dérivée de chaque p_i par rapport à z_j. La somme des y_i vaut un ; on obtient p_j-y_j. Pour la bonne classe, le gradient est négatif tant que la probabilité n'atteint pas un ; pour les autres classes, il est positif. La somme des composantes du gradient vaut zéro, conformément à l'invariance de softmax à l'ajout d'une constante. Avec une moyenne sur B exemples, le facteur 1/B doit être appliqué une fois, soit ici soit dans l'agrégation, pas deux fois.
@@ -405,9 +646,9 @@ Parce que les distributions p et y ont toutes deux une somme égale à un.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 23. RÉTROPROPAGATION D’UNE COUCHE DENSE
+## 33. RÉTROPROPAGATION D’UNE COUCHE DENSE
 
-DIAPOSITIVE 23 — RÉTROPROPAGATION D’UNE COUCHE DENSE
+DIAPOSITIVE 33 — RÉTROPROPAGATION D’UNE COUCHE DENSE
 
 EXPLICATION TECHNIQUE
 Vérifier les dimensions avant de développer la dérivée. δ a d courant composantes et a précédent en a d précédent ; leur produit extérieur donne bien une matrice de même forme que W. Pour une composante W_ij, la sensibilité de z_i est a_j et celle de la perte par rapport à z_i est δ_i. Le biais est ajouté directement à z, d'où son gradient δ. Ces formules concernent un exemple unique. Le passage au batch se fait ensuite en additionnant ou en moyennant les contributions selon la réduction de la perte.
@@ -425,9 +666,9 @@ LECTURES ET RÉFÉRENCES
 Jérémie Bigot — Introduction au Deep Learning
 https://www.math.u-bordeaux.fr/~jbigot/Site/Enseignement_files/Intro_DeepLearning.pdf
 
-## 24. PROPAGER LE SIGNAL DANS LES COUCHES CACHÉES
+## 34. PROPAGER LE SIGNAL DANS LES COUCHES CACHÉES
 
-DIAPOSITIVE 24 — PROPAGER LE SIGNAL DANS LES COUCHES CACHÉES
+DIAPOSITIVE 34 — PROPAGER LE SIGNAL DANS LES COUCHES CACHÉES
 
 EXPLICATION TECHNIQUE
 La multiplication par W transposée distribue le signal d'erreur vers les unités de la couche précédente. Le produit de Hadamard filtre ensuite ce signal par la sensibilité locale de l'activation. Pour ReLU, les préactivations négatives ne transmettent aucun gradient par cette branche. Expliquer pourquoi il faut utiliser les poids du passage avant pour tout le passage arrière : mettre W à jour avant de calculer les gradients des couches précédentes mélangerait deux états du modèle. L'optimiseur intervient après que tous les gradients nécessaires ont été calculés.
@@ -443,9 +684,9 @@ Pas dans la rétropropagation standard : on utilise un même état des poids.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 25. GRADIENTS VECTORISÉS SUR UN BATCH
+## 35. GRADIENTS VECTORISÉS SUR UN BATCH
 
-DIAPOSITIVE 25 — GRADIENTS VECTORISÉS SUR UN BATCH
+DIAPOSITIVE 35 — GRADIENTS VECTORISÉS SUR UN BATCH
 
 EXPLICATION TECHNIQUE
 Prendre B=32, une entrée de largeur 16 et une sortie de largeur 10. H est 32×16, W est 10×16, Z et D sont 32×10. D transposée multipliée par H donne 10×16. Dans nos implémentations NumPy, D contient déjà la division par B issue de la perte moyenne ; on ne divise donc pas à nouveau le gradient des poids. Les biais sont broadcastés pendant le passage avant : le passage arrière doit inverser cette opération en sommant sur les axes répétés. Ce principe s'applique à de nombreux bugs d'autograd manuel.
@@ -461,9 +702,9 @@ Non : cela réduirait le gradient d’un facteur B supplémentaire.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 26. VÉRIFIER UN GRADIENT NUMÉRIQUEMENT
+## 36. VÉRIFIER UN GRADIENT NUMÉRIQUEMENT
 
-DIAPOSITIVE 26 — VÉRIFIER UN GRADIENT NUMÉRIQUEMENT
+DIAPOSITIVE 36 — VÉRIFIER UN GRADIENT NUMÉRIQUEMENT
 
 EXPLICATION TECHNIQUE
 Une vérification numérique est un outil de diagnostic, pas une méthode pratique d'entraînement : elle exige deux évaluations de la perte par paramètre testé. Une valeur epsilon trop grande produit une erreur de troncature ; trop petite, une erreur d'arrondi. Une plage autour de 10 puissance moins cinq convient souvent en double précision, sans être une constante universelle. Désactiver le dropout et contrôler toute source d'aléa. Si la perturbation traverse zéro pour une ReLU, les dérivées peuvent différer sans que la règle de propagation soit incorrecte. Le TP vérifie séparément chaque tableau de paramètres.
@@ -479,9 +720,9 @@ Son coût croît avec le nombre de paramètres vérifiés.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 27. AUTOGRAD : CE QUI EST AUTOMATISÉ
+## 37. AUTOGRAD : CE QUI EST AUTOMATISÉ
 
-DIAPOSITIVE 27 — AUTOGRAD : CE QUI EST AUTOMATISÉ
+DIAPOSITIVE 37 — AUTOGRAD : CE QUI EST AUTOMATISÉ
 
 EXPLICATION TECHNIQUE
 Autograd applique un calcul de produits vecteur-Jacobienne en mode inverse, sans former toutes les Jacobiennes denses. Les activations nécessaires au passage arrière sont conservées, ce qui explique une partie de la mémoire d'entraînement. requires_grad indique quels tenseurs participent au calcul différentiel. detach coupe une relation dans le graphe, tandis qu'un contexte no_grad ou inference_mode évite d'enregistrer des opérations destinées à l'évaluation. Préciser que model.eval() change le comportement de certaines couches mais ne désactive pas, à lui seul, la construction du graphe. Les gradients s'accumulent tant qu'ils ne sont pas remis à zéro.
@@ -494,9 +735,9 @@ Non : utiliser aussi no_grad ou inference_mode pour l’évaluation.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 28. BOUCLE D’ENTRAÎNEMENT : INVARIANTS
+## 38. BOUCLE D’ENTRAÎNEMENT : INVARIANTS
 
-DIAPOSITIVE 28 — BOUCLE D’ENTRAÎNEMENT : INVARIANTS
+DIAPOSITIVE 38 — BOUCLE D’ENTRAÎNEMENT : INVARIANTS
 
 EXPLICATION TECHNIQUE
 Faire verbaliser la distinction entre époque, batch et étape d'optimisation. Mélanger l'ordre du train d'une époque à l'autre est usuel ; conserver une évaluation déterministe facilite les comparaisons. La perte de l'époque doit être pondérée par le nombre d'exemples lorsque le dernier batch est incomplet, afin de ne pas lui attribuer un poids excessif. Vérifier les types : logits flottants et cibles entières pour une classification multiclasses. Avant une expérience longue, essayer de surapprendre quelques exemples, puis vérifier que le passage en mode évaluation ne modifie aucun poids.
@@ -509,9 +750,9 @@ Pour retrouver la vraie moyenne par exemple, même avec un dernier batch plus pe
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 29. TP 01 · UN MLP EN NUMPY
+## 39. TP 01 · UN MLP EN NUMPY
 
-DIAPOSITIVE 29 — TP 01 · UN MLP EN NUMPY
+DIAPOSITIVE 39 — TP 01 · UN MLP EN NUMPY
 
 EXPLICATION TECHNIQUE
 Organisation : 20 minutes pour lire les données et les formes, 40 minutes pour annoter le calcul du gradient, 25 minutes pour le contrôle numérique, 40 minutes d'expériences et 25 minutes de restitution. Le notebook étudiant contient une base exécutable et des consignes d'investigation. Faire prédire l'effet d'un grand taux d'apprentissage avant de l'essayer. Les prétraitements sont ajustés sur le train. Les réponses doivent distinguer erreur d'implémentation, difficulté d'optimisation et manque de généralisation. Les corrigés proposent des conclusions attendues sans imposer un score unique.
@@ -524,7 +765,7 @@ Une configuration, une graine, des courbes, un contrôle du gradient et une limi
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 30. DIAGNOSTIQUER AVANT D’AJOUTER DES COUCHES
+## 40. DIAGNOSTIQUER AVANT D’AJOUTER DES COUCHES
 
 Symptôme | Vérification prioritaire
 Perte constante | Gradients, taux d’apprentissage, paramètres entraînables
@@ -533,7 +774,7 @@ Train bon, validation faible | Split, surapprentissage, décalage de distributio
 Score presque parfait dès le début | Fuite de cible ou duplication train/test
 Gradients NumPy ≠ numériques | Axes, transpose, facteur de moyenne et ReLU
 
-DIAPOSITIVE 30 — DIAGNOSTIQUER AVANT D’AJOUTER DES COUCHES
+DIAPOSITIVE 40 — DIAGNOSTIQUER AVANT D’AJOUTER DES COUCHES
 
 EXPLICATION TECHNIQUE
 Cette liste doit être appliquée dans l'ordre. Une erreur de forme, de cible ou de réduction peut produire une courbe qui ressemble à un mauvais choix d'hyperparamètre. Examiner ensuite les normes de gradients et la capacité à ajuster un très petit sous-ensemble. Si le train progresse mais pas la validation, l'optimisation fonctionne probablement : investiguer la régularisation, le protocole et les données. Une fuite de cible peut au contraire donner des résultats artificiellement excellents. Demander à chaque binôme d'associer un symptôme à une vérification falsifiable, plutôt qu'à une solution automatique.
@@ -546,9 +787,9 @@ Essayer de surapprendre un très petit lot d’exemples.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 31. EXERCICE · RECONSTRUIRE LE GRADIENT
+## 41. EXERCICE · RECONSTRUIRE LE GRADIENT
 
-DIAPOSITIVE 31 — EXERCICE · RECONSTRUIRE LE GRADIENT
+DIAPOSITIVE 41 — EXERCICE · RECONSTRUIRE LE GRADIENT
 
 EXPLICATION TECHNIQUE
 Accorder dix minutes de travail individuel puis mettre les propositions en commun. Pour un exemple colonne, W1 est 4×3, b1 est 4, a1 est 4, W2 est 2×4, b2 est 2. Le total est 12+4+8+2=26. La sortie a deux logits et delta2=p-y. Le gradient W2 est delta2 a1 transposée ; delta1=(W2 transposée delta2) multiplié élément par élément par l'indicatrice z1>0. Le gradient W1 est delta1 x transposée. Pour un batch, les activations passent en lignes et les produits changent d'ordre, sans changer le modèle.
@@ -561,9 +802,9 @@ RÉPONSE ATTENDUE
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 32. JOUR 1 · À RETENIR
+## 42. JOUR 1 · À RETENIR
 
-DIAPOSITIVE 32 — JOUR 1 · À RETENIR
+DIAPOSITIVE 42 — JOUR 1 · À RETENIR
 
 EXPLICATION TECHNIQUE
 Clore la séance par une explication sans code : demander à un étudiant de décrire le trajet d'un exemple jusqu'à la perte, puis le trajet d'un gradient jusqu'à un poids de la première couche. Faire nommer le rôle du batch et de la moyenne. L'autre vérification consiste à faire calculer un gradient de biais et à expliquer pourquoi il est une somme dans la version vectorisée. Annoncer la journée suivante : une fois les gradients corrects, il reste à rendre l'optimisation stable et à utiliser une structure adaptée aux images.
@@ -576,16 +817,16 @@ Composer des transformations et propager les sensibilités par la règle de la c
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 33. OPTIMISATION ET CONVOLUTIONS
+## 43. OPTIMISATION ET CONVOLUTIONS
 
-DIAPOSITIVE 33 — OPTIMISATION ET CONVOLUTIONS
+DIAPOSITIVE 43 — OPTIMISATION ET CONVOLUTIONS
 
 EXPLICATION TECHNIQUE
 Cette journée articule les concepts et leur mise à l'épreuve. Commencer par une restitution de la séance précédente. Faire expliciter les dimensions avant toute exécution. Le déroulé représente 420 minutes de formation effective ; pauses et déjeuner sont à ajouter. Les durées des activités sont ajustables à l'intérieur de cette enveloppe. L'objectif est une compréhension justifiée par un calcul, une expérience contrôlée ou une vérification du code.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 34. JOUR 2 · DÉROULÉ DES 7 HEURES
+## 44. JOUR 2 · DÉROULÉ DES 7 HEURES
 
 Séquence | Travail attendu | Minutes
 Optimisation | Mini-batches, Adam, initialisation et régularisation | 90
@@ -594,16 +835,16 @@ Exercices | Calcul à la main et champ réceptif | 45
 TP 02 | Petit CNN sur digits et expériences contrôlées | 150
 Synthèse | Diagnostic et restitution | 30
 
-DIAPOSITIVE 34 — JOUR 2 · DÉROULÉ DES 7 HEURES
+DIAPOSITIVE 44 — JOUR 2 · DÉROULÉ DES 7 HEURES
 
 EXPLICATION TECHNIQUE
 Présenter les cinq séquences de la journée. Les activités de cours incluent les questions au tableau et les démonstrations. Le travail pratique se fait en binôme mais chaque étudiant conserve un compte rendu personnel. Dans le débrief, demander une prédiction avant de montrer une sortie de code et distinguer une observation expérimentale d'une propriété mathématique. La somme des cinq durées est exactement 420 minutes. Les pauses ne sont pas comprises dans ce total.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 35. SGD ET MINI-BATCHES
+## 45. SGD ET MINI-BATCHES
 
-DIAPOSITIVE 35 — SGD ET MINI-BATCHES
+DIAPOSITIVE 45 — SGD ET MINI-BATCHES
 
 EXPLICATION TECHNIQUE
 Le gradient de mini-batch est un estimateur du gradient empirique lorsque l'échantillonnage est approprié. Sa variabilité influence la trajectoire de l'optimisation, sans constituer une garantie de meilleure généralisation. Doubler le batch réduit le nombre d'étapes par époque ; comparer seulement le nombre d'époques peut donc masquer un changement de budget de mises à jour. La mémoire des activations croît avec B, alors que celle des paramètres reste fixe. Les relations simples de redimensionnement du taux d'apprentissage sont des heuristiques qui nécessitent une validation.
@@ -619,9 +860,9 @@ RÉPONSE ATTENDUE
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 36. MOMENTUM : MÉMORISER UNE DIRECTION
+## 46. MOMENTUM : MÉMORISER UNE DIRECTION
 
-DIAPOSITIVE 36 — MOMENTUM : MÉMORISER UNE DIRECTION
+DIAPOSITIVE 46 — MOMENTUM : MÉMORISER UNE DIRECTION
 
 EXPLICATION TECHNIQUE
 Présenter explicitement la convention employée : ici, on n'introduit pas le facteur 1-beta devant g. Une autre écriture utilise une moyenne exponentielle normalisée et nécessite un taux effectif différent. Lorsque les gradients gardent un même signe, leur contribution s'accumule et accélère le mouvement ; lorsqu'ils oscillent, une partie se compense. Une mémoire importante peut aussi provoquer un dépassement ou retarder un changement de direction. Le momentum n'élimine donc pas le choix du taux d'apprentissage. Initialiser v à zéro et calculer deux étapes pour un gradient constant.
@@ -637,9 +878,9 @@ RÉPONSE ATTENDUE
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 37. ADAM : PREMIER ET SECOND MOMENTS
+## 47. ADAM : PREMIER ET SECOND MOMENTS
 
-DIAPOSITIVE 37 — ADAM : PREMIER ET SECOND MOMENTS
+DIAPOSITIVE 47 — ADAM : PREMIER ET SECOND MOMENTS
 
 EXPLICATION TECHNIQUE
 Le second moment est une moyenne des carrés, pas directement une estimation de variance centrée. La normalisation produit des échelles de pas différentes selon les coordonnées. Expliquer les facteurs de correction en développant l'espérance de m_t pour un gradient stationnaire : son initialisation à zéro réduit sa magnitude au début. Adam n'exonère pas du réglage du taux ni du contrôle des gradients. Les choix usuels des coefficients sont des points de départ et non des constantes mathématiques. Distinguer la stabilisation numérique epsilon d'une pénalisation du modèle.
@@ -657,9 +898,9 @@ LECTURES ET RÉFÉRENCES
 Kingma et Ba — Adam, 2014
 https://arxiv.org/abs/1412.6980
 
-## 38. INITIALISATION ET PROPAGATION DES VARIANCES
+## 48. INITIALISATION ET PROPAGATION DES VARIANCES
 
-DIAPOSITIVE 38 — INITIALISATION ET PROPAGATION DES VARIANCES
+DIAPOSITIVE 48 — INITIALISATION ET PROPAGATION DES VARIANCES
 
 EXPLICATION TECHNIQUE
 L'argument de variance suppose approximativement des composantes indépendantes et centrées. Une somme de d contributions indépendantes additionne leurs variances ; il faut donc compenser l'augmentation de fan-in. ReLU élimine une partie du signal, d'où le facteur deux dans l'heuristique de He. Ces conditions idéalisées ne prouvent pas la stabilité de tout réseau réel, mais fournissent un point de départ utile. Les biais peuvent être initialisés à zéro sans rendre tous les neurones identiques si les poids sont aléatoires. Ne pas dire que tous les paramètres doivent nécessairement être aléatoires.
@@ -675,9 +916,9 @@ Les neurones peuvent rester symétriques et apprendre des représentations ident
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 39. GRADIENTS QUI DISPARAISSENT OU EXPLOSENT
+## 49. GRADIENTS QUI DISPARAISSENT OU EXPLOSENT
 
-DIAPOSITIVE 39 — GRADIENTS QUI DISPARAISSENT OU EXPLOSENT
+DIAPOSITIVE 49 — GRADIENTS QUI DISPARAISSENT OU EXPLOSENT
 
 EXPLICATION TECHNIQUE
 Une succession d'opérateurs contractants peut atténuer le signal, tandis que des directions amplifiées peuvent le faire exploser. Les normes spectrales donnent une intuition, mais la direction effective du gradient et les corrélations entre matrices comptent aussi. Le clipping par norme limite la magnitude d'un gradient déjà calculé ; il ne restaure pas un gradient disparu et ne corrige pas un masque erroné. Observer les normes par couche avant de proposer une intervention. Les connexions résiduelles introduisent un chemin identité, que nous retrouverons dans ResNet et dans les Transformers.
@@ -693,9 +934,9 @@ Non : il borne les grands gradients, il ne recrée pas les petits.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 40. PÉNALISATION L2 ET WEIGHT DECAY
+## 50. PÉNALISATION L2 ET WEIGHT DECAY
 
-DIAPOSITIVE 40 — PÉNALISATION L2 ET WEIGHT DECAY
+DIAPOSITIVE 50 — PÉNALISATION L2 ET WEIGHT DECAY
 
 EXPLICATION TECHNIQUE
 Pour SGD sans adaptation, développer la mise à jour donne (1-eta lambda) theta moins eta fois le gradient de données. Avec Adam, introduire lambda theta dans le gradient modifie aussi les estimations des moments ; ce n'est donc pas en général la même opération qu'une décroissance séparée du paramètre. AdamW effectue ce découplage. En pratique, certains groupes de paramètres, tels que les biais ou les gains de normalisation, peuvent recevoir des réglages différents. Ce choix doit être documenté dans une comparaison. La pénalisation peut aider mais ne remplace pas un protocole de validation valide.
@@ -713,9 +954,9 @@ LECTURES ET RÉFÉRENCES
 Loshchilov et Hutter — Decoupled Weight Decay Regularization, 2017
 https://arxiv.org/abs/1711.05101
 
-## 41. DROPOUT : TRAIN ET ÉVALUATION
+## 51. DROPOUT : TRAIN ET ÉVALUATION
 
-DIAPOSITIVE 41 — DROPOUT : TRAIN ET ÉVALUATION
+DIAPOSITIVE 51 — DROPOUT : TRAIN ET ÉVALUATION
 
 EXPLICATION TECHNIQUE
 La formule utilise p comme probabilité de suppression. Vérifier cette convention, car certaines présentations utilisent au contraire une probabilité de conservation. La conservation de l'espérance d'une activation ne signifie pas que l'espérance de toute la sortie du réseau est inchangée : les couches suivantes sont non linéaires. Un taux trop fort peut empêcher l'ajustement du train. Pour une vérification numérique des gradients, le masque doit rester fixe ou le dropout doit être désactivé. En PyTorch, train() et eval() pilotent ce comportement sans modifier automatiquement requires_grad.
@@ -733,9 +974,9 @@ LECTURES ET RÉFÉRENCES
 Romain Tavenard — Introduction au Deep Learning, 2025
 https://rtavenar.github.io/deep_book/book_fr.pdf
 
-## 42. NORMALISER LES ACTIVATIONS
+## 52. NORMALISER LES ACTIVATIONS
 
-DIAPOSITIVE 42 — NORMALISER LES ACTIVATIONS
+DIAPOSITIVE 52 — NORMALISER LES ACTIVATIONS
 
 EXPLICATION TECHNIQUE
 Le point essentiel est de demander sur quels axes sont calculés moyenne et variance. BatchNorm utilise des statistiques regroupant plusieurs exemples et éventuellement des positions spatiales ; LayerNorm travaille à l'intérieur d'un exemple ou d'un token sur ses caractéristiques. Gamma et beta sont appris par gradient et ont des formes dépendant de la normalisation. Epsilon rend la division définie et influence le comportement lorsque la variance est très faible. Il faut distinguer ces normalisations internes du prétraitement global des entrées et des statistiques mobiles utilisées par BatchNorm à l'évaluation.
@@ -756,9 +997,9 @@ https://arxiv.org/abs/1502.03167
 Ba et al. — Layer Normalization, 2016
 https://arxiv.org/abs/1607.06450
 
-## 43. EARLY STOPPING ET COURBES D’APPRENTISSAGE
+## 53. EARLY STOPPING ET COURBES D’APPRENTISSAGE
 
-DIAPOSITIVE 43 — EARLY STOPPING ET COURBES D’APPRENTISSAGE
+DIAPOSITIVE 53 — EARLY STOPPING ET COURBES D’APPRENTISSAGE
 
 EXPLICATION TECHNIQUE
 Les courbes de cette diapositive sont illustratives et non les résultats d'un benchmark. Elles montrent un cas où la perte train continue de diminuer alors que la validation remonte. La règle d'arrêt doit préciser le critère, la direction d'amélioration, la patience et le changement minimal considéré. Sauvegarder réellement le meilleur état des poids, pas seulement l'indice de la meilleure époque. Tester plusieurs règles sur le même test revient à l'utiliser pour la sélection. Une seule séparation ne mesure pas toute la variabilité ; répéter sur plusieurs graines peut être utile si le budget le permet.
@@ -771,9 +1012,9 @@ La dernière époque n’est pas nécessairement celle qui généralise le mieux
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 44. POURQUOI UN CNN POUR UNE IMAGE ?
+## 54. POURQUOI UN CNN POUR UNE IMAGE ?
 
-DIAPOSITIVE 44 — POURQUOI UN CNN POUR UNE IMAGE ?
+DIAPOSITIVE 54 — POURQUOI UN CNN POUR UNE IMAGE ?
 
 EXPLICATION TECHNIQUE
 Comparer une image à un vecteur aplati. Une couche dense peut en principe apprendre des relations entre pixels, mais elle ne reçoit pas explicitement l'hypothèse qu'un motif local est réutilisable dans l'espace. La convolution introduit cette hypothèse dans la paramétrisation. Le partage réduit le nombre de paramètres et crée une équivariance sous certaines conditions. Il ne garantit pas l'invariance aux translations du modèle complet. Les effets de bord, le stride, le pooling et les couches finales peuvent modifier cette propriété. L'utilité du biais inductif dépend de la tâche et des transformations pertinentes.
@@ -788,9 +1029,9 @@ LECTURES ET RÉFÉRENCES
 Jérémie Bigot — Introduction au Deep Learning
 https://www.math.u-bordeaux.fr/~jbigot/Site/Enseignement_files/Intro_DeepLearning.pdf
 
-## 45. CONVOLUTION 2D : L’OPÉRATION LOCALE
+## 55. CONVOLUTION 2D : L’OPÉRATION LOCALE
 
-DIAPOSITIVE 45 — CONVOLUTION 2D : L’OPÉRATION LOCALE
+DIAPOSITIVE 55 — CONVOLUTION 2D : L’OPÉRATION LOCALE
 
 EXPLICATION TECHNIQUE
 La formule correspond au cas stride un, sans dilation et sans padding, avec un batch omis pour la lisibilité. Une convolution mathématique retourne le noyau ; l'opération usuelle des couches Conv2d est une corrélation croisée. Puisque les coefficients sont appris, cette convention ne réduit pas la famille de détecteurs représentable. Chaque canal de sortie possède un ensemble de noyaux sur tous les canaux d'entrée et un biais. Un filtre RGB a donc trois plans de coefficients, pas un seul noyau recopié mécaniquement sur rouge, vert et bleu.
@@ -808,9 +1049,9 @@ LECTURES ET RÉFÉRENCES
 PyTorch 2.8 — Conv2d
 https://docs.pytorch.org/docs/2.8/generated/torch.nn.Conv2d.html
 
-## 46. CONVOLUTION : EXEMPLE À LA MAIN
+## 56. CONVOLUTION : EXEMPLE À LA MAIN
 
-DIAPOSITIVE 46 — CONVOLUTION : EXEMPLE À LA MAIN
+DIAPOSITIVE 56 — CONVOLUTION : EXEMPLE À LA MAIN
 
 EXPLICATION TECHNIQUE
 Faire remplir les quatre cases avant d'afficher le calcul oralement. La première vaut 1×1+2×0+0×0+1×(-1)=0. La deuxième vaut 2-3=-1, la troisième 0-1=-1 et la quatrième 1-0=1. Insister sur le fait qu'un seul jeu de quatre poids a produit toutes les sorties. Un biais s'ajouterait à chaque case du même canal. Ce noyau est fixé à titre pédagogique ; dans un CNN, il est généralement appris. Le calcul est une corrélation croisée valide et ne doit pas être mélangé à une convention de noyau retourné.
@@ -826,9 +1067,9 @@ RÉPONSE ATTENDUE
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 47. STRIDE, PADDING ET DILATION
+## 57. STRIDE, PADDING ET DILATION
 
-DIAPOSITIVE 47 — STRIDE, PADDING ET DILATION
+DIAPOSITIVE 57 — STRIDE, PADDING ET DILATION
 
 EXPLICATION TECHNIQUE
 Définir le noyau effectif : d(k-1)+1. On compte ensuite le nombre de positions valides de cette fenêtre après ajout du padding. La formule présentée utilise un padding symétrique et s'applique indépendamment à la hauteur et à la largeur. Pour H=32, k=3, p=1, d=1 et s=2, la sortie vaut 16. Un padding dit same ne signifie pas la même chose pour tous les strides et toutes les bibliothèques ; dans les versions étudiées, vérifier les contraintes de l'API. La dilation augmente le champ couvert sans augmenter le nombre de coefficients.
@@ -846,7 +1087,7 @@ LECTURES ET RÉFÉRENCES
 PyTorch 2.8 — Conv2d
 https://docs.pytorch.org/docs/2.8/generated/torch.nn.Conv2d.html
 
-## 48. CANAUX ET TENSEURS D’UN CNN
+## 58. CANAUX ET TENSEURS D’UN CNN
 
 Objet | Forme | Rôle
 Entrée | B × Cᵢₙ × H × W | Images du batch
@@ -854,7 +1095,7 @@ Poids | Cₒᵤₜ × Cᵢₙ × kₕ × k𝓌 | Détecteurs partagés
 Biais | Cₒᵤₜ | Décalage par canal de sortie
 Sortie | B × Cₒᵤₜ × Hₒᵤₜ × Wₒᵤₜ | Cartes de caractéristiques
 
-DIAPOSITIVE 48 — CANAUX ET TENSEURS D’UN CNN
+DIAPOSITIVE 58 — CANAUX ET TENSEURS D’UN CNN
 
 EXPLICATION TECHNIQUE
 Conserver le batch au premier axe évite de confondre nombre d'images et nombre de canaux. Dans notre convention PyTorch, l'image est B×C×H×W. Une autre bibliothèque peut utiliser B×H×W×C ; l'algèbre est la même mais les axes à manipuler changent. Une convolution de 3 canaux vers 16 canaux produit 16 cartes d'activation, chacune agrégeant les trois canaux d'entrée. La notion de canal de sortie ne signifie pas que ce canal correspond à une classe ; les classes n'apparaissent que dans la tête finale choisie pour la tâche.
@@ -867,9 +1108,9 @@ Non : c’est une représentation intermédiaire apprise.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 49. TAILLES ET NOMBRE DE PARAMÈTRES
+## 59. TAILLES ET NOMBRE DE PARAMÈTRES
 
-DIAPOSITIVE 49 — TAILLES ET NOMBRE DE PARAMÈTRES
+DIAPOSITIVE 59 — TAILLES ET NOMBRE DE PARAMÈTRES
 
 EXPLICATION TECHNIQUE
 Pour une entrée RGB et 16 filtres 3×3, le nombre de paramètres est 16(3×9+1)=448. Les MACs comptent ici les multiplications-accumulations d'un exemple et omettent les biais. Une convention FLOPs peut compter deux opérations pour une multiplication-accumulation ; il faut annoncer cette convention. Si H et W doublent, les paramètres restent inchangés mais le calcul et les activations sont approximativement multipliés par quatre. Pour des convolutions groupées, le nombre de connexions par canal change ; la formule de cette diapositive doit alors être adaptée.
@@ -887,9 +1128,9 @@ LECTURES ET RÉFÉRENCES
 PyTorch 2.8 — Conv2d
 https://docs.pytorch.org/docs/2.8/generated/torch.nn.Conv2d.html
 
-## 50. POOLING : RÉDUIRE LA RÉSOLUTION
+## 60. POOLING : RÉDUIRE LA RÉSOLUTION
 
-DIAPOSITIVE 50 — POOLING : RÉDUIRE LA RÉSOLUTION
+DIAPOSITIVE 60 — POOLING : RÉDUIRE LA RÉSOLUTION
 
 EXPLICATION TECHNIQUE
 Expliquer la différence du passage arrière : le max transmet le gradient à une position sélectionnée, tandis que la moyenne le répartit également sur toutes les positions. Les égalités au maximum nécessitent une convention d'implémentation. Le sous-échantillonnage réduit la mémoire et augmente le champ réceptif des couches suivantes, mais détruit de l'information de position. Il ne procure pas une invariance parfaite aux translations. Une convolution à stride supérieur à un peut jouer un rôle de réduction de résolution tout en apprenant sa transformation, avec un autre coût en paramètres.
@@ -905,9 +1146,9 @@ Vers l’entrée qui a produit le maximum.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 51. CHAMP RÉCEPTIF : CALCUL RÉCURSIF
+## 61. CHAMP RÉCEPTIF : CALCUL RÉCURSIF
 
-DIAPOSITIVE 51 — CHAMP RÉCEPTIF : CALCUL RÉCURSIF
+DIAPOSITIVE 61 — CHAMP RÉCEPTIF : CALCUL RÉCURSIF
 
 EXPLICATION TECHNIQUE
 Faire le calcul pour Conv3 stride1, Pool2 stride2, Conv3 stride1. Après la première convolution, r=3 et j=1 ; après le pooling, r=4 et j=2 ; après la seconde convolution, r=8 et j=2. Deux convolutions 3×3 à stride un donnent en revanche un champ de 5×5 avant tout pooling. Le padding déplace les centres et traite les bords, mais n'augmente pas le nombre de pixels réels disponibles en dehors de l'image. Le champ réceptif effectif décrit les influences effectivement importantes, qui dépendent des poids et des données.
@@ -923,9 +1164,9 @@ RÉPONSE ATTENDUE
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 52. ÉQUIVARIANCE ET INVARIANCE
+## 62. ÉQUIVARIANCE ET INVARIANCE
 
-DIAPOSITIVE 52 — ÉQUIVARIANCE ET INVARIANCE
+DIAPOSITIVE 62 — ÉQUIVARIANCE ET INVARIANCE
 
 EXPLICATION TECHNIQUE
 Sur un domaine infini ou avec des conditions adaptées, une convolution à stride un commute avec une translation entière. Sur une image finie, le padding et les bords limitent cette égalité. Avec un stride supérieur à un, seules certaines translations s'alignent sur la grille de sous-échantillonnage. Un classifieur peut rechercher une certaine invariance via l'agrégation spatiale ou l'augmentation, mais cela n'est pas une conséquence absolue du mot CNN. Pour la segmentation, on souhaite plutôt préserver une relation spatiale entre entrée et sortie ; l'invariance totale serait indésirable.
@@ -941,9 +1182,9 @@ Non : le masque devrait généralement se déplacer avec les objets.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 53. TP 02 · CONSTRUIRE UN PETIT CNN
+## 63. TP 02 · CONSTRUIRE UN PETIT CNN
 
-DIAPOSITIVE 53 — TP 02 · CONSTRUIRE UN PETIT CNN
+DIAPOSITIVE 63 — TP 02 · CONSTRUIRE UN PETIT CNN
 
 EXPLICATION TECHNIQUE
 Déroulé : 20 minutes pour le protocole de séparation, 30 minutes pour les dimensions, 40 minutes pour l'entraînement, 35 minutes pour une ablation et 25 minutes d'analyse. Le réseau de base emploie deux blocs convolution-ReLU-pooling puis une tête dense. Les images sont divisées par 16, échelle définie par le jeu, sans apprentissage sur le test. Les étudiants comparent par exemple le pooling et une réduction par stride, à budget documenté. La petite résolution permet de travailler sur CPU ; les conclusions ne doivent pas être extrapolées directement à des images haute résolution.
@@ -956,9 +1197,9 @@ Une architecture annotée, un protocole sans fuite et une explication de ses err
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 54. EXERCICE · AUDITER UNE CONVOLUTION
+## 64. EXERCICE · AUDITER UNE CONVOLUTION
 
-DIAPOSITIVE 54 — EXERCICE · AUDITER UNE CONVOLUTION
+DIAPOSITIVE 64 — EXERCICE · AUDITER UNE CONVOLUTION
 
 EXPLICATION TECHNIQUE
 Laisser huit minutes puis faire corriger par un autre binôme. H sortie et W sortie valent chacun floor((32+2-2-1)/2+1)=16. La forme est donc B×16×16×16. Le nombre de paramètres est 16(3×3×3+1)=448. Le coût principal vaut 16×16×16×3×3×3=110592 MACs par image, hors biais et activation. Le batch multiplie ce coût par B sans modifier le nombre de poids. Demander enfin l'effet d'un padding nul : la hauteur devient 15, ce qui modifie le calcul et les activations mais pas les paramètres.
@@ -971,9 +1212,9 @@ RÉPONSE ATTENDUE
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 55. JOUR 2 · À RETENIR
+## 65. JOUR 2 · À RETENIR
 
-DIAPOSITIVE 55 — JOUR 2 · À RETENIR
+DIAPOSITIVE 65 — JOUR 2 · À RETENIR
 
 EXPLICATION TECHNIQUE
 Demander une restitution qui relie les deux moitiés de la journée. Les CNN n'ont pas une règle d'apprentissage séparée : ils utilisent la même rétropropagation, avec une structure de partage des poids. Le gradient d'un noyau additionne les contributions de toutes les positions où il a été appliqué et de tous les exemples du batch. Revenir sur le rôle des augmentations et du test pour ne pas confondre une hypothèse d'architecture et une propriété empiriquement validée. La journée suivante introduit le transfert, qui permet de réutiliser des représentations déjà apprises.
@@ -986,16 +1227,16 @@ Il additionne les contributions des positions et des exemples.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 56. CNN ET TRANSFERT
+## 66. CNN ET TRANSFERT
 
-DIAPOSITIVE 56 — CNN ET TRANSFERT
+DIAPOSITIVE 66 — CNN ET TRANSFERT
 
 EXPLICATION TECHNIQUE
 Cette journée articule les concepts et leur mise à l'épreuve. Commencer par une restitution de la séance précédente. Faire expliciter les dimensions avant toute exécution. Le déroulé représente 420 minutes de formation effective ; pauses et déjeuner sont à ajouter. Les durées des activités sont ajustables à l'intérieur de cette enveloppe. L'objectif est une compréhension justifiée par un calcul, une expérience contrôlée ou une vérification du code.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 57. JOUR 3 · DÉROULÉ DES 7 HEURES
+## 67. JOUR 3 · DÉROULÉ DES 7 HEURES
 
 Séquence | Travail attendu | Minutes
 Architectures | CNN complet, BatchNorm et résidus | 60
@@ -1004,14 +1245,14 @@ Transfert | Gel, adaptation et expériences comparables | 75
 TP 03 | Source digits 0–4 vers cible digits 5–9 | 180
 Restitution | Erreurs, résultats et limites | 30
 
-DIAPOSITIVE 57 — JOUR 3 · DÉROULÉ DES 7 HEURES
+DIAPOSITIVE 67 — JOUR 3 · DÉROULÉ DES 7 HEURES
 
 EXPLICATION TECHNIQUE
 Présenter les cinq séquences de la journée. Les activités de cours incluent les questions au tableau et les démonstrations. Le travail pratique se fait en binôme mais chaque étudiant conserve un compte rendu personnel. Dans le débrief, demander une prédiction avant de montrer une sortie de code et distinguer une observation expérimentale d'une propriété mathématique. La somme des cinq durées est exactement 420 minutes. Les pauses ne sont pas comprises dans ce total.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 58. LE CNN DU TP : PARCOURS D’UN BATCH
+## 68. LE CNN DU TP : PARCOURS D’UN BATCH
 
 Étape | Forme hors batch | Paramètres
 Conv 3×3 + ReLU | 8 × 8 × 8 | 80
@@ -1021,7 +1262,7 @@ MaxPool + flatten | 64 | 0
 Linear 64 → 10 | 10 logits | 650
 Total |  | 1 898
 
-DIAPOSITIVE 58 — LE CNN DU TP : PARCOURS D’UN BATCH
+DIAPOSITIVE 68 — LE CNN DU TP : PARCOURS D’UN BATCH
 
 EXPLICATION TECHNIQUE
 Ce tableau correspond exactement au réseau des notebooks. Une première convolution 1→8 conserve 8×8 grâce au padding, puis un pooling divise la résolution par deux. Le deuxième bloc 8→16 réduit ensuite 4×4 en 2×2. L'aplatissement donne 16×2×2=64 composantes. Le nombre de paramètres est 80+1168+650=1898 ; ReLU, pooling et flatten n'ajoutent aucun poids. Vérifier ce total avec la somme numel des paramètres PyTorch. L'aplatissement impose ici une taille d'entrée déterminée ; une agrégation globale pourrait rendre la tête moins dépendante de cette taille.
@@ -1034,9 +1275,9 @@ RÉPONSE ATTENDUE
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 59. CONVOLUTION 1×1 ET AGRÉGATION GLOBALE
+## 69. CONVOLUTION 1×1 ET AGRÉGATION GLOBALE
 
-DIAPOSITIVE 59 — CONVOLUTION 1×1 ET AGRÉGATION GLOBALE
+DIAPOSITIVE 69 — CONVOLUTION 1×1 ET AGRÉGATION GLOBALE
 
 EXPLICATION TECHNIQUE
 Un noyau 1×1 n'est pas une opération inutile : il réalise une projection sur les canaux, avec les mêmes poids à chaque position. Il est employé pour réduire ou augmenter la dimension et pour aligner les branches résiduelles. L'agrégation globale par moyenne réduit la dépendance de la tête à la taille spatiale et peut réduire fortement le nombre de paramètres. Elle détruit toutefois la localisation fine ; ce choix convient plus naturellement à certaines tâches de classification qu'à une reconstruction dense. Comparer son coût à celui d'une grande couche dense après aplatissement.
@@ -1052,9 +1293,9 @@ Oui, via une projection apprise partagée à chaque position.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 60. BATCHNORM DANS UN CNN
+## 70. BATCHNORM DANS UN CNN
 
-DIAPOSITIVE 60 — BATCHNORM DANS UN CNN
+DIAPOSITIVE 70 — BATCHNORM DANS UN CNN
 
 EXPLICATION TECHNIQUE
 Décrire précisément les axes d'agrégation pour une couche BatchNorm2d. Les paramètres gamma et beta possèdent une composante par canal et ne sont pas les statistiques mobiles. Les premières sont apprises par gradient ; les secondes sont des buffers mis à jour selon le comportement de la couche. Il existe des conventions d'estimation de variance et de mise à jour propres à chaque API ; la formule illustre ici la normalisation du batch. Durant un transfert sur peu de données, adapter ces statistiques peut être nuisible même si les poids convolutionnels sont gelés. D'où l'importance de distinguer gel des paramètres et mode évaluation.
@@ -1072,9 +1313,9 @@ LECTURES ET RÉFÉRENCES
 Ioffe et Szegedy — Batch Normalization, 2015
 https://arxiv.org/abs/1502.03167
 
-## 61. CONNEXIONS RÉSIDUELLES
+## 71. CONNEXIONS RÉSIDUELLES
 
-DIAPOSITIVE 61 — CONNEXIONS RÉSIDUELLES
+DIAPOSITIVE 71 — CONNEXIONS RÉSIDUELLES
 
 EXPLICATION TECHNIQUE
 L'écriture résiduelle change la paramétrisation d'un bloc : F peut apprendre une petite correction ou se rapprocher de zéro. Le terme identité offre un chemin direct au signal et au gradient, sans garantir l'absence de toute difficulté d'optimisation. Si le nombre de canaux ou la résolution change, une projection P(x), souvent convolution 1×1 avec stride approprié, remplace l'identité pour rendre l'addition possible. Le gradient du paramètre d'une branche est calculé comme précédemment ; le gradient par rapport à l'entrée additionne les chemins. Cette structure sera centrale dans les blocs Transformers.
@@ -1092,9 +1333,9 @@ LECTURES ET RÉFÉRENCES
 He et al. — Deep Residual Learning for Image Recognition, 2015
 https://arxiv.org/abs/1512.03385
 
-## 62. AUGMENTER SANS CHANGER LA CIBLE
+## 72. AUGMENTER SANS CHANGER LA CIBLE
 
-DIAPOSITIVE 62 — AUGMENTER SANS CHANGER LA CIBLE
+DIAPOSITIVE 72 — AUGMENTER SANS CHANGER LA CIBLE
 
 EXPLICATION TECHNIQUE
 Une rotation légère peut être acceptable pour certains chiffres, mais une rotation de 180 degrés peut échanger des significations. Un retournement horizontal peut être adapté à une photographie d'objet et incorrect pour du texte. Pour une segmentation, il faut transformer la cible spatiale de façon cohérente. La formule suppose ici que T conserve la classe ; cette hypothèse doit être vérifiée. Une augmentation ne crée pas un nouvel individu indépendant pour le test : toutes les variantes d'une même observation doivent rester dans la même partition. Documenter la politique et ses probabilités dans le compte rendu.
@@ -1110,9 +1351,9 @@ Cela crée une dépendance et une fuite entre les partitions.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 63. LE JEU DE DONNÉES FAIT PARTIE DU MODÈLE
+## 73. LE JEU DE DONNÉES FAIT PARTIE DU MODÈLE
 
-DIAPOSITIVE 63 — LE JEU DE DONNÉES FAIT PARTIE DU MODÈLE
+DIAPOSITIVE 73 — LE JEU DE DONNÉES FAIT PARTIE DU MODÈLE
 
 EXPLICATION TECHNIQUE
 Le jeu digits de scikit-learn contient 1797 images 8×8 de dix classes, avec des niveaux de gris entre 0 et 16. Cette petite base permet des expériences CPU rapides, mais ne représente pas les contraintes de la vision en conditions réelles. Une séparation stratifiée conserve approximativement les proportions de classes, sans garantir une séparation par auteur des chiffres : les notebooks ne disposent pas d'identifiants permettant un audit complet de ce niveau. Les conclusions doivent donc porter sur le protocole présenté. Pour un projet réel, l'unité de séparation doit suivre le scénario de déploiement.
@@ -1130,7 +1371,7 @@ https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.h
 Geoffrey Daniel — Réseaux de neurones et deep learning : utilisation et méthodologie
 https://indico.in2p3.fr/event/17858/attachments/49454/65831/Deep_Learning_Seance_1.pdf
 
-## 64. TRAIN, VALIDATION ET TEST : QUI DÉCIDE ?
+## 74. TRAIN, VALIDATION ET TEST : QUI DÉCIDE ?
 
 Partition | Utilisation | À éviter
 Train | Poids et statistiques apprises | Information issue du test
@@ -1138,7 +1379,7 @@ Validation | Modèle, hyperparamètres et checkpoint | Confondre sélection et e
 Test | Évaluer la procédure déjà choisie | Choisir les réglages selon son score
 Nouvelle distribution | Vérifier le transfert externe | La remplacer par le seul test interne
 
-DIAPOSITIVE 64 — TRAIN, VALIDATION ET TEST : QUI DÉCIDE ?
+DIAPOSITIVE 74 — TRAIN, VALIDATION ET TEST : QUI DÉCIDE ?
 
 EXPLICATION TECHNIQUE
 Expliquer la séparation comme une gestion des décisions. Le train détermine les poids et, si nécessaire, les paramètres du prétraitement. La validation guide le choix de l'architecture, des hyperparamètres et du checkpoint. Le test intervient une fois le protocole de choix terminé. Il n'est pas interdit de constater qu'un score test est faible ; ce qui est problématique est de continuer à l'optimiser en prétendant conserver une estimation indépendante. Si le protocole est modifié après l'observation du test, il faut une nouvelle évaluation indépendante pour une affirmation forte.
@@ -1151,9 +1392,9 @@ Pas si elle apprend des statistiques : l’ajustement doit être limité au trai
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 65. MÉTRIQUES ET MATRICE DE CONFUSION
+## 75. MÉTRIQUES ET MATRICE DE CONFUSION
 
-DIAPOSITIVE 65 — MÉTRIQUES ET MATRICE DE CONFUSION
+DIAPOSITIVE 75 — MÉTRIQUES ET MATRICE DE CONFUSION
 
 EXPLICATION TECHNIQUE
 Pour une classe donnée, considérer cette classe comme positive et toutes les autres comme négatives. Dans la matrice de confusion des notebooks, les lignes sont les vraies classes et les colonnes les prédictions ; annoncer cette convention. Une classe rare peut avoir un rappel faible tout en contribuant peu à l'accuracy globale. Le macro-F1 moyenne les F1 calculés séparément par classe ; ce n'est pas le F1 calculé à partir d'une précision macro et d'un rappel macro. Prévoir une convention lorsque le dénominateur est nul et afficher les effectifs pour contextualiser les métriques.
@@ -1169,9 +1410,9 @@ Non : il moyenne les F1 calculés classe par classe.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 66. TRANSFERT : RÉUTILISER UNE REPRÉSENTATION
+## 76. TRANSFERT : RÉUTILISER UNE REPRÉSENTATION
 
-DIAPOSITIVE 66 — TRANSFERT : RÉUTILISER UNE REPRÉSENTATION
+DIAPOSITIVE 76 — TRANSFERT : RÉUTILISER UNE REPRÉSENTATION
 
 EXPLICATION TECHNIQUE
 Séparer backbone et tête dans l'équation. Les poids du backbone contiennent une représentation issue d'un entraînement antérieur ; ils ne sont pas universellement pertinents. Dans le TP, la source contient les chiffres 0 à 4 et la cible les chiffres 5 à 9. Les espaces d'étiquettes sont disjoints, mais le type d'image reste proche. C'est un transfert pédagogique contrôlé, distinct d'un réseau préentraîné sur ImageNet. Le coût de préentraînement source doit être annoncé quand on compare les budgets, même s'il est partagé entre plusieurs tâches cibles.
@@ -1187,14 +1428,14 @@ Parce que les classes et éventuellement le nombre de sorties de la cible change
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 67. TROIS STRATÉGIES DE TRANSFERT
+## 77. TROIS STRATÉGIES DE TRANSFERT
 
 Stratégie | Backbone | Tête | Usage / limite
 Depuis zéro | Aléatoire, entraîné | Entraînée | Référence de comparaison
 Features gelées | Source, figé | Entraînée | Peu de labels, capacité d’adaptation limitée
 Fine-tuning | Source, adapté | Entraînée | Plus flexible, risque de surapprentissage
 
-DIAPOSITIVE 67 — TROIS STRATÉGIES DE TRANSFERT
+DIAPOSITIVE 77 — TROIS STRATÉGIES DE TRANSFERT
 
 EXPLICATION TECHNIQUE
 Comparer les procédures à données et partition identiques. L'extraction de caractéristiques apprend seulement la tête ; elle économise le passage arrière du backbone et limite la flexibilité. Le fine-tuning part d'un état source mais adapte une partie ou la totalité du réseau avec un taux contrôlé. L'entraînement depuis zéro fournit une référence indispensable. Un transfert peut être négatif si la représentation source ou le protocole est mal adapté. Dans le TP, le budget cible est annoncé et le coût source présenté séparément ; le test n'est pas utilisé pour décider laquelle des stratégies conserver.
@@ -1207,9 +1448,9 @@ Le même modèle entraîné depuis zéro avec un protocole comparable.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 68. FINE-TUNING : UNE PROCÉDURE EXPLICITE
+## 78. FINE-TUNING : UNE PROCÉDURE EXPLICITE
 
-DIAPOSITIVE 68 — FINE-TUNING : UNE PROCÉDURE EXPLICITE
+DIAPOSITIVE 78 — FINE-TUNING : UNE PROCÉDURE EXPLICITE
 
 EXPLICATION TECHNIQUE
 Une phase de tête seule peut éviter que des gradients provenant d'une tête aléatoire perturbent immédiatement la représentation source. Après le dégel, il faut reconstruire l'optimiseur ou lui ajouter les nouveaux paramètres si ceux-ci n'étaient pas inclus. Des groupes de paramètres autorisent un taux différent pour la tête et pour le backbone. Aucune séquence de phases ne garantit un gain ; c'est une procédure à tester et à comparer. Si l'on change de domaine ou de prétraitement, vérifier aussi la distribution des activations et les statistiques des couches de normalisation.
@@ -1222,9 +1463,9 @@ Que les paramètres nouvellement entraînables font partie de ses groupes.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 69. GEL DES POIDS ET MODE ÉVALUATION
+## 79. GEL DES POIDS ET MODE ÉVALUATION
 
-DIAPOSITIVE 69 — GEL DES POIDS ET MODE ÉVALUATION
+DIAPOSITIVE 79 — GEL DES POIDS ET MODE ÉVALUATION
 
 EXPLICATION TECHNIQUE
 Ces deux commandes répondent à des questions différentes. Un backbone peut être figé du point de vue des poids tout en mettant à jour les buffers BatchNorm si son mode reste train. Inversement, eval ne bloque pas les gradients d'un paramètre qui les requiert. Dans notre petit CNN, il n'y a ni BatchNorm ni Dropout ; cela isole le mécanisme de transfert. Pour un ResNet importé, ce détail devient essentiel. Faire vérifier les drapeaux requires_grad, l'appartenance aux groupes d'optimiseur et l'évolution des buffers avant et après une époque.
@@ -1237,9 +1478,9 @@ Le dropout et les statistiques de BatchNorm peuvent encore changer.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 70. UTILISER UN MODÈLE PRÉENTRAÎNÉ PUBLIC
+## 80. UTILISER UN MODÈLE PRÉENTRAÎNÉ PUBLIC
 
-DIAPOSITIVE 70 — UTILISER UN MODÈLE PRÉENTRAÎNÉ PUBLIC
+DIAPOSITIVE 80 — UTILISER UN MODÈLE PRÉENTRAÎNÉ PUBLIC
 
 EXPLICATION TECHNIQUE
 Ce bloc est une extension de lecture, distincte du TP CPU sans téléchargement. Avec Torchvision, l'objet weights expose les transformations attendues : redimensionnement, recadrage et normalisation. Les images doivent avoir un nombre de canaux adapté, et l'ordre des classes de la tête source n'est plus valable lorsque l'on remplace celle-ci. Le téléchargement de poids nécessite un accès réseau. L'extrait ne constitue pas un entraînement complet ni une démonstration de performance. Le notebook principal montre le même mécanisme de séparation backbone-tête à partir d'un préentraînement source réalisé localement.
@@ -1254,7 +1495,7 @@ LECTURES ET RÉFÉRENCES
 Torchvision 0.23 — ResNet18
 https://docs.pytorch.org/vision/0.23/models/generated/torchvision.models.resnet18.html
 
-## 71. COMPARER DES EXPÉRIENCES
+## 81. COMPARER DES EXPÉRIENCES
 
 À conserver | Pourquoi
 Split et graine | Comparer sur les mêmes observations
@@ -1263,7 +1504,7 @@ Optimiseur, pas et batch | Reproduire le budget d’apprentissage
 Critère de checkpoint | Comprendre la sélection
 Score, effectifs et temps | Interpréter performance et coût
 
-DIAPOSITIVE 71 — COMPARER DES EXPÉRIENCES
+DIAPOSITIVE 81 — COMPARER DES EXPÉRIENCES
 
 EXPLICATION TECHNIQUE
 Un tableau d'expériences doit permettre de reconstruire les décisions. En plus du score, conserver la graine, le découpage, la configuration, le nombre de mises à jour et le temps mesuré sur un matériel identifié. Une comparaison à une seule graine reste indicative. Les ablations changent un facteur à la fois lorsque l'objectif est d'isoler son effet ; si plusieurs facteurs changent, le résultat concerne une recette complète. Les coûts source et cible du transfert doivent être distingués. Une expérience terminée avec une précision faible peut être pédagogiquement utile si elle est documentée et correctement interprétée.
@@ -1276,9 +1517,9 @@ Non, pas sans expérience supplémentaire isolant les effets.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 72. ANALYSE D’ERREURS : REGARDER LES EXEMPLES
+## 82. ANALYSE D’ERREURS : REGARDER LES EXEMPLES
 
-DIAPOSITIVE 72 — ANALYSE D’ERREURS : REGARDER LES EXEMPLES
+DIAPOSITIVE 82 — ANALYSE D’ERREURS : REGARDER LES EXEMPLES
 
 EXPLICATION TECHNIQUE
 Le score global masque des mécanismes très différents : une classe peut être sous-représentée, une annotation erronée ou un exemple simplement ambigu à faible résolution. Afficher ensemble vérité, prédiction et confiance, sans prendre cette confiance pour une probabilité calibrée. Construire une hypothèse d'erreur puis une vérification ciblée. Si l'analyse du test guide une modification du modèle, le test a servi au développement et ne doit plus être présenté comme une estimation indépendante de cette nouvelle version. Les notebooks emploient la validation pour l'investigation et réservent le test au bilan final.
@@ -1291,9 +1532,9 @@ Le test devient progressivement un outil de sélection.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 73. TP 03 · MESURER LE TRANSFERT
+## 83. TP 03 · MESURER LE TRANSFERT
 
-DIAPOSITIVE 73 — TP 03 · MESURER LE TRANSFERT
+DIAPOSITIVE 83 — TP 03 · MESURER LE TRANSFERT
 
 EXPLICATION TECHNIQUE
 Répartition : 25 minutes de préparation, 35 minutes d'apprentissage source, 55 minutes de comparaison des trois stratégies, 35 minutes d'analyse et 30 minutes de restitution. Les étiquettes cible sont remappées de 5–9 vers 0–4 pour la nouvelle tête à cinq sorties. Les données source et cible sont séparées par classe ; aucune image cible n'est utilisée pour apprendre la source. Chaque stratégie choisit son checkpoint sur la validation. Le test compare des procédures fixées à l'avance. Un score moins bon après transfert constitue un résultat à expliquer, pas une raison de modifier le test.
@@ -1306,9 +1547,9 @@ Un tableau des trois protocoles, leur coût et une interprétation du transfert 
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 74. JOUR 3 · À RETENIR
+## 84. JOUR 3 · À RETENIR
 
-DIAPOSITIVE 74 — JOUR 3 · À RETENIR
+DIAPOSITIVE 84 — JOUR 3 · À RETENIR
 
 EXPLICATION TECHNIQUE
 Faire conclure chaque binôme avec trois phrases : quelle configuration a été comparée, quelle observation a été faite sur la validation, et quelle explication reste une hypothèse. Revenir sur la taille du domaine source et sur le nombre réduit de labels cible. Les résultats du petit jeu ne permettent pas d'affirmer qu'une famille d'architectures domine universellement. Préparer la transition : les CNN mélangent localement l'information avec des poids indépendants de l'exemple ; l'attention calculera une pondération entre éléments dépendant du contenu observé.
@@ -1321,16 +1562,16 @@ Un mélange entre positions dont les poids dépendent du contenu.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 75. ATTENTION ET TRANSFORMERS
+## 85. ATTENTION ET TRANSFORMERS
 
-DIAPOSITIVE 75 — ATTENTION ET TRANSFORMERS
+DIAPOSITIVE 85 — ATTENTION ET TRANSFORMERS
 
 EXPLICATION TECHNIQUE
 Cette journée articule les concepts et leur mise à l'épreuve. Commencer par une restitution de la séance précédente. Faire expliciter les dimensions avant toute exécution. Le déroulé représente 420 minutes de formation effective ; pauses et déjeuner sont à ajouter. Les durées des activités sont ajustables à l'intérieur de cette enveloppe. L'objectif est une compréhension justifiée par un calcul, une expérience contrôlée ou une vérification du code.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 76. JOUR 4 · DÉROULÉ DES 7 HEURES
+## 86. JOUR 4 · DÉROULÉ DES 7 HEURES
 
 Séquence | Travail attendu | Minutes
 Séquences | Représentation, récurrence et positions | 60
@@ -1339,16 +1580,16 @@ Architecture | Têtes, normalisation et blocs Transformers | 90
 TP 04 | Calcul d’attention et tests de causalité | 150
 Synthèse | Dimensions, coût et questions de contrôle | 30
 
-DIAPOSITIVE 76 — JOUR 4 · DÉROULÉ DES 7 HEURES
+DIAPOSITIVE 86 — JOUR 4 · DÉROULÉ DES 7 HEURES
 
 EXPLICATION TECHNIQUE
 Présenter les cinq séquences de la journée. Les activités de cours incluent les questions au tableau et les démonstrations. Le travail pratique se fait en binôme mais chaque étudiant conserve un compte rendu personnel. Dans le débrief, demander une prédiction avant de montrer une sortie de code et distinguer une observation expérimentale d'une propriété mathématique. La somme des cinq durées est exactement 420 minutes. Les pauses ne sont pas comprises dans ce total.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 77. UNE SÉQUENCE COMME TENSEUR
+## 87. UNE SÉQUENCE COMME TENSEUR
 
-DIAPOSITIVE 77 — UNE SÉQUENCE COMME TENSEUR
+DIAPOSITIVE 87 — UNE SÉQUENCE COMME TENSEUR
 
 EXPLICATION TECHNIQUE
 Donner plusieurs exemples de tokens : sous-mots en texte, instants d'une série temporelle ou patches d'une image. Le vocabulaire et la tokenisation déterminent l'espace d'entrée ; des modèles avec des tokenisations différentes ne sont pas comparables directement par la seule perplexité. Les séquences peuvent avoir des longueurs variées. Le padding est une commodité de calcul, pas une observation : il doit être exclu de l'attention et, selon la tâche, de la perte. Distinguer la dimension d d'une représentation continue et la taille V du vocabulaire d'identifiants discrets.
@@ -1364,9 +1605,9 @@ Non : il peut représenter un sous-mot, un caractère, un patch ou un autre él�
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 78. RÉCURRENCE ET DÉPENDANCES LONGUES
+## 88. RÉCURRENCE ET DÉPENDANCES LONGUES
 
-DIAPOSITIVE 78 — RÉCURRENCE ET DÉPENDANCES LONGUES
+DIAPOSITIVE 88 — RÉCURRENCE ET DÉPENDANCES LONGUES
 
 EXPLICATION TECHNIQUE
 Cette parenthèse explique la motivation historique, sans prétendre que la récurrence est obsolète. Un RNN partage ses poids dans le temps et condense le passé dans un état. Les gradients sur de longues distances impliquent de nombreux produits de Jacobiennes. Des mécanismes comme LSTM et GRU ont été conçus pour améliorer cette dynamique. L'attention introduit un chemin direct entre positions, au prix d'un calcul potentiellement quadratique. Des architectures récurrentes ou à état restent pertinentes lorsque le coût mémoire ou la structure du flux les favorise.
@@ -1384,9 +1625,9 @@ LECTURES ET RÉFÉRENCES
 Romain Tavenard — Introduction au Deep Learning, 2025
 https://rtavenar.github.io/deep_book/book_fr.pdf
 
-## 79. EMBEDDINGS : DES IDENTIFIANTS AUX VECTEURS
+## 89. EMBEDDINGS : DES IDENTIFIANTS AUX VECTEURS
 
-DIAPOSITIVE 79 — EMBEDDINGS : DES IDENTIFIANTS AUX VECTEURS
+DIAPOSITIVE 89 — EMBEDDINGS : DES IDENTIFIANTS AUX VECTEURS
 
 EXPLICATION TECHNIQUE
 Une entrée entière n'est pas une grandeur ordinale : l'identifiant 8 n'est pas intrinsèquement plus proche de 9 que de 2. L'embedding transforme cet index en vecteur continu. Sa table comporte V×d paramètres, ce qui peut devenir coûteux pour un grand vocabulaire. Seules les lignes utilisées contribuent directement à une étape donnée, selon le calcul et l'optimiseur. La proximité géométrique des vecteurs est une conséquence de l'objectif appris et ne garantit pas une relation sémantique précise. Pour le mini-Transformer, les tokens sont volontairement de petits symboles entiers afin d'isoler le mécanisme.
@@ -1402,9 +1643,9 @@ RÉPONSE ATTENDUE
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 80. INFORMATION DE POSITION
+## 90. INFORMATION DE POSITION
 
-DIAPOSITIVE 80 — INFORMATION DE POSITION
+DIAPOSITIVE 90 — INFORMATION DE POSITION
 
 EXPLICATION TECHNIQUE
 La propriété de permutation concerne une auto-attention sans masque positionnel et avec les mêmes projections à toutes les positions. Un masque causal introduit déjà une structure d'ordre, mais ne remplace pas toutes les informations de position utiles. Dans le notebook, une table de positions apprises est ajoutée à chaque embedding avant les blocs. Cela fixe une longueur maximale prévue et ne garantit pas une extrapolation à des positions jamais vues. Les encodages relatifs et rotatifs constituent d'autres choix, seulement mentionnés ici pour situer cette famille de solutions.
@@ -1422,9 +1663,9 @@ LECTURES ET RÉFÉRENCES
 Vaswani et al. — Attention Is All You Need, 2017
 https://arxiv.org/abs/1706.03762
 
-## 81. ENCODAGE SINUSOÏDAL DES POSITIONS
+## 91. ENCODAGE SINUSOÏDAL DES POSITIONS
 
-DIAPOSITIVE 81 — ENCODAGE SINUSOÏDAL DES POSITIONS
+DIAPOSITIVE 91 — ENCODAGE SINUSOÏDAL DES POSITIONS
 
 EXPLICATION TECHNIQUE
 Décrire t comme la position et i comme un index de paire de caractéristiques. Les fréquences réparties sur plusieurs échelles rendent les positions distinguables dans différents régimes. Pour un décalage donné, les formules trigonométriques relient les sinus et cosinus de positions voisines par une transformation linéaire dans chaque paire. Cela motive l'approche sans prouver qu'un modèle entraîné sur une longueur donnée fonctionnera arbitrairement loin. Comparer avec la table apprise du TP : moins de structure imposée mais aucune valeur apprise au-delà des indices disponibles.
@@ -1442,9 +1683,9 @@ LECTURES ET RÉFÉRENCES
 Vaswani et al. — Attention Is All You Need, 2017
 https://arxiv.org/abs/1706.03762
 
-## 82. L’ATTENTION COMME SOMME PONDÉRÉE
+## 92. L’ATTENTION COMME SOMME PONDÉRÉE
 
-DIAPOSITIVE 82 — L’ATTENTION COMME SOMME PONDÉRÉE
+DIAPOSITIVE 92 — L’ATTENTION COMME SOMME PONDÉRÉE
 
 EXPLICATION TECHNIQUE
 Cette écriture suffit à expliquer le mécanisme sans métaphore obligatoire. La requête détermine ce que la position i cherche ; la clé fournit un espace de comparaison ; la valeur porte l'information mélangée dans la sortie. Les clés et les valeurs peuvent avoir des dimensions différentes, mais la dimension des requêtes doit correspondre à celle des clés pour un produit scalaire. Avec softmax, la sortie avant projection est dans l'enveloppe convexe des valeurs. Cela n'implique pas que le bloc complet soit une simple moyenne, puisqu'il comprend des projections, des résidus et des non-linéarités.
@@ -1462,9 +1703,9 @@ LECTURES ET RÉFÉRENCES
 Romain Tavenard — Introduction au Deep Learning, 2025
 https://rtavenar.github.io/deep_book/book_fr.pdf
 
-## 83. Q, K, V : PROJECTIONS APPRISES
+## 93. Q, K, V : PROJECTIONS APPRISES
 
-DIAPOSITIVE 83 — Q, K, V : PROJECTIONS APPRISES
+DIAPOSITIVE 93 — Q, K, V : PROJECTIONS APPRISES
 
 EXPLICATION TECHNIQUE
 Ici, X a n lignes et d colonnes, en omettant le batch. Les matrices W ont donc l'orientation entrée×sortie, contrairement à la convention de stockage de nn.Linear exposée plus tôt. Le calcul reste identique : une bibliothèque stockant sortie×entrée applique la transposée. Q et K ont n×d_k éléments, V en a n×d_v. Les trois matrices sont différentes en général, même si leur entrée est commune. Le gradient traverse à la fois les valeurs et les scores qui règlent leur mélange ; l'attention est entraînée de bout en bout.
@@ -1480,9 +1721,9 @@ Pas en général : l’entrée est commune, les projections apprises sont distin
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 84. SCORES D’ATTENTION : TOUTES LES PAIRES
+## 94. SCORES D’ATTENTION : TOUTES LES PAIRES
 
-DIAPOSITIVE 84 — SCORES D’ATTENTION : TOUTES LES PAIRES
+DIAPOSITIVE 94 — SCORES D’ATTENTION : TOUTES LES PAIRES
 
 EXPLICATION TECHNIQUE
 Écrire explicitement un produit scalaire entre une ligne de Q et une ligne de K. La transposition de K permet de calculer tous ces produits en une seule opération. Les lignes n'ont pas besoin d'avoir la même longueur en cross-attention : n_q peut être la longueur cible et n_k la longueur source. La largeur d_k doit en revanche être la même pour les deux. Le facteur racine carrée sera justifié ensuite. Une carte de scores brute n'est pas encore une carte de probabilités : ses valeurs peuvent être positives ou négatives et leur somme est quelconque.
@@ -1498,9 +1739,9 @@ RÉPONSE ATTENDUE
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 85. POURQUOI DIVISER PAR √dₖ ?
+## 95. POURQUOI DIVISER PAR √dₖ ?
 
-DIAPOSITIVE 85 — POURQUOI DIVISER PAR √dₖ ?
+DIAPOSITIVE 95 — POURQUOI DIVISER PAR √dₖ ?
 
 EXPLICATION TECHNIQUE
 Annoncer les hypothèses : composantes centrées, indépendantes, de variance unité, avec indépendance appropriée entre q et k. Chaque produit q_r k_r a alors une variance d'ordre un et la variance de la somme est proportionnelle au nombre de termes. Les représentations réelles n'obéissent pas exactement à ces hypothèses ; il s'agit d'une justification d'échelle. Un softmax très concentré peut avoir de faibles dérivées pour de nombreuses directions. Le facteur ne normalise pas la norme exacte de chaque requête et ne transforme pas le produit scalaire en similarité cosinus.
@@ -1518,9 +1759,9 @@ LECTURES ET RÉFÉRENCES
 Vaswani et al. — Attention Is All You Need, 2017
 https://arxiv.org/abs/1706.03762
 
-## 86. SOFTMAX PUIS AGRÉGATION DES VALEURS
+## 96. SOFTMAX PUIS AGRÉGATION DES VALEURS
 
-DIAPOSITIVE 86 — SOFTMAX PUIS AGRÉGATION DES VALEURS
+DIAPOSITIVE 96 — SOFTMAX PUIS AGRÉGATION DES VALEURS
 
 EXPLICATION TECHNIQUE
 Montrer que multiplier une matrice n_q×n_k par n_k×d_v produit n_q×d_v. Chaque requête obtient sa propre combinaison de valeurs. La même clé peut contribuer fortement à plusieurs requêtes ; il n'y a pas de contrainte de somme un par colonne. Le mécanisme n'est donc pas un appariement exclusif. Pour un batch multi-têtes, les axes batch et tête sont indépendants et le softmax reste appliqué sur le dernier axe des clés. Une erreur d'axe peut produire des tenseurs de formes plausibles tout en changeant complètement l'opération.
@@ -1536,9 +1777,9 @@ Non : seule chaque distribution sur les clés, donc chaque ligne, est normalisé
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 87. ATTENTION : EXEMPLE NUMÉRIQUE COMPLET
+## 97. ATTENTION : EXEMPLE NUMÉRIQUE COMPLET
 
-DIAPOSITIVE 87 — ATTENTION : EXEMPLE NUMÉRIQUE COMPLET
+DIAPOSITIVE 97 — ATTENTION : EXEMPLE NUMÉRIQUE COMPLET
 
 EXPLICATION TECHNIQUE
 Calculer les scores avant le softmax : les éléments diagonaux valent 1/racine(2) et les autres zéro. Le poids diagonal est exp(1/racine(2))/(exp(1/racine(2))+1), soit environ 0,6697615. Multiplier ensuite les poids de chaque ligne par V. La deuxième composante de la première sortie vaut deux fois 0,3302385, soit 0,660477. L'exemple volontairement petit montre que la sortie ne copie pas nécessairement un token unique. Le notebook refait le calcul en NumPy puis le compare à la version PyTorch, avec des assertions sur les valeurs et les sommes des lignes.
@@ -1554,9 +1795,9 @@ La seconde valeur contient 2, pondéré par environ 0,3302.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 88. MASQUE CAUSAL ET MASQUE DE PADDING
+## 98. MASQUE CAUSAL ET MASQUE DE PADDING
 
-DIAPOSITIVE 88 — MASQUE CAUSAL ET MASQUE DE PADDING
+DIAPOSITIVE 98 — MASQUE CAUSAL ET MASQUE DE PADDING
 
 EXPLICATION TECHNIQUE
 Distinguer l'information temporelle interdite de l'information absente. Une ligne entièrement masquée peut produire des NaN : il faut garantir au moins une clé accessible pour chaque requête effectivement évaluée. Les requêtes correspondant au padding doivent être exclues de la perte ou de l'agrégation finale selon la tâche. Les conventions booléennes des API peuvent différer ; nn.MultiheadAttention traite True comme une interdiction pour son masque booléen, alors que certaines fonctions d'attention optimisée utilisent un sens différent. Notre code manuel emploie masked_fill avec True pour interdire explicitement.
@@ -1574,9 +1815,9 @@ LECTURES ET RÉFÉRENCES
 PyTorch 2.8 — MultiheadAttention
 https://docs.pytorch.org/docs/2.8/generated/torch.nn.MultiheadAttention.html
 
-## 89. MULTI-HEAD ATTENTION
+## 99. MULTI-HEAD ATTENTION
 
-DIAPOSITIVE 89 — MULTI-HEAD ATTENTION
+DIAPOSITIVE 99 — MULTI-HEAD ATTENTION
 
 EXPLICATION TECHNIQUE
 Dans la configuration standard, d est divisible par h et chaque tête utilise d_k=d_v=d/h. La concaténation restaure d composantes, puis W_O mélange l'information provenant des têtes. Les têtes peuvent apprendre des relations différentes, mais elles peuvent aussi être redondantes ; on ne doit pas leur attribuer automatiquement une fonction linguistique précise. À largeur d constante, augmenter h n'augmente pas forcément les paramètres des grandes projections, mais modifie la dimension par tête et certains coûts intermédiaires. L'entraînement ajuste ensemble toutes les projections.
@@ -1594,7 +1835,7 @@ LECTURES ET RÉFÉRENCES
 Vaswani et al. — Attention Is All You Need, 2017
 https://arxiv.org/abs/1706.03762
 
-## 90. DÉPLIAGE DES AXES MULTI-TÊTES
+## 100. DÉPLIAGE DES AXES MULTI-TÊTES
 
 Étape | Forme standard | Exemple B=2,n=4,d=8,h=2
 Projection Q/K/V | B × n × d | 2 × 4 × 8
@@ -1603,7 +1844,7 @@ Scores | B × h × n × n | 2 × 2 × 4 × 4
 Mélange des valeurs | B × h × n × dₕ | 2 × 2 × 4 × 4
 Concaténation | B × n × d | 2 × 4 × 8
 
-DIAPOSITIVE 90 — DÉPLIAGE DES AXES MULTI-TÊTES
+DIAPOSITIVE 100 — DÉPLIAGE DES AXES MULTI-TÊTES
 
 EXPLICATION TECHNIQUE
 Partir du tenseur B×n×d produit par une projection. On le reforme en B×n×h×d_h, puis on transpose les axes pour obtenir B×h×n×d_h. Le produit avec les clés transposées sur les deux derniers axes donne B×h×n×n. Après le mélange des valeurs, on inverse la permutation et on réunit les têtes. En PyTorch, un transpose peut rendre le stockage non contigu ; reshape sait parfois copier, tandis que view peut exiger contiguous. Le point conceptuel reste de ne pas fusionner des axes qui n'ont pas la même signification.
@@ -1616,9 +1857,9 @@ Pour que chaque tête calcule indépendamment ses interactions entre positions.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 91. LAYERNORM : NORMALISER CHAQUE TOKEN
+## 101. LAYERNORM : NORMALISER CHAQUE TOKEN
 
-DIAPOSITIVE 91 — LAYERNORM : NORMALISER CHAQUE TOKEN
+DIAPOSITIVE 101 — LAYERNORM : NORMALISER CHAQUE TOKEN
 
 EXPLICATION TECHNIQUE
 Dans le Transformer étudié, chaque token est normalisé séparément sur son dernier axe. Les paramètres gamma et beta ont d composantes partagées entre positions. LayerNorm ne mélange donc pas les tokens et ne transmet pas à elle seule d'information entre positions. Elle n'utilise pas les statistiques mobiles de BatchNorm ; ce contraste explique une partie de son intérêt pour des batches et longueurs variables. La normalisation influe sur l'échelle des activations et la dynamique d'optimisation, mais n'est pas un mécanisme de masquage ni une méthode de correction des fuites de cible.
@@ -1636,9 +1877,9 @@ LECTURES ET RÉFÉRENCES
 Ba et al. — Layer Normalization, 2016
 https://arxiv.org/abs/1607.06450
 
-## 92. LE MLP POSITION PAR POSITION
+## 102. LE MLP POSITION PAR POSITION
 
-DIAPOSITIVE 92 — LE MLP POSITION PAR POSITION
+DIAPOSITIVE 102 — LE MLP POSITION PAR POSITION
 
 EXPLICATION TECHNIQUE
 Le FFN n'est pas une attention supplémentaire. Il applique un MLP identique à chaque token ; l'échange d'information entre positions a lieu dans l'attention. Avec d_ff=4d et en négligeant les biais, les deux matrices du FFN contiennent 8d² paramètres. Les projections Q, K, V et O d'une auto-attention standard contiennent environ 4d² paramètres : le FFN peut donc représenter une part importante du bloc. L'activation du papier original est ReLU ; nos petits modèles utilisent GELU. Cette différence de variante doit être annoncée sans changer l'explication fondamentale.
@@ -1654,9 +1895,9 @@ L’attention ; le FFN mélange les caractéristiques de chaque position.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 93. UN BLOC TRANSFORMER PRE-LN
+## 103. UN BLOC TRANSFORMER PRE-LN
 
-DIAPOSITIVE 93 — UN BLOC TRANSFORMER PRE-LN
+DIAPOSITIVE 103 — UN BLOC TRANSFORMER PRE-LN
 
 EXPLICATION TECHNIQUE
 Le papier de 2017 emploie une organisation post-normalisation : normaliser après l'addition résiduelle. Cette diapositive décrit explicitement la variante pre-LN utilisée dans le mini-modèle. Elle modifie la circulation du gradient et les conditions d'optimisation. On ne doit pas présenter une variante comme la seule définition possible d'un Transformer. Les dropout éventuels sont omis de la formule pour faire ressortir les branches ; dans le code, leur place et leur taux doivent être identifiables. Les formes des deux termes additionnés doivent toujours correspondre, y compris lors de changements de largeur.
@@ -1674,9 +1915,9 @@ LECTURES ET RÉFÉRENCES
 Xiong et al. — On Layer Normalization in the Transformer Architecture, 2020
 https://arxiv.org/abs/2002.04745
 
-## 94. ENCODEUR : CONTEXTUALISER UNE SÉQUENCE
+## 104. ENCODEUR : CONTEXTUALISER UNE SÉQUENCE
 
-DIAPOSITIVE 94 — ENCODEUR : CONTEXTUALISER UNE SÉQUENCE
+DIAPOSITIVE 104 — ENCODEUR : CONTEXTUALISER UNE SÉQUENCE
 
 EXPLICATION TECHNIQUE
 Un encodeur bidirectionnel est utile lorsque toute l'entrée est disponible. Pour une classification de séquence, une représentation spéciale ou une agrégation masquée peut alimenter la tête. Pour une étiquette par token, la tête est appliquée à chaque position. Il faut traiter le padding de manière cohérente dans l'attention, l'agrégation et la perte. L'adjectif bidirectionnel n'implique pas une récurrence : il décrit l'accès aux positions à gauche et à droite. Le même bloc peut être employé avec un masque causal dans une implémentation, mais le régime d'information change alors.
@@ -1692,9 +1933,9 @@ Non si les tokens futurs sont présents dans son entrée.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 95. CROSS-ATTENTION : RELIER DEUX SÉQUENCES
+## 105. CROSS-ATTENTION : RELIER DEUX SÉQUENCES
 
-DIAPOSITIVE 95 — CROSS-ATTENTION : RELIER DEUX SÉQUENCES
+DIAPOSITIVE 105 — CROSS-ATTENTION : RELIER DEUX SÉQUENCES
 
 EXPLICATION TECHNIQUE
 Dans un Transformer encodeur-décodeur de traduction, l'encodeur produit une mémoire source contextualisée et le décodeur interroge cette mémoire. Les scores ont alors n cible lignes et n source colonnes. Le masque de padding source interdit les positions ajoutées, tandis que la causalité s'applique principalement à l'auto-attention de la cible. Une cross-attention n'est pas intrinsèquement une traduction : elle peut aussi relier des modalités différentes. Il faut indiquer quels tenseurs fournissent Q et lesquels fournissent K et V pour rendre l'architecture compréhensible.
@@ -1712,14 +1953,14 @@ LECTURES ET RÉFÉRENCES
 Vaswani et al. — Attention Is All You Need, 2017
 https://arxiv.org/abs/1706.03762
 
-## 96. TROIS FAMILLES D’ARCHITECTURES
+## 106. TROIS FAMILLES D’ARCHITECTURES
 
 Famille | Accès aux positions | Exemple de tâche
 Encodeur | Toutes les positions disponibles | Classification / étiquetage
 Décodeur seul | Passé et position courante | Prédiction du prochain token
 Encodeur-décodeur | Source complète + cible causale | Transformation d’une séquence en une autre
 
-DIAPOSITIVE 96 — TROIS FAMILLES D’ARCHITECTURES
+DIAPOSITIVE 106 — TROIS FAMILLES D’ARCHITECTURES
 
 EXPLICATION TECHNIQUE
 Le nom Transformer couvre plusieurs régimes de calcul. Un encodeur consulte l'entrée disponible dans les deux directions. Un décodeur seul utilise une attention causale pour modéliser une séquence auto-régressive. Un encodeur-décodeur combine une mémoire source et une génération cible avec cross-attention. Le code PyTorch d'un petit décodeur seul peut réutiliser une pile nommée TransformerEncoder avec un masque causal ; le nom de la classe ne détermine pas à lui seul le régime probabiliste. Demander de tracer l'accès à l'information plutôt que de se fier seulement aux noms des composants.
@@ -1732,9 +1973,9 @@ Non : il peut ne contenir que de l’auto-attention causale et des FFN.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 97. COÛT DE L’ATTENTION DENSE
+## 107. COÛT DE L’ATTENTION DENSE
 
-DIAPOSITIVE 97 — COÛT DE L’ATTENTION DENSE
+DIAPOSITIVE 107 — COÛT DE L’ATTENTION DENSE
 
 EXPLICATION TECHNIQUE
 La matrice n×n apparaît pour chaque tête et chaque exemple lorsque l'implémentation la matérialise. Pour n=2048 et h=8, on obtient 33554432 éléments par exemple ; en float32, les seuls scores représentent 128 MiB, avant les gradients et les autres activations. Ce calcul ne constitue pas la mémoire totale d'un modèle. Des algorithmes optimisés évitent de conserver toute la matrice en mémoire tout en calculant l'attention exacte. Ils ne rendent pas automatiquement les interactions denses linéaires en calcul. Le FFN peut dominer pour certaines dimensions et longueurs.
@@ -1750,9 +1991,9 @@ Non : par quatre, à batch et nombre de têtes constants.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 98. ATTENTION MANUELLE : LE CŒUR DU CODE
+## 108. ATTENTION MANUELLE : LE CŒUR DU CODE
 
-DIAPOSITIVE 98 — ATTENTION MANUELLE : LE CŒUR DU CODE
+DIAPOSITIVE 108 — ATTENTION MANUELLE : LE CŒUR DU CODE
 
 EXPLICATION TECHNIQUE
 Relier ligne par ligne l'extrait aux trois équations de l'attention. La transposition n'inverse que les deux derniers axes de K ; elle ne permute ni le batch ni la tête. Le masque doit être broadcastable vers la forme des scores. masked_fill retire les scores interdits en leur attribuant moins l'infini. Softmax est appliqué au dernier axe. L'extrait omet volontairement les projections et le dropout pour isoler le noyau du calcul ; le notebook complet les encapsule dans une classe multi-têtes et contrôle les dimensions avant l'agrégation.
@@ -1765,9 +2006,9 @@ On normalise une autre relation que la distribution des clés pour chaque requê
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 99. TP 04 · VÉRIFIER L’ATTENTION
+## 109. TP 04 · VÉRIFIER L’ATTENTION
 
-DIAPOSITIVE 99 — TP 04 · VÉRIFIER L’ATTENTION
+DIAPOSITIVE 109 — TP 04 · VÉRIFIER L’ATTENTION
 
 EXPLICATION TECHNIQUE
 Déroulé : 25 minutes de calcul manuel, 45 minutes pour suivre les axes de la classe multi-têtes, 35 minutes de tests de masques, 25 minutes d'analyse des gradients et 20 minutes de restitution. Le test de causalité remplace les tokens futurs tout en gardant le préfixe identique : les sorties du préfixe doivent rester identiques en mode évaluation, avec dropout désactivé. Une carte d'attention peut illustrer une dépendance calculée, mais ne constitue pas une explication causale complète d'une décision. Les corrigés explicitent aussi le cas d'une ligne entièrement masquée.
@@ -1780,9 +2021,9 @@ Les valeurs numériques de référence et un test qui échouerait si le masque c
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 100. EXERCICE · UN BLOC À 256 DIMENSIONS
+## 110. EXERCICE · UN BLOC À 256 DIMENSIONS
 
-DIAPOSITIVE 100 — EXERCICE · UN BLOC À 256 DIMENSIONS
+DIAPOSITIVE 110 — EXERCICE · UN BLOC À 256 DIMENSIONS
 
 EXPLICATION TECHNIQUE
 La largeur de tête vaut 256/8=32. Les quatre projections d×d contiennent 4×256²=262144 paramètres. Le FFN contient 256×1024 + 1024×256 =524288 paramètres. Le total des matrices de ces sous-couches est 786432. Cette somme n'inclut pas les embeddings, la tête de sortie, les biais ni les paramètres de normalisation. Les paramètres ne dépendent pas de n pour ces matrices, mais la mémoire d'attention et les activations en dépendent. Faire expliquer pourquoi plusieurs têtes ne multiplient pas nécessairement d'autant le nombre total de paramètres lorsque d reste fixe.
@@ -1795,9 +2036,9 @@ Le FFN : 524 288 contre 262 144 pour les projections d’attention.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 101. JOUR 4 · À RETENIR
+## 111. JOUR 4 · À RETENIR
 
-DIAPOSITIVE 101 — JOUR 4 · À RETENIR
+DIAPOSITIVE 111 — JOUR 4 · À RETENIR
 
 EXPLICATION TECHNIQUE
 Faire reconstruire un bloc sans regarder les diapositives : embedding plus position, normalisation, projections, scores masqués, softmax, valeurs, concaténation, projection, résidu, puis FFN et second résidu. Les détails de variante doivent être annoncés, notamment pre-LN et post-LN. Une question utile consiste à retirer un composant fictivement : sans masque causal, une prédiction de token pourrait lire sa cible ; sans information de position, une auto-attention non masquée conserve l'équivalence par permutation. La journée suivante entraînera effectivement un petit modèle causal et reliera vision et séquences avec les patches.
@@ -1810,16 +2051,16 @@ Modifier le futur et vérifier que les sorties du préfixe restent identiques.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 102. MODÈLES CAUSAUX ET SYNTHÈSE
+## 112. MODÈLES CAUSAUX ET SYNTHÈSE
 
-DIAPOSITIVE 102 — MODÈLES CAUSAUX ET SYNTHÈSE
+DIAPOSITIVE 112 — MODÈLES CAUSAUX ET SYNTHÈSE
 
 EXPLICATION TECHNIQUE
 Cette journée articule les concepts et leur mise à l'épreuve. Commencer par une restitution de la séance précédente. Faire expliciter les dimensions avant toute exécution. Le déroulé représente 420 minutes de formation effective ; pauses et déjeuner sont à ajouter. Les durées des activités sont ajustables à l'intérieur de cette enveloppe. L'objectif est une compréhension justifiée par un calcul, une expérience contrôlée ou une vérification du code.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 103. JOUR 5 · DÉROULÉ DES 7 HEURES
+## 113. JOUR 5 · DÉROULÉ DES 7 HEURES
 
 Séquence | Travail attendu | Minutes
 Modélisation | Objectif causal, génération et perplexité | 75
@@ -1828,16 +2069,16 @@ Protocole | Ablations, limites et préparation du projet | 45
 TP 05 | Mini-Transformer causal sur séquences synthétiques | 180
 Évaluation | Restitution argumentée et synthèse transversale | 60
 
-DIAPOSITIVE 103 — JOUR 5 · DÉROULÉ DES 7 HEURES
+DIAPOSITIVE 113 — JOUR 5 · DÉROULÉ DES 7 HEURES
 
 EXPLICATION TECHNIQUE
 Présenter les cinq séquences de la journée. Les activités de cours incluent les questions au tableau et les démonstrations. Le travail pratique se fait en binôme mais chaque étudiant conserve un compte rendu personnel. Dans le débrief, demander une prédiction avant de montrer une sortie de code et distinguer une observation expérimentale d'une propriété mathématique. La somme des cinq durées est exactement 420 minutes. Les pauses ne sont pas comprises dans ce total.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 104. OBJECTIF AUTO-RÉGRESSIF
+## 114. OBJECTIF AUTO-RÉGRESSIF
 
-DIAPOSITIVE 104 — OBJECTIF AUTO-RÉGRESSIF
+DIAPOSITIVE 114 — OBJECTIF AUTO-RÉGRESSIF
 
 EXPLICATION TECHNIQUE
 La factorisation par la règle de la chaîne est exacte pour toute distribution de séquence ; le choix architectural détermine comment les probabilités conditionnelles sont paramétrées. Le token de début permet de définir le premier contexte. La moyenne doit ignorer les cibles de padding quand elles ne représentent pas une observation. En entraînement, toutes les positions peuvent être calculées en parallèle grâce au masque causal, même si la génération sera séquentielle. Une séquence avec plusieurs documents concaténés exige une décision sur les frontières et l'information autorisée entre documents.
@@ -1853,9 +2094,9 @@ Les vrais préfixes sont disponibles au train ; à l’inférence les prochains 
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 105. DÉCALER ENTRÉES ET CIBLES
+## 115. DÉCALER ENTRÉES ET CIBLES
 
-DIAPOSITIVE 105 — DÉCALER ENTRÉES ET CIBLES
+DIAPOSITIVE 115 — DÉCALER ENTRÉES ET CIBLES
 
 EXPLICATION TECHNIQUE
 Montrer une séquence très courte avec des identifiants : [BOS,2,4,EOS]. L'entrée est [BOS,2,4] et la cible [2,4,EOS]. La sortie à la position de 2 doit prédire 4 en ayant accès à BOS et 2, mais pas à 4 en entrée future. Si l'on donne la même séquence comme entrée et cible, le modèle peut apprendre à copier le token qu'il voit déjà. Ce bug peut produire une perte très faible et une génération inutile. Le test de causalité et la lecture du décalage sont donc complémentaires.
@@ -1871,9 +2112,9 @@ Oui : le modèle peut voir directement le token qu’on lui demande de prédire.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 106. TEACHER FORCING ET GÉNÉRATION
+## 116. TEACHER FORCING ET GÉNÉRATION
 
-DIAPOSITIVE 106 — TEACHER FORCING ET GÉNÉRATION
+DIAPOSITIVE 116 — TEACHER FORCING ET GÉNÉRATION
 
 EXPLICATION TECHNIQUE
 Ce contraste est souvent appelé différence d'exposition aux contextes. La vraisemblance reste un objectif bien défini, mais une bonne performance conditionnée par les vrais préfixes ne garantit pas une génération de longue durée sans dérive. Dans le TP, on évalue séparément la perte sur séquences tenues à part et la capacité de continuation après un préfixe fixé. Les séquences sont synthétiques pour rendre la règle attendue explicite. Les modèles de langage réels ajoutent des contraintes de données, de tokenisation et d'usage qui ne sont pas reproduites par ce petit laboratoire.
@@ -1886,9 +2127,9 @@ Pour observer le comportement lorsque le modèle conditionne sur ses propres sor
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 107. DÉCODAGE : ARGMAX, TEMPÉRATURE ET ÉCHANTILLONNAGE
+## 117. DÉCODAGE : ARGMAX, TEMPÉRATURE ET ÉCHANTILLONNAGE
 
-DIAPOSITIVE 107 — DÉCODAGE : ARGMAX, TEMPÉRATURE ET ÉCHANTILLONNAGE
+DIAPOSITIVE 117 — DÉCODAGE : ARGMAX, TEMPÉRATURE ET ÉCHANTILLONNAGE
 
 EXPLICATION TECHNIQUE
 Une petite température concentre la masse vers les plus grands logits ; une grande température aplatit la distribution. La limite vers zéro approche une sélection des maxima, mais diviser effectivement par zéro est une erreur. Top-k garde un nombre fixe de candidats ; top-p conserve un ensemble dont la masse cumulée atteint un seuil selon la règle employée. Ces transformations changent la distribution de génération et ne corrigent pas une connaissance erronée. Dans le TP, commencer par un décodage glouton pour comprendre le mécanisme, puis varier la température avec une graine de tirage explicite.
@@ -1904,9 +2145,9 @@ Non : elle concentre la distribution du modèle, y compris sur ses erreurs.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 108. PERPLEXITÉ ET NORMALISATION DE LA PERTE
+## 118. PERPLEXITÉ ET NORMALISATION DE LA PERTE
 
-DIAPOSITIVE 108 — PERPLEXITÉ ET NORMALISATION DE LA PERTE
+DIAPOSITIVE 118 — PERPLEXITÉ ET NORMALISATION DE LA PERTE
 
 EXPLICATION TECHNIQUE
 V désigne ici l'ensemble des positions valides, et non la taille du vocabulaire utilisée précédemment ; le préciser oralement. Pour éviter l'ambiguïté, parler de positions évaluées. Une distribution uniforme sur dix tokens a une perplexité de dix lorsque ces dix tokens sont les cibles possibles. Une perplexité de un correspond à une probabilité un sur les cibles observées dans cette évaluation, limite idéale. La perplexité d'un modèle à caractères et celle d'un modèle à sous-mots n'ont pas la même unité de normalisation. Dans le TP, les premiers symboles aléatoires restent intrinsèquement difficiles à prédire.
@@ -1922,9 +2163,9 @@ RÉPONSE ATTENDUE
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 109. CACHE K/V À L’INFÉRENCE
+## 119. CACHE K/V À L’INFÉRENCE
 
-DIAPOSITIVE 109 — CACHE K/V À L’INFÉRENCE
+DIAPOSITIVE 119 — CACHE K/V À L’INFÉRENCE
 
 EXPLICATION TECHNIQUE
 Dans une multi-head attention standard, la largeur totale des clés et celle des valeurs valent souvent d, donc d_KV=d. Des variantes à clés et valeurs partagées changent ce facteur. Le cache contient un tenseur K et un tenseur V par couche, batch et position. Pour chaque nouveau token, on ne recalcule pas les projections du passé, mais on doit toujours comparer sa requête aux clés conservées. La mémoire croît donc avec la longueur de contexte. Le mini-modèle du TP recalcule volontairement le préfixe complet pour rester lisible ; il n'implémente pas de cache.
@@ -1940,9 +2181,9 @@ Non : il réutilise leurs clés et valeurs déjà calculées.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 110. VISION TRANSFORMER : UNE IMAGE EN PATCHES
+## 120. VISION TRANSFORMER : UNE IMAGE EN PATCHES
 
-DIAPOSITIVE 110 — VISION TRANSFORMER : UNE IMAGE EN PATCHES
+DIAPOSITIVE 120 — VISION TRANSFORMER : UNE IMAGE EN PATCHES
 
 EXPLICATION TECHNIQUE
 La formule suppose H et W divisibles par P et des patches carrés de côté P. Chaque patch est converti en vecteur, puis en embedding appris. Un token de classification peut être ajouté ; d'autres variantes utilisent une agrégation des sorties. La couche de projection peut être implémentée comme une convolution de noyau P et de stride P, ce qui relie les deux familles sans les rendre identiques. Les positions sont indispensables pour préserver l'organisation spatiale dans l'approche standard. Une réduction de P augmente fortement le nombre de tokens et le coût de l'attention.
@@ -1960,9 +2201,9 @@ LECTURES ET RÉFÉRENCES
 Dosovitskiy et al. — An Image is Worth 16x16 Words, 2020
 https://arxiv.org/abs/2010.11929
 
-## 111. PATCHES : CALCULER LE COÛT
+## 121. PATCHES : CALCULER LE COÛT
 
-DIAPOSITIVE 111 — PATCHES : CALCULER LE COÛT
+DIAPOSITIVE 121 — PATCHES : CALCULER LE COÛT
 
 EXPLICATION TECHNIQUE
 Le dernier rapport porte uniquement sur les matrices d'attention des tokens visuels sans token de classification. En ajoutant ce token, le rapport exact devient 785²/197², légèrement différent de seize. Cette précision montre l'intérêt de distinguer une approximation d'ordre de grandeur d'un calcul exact. La projection de chaque patch change aussi avec P ; tout le coût du modèle ne suit donc pas nécessairement le même facteur. Des patches plus petits gardent une granularité spatiale plus fine, mais le compromis dépend de la tâche, des données et du budget.
@@ -1978,7 +2219,7 @@ Non : n est multiplié par quatre pour une image 2D.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 112. CNN ET VIT : COMPARER LES HYPOTHÈSES
+## 122. CNN ET VIT : COMPARER LES HYPOTHÈSES
 
 Aspect | CNN standard | ViT standard
 Interaction initiale | Locale, noyaux partagés | Patches puis attention globale
@@ -1987,7 +2228,7 @@ Résolution | Champ réceptif progressif | Nombre de patches / tokens
 Coût typique | Dépend des cartes et des noyaux | Attention dense quadratique en tokens
 Conclusion | À valider pour la tâche | À valider pour la tâche
 
-DIAPOSITIVE 112 — CNN ET VIT : COMPARER LES HYPOTHÈSES
+DIAPOSITIVE 122 — CNN ET VIT : COMPARER LES HYPOTHÈSES
 
 EXPLICATION TECHNIQUE
 Éviter un classement absolu des architectures. Les CNN imposent une localité et un partage spatiaux forts ; les Transformers permettent un mélange global dépendant du contenu dans les couches d'attention denses. Les données, le préentraînement, les augmentations, la résolution et le budget peuvent modifier les conclusions empiriques. Un ViT ne devient pas automatiquement supérieur parce qu'il appartient à une famille plus récente. Les architectures hybrides et hiérarchiques rendent la frontière moins stricte. L'évaluation doit comparer des recettes documentées plutôt qu'un nom de famille isolé.
@@ -2002,9 +2243,9 @@ LECTURES ET RÉFÉRENCES
 Dosovitskiy et al. — An Image is Worth 16x16 Words, 2020
 https://arxiv.org/abs/2010.11929
 
-## 113. TRANSFERT DANS UN TRANSFORMER
+## 123. TRANSFERT DANS UN TRANSFORMER
 
-DIAPOSITIVE 113 — TRANSFERT DANS UN TRANSFORMER
+DIAPOSITIVE 123 — TRANSFERT DANS UN TRANSFORMER
 
 EXPLICATION TECHNIQUE
 Le même principe backbone-tête vu pour les CNN s'applique aux encodeurs Transformers, mais avec des choix supplémentaires : tokenisation, positions, masque et agrégation. Pour un modèle causal, la tâche peut être formulée comme une prédiction de séquence ; il faut vérifier que les cibles et le masquage de perte correspondent à l'objectif. Les méthodes d'adaptation à faible nombre de paramètres sont une extension possible, pas détaillée dans ce cours d'introduction. Un petit nombre de paramètres adaptés ne garantit ni un faible coût d'inférence ni une absence d'oubli sur la tâche source.
@@ -2017,9 +2258,9 @@ Non : les identifiants, embeddings et prétraitements doivent rester cohérents.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 114. LIMITES ET INTERPRÉTATION
+## 124. LIMITES ET INTERPRÉTATION
 
-DIAPOSITIVE 114 — LIMITES ET INTERPRÉTATION
+DIAPOSITIVE 124 — LIMITES ET INTERPRÉTATION
 
 EXPLICATION TECHNIQUE
 Les informations peuvent transiter par plusieurs têtes, les valeurs, les résidus et les MLP ; une carte d'attention ne décrit donc qu'une partie du calcul. Une vérification causale demanderait des interventions contrôlées, elles-mêmes à interpréter prudemment. Pour les modèles génératifs, la vraisemblance entraîne la prédiction de séquences, pas une garantie de vérité. Dans un projet appliqué, analyser les populations concernées, la provenance et l'autorisation d'usage des données, ainsi que les risques d'erreurs spécifiques au domaine. Les exemples jouets du cours ne valident pas ces conditions de déploiement.
@@ -2032,9 +2273,9 @@ Non : elle ne couvre qu’une partie des chemins de calcul.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 115. TP 05 : LA TÂCHE ET SON PROTOCOLE
+## 125. TP 05 : LA TÂCHE ET SON PROTOCOLE
 
-DIAPOSITIVE 115 — TP 05 : LA TÂCHE ET SON PROTOCOLE
+DIAPOSITIVE 125 — TP 05 : LA TÂCHE ET SON PROTOCOLE
 
 EXPLICATION TECHNIQUE
 Les quatre premiers symboles sont choisis dans un alphabet de huit possibilités. Ils ne peuvent pas tous être déduits du préfixe ; une partie de la perte est donc irréductible pour cette distribution. Les répétitions suivantes constituent les positions de copie prévisibles. Le découpage se fait sur les motifs de quatre symboles, avant la répétition, pour éviter qu'une séquence identique soit présente dans plusieurs partitions. Il s'agit d'une tâche synthétique de structure séquentielle, pas d'une évaluation linguistique. La métrique de copie complète la perplexité et permet de distinguer apprentissage de la règle et prédiction des symboles initiaux.
@@ -2050,9 +2291,9 @@ Les symboles initiaux du motif sont aléatoires et ne sont pas entièrement pré
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 116. TP 05 · ENTRAÎNER UN MINI-TRANSFORMER
+## 126. TP 05 · ENTRAÎNER UN MINI-TRANSFORMER
 
-DIAPOSITIVE 116 — TP 05 · ENTRAÎNER UN MINI-TRANSFORMER
+DIAPOSITIVE 126 — TP 05 · ENTRAÎNER UN MINI-TRANSFORMER
 
 EXPLICATION TECHNIQUE
 Organisation : 25 minutes pour les données et l'objectif, 40 minutes d'inspection du bloc et des masques, 40 minutes d'entraînement et d'évaluation, 40 minutes d'ablation et 35 minutes de restitution. Les étudiants doivent d'abord prouver l'absence d'accès au futur. Le test modifie la fin d'une entrée et vérifie les logits du préfixe. L'ablation choisit un facteur, par exemple la position ou le nombre de têtes, puis reconduit le même protocole. Un modèle qui apprend imparfaitement la copie reste utile pour étudier le diagnostic. Le notebook inclut aussi un exercice de mise en patches sans entraînement d'un grand ViT.
@@ -2065,7 +2306,7 @@ Une expérience reproductible et une explication des mécanismes, même si la co
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 117. ABLATIONS : CHANGER UN FACTEUR
+## 127. ABLATIONS : CHANGER UN FACTEUR
 
 Modification | Hypothèse à tester | Contrôle requis
 Sans position | Effet de l’information d’ordre | Même données et budget
@@ -2073,7 +2314,7 @@ Une seule tête | Diversité des projections | Largeur totale fixée
 Plus de couches | Capacité / optimisation | Coût et normes des gradients
 Sans masque causal | Détection de fuite | Test de préfixe doit échouer
 
-DIAPOSITIVE 117 — ABLATIONS : CHANGER UN FACTEUR
+DIAPOSITIVE 127 — ABLATIONS : CHANGER UN FACTEUR
 
 EXPLICATION TECHNIQUE
 Faire annoncer l'hypothèse avant l'exécution. Une ablation utile doit préciser ce qui reste fixé et ce qui change. Retirer le masque causal est un contrôle de fuite, pas une amélioration admissible de l'objectif auto-régressif. Retirer les positions teste un mécanisme différent et peut ne pas dégrader toutes les tâches de la même manière. Modifier les têtes à largeur fixe ne modifie pas nécessairement les paramètres comme le ferait une modification de d. Les conclusions doivent citer le nombre de graines et le budget réellement exécuté, et distinguer une observation locale d'une propriété générale.
@@ -2086,7 +2327,7 @@ Non : il peut exploiter les tokens futurs et résoudre un autre problème.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 118. ÉVALUATION FINALE : EXPLIQUER ET PROUVER
+## 128. ÉVALUATION FINALE : EXPLIQUER ET PROUVER
 
 Critère | Preuve | Points
 Compréhension mathématique | Dérivation et dimensions | 5
@@ -2094,7 +2335,7 @@ Implémentation | Calcul vérifié et masques corrects | 5
 Protocole expérimental | Séparation et sélection sans fuite | 5
 Analyse et limites | Erreurs, ablation et discussion | 5
 
-DIAPOSITIVE 118 — ÉVALUATION FINALE : EXPLIQUER ET PROUVER
+DIAPOSITIVE 128 — ÉVALUATION FINALE : EXPLIQUER ET PROUVER
 
 EXPLICATION TECHNIQUE
 Le barème proposé totalise vingt points et peut être adapté au règlement de la formation. Évaluer une présentation de dix minutes par binôme, accompagnée d'un notebook exécuté et d'un court compte rendu individuel. Faire poser une question de gradient, une question de formes et une question de validité expérimentale. Ne pas attribuer tous les points à l'accuracy : un résultat performant avec fuite de données échoue sur le protocole. Inversement, un résultat limité mais bien contrôlé peut démontrer la maîtrise des mécanismes et une capacité de diagnostic.
@@ -2107,9 +2348,9 @@ Le protocole qui permet de comprendre ce que ce score estime.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 119. SYNTHÈSE : UN MÊME CADRE, PLUSIEURS STRUCTURES
+## 129. SYNTHÈSE : UN MÊME CADRE, PLUSIEURS STRUCTURES
 
-DIAPOSITIVE 119 — SYNTHÈSE : UN MÊME CADRE, PLUSIEURS STRUCTURES
+DIAPOSITIVE 129 — SYNTHÈSE : UN MÊME CADRE, PLUSIEURS STRUCTURES
 
 EXPLICATION TECHNIQUE
 Revenir à l'unité conceptuelle du cours. Un MLP, un CNN et un Transformer diffèrent par leurs opérations et les contraintes qu'ils imposent, mais chacun définit une fonction paramétrée et une perte différentiable. La rétropropagation traverse le graphe correspondant ; l'optimiseur utilise ses gradients. Les paramètres de convolution sont partagés entre positions spatiales, ceux du FFN Transformer entre tokens, et les poids d'attention eux-mêmes sont calculés à partir du contenu. La performance dépend ensuite des données et de l'évaluation, pas uniquement de la famille du modèle.
@@ -2125,9 +2366,9 @@ Le graphe de calcul et ses hypothèses de structure, tout en gardant le cadre d�
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 120. EXERCICE DE SYNTHÈSE : AUDIT D’UN MODÈLE
+## 130. EXERCICE DE SYNTHÈSE : AUDIT D’UN MODÈLE
 
-DIAPOSITIVE 120 — EXERCICE DE SYNTHÈSE : AUDIT D’UN MODÈLE
+DIAPOSITIVE 130 — EXERCICE DE SYNTHÈSE : AUDIT D’UN MODÈLE
 
 EXPLICATION TECHNIQUE
 Corrigé : les cibles doivent être décalées d'un token par rapport aux entrées. Sinon, la position courante voit déjà le symbole à prédire. Un masque additif constitué de zéros et de uns n'interdit aucune position ; il décale seulement les scores. Le masque doit utiliser moins l'infini pour les positions interdites, ou une convention booléenne correctement interprétée par l'API. Tester un petit exemple explicite de décalage et modifier les tokens futurs tout en comparant les logits du préfixe en mode évaluation. Vérifier également les sommes des poids et les entrées de la matrice masquée.
@@ -2140,9 +2381,9 @@ Un exemple entrée/cible décalé et un test d’invariance du préfixe aux modi
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 121. LECTURES FOURNIES : FONDEMENTS ET MÉTHODE
+## 131. LECTURES FOURNIES : FONDEMENTS ET MÉTHODE
 
-DIAPOSITIVE 121 — LECTURES FOURNIES : FONDEMENTS ET MÉTHODE
+DIAPOSITIVE 131 — LECTURES FOURNIES : FONDEMENTS ET MÉTHODE
 
 EXPLICATION TECHNIQUE
 Ces quatre supports constituent des lectures complémentaires, pas des textes à mémoriser intégralement. Bigot fournit une entrée mathématique sur le risque, les réseaux multicouches et les CNN. Le cours de Tavenard, dans sa version PDF datée du 11 août 2025, couvre aussi la régularisation, les architectures et l'attention. Le support RCP 209 2025–2026 du CNAM est signé Javiera Castillo Navarro. Geoffrey Daniel insiste sur l'utilisation et la méthodologie. La version HTML de Tavenard permet une navigation par chapitre. Les numéros indiqués ci-dessous sont ceux des pages PDF lorsqu'ils sont cités dans le guide.
@@ -2169,9 +2410,9 @@ https://indico.in2p3.fr/event/17858/attachments/49454/65831/Deep_Learning_Seance
 Romain Tavenard — Version HTML du cours
 https://rtavenar.github.io/deep_book/fr/content/fr/intro.html
 
-## 122. ARTICLES : ARCHITECTURES ET OPTIMISATION
+## 132. ARTICLES : ARCHITECTURES ET OPTIMISATION
 
-DIAPOSITIVE 122 — ARTICLES : ARCHITECTURES ET OPTIMISATION
+DIAPOSITIVE 132 — ARTICLES : ARCHITECTURES ET OPTIMISATION
 
 EXPLICATION TECHNIQUE
 Utiliser les articles pour distinguer la définition historique d'une architecture des variantes modernes. Attention Is All You Need décrit un Transformer encodeur-décodeur avec post-normalisation. ResNet introduit la formulation résiduelle pour la vision. Le travail sur ViT montre comment traiter une image comme une séquence de patches dans un régime de préentraînement explicite. Adam et AdamW répondent à des choix d'optimisation différents. Lire les sections de méthode avant les tableaux de scores, puis demander quelles données, quel budget et quelle évaluation rendent ces scores interprétables.
@@ -2198,9 +2439,9 @@ https://arxiv.org/abs/1412.6980
 Loshchilov et Hutter — Decoupled Weight Decay Regularization, 2017
 https://arxiv.org/abs/1711.05101
 
-## 123. NORMALISATION ET DOCUMENTATION DES API
+## 133. NORMALISATION ET DOCUMENTATION DES API
 
-DIAPOSITIVE 123 — NORMALISATION ET DOCUMENTATION DES API
+DIAPOSITIVE 133 — NORMALISATION ET DOCUMENTATION DES API
 
 EXPLICATION TECHNIQUE
 Ces références aident à vérifier les détails qui modifient réellement une implémentation. Les publications sur BatchNorm et LayerNorm expliquent les axes et les paramètres. L'analyse pre-LN/post-LN éclaire la place de la normalisation, sans remplacer une validation sur la configuration retenue. Les pages PyTorch consultées sont celles de la version 2.8 utilisée dans les dépendances des TP. En lisant une documentation d'API, vérifier les formes, les valeurs par défaut, la réduction d'une perte et le sens d'un masque booléen. Une signature familière peut cacher des conventions différentes.
@@ -2230,9 +2471,9 @@ https://docs.pytorch.org/docs/2.8/generated/torch.nn.CrossEntropyLoss.html
 PyTorch 2.8 — MultiheadAttention
 https://docs.pytorch.org/docs/2.8/generated/torch.nn.MultiheadAttention.html
 
-## 124. VOTRE CHECKLIST TECHNIQUE
+## 134. VOTRE CHECKLIST TECHNIQUE
 
-DIAPOSITIVE 124 — VOTRE CHECKLIST TECHNIQUE
+DIAPOSITIVE 134 — VOTRE CHECKLIST TECHNIQUE
 
 EXPLICATION TECHNIQUE
 Terminer par un retour sur les preuves de maîtrise annoncées en début de cours. Demander à chaque étudiant de choisir la compétence la moins solide et de formuler un exercice permettant de la renforcer. Les notebooks, les sources LaTeX et les notes du présentateur permettent de reprendre les démonstrations. Le meilleur prolongement consiste à garder un protocole simple et à augmenter progressivement la difficulté, plutôt qu'à passer directement à un modèle très grand. Une compréhension précise des formes, des objectifs et des masques se transfère à des architectures plus complexes.
@@ -2245,9 +2486,9 @@ Les dimensions, le gradient, les invariants de l’attention et la séparation d
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
 
-## 125. MERCI
+## 135. MERCI
 
-DIAPOSITIVE 125 — MERCI
+DIAPOSITIVE 135 — MERCI
 
 EXPLICATION TECHNIQUE
 Inviter les étudiants à revenir sur une équation, un résultat de TP ou une erreur observée. Pour chaque question, partir du problème et des hypothèses avant de choisir une architecture. La conclusion attendue est une capacité à expliquer un calcul, à construire une expérience et à reconnaître les limites de ce que les résultats démontrent. Les suites possibles sont un projet de vision sur données réelles, une étude de modèles préentraînés ou une analyse plus avancée de l'optimisation et des architectures séquentielles.

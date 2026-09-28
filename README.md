@@ -2,7 +2,9 @@
 
 [![Validation des notebooks](https://github.com/svngoku/cybersup-deep-learning-intro/actions/workflows/notebooks.yml/badge.svg)](https://github.com/svngoku/cybersup-deep-learning-intro/actions/workflows/notebooks.yml)
 
-Cours d'introduction technique pour **Master 2 IA**, par **Chrys NIONGOLO** : **35 heures sur cinq journées**, 125 diapositives et cinq TP. Le template Cybersup est conservé ; son fichier source n'est pas publié dans le dépôt.
+Cours d'introduction technique pour **Master 2 IA**, par **Chrys NIONGOLO** : **35 heures sur cinq journées**, 135 diapositives et cinq TP. Le template Cybersup est conservé ; son fichier source n'est pas publié dans le dépôt.
+
+L'introduction présente les repères historiques du deep learning, les boucles d'apprentissage, les représentations et le choix d'une approche. Les deux schémas fournis du livre de Howard et Gugger sont intégrés avec leur attribution. Le deep learning est situé comme une famille du machine learning. Cette introduction est comprise dans le jour 1, dont le TP conserve ses 150 minutes.
 
 ## Démarrer dans Google Colab
 
@@ -22,12 +24,12 @@ Chaque journée totalise 420 minutes de formation effective ; pauses et déjeune
 
 ## Supports du cours
 
-- [PowerPoint avec les notes techniques](output/CYBERSUP-Deep-Learning-M2-35h-v2.pptx) et [PDF des diapositives](output/CYBERSUP-Deep-Learning-M2-35h-v2.pdf).
+- [PowerPoint avec les notes techniques](output/CYBERSUP-Deep-Learning-M2-35h-v3.pptx) et [PDF des diapositives](output/CYBERSUP-Deep-Learning-M2-35h-v3.pdf).
 - [Guide du formateur](output/Guide-formateur.md), [corrigés des notebooks](notebooks/formateur/) et [sources LaTeX](output/sources/formules.tex).
 - [Pack étudiant](output/CYBERSUP-Deep-Learning-M2-Pack-etudiant.zip) et [pack formateur complet](output/CYBERSUP-Deep-Learning-M2-Pack-formateur.zip).
 - [Guide Colab](docs/COLAB.md) : accès privé, sauvegarde, export des résultats et dépannage.
 
-Dans PowerPoint, ouvrir le volet **Notes** ou le **mode Présentateur**. Les 67 équations sont composées depuis LaTeX et insérées en vectoriel ; les sources permettent de les modifier. Les textes et tableaux sont éditables. Les polices du template sont Archivo Black, DM Sans et Roboto Mono.
+Dans PowerPoint, ouvrir le volet **Notes** ou le **mode Présentateur**. Les 69 équations sont composées depuis LaTeX et insérées en vectoriel ; les sources permettent de les modifier. Les textes et tableaux sont éditables. Les deux extraits O'Reilly restent des images et leurs [références sont documentées](output/sources/illustrations.md). Les polices du template sont Archivo Black, DM Sans et Roboto Mono. La version courante est la v3 ; la v2 est conservée comme version antérieure.
 
 ## Organisation du dépôt
 
@@ -65,6 +67,8 @@ Les notebooks donnent une base fonctionnelle, des contrôles et des investigatio
 
 ## Références
 
+- [Jeremy Howard et Sylvain Gugger, Deep Learning for Coders with fastai and PyTorch, O'Reilly, 2020](https://www.oreilly.com/library/view/deep-learning-for/9781492045519/), chapitre 1, figures 1-6 et 1-8 fournies par le formateur.
+- [LeCun, Bengio et Hinton, Deep learning, 2015](https://www.nature.com/articles/nature14539). Les publications historiques sont citées dans les notes de l'introduction.
 - [Jérémie Bigot, Introduction au Deep Learning](https://www.math.u-bordeaux.fr/~jbigot/Site/Enseignement_files/Intro_DeepLearning.pdf).
 - [Romain Tavenard, Introduction au Deep Learning](https://rtavenar.github.io/deep_book/book_fr.pdf) et [version HTML](https://rtavenar.github.io/deep_book/fr/content/fr/intro.html).
 - [Javiera Castillo Navarro, RCP 209, CNAM](https://cedric.cnam.fr/vertigo/Cours/ml2/docs/coursDeep1.pdf).
