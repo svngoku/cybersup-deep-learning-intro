@@ -2,7 +2,7 @@
 
 Master 2 IA · Chrys NIONGOLO · 35 heures, cinq journées.
 
-Les mêmes explications figurent dans les notes de chaque diapositive du PowerPoint. Les équations sont rendues depuis LaTeX et leur source est conservée dans sources/formules.tex. Les pauses sont à ajouter aux 420 minutes quotidiennes. L’introduction appartient au jour 1.
+Ce guide reprend les notes du PowerPoint. Chaque formule comporte une lecture à voix haute, un tableau des symboles avec leur prononciation et leur sens, une interprétation et un point d’attention. Ces explications sont réservées aux notes et au guide formateur ; elles n’ajoutent aucun contenu aux diapositives projetées. Les équations visibles restent composées depuis LaTeX. Les pauses sont à ajouter aux 420 minutes quotidiennes.
 
 ## 1. DEEP LEARNING
 
@@ -62,6 +62,24 @@ Définir le machine learning comme un ensemble de méthodes qui tirent des régu
 
 ÉQUATION — SOURCE LATEX
 \mathrm{Deep\ learning}\subset\mathrm{Machine\ learning}\subset\mathrm{IA}
+
+LECTURE À VOIX HAUTE
+« Le deep learning est inclus dans le machine learning, qui est lui-même inclus dans l’intelligence artificielle. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\mathrm{Deep\ learning}` | « deep learning, ou apprentissage profond » | Famille de méthodes fondées ici sur des réseaux à plusieurs niveaux de représentation. |
+| `\mathrm{Machine\ learning}` | « machine learning, ou apprentissage automatique » | Domaine qui regroupe les méthodes apprenant à partir de données. |
+| `\mathrm{IA}` | « i a » | Intelligence artificielle. |
+| `\subset` | « est inclus dans » | Relation entre domaines. Tout élément du domaine de gauche appartient au domaine de droite. |
+
+INTERPRÉTATION
+L’écriture situe des familles de méthodes. Elle ne donne pas un classement de leurs performances.
+
+POINT D’ATTENTION
+Le signe d’inclusion ne se lit pas « inférieur à ».
 
 QUESTION À POSER
 Un arbre de décision très profond est-il un réseau de deep learning ?
@@ -185,6 +203,30 @@ Définir N exemples étiquetés, x les observations, y les cibles et ell la pert
 
 ÉQUATION — SOURCE LATEX
 \begin{aligned}\text{Descripteur fixe :}\quad &\min_{\theta}\frac{1}{N}\sum_{i=1}^{N}\ell\bigl(g_{\theta}(\phi(x_i)),y_i\bigr)\\[8pt]\text{Repr. apprise :}\quad &\min_{\psi,\theta}\frac{1}{N}\sum_{i=1}^{N}\ell\bigl(g_{\theta}(h_{\psi}(x_i)),y_i\bigr)\end{aligned}
+
+LECTURE À VOIX HAUTE
+« Descripteur fixe : on minimise, par rapport à thêta, un sur grand N fois la somme, pour i allant de un à grand N, de la perte entre g thêta appliqué à phi de x i et la cible y i. »
+« Représentation apprise : on minimise la même moyenne par rapport à psi et à thêta, avec h psi de x i comme représentation. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `N,\ i` | « grand n, i » | Nombre d’exemples et indice d’un exemple. |
+| `x_i,\ y_i` | « x indice i, y indice i » | Observation et cible du i-ième exemple. |
+| `\phi(x_i)` | « phi de x indice i » | Descripteur fixé dans cette comparaison. |
+| `h_\psi(x_i)` | « h paramétré par psi, appliqué à x indice i » | Extracteur de représentation dont les paramètres sont psi. |
+| `g_\theta` | « g paramétré par thêta » | Prédicteur dont les paramètres sont theta. |
+| `\ell(\cdot,\cdot)` | « ell de deux arguments » | Perte qui compare une prédiction et sa cible. |
+| `\frac1N\sum_{i=1}^N` | « un sur grand n fois la somme pour i de un à grand n » | Moyenne des pertes sur les exemples. |
+| `\min_\theta,\ \min_{\psi,\theta}` | « minimum par rapport à thêta ; minimum par rapport à psi et thêta » | Variables ajustées par l’optimisation. |
+| `g_\theta(h_\psi(x_i))` | « g thêta de h psi de x i » | On calcule d’abord la représentation h, puis la prédiction g. |
+
+INTERPRÉTATION
+La différence porte sur les paramètres que la perte peut ajuster : seulement le prédicteur, ou aussi l’extracteur.
+
+POINT D’ATTENTION
+Min désigne la valeur minimale recherchée. Arg min désignerait les paramètres qui la réalisent. Phi est ici une fonction fixe, alors qu’il désigne des paramètres dans la formule du transfert.
 
 QUESTION À POSER
 Que devient la seconde optimisation si l’extracteur préentraîné est gelé ?
@@ -321,6 +363,31 @@ Fixer les conventions dès le début évite la plupart des erreurs de transposit
 ÉQUATION — SOURCE LATEX
 \begin{aligned}x&\in\mathbb{R}^{d},\quad W_\ell\in\mathbb{R}^{d_\ell\times d_{\ell-1}}\\X&\in\mathbb{R}^{B\times d},\quad H_\ell=\phi(XW_\ell^\top+\mathbf{1}b_\ell^\top)\end{aligned}
 
+LECTURE À VOIX HAUTE
+« x appartient à l’espace des vecteurs réels de dimension d. W indice ell appartient à l’espace des matrices réelles à d ell lignes et d ell moins un colonnes. »
+« Grand X contient B lignes et d colonnes. H ell vaut phi appliquée à X fois W ell transposée, plus le vecteur de uns fois b ell transposé. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\in,\ \mathbb R^d` | « appartient à ; R puissance d » | Appartenance à l’espace des vecteurs réels à d composantes. |
+| `x,\ X` | « x minuscule, grand x » | Un exemple sous forme de vecteur colonne, puis un batch stocké en lignes. |
+| `B,\ d` | « bé, dé » | Nombre d’exemples dans le batch et dimension des entrées. |
+| `\ell,\ \ell-1` | « ell, ell moins un » | Indices de la couche courante et de la couche précédente. |
+| `d_\ell,\ d_{\ell-1}` | « d indice ell, d indice ell moins un » | Largeurs de sortie et d’entrée de la couche. |
+| `W_\ell,\ b_\ell` | « w indice ell, b indice ell » | Matrice de poids et vecteur de biais. |
+| `\mathbb R^{m\times n}` | « matrices réelles à m lignes et n colonnes » | Le signe fois sépare ici des dimensions. |
+| `{}^\top` | « transposé, ou transposée » | Échange des lignes et des colonnes. |
+| `\mathbf1` | « vecteur de uns » | Vecteur colonne à B composantes, utilisé pour répéter le biais. |
+| `H_\ell,\ \phi` | « h indice ell, phi » | Activations du batch après application de la fonction non linéaire, composante par composante. |
+
+INTERPRÉTATION
+Pour cette couche, les colonnes de X doivent correspondre à d ell moins un. Le produit X W transposée donne B par d ell et le biais s’ajoute à chacune des B lignes.
+
+POINT D’ATTENTION
+La juxtaposition X W transposée est un produit matriciel. Le T en exposant représente une transposition, pas une puissance.
+
 QUESTION À POSER
 Pourquoi W est-il transposé dans la version batch ?
 
@@ -364,6 +431,26 @@ Partir d'un exemple de vision : les valeurs des pixels ne sont pas directement l
 ÉQUATION — SOURCE LATEX
 f_\theta=f_L\circ f_{L-1}\circ\cdots\circ f_1
 
+LECTURE À VOIX HAUTE
+« f paramétrée par thêta est la composée de f grand L, f grand L moins un, et ainsi de suite jusqu’à f un. On applique f un en premier. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `f_\theta` | « f paramétrée par thêta » | Fonction calculée par le réseau complet. |
+| `\theta` | « thêta » | Ensemble des paramètres du réseau. |
+| `L` | « grand ell » | Nombre de transformations dans la composition. |
+| `f_1,\ f_{L-1},\ f_L` | « f un, f grand ell moins un, f grand ell » | Première transformation, avant-dernière et dernière. |
+| `\circ` | « rond, ou composée avec » | Composition de fonctions. La fonction à droite agit d’abord. |
+| `\cdots` | « et ainsi de suite » | Transformations intermédiaires omises pour alléger l’écriture. |
+
+INTERPRÉTATION
+Le résultat d’une couche devient l’entrée de la suivante.
+
+POINT D’ATTENTION
+Le rond de composition n’est ni une multiplication ordinaire ni un produit terme à terme.
+
 QUESTION À POSER
 Une architecture plus profonde est-elle toujours meilleure ?
 
@@ -384,6 +471,27 @@ Distinguer le perceptron historique à seuil d'un neurone entraîné par gradien
 ÉQUATION — SOURCE LATEX
 z=w^\top x+b,\qquad a=\phi(z)
 
+LECTURE À VOIX HAUTE
+« z vaut w transposé fois x, plus b. a vaut phi de z. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `x` | « x » | Vecteur d’entrée à d composantes. |
+| `w,\ w^\top` | « w, w transposé » | Vecteur de poids puis sa transposée. |
+| `w^\top x` | « produit scalaire de w et x » | Somme des produits des composantes correspondantes. |
+| `b` | « bé » | Biais scalaire ajouté au produit scalaire. |
+| `z` | « zède » | Préactivation scalaire, avant la non-linéarité. |
+| `\phi` | « phi » | Fonction d’activation. |
+| `a=\phi(z)` | « a égale phi de zède » | Sortie du neurone après activation. |
+
+INTERPRÉTATION
+Le neurone combine les entrées par un calcul affine puis applique une non-linéarité.
+
+POINT D’ATTENTION
+w transposé fois x est un scalaire. Phi de z se lit comme l’application d’une fonction, pas comme phi multiplié par z.
+
 QUESTION À POSER
 Combien de paramètres pour une entrée de dimension d ?
 
@@ -403,6 +511,27 @@ Développer le produit au tableau pour montrer exactement ce que l'empilement af
 
 ÉQUATION — SOURCE LATEX
 W_2(W_1x+b_1)+b_2=(W_2W_1)x+(W_2b_1+b_2)
+
+LECTURE À VOIX HAUTE
+« W deux appliqué à W un fois x plus b un, puis plus b deux, vaut W deux fois W un appliqué à x, plus W deux fois b un plus b deux. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `x` | « x » | Vecteur d’entrée. |
+| `W_1,\ W_2` | « w un, w deux » | Matrices de la première et de la deuxième couche affine. |
+| `b_1,\ b_2` | « b un, b deux » | Vecteurs de biais des deux couches. |
+| `W_2W_1` | « w deux fois w un » | Matrice composée. L’ordre des facteurs compte. |
+| `W_2b_1+b_2` | « w deux fois b un, plus b deux » | Biais total obtenu après développement. |
+| `(\cdot)` | « parenthèses » | Regroupent un calcul à effectuer comme un tout. |
+| `=` | « égale » | Les deux expressions calculent exactement la même fonction. |
+
+INTERPRÉTATION
+Deux couches affines successives peuvent se remplacer par une seule couche affine.
+
+POINT D’ATTENTION
+On utilise la distributivité et l’associativité. On ne permute pas les matrices : W deux W un est généralement différent de W un W deux.
 
 QUESTION À POSER
 Que devient un réseau de dix couches linéaires ?
@@ -439,6 +568,30 @@ Retrouver la dérivée de la sigmoïde par la dérivation d'un inverse et d'une 
 ÉQUATION — SOURCE LATEX
 \sigma'(z)=\sigma(z)(1-\sigma(z)),\quad\phi_{\rm ReLU}'(z)=\mathbf{1}_{z>0}\\\operatorname{GELU}(z)=z\Phi(z)
 
+LECTURE À VOIX HAUTE
+« Sigma prime de z vaut sigma de z fois un moins sigma de z. »
+« La dérivée de ReLU en z vaut l’indicatrice de z strictement positif, pour z différent de zéro. »
+« GELU de z vaut z fois grand phi de z. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `z` | « zède » | Préactivation scalaire. |
+| `\sigma(z)` | « sigma de zède » | Sigmoïde logistique. |
+| `{}'` | « prime » | Dérivée d’une fonction scalaire par rapport à son argument. |
+| `\sigma'(z)` | « sigma prime de zède » | Dérivée de la sigmoïde au point z. |
+| `\phi_{\rm ReLU}` | « phi indice rélu » | Fonction ReLU : maximum entre zéro et z. |
+| `\mathbf1_{z>0}` | « indicatrice de zède strictement positif » | Vaut un si z est positif et zéro sinon. |
+| `\Phi(z)` | « grand phi de zède » | Fonction de répartition de la loi normale centrée réduite. |
+| `\operatorname{GELU}(z)` | « gélu de zède » | Activation obtenue ici par z multiplié par la probabilité Phi de z. |
+
+INTERPRÉTATION
+Les dérivées déterminent comment le signal de gradient traverse les activations.
+
+POINT D’ATTENTION
+La dérivée de ReLU n’existe pas en zéro. Mettre zéro à cet endroit est une convention de calcul. Sigma, phi et grand Phi désignent trois fonctions différentes.
+
 QUESTION À POSER
 La dérivée de ReLU vaut-elle 1 pour toute entrée ?
 
@@ -456,6 +609,28 @@ EXPLICATION TECHNIQUE
 
 ÉQUATION — SOURCE LATEX
 a_\ell=\phi_\ell(W_\ell a_{\ell-1}+b_\ell),\qquad P_\ell=d_\ell(d_{\ell-1}+1)
+
+LECTURE À VOIX HAUTE
+« a indice ell vaut phi indice ell appliquée à W ell fois a ell moins un, plus b ell. »
+« Le nombre P ell de paramètres vaut d ell fois la quantité d ell moins un plus un. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\ell,\ \ell-1` | « ell, ell moins un » | Numéros des couches courante et précédente. |
+| `a_{\ell-1},\ a_\ell` | « a indice ell moins un, a indice ell » | Entrée et sortie de la couche. |
+| `W_\ell` | « w indice ell » | Matrice à d ell lignes et d ell moins un colonnes. |
+| `b_\ell` | « b indice ell » | Un biais par neurone de sortie. |
+| `\phi_\ell` | « phi indice ell » | Activation appliquée à chaque préactivation. |
+| `P_\ell` | « pé indice ell » | Nombre total de poids et de biais de la couche. |
+| `d_\ell(d_{\ell-1}+1)` | « d ell fois, entre parenthèses, d ell moins un plus un » | Chaque sortie utilise d ell moins un poids et un biais. |
+
+INTERPRÉTATION
+La formule de calcul et la formule de comptage décrivent la même couche dense.
+
+POINT D’ATTENTION
+Dans l’indice d ell moins un, « moins un » fait partie du numéro de couche. Ce n’est pas la largeur d ell diminuée de un.
 
 QUESTION À POSER
 Une couche 64 → 10 contient combien de paramètres ?
@@ -497,6 +672,30 @@ Développer la somme des carrés composante par composante. Le gradient a la mê
 ÉQUATION — SOURCE LATEX
 \ell(\hat y,y)=\frac12\|\hat y-y\|_2^2,\qquad\nabla_{\hat y}\ell=\hat y-y
 
+LECTURE À VOIX HAUTE
+« La perte de y chapeau et y vaut un demi de la norme deux de leur différence, au carré. »
+« Le gradient de ell par rapport à y chapeau vaut y chapeau moins y. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\ell` | « ell minuscule » | Fonction de perte. |
+| `\hat y` | « y chapeau » | Prédiction du modèle, scalaire ou vecteur. |
+| `y` | « y » | Valeur cible attendue. |
+| `\frac12` | « un demi » | Facteur qui simplifie la dérivée du carré. |
+| `\hat y-y` | « y chapeau moins y » | Écart entre la prédiction et la cible. |
+| `\\|\hat y-y\\|_2` | « norme deux de y chapeau moins y » | Longueur euclidienne du vecteur des écarts. Les doubles barres désignent une norme et le deux en indice indique son type. |
+| `{}^2` | « au carré » | On élève la norme entière au carré, ce qui donne la somme des carrés des écarts. |
+| `\nabla` | « nabla » | Notation d’un gradient. |
+| `\nabla_{\hat y}\ell` | « gradient de ell par rapport à y chapeau » | Vecteur des dérivées partielles de la perte par rapport aux composantes de la prédiction. |
+
+INTERPRÉTATION
+Le carré pénalise les écarts dans les deux sens. Par exemple, pour une sortie scalaire y chapeau égale trois et y égale un, la perte vaut deux et le gradient vaut deux.
+
+POINT D’ATTENTION
+La cible y reste fixée pendant cette dérivation. Le gradient pointe localement vers l’augmentation de la perte. La descente utilise son opposé. Une moyenne sur les composantes ajouterait un facteur de normalisation.
+
 QUESTION À POSER
 Quel gradient obtient-on pour y=2 et une prédiction 5 ?
 
@@ -516,6 +715,30 @@ Pour une cible one-hot, un seul terme de la somme reste : moins le logarithme de
 
 ÉQUATION — SOURCE LATEX
 p_k=\frac{e^{z_k}}{\sum_j e^{z_j}},\qquad\ell(z,y)=-\sum_{k=1}^{K}y_k\log p_k
+
+LECTURE À VOIX HAUTE
+« p indice k vaut l’exponentielle du logit z k, divisée par la somme des exponentielles de tous les logits. »
+« La perte de z et y vaut moins la somme, pour k de un à grand K, de y k fois le logarithme de p k. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `z,\ z_k` | « zède, zède indice k » | Vecteur des logits et score brut de la classe k. |
+| `e^{z_k}` | « exponentielle de zède indice k » | Transforme un score en quantité strictement positive. |
+| `p_k` | « pé indice k » | Probabilité prédite pour la classe k après softmax. |
+| `\sum_j e^{z_j}` | « somme sur j des exponentielles de z j » | Normalisation calculée sur toutes les classes. |
+| `K,\ k,\ j` | « grand k, k, j » | Nombre de classes et indices qui parcourent les classes. |
+| `y_k` | « y indice k » | Composante de la cible. En one-hot, elle vaut un pour la classe correcte et zéro ailleurs. |
+| `\log p_k` | « logarithme de pé indice k » | Logarithme naturel de la probabilité prédite. |
+| `-\sum_{k=1}^K y_k\log p_k` | « moins la somme des y k logarithme de p k » | Entropie croisée entre la cible et la distribution prédite. |
+| `\ell(z,y)` | « ell de zède et y » | Perte scalaire associée aux logits et à la cible. |
+
+INTERPRÉTATION
+Avec une cible one-hot de classe c, la perte devient moins le logarithme de la probabilité de c.
+
+POINT D’ATTENTION
+La perte reçoit ici des logits z. Il ne faut pas appliquer deux fois softmax si la fonction de bibliothèque le calcule déjà.
 
 QUESTION À POSER
 Pourquoi accuracy et entropie croisée ne racontent-elles pas la même chose ?
@@ -537,6 +760,28 @@ Montrer l'invariance en multipliant numérateur et dénominateur par exp(-m). L'
 ÉQUATION — SOURCE LATEX
 \ell(z,c)=-z_c+m+\log\sum_j e^{z_j-m},\qquad m=\max_j z_j
 
+LECTURE À VOIX HAUTE
+« La perte de z et de la classe c vaut moins z indice c, plus m, plus le logarithme de la somme des exponentielles de z j moins m. »
+« m est le maximum des logits z j. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `z_j,\ z_c` | « zède indice j, zède indice c » | Score d’une classe quelconque et score de la classe correcte. |
+| `c` | « cé » | Indice entier de la classe cible. |
+| `m=\max_j z_j` | « m égale le maximum, sur j, de z j » | Plus grand logit de l’exemple. |
+| `e^{z_j-m}` | « exponentielle de z j moins m » | Exponentielle d’un score décalé, dont l’exposant est inférieur ou égal à zéro. |
+| `\sum_j` | « somme sur j » | Somme sur toutes les classes. |
+| `\log` | « logarithme » | Logarithme naturel. |
+| `\ell(z,c)` | « ell de zède et cé » | Entropie croisée calculée avec la classe cible c. |
+
+INTERPRÉTATION
+Soustraire le maximum avant l’exponentielle évite les très grandes exponentielles tout en conservant la même perte mathématique.
+
+POINT D’ATTENTION
+Le m ajouté hors du logarithme compense le décalage. Le calcul stabilisé ne consiste pas à supprimer le terme m.
+
 QUESTION À POSER
 Faut-il appliquer softmax avant CrossEntropyLoss ?
 
@@ -556,6 +801,31 @@ La fonction minimisée est une approximation du risque attendu sur de nouvelles 
 
 ÉQUATION — SOURCE LATEX
 \hat R(\theta)=\frac1N\sum_{i=1}^{N}\ell(f_\theta(x_i),y_i),\qquad\hat\theta\approx\arg\min_\theta\hat R(\theta)
+
+LECTURE À VOIX HAUTE
+« R chapeau de thêta vaut un sur grand N fois la somme des pertes sur les N exemples. »
+« Thêta chapeau est approximativement un argument qui minimise R chapeau par rapport à thêta. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\hat R(\theta)` | « R chapeau de thêta » | Risque empirique : perte moyenne mesurée sur l’échantillon. |
+| `\theta` | « thêta » | Paramètres du modèle. |
+| `\hat\theta` | « thêta chapeau » | Paramètres estimés par l’apprentissage. |
+| `N,\ i` | « grand n, i » | Nombre d’exemples et indice d’exemple. |
+| `x_i,\ y_i` | « x i, y i » | Entrée et cible du i-ième exemple. |
+| `f_\theta(x_i)` | « f thêta de x i » | Prédiction pour cet exemple. |
+| `\ell` | « ell » | Fonction de perte d’un exemple. |
+| `\frac1N\sum_{i=1}^N` | « un sur N fois la somme de i égale un à N » | Moyenne arithmétique des pertes. |
+| `\arg\min_\theta` | « argument du minimum par rapport à thêta » | Paramètres qui minimisent la fonction, plutôt que valeur minimale de cette fonction. |
+| `\approx` | « est approximativement égal à » | L’optimisation numérique ne garantit pas ici un minimum global exact. |
+
+INTERPRÉTATION
+L’apprentissage cherche des paramètres qui rendent faible la perte moyenne d’entraînement.
+
+POINT D’ATTENTION
+Le chapeau de R rappelle l’estimation à partir d’un échantillon. Un faible risque empirique ne suffit pas à établir un faible risque sur de nouvelles données.
 
 QUESTION À POSER
 Où choisit-on le nombre d’époques ?
@@ -580,6 +850,26 @@ Faire dériver un risque quadratique simple avant de parler de réseau. La rétr
 ÉQUATION — SOURCE LATEX
 \theta_{t+1}=\theta_t-\eta_t\nabla_\theta\hat R(\theta_t)
 
+LECTURE À VOIX HAUTE
+« Thêta à l’itération t plus un vaut thêta à l’itération t, moins êta t fois le gradient, par rapport à thêta, du risque empirique évalué en thêta t. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `t,\ t+1` | « té, té plus un » | Itération courante et itération suivante. |
+| `\theta_t,\ \theta_{t+1}` | « thêta indice t, thêta indice t plus un » | Paramètres avant et après la mise à jour. |
+| `\eta_t` | « êta indice t » | Taux d’apprentissage, positif, éventuellement variable selon l’itération. |
+| `\nabla_\theta` | « gradient par rapport à thêta » | Vecteur des dérivées partielles selon les paramètres. |
+| `\hat R(\theta_t)` | « R chapeau évalué en thêta t » | Risque empirique au point courant. |
+| `-\eta_t\nabla_\theta\hat R(\theta_t)` | « moins êta t fois le gradient du risque » | Déplacement choisi dans la direction opposée au gradient. |
+
+INTERPRÉTATION
+Le gradient indique une direction d’augmentation locale. Le signe moins choisit la direction de descente.
+
+POINT D’ATTENTION
+Le gradient doit être évalué aux paramètres courants. Un pas trop grand peut augmenter la perte malgré le signe moins.
+
 QUESTION À POSER
 Un gradient correct garantit-il que chaque étape diminue la perte ?
 
@@ -599,6 +889,28 @@ Dessiner au tableau le graphe d'un calcul scalaire, puis identifier la valeur tr
 
 ÉQUATION — SOURCE LATEX
 z=g(x),\quad u=h(z),\quad \frac{\partial\ell}{\partial x}=\frac{\partial\ell}{\partial u}\frac{\partial u}{\partial z}\frac{\partial z}{\partial x}
+
+LECTURE À VOIX HAUTE
+« z vaut g de x et u vaut h de z. »
+« La dérivée partielle de ell par rapport à x vaut la dérivée de ell par rapport à u, fois la dérivée de u par rapport à z, fois la dérivée de z par rapport à x. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `x,\ z,\ u` | « x, zède, u » | Variables scalaires successives du calcul. |
+| `g,\ h` | « gé, ache » | Fonctions qui relient ces variables. |
+| `\ell` | « ell » | Perte scalaire finale. |
+| `\partial` | « dérivée partielle, ou d rond » | Symbole de dérivation en faisant varier une variable et en fixant les autres variables indépendantes. |
+| `\frac{\partial\ell}{\partial x}` | « dérivée partielle de ell par rapport à x » | Sensibilité finale recherchée. |
+| `\frac{\partial\ell}{\partial u},\ \frac{\partial u}{\partial z},\ \frac{\partial z}{\partial x}` | « dérivées de ell selon u, de u selon z et de z selon x » | Sensibilités locales le long de la chaîne. |
+| `\frac{\partial\ell}{\partial u}\frac{\partial u}{\partial z}\frac{\partial z}{\partial x}` | « produit des trois dérivées locales » | Propagation de la sensibilité finale à travers les opérations intermédiaires. |
+
+INTERPRÉTATION
+Une petite variation de x modifie z, puis u, puis la perte. Le produit combine ces effets.
+
+POINT D’ATTENTION
+La diapositive traite une chaîne scalaire. Pour des vecteurs, il faut des jacobiennes et des conventions de dimensions. Sur plusieurs chemins, on additionne les contributions.
 
 QUESTION À POSER
 Que fait-on si un paramètre est utilisé deux fois dans le graphe ?
@@ -620,6 +932,30 @@ Calculer d'abord z=1, puis a=1/(1+exp(-1)). Le résidu est négatif car la sorti
 ÉQUATION — SOURCE LATEX
 \ell=\tfrac12(a-y)^2,\quad a=\sigma(wx+b)\\\frac{\partial\ell}{\partial w}=(a-y)a(1-a)x\approx-0.1058
 
+LECTURE À VOIX HAUTE
+« Ell vaut un demi de a moins y, au carré. a vaut la sigmoïde de w fois x plus b. »
+« La dérivée de ell par rapport à w vaut a moins y, fois a, fois un moins a, fois x. Elle vaut ici environ moins zéro virgule un zéro cinq huit. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\ell` | « ell » | Perte quadratique scalaire. |
+| `a,\ y` | « a, y » | Prédiction du neurone et cible. |
+| `\tfrac12(a-y)^2` | « un demi de a moins y au carré » | Carré de l’erreur, multiplié par un demi. |
+| `x,\ w,\ b` | « x, w, bé » | Entrée scalaire, poids et biais. |
+| `\sigma(wx+b)` | « sigma de w x plus b » | Sigmoïde de la préactivation. |
+| `\frac{\partial\ell}{\partial w}` | « dérivée partielle de ell par rapport à w » | Variation locale de la perte quand seul le poids varie. |
+| `a(1-a)` | « a fois un moins a » | Dérivée de la sigmoïde exprimée à partir de sa sortie. |
+| `(a-y)a(1-a)x` | « a moins y, fois a, fois un moins a, fois x » | Produit des trois facteurs de la règle de la chaîne. |
+| `\approx-0.1058` | « environ moins zéro virgule un zéro cinq huit » | Valeur arrondie du gradient dans l’exemple. |
+
+INTERPRÉTATION
+Les trois facteurs sont la dérivée de la perte selon a, celle de a selon la préactivation et celle de la préactivation selon w.
+
+POINT D’ATTENTION
+Le gradient négatif entraîne une augmentation de w lors d’une descente. Il ne signifie pas que la perte est négative.
+
 QUESTION À POSER
 Quel facteur disparaît dans la dérivée par rapport au biais ?
 
@@ -638,6 +974,29 @@ Développer moins la somme y_i log(p_i), puis appliquer la dérivée de chaque p
 ÉQUATION — SOURCE LATEX
 \frac{\partial p_i}{\partial z_j}=p_i(\delta_{ij}-p_j),\qquad\frac{\partial\ell}{\partial z}=p-y
 
+LECTURE À VOIX HAUTE
+« La dérivée de p i par rapport à z j vaut p i fois delta i j moins p j. »
+« Le gradient de ell par rapport au vecteur z vaut p moins y. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `p_i,\ p_j` | « pé indice i, pé indice j » | Probabilités de deux classes après softmax. |
+| `z_j` | « zède indice j » | Logit de la classe j. |
+| `\frac{\partial p_i}{\partial z_j}` | « dérivée de pé i par rapport à zède j » | Une entrée de la jacobienne de softmax. |
+| `\delta_{ij}` | « delta de Kronecker, indices i j » | Vaut un si i égale j et zéro sinon. |
+| `\ell` | « ell » | Entropie croisée pour un exemple. |
+| `\frac{\partial\ell}{\partial z}` | « gradient de ell par rapport à zède » | Vecteur des dérivées par rapport à tous les logits. |
+| `p-y` | « pé moins y » | Différence composante par composante entre distribution prédite et cible. |
+| `i,\ j` | « i, j » | Indices de classes. |
+
+INTERPRÉTATION
+La combinaison softmax et entropie croisée conduit à un gradient simple malgré les dépendances entre toutes les classes.
+
+POINT D’ATTENTION
+La cible doit sommer à un pour cette simplification. Delta i j est ici une indicatrice, alors que delta ell désignera un signal de gradient dans les couches.
+
 QUESTION À POSER
 Pourquoi les gradients des logits somment-ils à zéro ?
 
@@ -655,6 +1014,32 @@ Vérifier les dimensions avant de développer la dérivée. δ a d courant compo
 
 ÉQUATION — SOURCE LATEX
 \delta_\ell=\frac{\partial\ell}{\partial z_\ell},\quad\nabla_{W_\ell}\ell=\delta_\ell a_{\ell-1}^{\top}\\\nabla_{b_\ell}\ell=\delta_\ell,\quad\frac{\partial\ell}{\partial a_{\ell-1}}=W_\ell^\top\delta_\ell
+
+LECTURE À VOIX HAUTE
+« Delta ell est le gradient de la perte par rapport à la préactivation z ell. »
+« Le gradient selon W ell vaut delta ell fois a ell moins un transposé. Le gradient selon b ell vaut delta ell. »
+« Le gradient selon a ell moins un vaut W ell transposée fois delta ell. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\ell` | « ell minuscule » | Fonction de perte dans les dérivées. |
+| `{}_{\ell},\ {}_{\ell-1}` | « indice ell, indice ell moins un » | Indices de couche. Le même caractère ell a ici un rôle distinct de celui de la perte. |
+| `z_\ell` | « zède indice ell » | Vecteur des préactivations de la couche. |
+| `\delta_\ell` | « delta indice ell » | Gradient de la perte selon les préactivations de la couche. |
+| `W_\ell,\ b_\ell` | « w indice ell, b indice ell » | Matrice des poids et vecteur des biais. |
+| `a_{\ell-1}` | « a indice ell moins un » | Vecteur colonne des activations d’entrée. |
+| `{}^\top` | « transposé » | Échange des lignes et colonnes. |
+| `\delta_\ell a_{\ell-1}^\top` | « delta ell fois a ell moins un transposé » | Produit extérieur : matrice de la même forme que W ell. |
+| `\nabla_{W_\ell}\ell,\ \nabla_{b_\ell}\ell` | « gradient de ell selon W ell ; selon b ell » | Dérivées par rapport à chaque poids et à chaque biais. |
+| `W_\ell^\top\delta_\ell` | « W ell transposée fois delta ell » | Gradient transmis à la couche précédente. |
+
+INTERPRÉTATION
+Chaque poids reçoit la sensibilité de son neurone de sortie multipliée par l’activation qui lui arrive.
+
+POINT D’ATTENTION
+Ces expressions concernent un exemple. Une perte moyennée sur un batch exige une réduction cohérente des contributions.
 
 QUESTION À POSER
 Pourquoi le gradient de W a-t-il la même forme que W ?
@@ -676,6 +1061,26 @@ La multiplication par W transposée distribue le signal d'erreur vers les unité
 ÉQUATION — SOURCE LATEX
 \delta_\ell=\left(W_{\ell+1}^\top\delta_{\ell+1}\right)\odot\phi_\ell'(z_\ell)
 
+LECTURE À VOIX HAUTE
+« Delta ell vaut W ell plus un transposée fois delta ell plus un, puis ce résultat multiplié terme à terme par phi ell prime de z ell. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\delta_\ell,\ \delta_{\ell+1}` | « delta ell, delta ell plus un » | Gradients selon les préactivations de la couche courante et de la suivante. |
+| `W_{\ell+1}^\top` | « W de la couche ell plus un, transposée » | Matrice qui ramène la sensibilité depuis la couche suivante. |
+| `\phi_\ell'(z_\ell)` | « phi ell prime de zède ell » | Dérivée de l’activation, évaluée à chaque préactivation. |
+| `\odot` | « produit de Hadamard, ou produit terme à terme » | Chaque composante est multipliée par la composante correspondante. |
+| `\ell+1` | « ell plus un » | Indice de la couche suivante. |
+| `z_\ell` | « zède ell » | Valeurs calculées avant l’activation lors du passage avant. |
+
+INTERPRÉTATION
+La propagation arrière combine l’effet des poids de la couche suivante et la dérivée locale de l’activation.
+
+POINT D’ATTENTION
+Le premier produit est matriciel. Le symbole cercle avec point demande ensuite un produit terme à terme, avec deux vecteurs de même taille.
+
 QUESTION À POSER
 Peut-on mettre les poids à jour pendant que l’on remonte les couches ?
 
@@ -694,6 +1099,31 @@ Prendre B=32, une entrée de largeur 16 et une sortie de largeur 10. H est 32×1
 ÉQUATION — SOURCE LATEX
 Z=HW^\top+\mathbf1b^\top,\quad D=\frac{\partial\mathcal L}{\partial Z}\\\nabla_W\mathcal L=D^\top H,\quad\nabla_b\mathcal L=\sum_{i=1}^{B}D_{i,:},\quad\nabla_H\mathcal L=DW
 
+LECTURE À VOIX HAUTE
+« Z vaut H fois W transposée, plus le vecteur de uns fois b transposé. D est le gradient de la perte totale par rapport à Z. »
+« Le gradient selon W vaut D transposée fois H. Celui selon b est la somme des lignes de D. Celui selon H vaut D fois W. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `H,\ W,\ Z` | « grand ache, w, zède » | Activations d’entrée B par d entrée, poids d sortie par d entrée, préactivations B par d sortie. |
+| `B` | « bé » | Nombre d’exemples du batch. |
+| `b,\ \mathbf1 b^\top` | « bé ; vecteur de uns fois b transposé » | Vecteur des biais, puis matrice qui répète ce biais sur chaque ligne. |
+| `\mathcal L` | « grand ell calligraphique » | Perte agrégée sur le batch, avec une réduction définie. |
+| `D=\frac{\partial\mathcal L}{\partial Z}` | « D égale le gradient de grand ell selon Z » | Matrice des sensibilités, de même forme que Z. |
+| `D^\top H` | « D transposée fois H » | Gradient des poids, de même forme que W. |
+| `D_{i,:}` | « ligne i de D, toutes les colonnes » | Sensibilités correspondant à l’exemple i. Le deux-points sélectionne toutes les colonnes. |
+| `\sum_{i=1}^B D_{i,:}` | « somme des lignes de D, de i égale un à B » | Gradient du biais partagé entre les exemples. |
+| `DW` | « D fois W » | Gradient des activations d’entrée H. |
+| `\nabla` | « nabla, gradient » | Dérivées par rapport à l’objet indiqué en indice. |
+
+INTERPRÉTATION
+Les produits matriciels regroupent les calculs de chaque exemple sans changer les dérivées.
+
+POINT D’ATTENTION
+Si D contient déjà le facteur un sur B d’une perte moyenne, il ne faut pas diviser encore une fois le gradient des poids.
+
 QUESTION À POSER
 Si D=(p-y)/B, faut-il encore diviser DᵀH par B ?
 
@@ -711,6 +1141,31 @@ Une vérification numérique est un outil de diagnostic, pas une méthode pratiq
 
 ÉQUATION — SOURCE LATEX
 g_j^{\rm num}=\frac{\mathcal L(\theta+\varepsilon e_j)-\mathcal L(\theta-\varepsilon e_j)}{2\varepsilon}\\r=\frac{\|g^{\rm num}-g\|_2}{\|g^{\rm num}\|_2+\|g\|_2+10^{-12}}
+
+LECTURE À VOIX HAUTE
+« Le gradient numérique de coordonnée j vaut la perte en thêta plus epsilon e j, moins la perte en thêta moins epsilon e j, le tout divisé par deux epsilon. »
+« r est la norme de la différence des gradients, divisée par la somme de leurs normes et de dix puissance moins douze. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `g_j^{\rm num}` | « g indice j, exposant num » | Approximation numérique de la j-ième composante du gradient. Num est une étiquette, pas une puissance. |
+| `\theta` | « thêta » | Vecteur des paramètres au point testé. |
+| `\varepsilon` | « epsilon » | Petit pas utilisé pour perturber un paramètre. |
+| `e_j` | « e indice j » | Vecteur de base : un à la position j et zéro ailleurs. |
+| `\mathcal L(\theta\pm\varepsilon e_j)` | « perte en thêta plus ou moins epsilon e j » | Deux évaluations de la perte, de part et d’autre du point courant. |
+| `2\varepsilon` | « deux epsilon » | Distance entre les deux points de calcul. |
+| `g^{\rm num},\ g` | « g numérique, g » | Gradient approché et gradient analytique à comparer. |
+| `\\|\cdot\\|_2` | « norme deux » | Longueur euclidienne du vecteur. |
+| `r` | « erre » | Écart relatif normalisé entre les deux gradients. |
+| `10^{-12}` | « dix puissance moins douze » | Petit terme qui évite un dénominateur exactement nul. |
+
+INTERPRÉTATION
+La différence centrale estime une dérivée en observant la variation de la perte autour du point courant.
+
+POINT D’ATTENTION
+Le petit pas epsilon n’est pas une variable à apprendre. Trop petit, il amplifie l’erreur d’arrondi. Les tirages aléatoires doivent rester identiques entre les deux évaluations.
 
 QUESTION À POSER
 Pourquoi la différence finie est-elle coûteuse pour un grand réseau ?
@@ -852,6 +1307,29 @@ Le gradient de mini-batch est un estimateur du gradient empirique lorsque l'éch
 ÉQUATION — SOURCE LATEX
 g_t=\frac1B\sum_{i\in\mathcal B_t}\nabla_\theta\ell_i(\theta_t),\qquad\theta_{t+1}=\theta_t-\eta_tg_t
 
+LECTURE À VOIX HAUTE
+« g t vaut un sur B fois la somme des gradients des pertes des exemples dont l’indice appartient au mini-batch à l’itération t. »
+« Thêta t plus un vaut thêta t moins êta t fois g t. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `g_t` | « gé indice t » | Gradient moyen du mini-batch courant. |
+| `B` | « bé » | Nombre d’exemples du mini-batch. |
+| `\mathcal B_t` | « bé calligraphique indice t » | Ensemble des indices des exemples choisis à l’itération t. |
+| `i\in\mathcal B_t` | « i appartient au mini-batch bé t » | La somme porte seulement sur ces exemples. |
+| `\ell_i(\theta_t)` | « ell indice i évaluée en thêta t » | Perte de l’exemple i avec les paramètres courants. |
+| `\nabla_\theta` | « gradient par rapport à thêta » | Dérivées selon les paramètres du modèle. |
+| `\eta_t` | « êta indice t » | Taux d’apprentissage de cette mise à jour. |
+| `\theta_t,\ \theta_{t+1}` | « thêta t, thêta t plus un » | Paramètres courants et paramètres mis à jour. |
+
+INTERPRÉTATION
+SGD remplace le gradient de tout l’échantillon par une estimation calculée sur un sous-ensemble.
+
+POINT D’ATTENTION
+B est une taille, alors que B calligraphique t est un ensemble d’indices. L’échelle du gradient dépend du choix somme ou moyenne.
+
 QUESTION À POSER
 Si N=1000 et B=128 sans drop_last, combien d’étapes par époque ?
 
@@ -870,6 +1348,28 @@ Présenter explicitement la convention employée : ici, on n'introduit pas le fa
 ÉQUATION — SOURCE LATEX
 v_t=\beta v_{t-1}+g_t,\qquad\theta_{t+1}=\theta_t-\eta v_t
 
+LECTURE À VOIX HAUTE
+« v t vaut bêta fois v t moins un, plus g t. »
+« Thêta t plus un vaut thêta t moins êta fois v t. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `v_t` | « vé indice t » | Accumulateur de gradients, ou vitesse, au pas courant. |
+| `v_{t-1}` | « vé indice t moins un » | État de l’accumulateur au pas précédent. |
+| `\beta` | « bêta » | Coefficient de mémoire, généralement entre zéro inclus et un exclu. |
+| `g_t` | « gé indice t » | Gradient courant. |
+| `\eta` | « êta » | Taux d’apprentissage. |
+| `\theta_t,\ \theta_{t+1}` | « thêta t, thêta t plus un » | Paramètres avant et après la mise à jour. |
+| `t-1` | « té moins un » | Itération précédente, et non soustraction de un à la valeur de v. |
+
+INTERPRÉTATION
+La direction du pas tient compte de plusieurs gradients successifs.
+
+POINT D’ATTENTION
+Cette convention du momentum n’ajoute pas de facteur un moins bêta devant g. D’autres conventions normalisent l’accumulateur différemment.
+
 QUESTION À POSER
 Avec β=0,9, v0=0 et g=1, quelles sont v1 et v2 ?
 
@@ -887,6 +1387,33 @@ Le second moment est une moyenne des carrés, pas directement une estimation de 
 
 ÉQUATION — SOURCE LATEX
 \begin{aligned}m_t&=\beta_1m_{t-1}+(1-\beta_1)g_t\\v_t&=\beta_2v_{t-1}+(1-\beta_2)g_t^2\\\theta_{t+1}&=\theta_t-\eta\frac{m_t/(1-\beta_1^t)}{\sqrt{v_t/(1-\beta_2^t)}+\varepsilon}\end{aligned}
+
+LECTURE À VOIX HAUTE
+« m t vaut bêta un fois m t moins un, plus un moins bêta un fois le gradient g t. »
+« v t vaut bêta deux fois v t moins un, plus un moins bêta deux fois g t au carré, composante par composante. »
+« Thêta t plus un vaut thêta t moins êta fois le premier moment corrigé, divisé composante par composante par la racine du second moment corrigé plus epsilon. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `g_t` | « gé indice t » | Gradient au pas t. |
+| `m_t,\ m_{t-1}` | « m t, m t moins un » | Moyenne mobile des gradients, courante et précédente. |
+| `v_t,\ v_{t-1}` | « vé t, vé t moins un » | Moyenne mobile des carrés des gradients. |
+| `\beta_1,\ \beta_2` | « bêta un, bêta deux » | Coefficients de mémoire des deux moyennes. |
+| `g_t^2` | « gé t au carré, terme à terme » | Chaque composante du gradient est élevée au carré. |
+| `\beta_1^t,\ \beta_2^t` | « bêta un puissance t, bêta deux puissance t » | Puissances utilisées pour corriger l’initialisation à zéro des moments. |
+| `m_t/(1-\beta_1^t)` | « m t divisé par un moins bêta un puissance t » | Premier moment corrigé. |
+| `v_t/(1-\beta_2^t)` | « vé t divisé par un moins bêta deux puissance t » | Second moment corrigé. |
+| `\sqrt{\cdot}` | « racine carrée » | Racine prise composante par composante. |
+| `\eta,\ \varepsilon` | « êta, epsilon » | Taux d’apprentissage et petit stabilisateur numérique du dénominateur. |
+| `\theta_t,\ \theta_{t+1}` | « thêta t, thêta t plus un » | Paramètres avant et après la mise à jour. |
+
+INTERPRÉTATION
+Adam mémorise la direction moyenne du gradient et adapte l’échelle du pas à chaque paramètre.
+
+POINT D’ATTENTION
+v est un second moment non centré, pas une variance centrée. Les divisions sont terme à terme. Epsilon se trouve hors de la racine dans la convention affichée.
 
 QUESTION À POSER
 Le v d’Adam est-il exactement la variance du gradient ?
@@ -908,6 +1435,29 @@ L'argument de variance suppose approximativement des composantes indépendantes 
 ÉQUATION — SOURCE LATEX
 W_{ij}\sim\mathcal N\!\left(0,\frac{2}{d_{\rm in}}\right)\quad\text{(ReLU)},\qquad\operatorname{Var}(W_{ij})\approx\frac{2}{d_{\rm in}+d_{\rm out}}\quad\text{(Xavier)}
 
+LECTURE À VOIX HAUTE
+« W i j suit une loi normale de moyenne zéro et de variance deux sur d entrée, pour l’initialisation adaptée à ReLU. »
+« Pour Xavier, la variance de W i j vaut approximativement deux divisé par d entrée plus d sortie. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `W_{ij}` | « w indices i j » | Poids reliant une composante d’entrée à une unité de sortie. |
+| `\sim` | « suit la loi » | Le poids est tiré aléatoirement selon la distribution indiquée. |
+| `\mathcal N(0,v)` | « loi normale de moyenne zéro et de variance vé » | Dans cette convention, le deuxième argument est la variance. |
+| `d_{\rm in},\ d_{\rm out}` | « d entrée, d sortie » | Nombre de connexions d’entrée et nombre d’unités de sortie de la couche. |
+| `\operatorname{Var}(W_{ij})` | « variance de w i j » | Dispersion des tirages de ce poids autour de leur moyenne. |
+| `2/d_{\rm in}` | « deux sur d entrée » | Variance de l’initialisation indiquée pour ReLU. |
+| `2/(d_{\rm in}+d_{\rm out})` | « deux sur la somme de d entrée et d sortie » | Variance utilisée dans l’heuristique de Xavier. |
+| `\approx` | « environ égal à » | Expression inscrite dans une analyse simplifiée des variances. |
+
+INTERPRÉTATION
+L’échelle des poids compense le nombre de contributions additionnées par chaque neurone.
+
+POINT D’ATTENTION
+La variance deux sur d entrée n’est pas l’écart-type. L’écart-type correspondant est sa racine carrée.
+
 QUESTION À POSER
 Pourquoi ne pas initialiser tous les poids d’une couche à la même valeur ?
 
@@ -926,6 +1476,27 @@ Une succession d'opérateurs contractants peut atténuer le signal, tandis que d
 ÉQUATION — SOURCE LATEX
 \frac{\partial\ell}{\partial a_0}=J_1^\top J_2^\top\cdots J_L^\top\frac{\partial\ell}{\partial a_L}
 
+LECTURE À VOIX HAUTE
+« Le gradient de la perte selon a zéro vaut J un transposée, fois J deux transposée, et ainsi de suite jusqu’à J grand L transposée, appliquées au gradient de la perte selon a grand L. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `a_0,\ a_L` | « a zéro, a grand ell » | Activations d’entrée et de sortie de la pile. |
+| `L` | « grand ell » | Nombre de couches ou de transformations. |
+| `J_\ell` | « ji indice ell » | Jacobienne de a ell par rapport à a ell moins un : matrice des dérivées locales. |
+| `J_\ell^\top` | « ji indice ell transposée » | Opérateur qui propage un gradient colonne vers la couche précédente. |
+| `\frac{\partial\ell}{\partial a_0}` | « gradient de ell par rapport à a zéro » | Sensibilité de la perte aux activations d’entrée. |
+| `\frac{\partial\ell}{\partial a_L}` | « gradient de ell par rapport à a grand ell » | Gradient disponible au sommet de la pile. |
+| `\cdots` | « et ainsi de suite » | Produits des jacobiennes des couches intermédiaires. |
+
+INTERPRÉTATION
+La rétropropagation applique successivement les transformations locales au gradient de sortie.
+
+POINT D’ATTENTION
+Dans le produit écrit, J grand L transposée agit d’abord sur le vecteur à droite. Une accumulation de contractions ou d’amplifications peut modifier fortement la norme du gradient.
+
 QUESTION À POSER
 Le clipping permet-il de récupérer des gradients proches de zéro ?
 
@@ -943,6 +1514,29 @@ Pour SGD sans adaptation, développer la mise à jour donne (1-eta lambda) theta
 
 ÉQUATION — SOURCE LATEX
 \mathcal L_{\rm reg}=\mathcal L+\frac\lambda2\|\theta\|_2^2,\qquad\nabla\mathcal L_{\rm reg}=\nabla\mathcal L+\lambda\theta
+
+LECTURE À VOIX HAUTE
+« La perte régularisée vaut la perte de données plus lambda sur deux fois la norme deux de thêta au carré. »
+« Son gradient vaut le gradient de la perte de données plus lambda fois thêta. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\mathcal L,\ \mathcal L_{\rm reg}` | « grand ell, grand ell indice reg » | Perte de données et perte avec pénalisation. |
+| `\theta` | « thêta » | Vecteur des paramètres auxquels on applique la pénalisation. |
+| `\lambda` | « lambda » | Coefficient non négatif qui règle la force de la pénalisation. |
+| `\\|\theta\\|_2` | « norme deux de thêta » | Longueur euclidienne du vecteur des paramètres. |
+| `\\|\theta\\|_2^2` | « norme deux de thêta au carré » | Somme des carrés des paramètres. |
+| `\lambda/2` | « lambda sur deux » | Facteur choisi pour que la dérivée de la pénalisation soit lambda thêta. |
+| `\nabla` | « nabla, gradient » | Toutes les dérivées de cette ligne sont prises par rapport à theta. |
+| `\lambda\theta` | « lambda fois thêta » | Contribution de la pénalisation au gradient. |
+
+INTERPRÉTATION
+La pénalisation ajoute un coût lorsque les coefficients deviennent grands.
+
+POINT D’ATTENTION
+Le gradient de la perte et celui de la pénalisation s’additionnent. Dans Adam, pénalisation L2 et weight decay découplé ne sont pas généralement équivalents.
 
 QUESTION À POSER
 L2 et weight decay sont-ils interchangeables dans toutes les méthodes ?
@@ -964,6 +1558,29 @@ La formule utilise p comme probabilité de suppression. Vérifier cette conventi
 ÉQUATION — SOURCE LATEX
 m_j\sim\operatorname{Bernoulli}(1-p),\qquad\tilde a_j=\frac{m_j}{1-p}a_j,\qquad\mathbb E[\tilde a_j]=a_j
 
+LECTURE À VOIX HAUTE
+« m j suit une loi de Bernoulli dont la probabilité de conservation est un moins p. »
+« a tilde j vaut m j divisé par un moins p, puis multiplié par a j. »
+« L’espérance de a tilde j vaut a j. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `a_j` | « a indice j » | Activation avant dropout. |
+| `m_j` | « m indice j » | Masque aléatoire égal à zéro ou à un. |
+| `p,\ 1-p` | « pé, un moins pé » | Probabilité de suppression et probabilité de conservation. On suppose zéro inférieur ou égal à p et p strictement inférieur à un. |
+| `\sim\operatorname{Bernoulli}(1-p)` | « suit une loi de Bernoulli de paramètre un moins p » | Le masque vaut un avec probabilité un moins p. |
+| `\tilde a_j` | « a tilde indice j » | Activation après application du masque et remise à l’échelle. |
+| `\frac{m_j}{1-p}a_j` | « m j sur un moins p, fois a j » | Activation annulée ou amplifiée pour préserver son espérance. |
+| `\mathbb E[\tilde a_j]` | « espérance de a tilde j » | Moyenne théorique sur les tirages du masque, pour a j fixé. |
+
+INTERPRÉTATION
+Le dropout inversé conserve en moyenne chaque activation grâce à la division par la probabilité de conservation.
+
+POINT D’ATTENTION
+Le tilde marque ici une activation modifiée, pas une estimation de probabilité. Préserver l’espérance de cette activation ne préserve pas forcément celle de toute la sortie du réseau.
+
 QUESTION À POSER
 Pourquoi diviser par 1-p pendant le train ?
 
@@ -983,6 +1600,29 @@ Le point essentiel est de demander sur quels axes sont calculés moyenne et vari
 
 ÉQUATION — SOURCE LATEX
 \hat x=\frac{x-\mu}{\sqrt{\sigma^2+\varepsilon}},\qquad y=\gamma\hat x+\beta
+
+LECTURE À VOIX HAUTE
+« x chapeau vaut x moins mu, le tout divisé par la racine carrée de sigma au carré plus epsilon. »
+« y vaut gamma fois x chapeau plus bêta. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `x,\ \hat x` | « x, x chapeau » | Activation initiale puis activation normalisée. |
+| `\mu` | « mu » | Moyenne calculée sur les axes retenus par la normalisation. |
+| `\sigma^2` | « sigma au carré » | Variance sur ces mêmes axes. |
+| `\varepsilon` | « epsilon » | Petit nombre positif qui stabilise le dénominateur. |
+| `\sqrt{\sigma^2+\varepsilon}` | « racine carrée de sigma au carré plus epsilon » | Échelle de normalisation. |
+| `\gamma,\ \beta` | « gamma, bêta » | Gain multiplicatif et décalage appris. |
+| `y` | « y » | Activation de sortie après transformation affine. |
+| `\hat x` | « chapeau » | Indique ici une normalisation, alors que y chapeau désigne une prédiction dans la perte de régression. |
+
+INTERPRÉTATION
+On centre l’activation, on ajuste son échelle, puis on lui applique un gain et un décalage appris.
+
+POINT D’ATTENTION
+Les axes des statistiques dépendent de la méthode : BatchNorm et LayerNorm ne calculent pas les mêmes moyennes. Sigma au carré est une variance, pas l’activation sigmoïde.
 
 QUESTION À POSER
 Peut-on comparer BatchNorm et LayerNorm sans préciser les axes ?
@@ -1039,6 +1679,30 @@ La formule correspond au cas stride un, sans dilation et sans padding, avec un b
 ÉQUATION — SOURCE LATEX
 Y_{o,i,j}=b_o+\sum_{c=1}^{C_{\rm in}}\sum_{u=0}^{k_h-1}\sum_{v=0}^{k_w-1}W_{o,c,u,v}\,X_{c,i+u,j+v}
 
+LECTURE À VOIX HAUTE
+« Y aux indices o, i, j vaut le biais du canal o plus une somme sur les canaux c, les décalages verticaux u et horizontaux v, des poids W o c u v multipliés par les entrées X c, i plus u, j plus v. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `X,\ Y` | « grand x, grand y » | Tenseur d’entrée et tenseur de sortie. L’axe batch est omis ici. |
+| `o,\ c` | « o, cé » | Indice du canal de sortie et indice du canal d’entrée. |
+| `i,\ j` | « i, j » | Position spatiale de la sortie. |
+| `u,\ v` | « u, vé » | Décalages à l’intérieur du noyau. |
+| `C_{\rm in}` | « cé entrée » | Nombre de canaux d’entrée. |
+| `k_h,\ k_w` | « k hauteur, k largeur » | Hauteur et largeur du noyau. |
+| `W_{o,c,u,v}` | « w indices o, c, u, v » | Coefficient du noyau reliant le canal c au canal o au décalage u, v. |
+| `X_{c,i+u,j+v}` | « x au canal c, ligne i plus u, colonne j plus v » | Valeur d’entrée couverte par ce coefficient. |
+| `b_o` | « bé indice o » | Biais commun à toutes les positions du canal de sortie o. |
+| `\sum_c\sum_u\sum_v` | « somme sur c, puis sur u, puis sur v » | Addition de toutes les contributions des canaux et de la fenêtre. |
+
+INTERPRÉTATION
+Une valeur de sortie combine une fenêtre locale de tous les canaux d’entrée avec les coefficients d’un filtre.
+
+POINT D’ATTENTION
+C’est la corrélation croisée utilisée par Conv2d, avec stride un, dilation un et sans padding dans cet exemple. Les indices u et v commencent à zéro.
+
 QUESTION À POSER
 Un filtre 3×3 sur une entrée RGB contient-il 9 poids ?
 
@@ -1059,6 +1723,28 @@ Faire remplir les quatre cases avant d'afficher le calcul oralement. La premièr
 ÉQUATION — SOURCE LATEX
 X=\begin{bmatrix}1&2&0\\0&1&3\\2&1&0\end{bmatrix},\quad W=\begin{bmatrix}1&0\\0&-1\end{bmatrix}\\Y=\begin{bmatrix}0&-1\\-1&1\end{bmatrix}
 
+LECTURE À VOIX HAUTE
+« X est une matrice trois par trois. Ses lignes sont : un, deux, zéro ; zéro, un, trois ; deux, un, zéro. »
+« W est une matrice deux par deux dont les lignes sont un, zéro, puis zéro, moins un. »
+« Y est la matrice deux par deux : zéro, moins un, puis moins un, un. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `X` | « grand x » | Image d’entrée de hauteur trois et de largeur trois. |
+| `W` | « w » | Noyau de hauteur deux et de largeur deux. |
+| `Y` | « grand y » | Carte de sortie, obtenue avec un pas de un et sans padding. |
+| `\begin{bmatrix}a&b\\c&d\end{bmatrix}` | « matrice deux par deux, première ligne a b, deuxième ligne c d » | Les crochets regroupent des valeurs en lignes et colonnes. |
+| `-1` | « moins un » | Poids négatif du coin inférieur droit du noyau, ou valeur négative de sortie selon sa position. |
+| `=` | « égale » | Attribue explicitement ses valeurs à chaque matrice. |
+
+INTERPRÉTATION
+À chaque position, le noyau soustrait le coin inférieur droit de la fenêtre à son coin supérieur gauche. La première sortie vaut un moins un, donc zéro.
+
+POINT D’ATTENTION
+Le noyau n’est pas retourné dans ce calcul. La lecture de la matrice se fait ligne par ligne, sans traiter les crochets comme une norme.
+
 QUESTION À POSER
 Combien de paramètres seraient appris avec un biais ?
 
@@ -1076,6 +1762,28 @@ Définir le noyau effectif : d(k-1)+1. On compte ensuite le nombre de positions 
 
 ÉQUATION — SOURCE LATEX
 H_{\rm out}=\left\lfloor\frac{H+2p-d(k-1)-1}{s}+1\right\rfloor
+
+LECTURE À VOIX HAUTE
+« H sortie vaut la partie entière inférieure de la quantité H plus deux p, moins d fois k moins un, moins un, divisée par s, puis plus un. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `H,\ H_{\rm out}` | « ache, ache sortie » | Hauteur de l’entrée et hauteur de la sortie. |
+| `p` | « pé » | Nombre de lignes de padding ajoutées de chaque côté. |
+| `d` | « dé » | Dilation, c’est-à-dire espacement des coefficients du noyau. |
+| `k` | « ka » | Taille du noyau selon cet axe. |
+| `s` | « esse » | Stride, ou pas de déplacement de la fenêtre. |
+| `d(k-1)+1` | « d fois k moins un, plus un » | Taille effective du noyau après dilation. |
+| `\lfloor\cdot\rfloor` | « partie entière inférieure, ou plancher » | Plus grand entier inférieur ou égal à la valeur entre les crochets. |
+| `2p` | « deux pé » | Padding total, réparti symétriquement sur les deux bords. |
+
+INTERPRÉTATION
+On compte le nombre de positions de la fenêtre qui tiennent dans l’entrée après padding.
+
+POINT D’ATTENTION
+Les crochets de plancher demandent d’arrondir vers le bas. Ici d est une dilation, pas une dimension d’embedding. La même formule s’applique indépendamment à la largeur.
 
 QUESTION À POSER
 Pour H=28, k=3, p=0, s=1, d=1, quelle hauteur ?
@@ -1118,6 +1826,29 @@ Pour une entrée RGB et 16 filtres 3×3, le nombre de paramètres est 16(3×9+1)
 ÉQUATION — SOURCE LATEX
 P=C_{\rm out}(C_{\rm in}k_hk_w+1)\\\operatorname{MACs}\approx H_{\rm out}W_{\rm out}C_{\rm out}C_{\rm in}k_hk_w
 
+LECTURE À VOIX HAUTE
+« Le nombre de paramètres vaut C sortie multiplié par la somme de C entrée fois k hauteur fois k largeur et de un. »
+« Le nombre de multiplications-accumulations vaut approximativement H sortie fois W sortie fois C sortie fois C entrée fois k hauteur fois k largeur. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `P` | « pé » | Nombre de paramètres appris, biais inclus. |
+| `C_{\rm in},\ C_{\rm out}` | « cé entrée, cé sortie » | Nombre de canaux d’entrée et de sortie. |
+| `k_h,\ k_w` | « k hauteur, k largeur » | Dimensions du noyau. |
+| `C_{\rm in}k_hk_w` | « cé entrée fois k hauteur fois k largeur » | Nombre de poids utilisés pour une valeur de sortie. |
+| `+1` | « plus un » | Un biais supplémentaire par canal de sortie. |
+| `H_{\rm out},\ W_{\rm out}` | « ache sortie, w sortie » | Hauteur et largeur de la carte de sortie. |
+| `\operatorname{MACs}` | « macs, multiplications-accumulations » | Nombre de produits ajoutés à un accumulateur, pour un exemple. |
+| `\approx` | « approximativement égal à » | Le comptage du calcul omet notamment les biais et d’autres opérations. |
+
+INTERPRÉTATION
+Les paramètres sont partagés entre les positions, mais le calcul doit être répété à chacune d’elles.
+
+POINT D’ATTENTION
+La formule suppose une convolution non groupée. P désigne ici un nombre de paramètres, alors qu’il désigne la taille d’un patch dans la partie ViT.
+
 QUESTION À POSER
 Une convolution contient-elle plus de poids lorsqu’on passe de 32×32 à 64×64 ?
 
@@ -1138,6 +1869,27 @@ Expliquer la différence du passage arrière : le max transmet le gradient à un
 ÉQUATION — SOURCE LATEX
 \operatorname{maxpool}\!\begin{bmatrix}1&4\\2&3\end{bmatrix}=4,\qquad\operatorname{avgpool}\!\begin{bmatrix}1&4\\2&3\end{bmatrix}=2.5
 
+LECTURE À VOIX HAUTE
+« Le max-pooling de la fenêtre contenant un, quatre, deux et trois vaut quatre. »
+« Le pooling moyen de la même fenêtre vaut deux virgule cinq. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\operatorname{maxpool}` | « max-pooling, ou agrégation par maximum » | Sélection de la plus grande valeur de la fenêtre. |
+| `\operatorname{avgpool}` | « average-pooling, ou agrégation par moyenne » | Moyenne arithmétique des valeurs de la fenêtre. |
+| `\begin{bmatrix}1&4\\2&3\end{bmatrix}` | « matrice deux par deux : un quatre, puis deux trois » | Fenêtre locale examinée. |
+| `4` | « quatre » | Valeur maximale de la fenêtre. |
+| `2.5` | « deux virgule cinq » | Moyenne : un plus quatre plus deux plus trois, divisés par quatre. |
+| `=` | « égale » | Résultat scalaire de l’agrégation. |
+
+INTERPRÉTATION
+Les quatre valeurs de la fenêtre se réduisent à une seule valeur par canal.
+
+POINT D’ATTENTION
+Le point de 2.5 est un séparateur décimal dans la formule. Le lire « virgule » en français. Ces opérations de pooling ne possèdent pas de poids appris.
+
 QUESTION À POSER
 Où va le gradient d’un max pooling 2×2 sans égalité ?
 
@@ -1156,6 +1908,30 @@ Faire le calcul pour Conv3 stride1, Pool2 stride2, Conv3 stride1. Après la prem
 ÉQUATION — SOURCE LATEX
 j_\ell=j_{\ell-1}s_\ell,\qquad r_\ell=r_{\ell-1}+(k_\ell-1)d_\ell j_{\ell-1}\\r_0=j_0=1
 
+LECTURE À VOIX HAUTE
+« Le saut j de la couche ell vaut le saut précédent multiplié par le stride de cette couche. »
+« Le champ réceptif r de la couche ell vaut le champ précédent, plus k ell moins un, fois la dilation d ell, fois le saut précédent. »
+« Au départ, r zéro et j zéro valent un. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\ell,\ \ell-1` | « ell, ell moins un » | Indices de la couche courante et de la couche précédente. |
+| `j_\ell` | « ji indice ell » | Écart entre deux positions voisines de cette couche, mesuré en pixels de l’entrée. |
+| `s_\ell` | « esse indice ell » | Stride de la couche. |
+| `r_\ell` | « erre indice ell » | Taille du champ réceptif théorique sur un axe. |
+| `k_\ell` | « ka indice ell » | Taille du noyau de la couche. |
+| `d_\ell` | « dé indice ell » | Dilation de cette couche. |
+| `(k_\ell-1)d_\ell j_{\ell-1}` | « k ell moins un, fois d ell, fois j ell moins un » | Étendue supplémentaire couverte dans les coordonnées de l’entrée. |
+| `r_0=j_0=1` | « r zéro et j zéro valent un » | Un pixel de l’entrée couvre un pixel et deux pixels voisins sont séparés d’un pas. |
+
+INTERPRÉTATION
+Le stride change l’espacement entre les sorties. Les tailles de noyau et les dilations agrandissent le champ couvert.
+
+POINT D’ATTENTION
+j est ici un saut spatial, pas un indice de colonne comme dans la convolution. Le champ réceptif théorique ne mesure pas l’influence effective de chaque pixel.
+
 QUESTION À POSER
 Quel champ obtient-on avec deux convolutions 3×3 sans stride ?
 
@@ -1173,6 +1949,28 @@ Sur un domaine infini ou avec des conditions adaptées, une convolution à strid
 
 ÉQUATION — SOURCE LATEX
 f(Tx)=T f(x)\quad\text{(equivariance)},\qquad g(Tx)=g(x)\quad\text{(invariance)}
+
+LECTURE À VOIX HAUTE
+« f appliquée à T de x est égale à T appliquée à f de x : c’est l’équivariance. »
+« g appliquée à T de x est égale à g de x : c’est l’invariance. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `x` | « x » | Entrée du modèle. |
+| `T` | « té majuscule » | Transformation de l’entrée, par exemple une translation. |
+| `Tx` | « té appliquée à x » | Entrée après transformation. |
+| `f,\ g` | « effe, gé » | Fonctions dont on étudie le comportement. |
+| `Tf(x)` | « té appliquée à effe de x » | Transformation correspondante de la sortie. |
+| `f(Tx)=Tf(x)` | « transformer l’entrée puis calculer, ou calculer puis transformer » | La sortie se transforme de façon cohérente avec l’entrée. |
+| `g(Tx)=g(x)` | « la sortie de g reste la même après transformation de l’entrée » | La sortie ne dépend pas de cette transformation. |
+
+INTERPRÉTATION
+Équivariance : la sortie suit la transformation. Invariance : la sortie reste identique.
+
+POINT D’ATTENTION
+Le même T représente les actions compatibles dans l’espace d’entrée et de sortie. Les bords, le padding et le sous-échantillonnage peuvent limiter ces égalités.
 
 QUESTION À POSER
 Une segmentation d’image doit-elle être totalement invariante à la translation ?
@@ -1285,6 +2083,29 @@ Un noyau 1×1 n'est pas une opération inutile : il réalise une projection sur 
 ÉQUATION — SOURCE LATEX
 Y_{o,i,j}=b_o+\sum_c W_{o,c}X_{c,i,j},\qquad g_c=\frac1{HW}\sum_{i,j}X_{c,i,j}
 
+LECTURE À VOIX HAUTE
+« Y du canal o à la position i j vaut b o plus la somme, sur les canaux c, de W o c fois X c i j. »
+« g c vaut un sur H W fois la somme de X c i j sur toutes les positions spatiales. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `X_{c,i,j},\ Y_{o,i,j}` | « x canal c position i j ; y canal o position i j » | Activations d’entrée et de sortie à une même position. |
+| `c,\ o` | « cé, o » | Canal d’entrée et canal de sortie. |
+| `W_{o,c},\ b_o` | « w indices o c, b indice o » | Poids du mélange des canaux et biais du canal de sortie. |
+| `\sum_c` | « somme sur cé » | Addition des contributions de tous les canaux d’entrée. |
+| `H,\ W` | « ache, w » | Hauteur et largeur de la carte dans la seconde formule. |
+| `HW` | « ache fois w » | Nombre total de positions spatiales. |
+| `\sum_{i,j}` | « somme sur i et j » | Somme sur toutes les lignes et colonnes. |
+| `g_c` | « gé indice cé » | Moyenne spatiale du canal c. |
+
+INTERPRÉTATION
+La convolution un par un mélange les canaux à position fixe. La moyenne globale réduit chaque canal à un scalaire.
+
+POINT D’ATTENTION
+W avec des indices est un poids, tandis que W seul dans H W désigne la largeur. Les deux opérations décrites ont des rôles distincts.
+
 QUESTION À POSER
 Une convolution 1×1 peut-elle modifier le nombre de canaux ?
 
@@ -1302,6 +2123,29 @@ Décrire précisément les axes d'agrégation pour une couche BatchNorm2d. Les p
 
 ÉQUATION — SOURCE LATEX
 \mu_c=\frac1{BHW}\sum_{b,i,j}X_{b,c,i,j},\quad\hat X_{b,c,i,j}=\frac{X_{b,c,i,j}-\mu_c}{\sqrt{\sigma_c^2+\varepsilon}}
+
+LECTURE À VOIX HAUTE
+« Mu c vaut la somme des activations du canal c sur le batch et les positions spatiales, divisée par B fois H fois W. »
+« X chapeau aux indices b c i j vaut X b c i j moins mu c, divisé par la racine de sigma c au carré plus epsilon. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `B,\ H,\ W` | « bé, ache, w » | Taille du batch, hauteur et largeur des cartes. |
+| `b,\ c,\ i,\ j` | « bé, cé, i, j » | Indices de l’exemple, du canal, de la ligne et de la colonne. |
+| `X_{b,c,i,j}` | « x indices b c i j » | Une activation du tenseur d’entrée. |
+| `\mu_c` | « mu indice cé » | Moyenne du canal c sur les B H W valeurs du batch. |
+| `\sum_{b,i,j}` | « somme sur b, i et j » | Agrégation sur les exemples et les positions, en gardant le canal fixé. |
+| `\sigma_c^2` | « sigma indice cé au carré » | Variance calculée sur ces mêmes axes. |
+| `\varepsilon` | « epsilon » | Terme positif de stabilisation. |
+| `\hat X_{b,c,i,j}` | « x chapeau indices b c i j » | Activation centrée et normalisée. |
+
+INTERPRÉTATION
+BatchNorm2d calcule une paire de statistiques pour chaque canal.
+
+POINT D’ATTENTION
+b minuscule est ici un indice d’exemple et non un biais. L’écriture montre la normalisation du batch. En évaluation, BatchNorm utilise normalement ses statistiques enregistrées. Le gain gamma et le biais beta peuvent ensuite compléter le calcul.
 
 QUESTION À POSER
 requires_grad=False fige-t-il automatiquement les statistiques mobiles ?
@@ -1323,6 +2167,27 @@ L'écriture résiduelle change la paramétrisation d'un bloc : F peut apprendre 
 ÉQUATION — SOURCE LATEX
 y=x+F(x),\qquad\frac{\partial y}{\partial x}=I+\frac{\partial F}{\partial x}
 
+LECTURE À VOIX HAUTE
+« y vaut x plus F de x. »
+« La jacobienne de y par rapport à x vaut la matrice identité plus la jacobienne de F par rapport à x. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `x,\ y` | « x, y » | Entrée et sortie du bloc, de formes compatibles pour l’addition. |
+| `F(x)` | « grand effe de x » | Transformation calculée par la branche résiduelle. |
+| `+` | « plus » | Addition des deux branches, composante par composante. |
+| `\frac{\partial y}{\partial x}` | « jacobienne de y par rapport à x » | Matrice des dérivées de chaque composante de sortie selon chaque composante d’entrée. |
+| `I` | « i majuscule, matrice identité » | Dérivée du chemin direct x. |
+| `\frac{\partial F}{\partial x}` | « jacobienne de grand effe par rapport à x » | Dérivée de la branche transformée. |
+
+INTERPRÉTATION
+Le chemin direct contribue une identité à la dérivée, en plus du chemin qui traverse la transformation F.
+
+POINT D’ATTENTION
+Il s’agit d’une jacobienne lorsque x et y sont vectoriels. Une branche projetée possède la dérivée de sa projection au lieu d’une identité stricte.
+
 QUESTION À POSER
 Peut-on ajouter directement B×16×16×16 et B×32×8×8 ?
 
@@ -1342,6 +2207,28 @@ Une rotation légère peut être acceptable pour certains chiffres, mais une rot
 
 ÉQUATION — SOURCE LATEX
 \mathcal L_{\rm aug}=\mathbb E_{(x,y)}\,\mathbb E_{T\sim\mathcal A}\!\left[\ell(f_\theta(Tx),y)\right]
+
+LECTURE À VOIX HAUTE
+« La perte avec augmentation est l’espérance, sur les exemples x y, de l’espérance sur une transformation T tirée selon la politique A, de la perte entre la prédiction sur T x et la cible y. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\mathcal L_{\rm aug}` | « grand ell indice aug » | Perte qui tient compte des transformations aléatoires des entrées. |
+| `\mathbb E` | « espérance » | Moyenne théorique selon la distribution indiquée en indice. |
+| `(x,y)` | « couple x y » | Observation et cible associée. |
+| `T` | « té majuscule » | Transformation aléatoire appliquée à une entrée. |
+| `T\sim\mathcal A` | « té tirée selon a calligraphique » | La politique d’augmentation A définit les transformations et leurs probabilités. |
+| `Tx` | « té appliquée à x » | Exemple transformé. |
+| `f_\theta(Tx)` | « f thêta de té x » | Prédiction du modèle sur cet exemple transformé. |
+| `\ell(f_\theta(Tx),y)` | « perte entre la prédiction transformée et y » | Erreur d’apprentissage avec la cible de classe conservée. |
+
+INTERPRÉTATION
+L’objectif demande au modèle de fonctionner sur plusieurs transformations admissibles du même exemple.
+
+POINT D’ATTENTION
+La formule suppose que T conserve la cible. Pour une segmentation, la transformation spatiale doit aussi s’appliquer à la cible.
 
 QUESTION À POSER
 Pourquoi ne pas répartir des augmentations d’une même image entre train et test ?
@@ -1402,6 +2289,29 @@ Pour une classe donnée, considérer cette classe comme positive et toutes les a
 ÉQUATION — SOURCE LATEX
 \operatorname{precision}=\frac{TP}{TP+FP},\quad\operatorname{rappel}=\frac{TP}{TP+FN},\quad F_1=\frac{2PR}{P+R}
 
+LECTURE À VOIX HAUTE
+« La précision vaut le nombre de vrais positifs divisé par le nombre de prédictions positives, soit vrais positifs plus faux positifs. »
+« Le rappel vaut les vrais positifs divisés par vrais positifs plus faux négatifs. »
+« F un vaut deux fois P fois R, divisé par P plus R. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `TP` | « vrais positifs, ou té pé » | Exemples de la classe positive prédits positifs. |
+| `FP` | « faux positifs, ou effe pé » | Exemples négatifs prédits positifs. |
+| `FN` | « faux négatifs, ou effe enne » | Exemples positifs prédits négatifs. |
+| `P` | « pé » | Précision : fraction des prédictions positives qui sont correctes. |
+| `R` | « erre » | Rappel : fraction des positifs réels qui sont retrouvés. |
+| `F_1` | « effe un » | Moyenne harmonique de la précision et du rappel. |
+| `2PR/(P+R)` | « deux pé erre divisé par pé plus erre » | Formule de la moyenne harmonique pour deux valeurs. |
+
+INTERPRÉTATION
+La précision décrit la fiabilité des alertes positives. Le rappel décrit la couverture des vrais positifs.
+
+POINT D’ATTENTION
+Ces formules concernent une classe positive définie. Si un dénominateur est nul, la convention de calcul doit être précisée. En multiclasse, indiquer aussi le type de moyenne.
+
 QUESTION À POSER
 Le macro-F1 est-il le F1 de la précision et du rappel moyens ?
 
@@ -1419,6 +2329,28 @@ Séparer backbone et tête dans l'équation. Les poids du backbone contiennent u
 
 ÉQUATION — SOURCE LATEX
 f(x)=h_{\psi}(g_{\phi}(x)),\qquad\phi\leftarrow\phi_{\rm source},\quad\psi\leftarrow\psi_{\rm nouvelle}
+
+LECTURE À VOIX HAUTE
+« f de x vaut h psi appliquée à g phi de x. »
+« On initialise phi avec les paramètres source et psi avec de nouveaux paramètres. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `f(x)` | « effe de x » | Modèle complet appliqué à l’entrée. |
+| `g_\phi(x)` | « gé paramétré par phi, appliqué à x » | Extracteur de caractéristiques, ou backbone. |
+| `h_\psi` | « ache paramétré par psi » | Tête qui transforme les caractéristiques en prédiction. |
+| `\phi,\ \psi` | « phi, psi » | Paramètres de l’extracteur et paramètres de la tête. |
+| `\leftarrow` | « reçoit, ou est initialisé avec » | Affectation d’une valeur, pas une égalité à démontrer. |
+| `\phi_{\rm source}` | « phi source » | Paramètres provenant d’un entraînement antérieur. |
+| `\psi_{\rm nouvelle}` | « psi nouvelle » | Paramètres d’une tête adaptée à la nouvelle tâche. |
+
+INTERPRÉTATION
+Le transfert réutilise un extracteur et lui associe une tête correspondant à la tâche cible.
+
+POINT D’ATTENTION
+Dans cette formule, phi et psi sont des ensembles de paramètres. Le rôle de g et h diffère de la notation de l’introduction : il faut toujours relire les définitions locales.
 
 QUESTION À POSER
 Pourquoi remplacer la dernière couche ?
@@ -1597,6 +2529,27 @@ Donner plusieurs exemples de tokens : sous-mots en texte, instants d'une série 
 ÉQUATION — SOURCE LATEX
 X\in\mathbb R^{B\times n\times d}
 
+LECTURE À VOIX HAUTE
+« Grand X appartient à l’espace des tenseurs réels de taille B par n par d. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `X` | « grand x » | Tenseur représentant un batch de séquences. |
+| `\in` | « appartient à » | Indique le type d’objet mathématique. |
+| `\mathbb R` | « erre, ensemble des réels » | Les composantes du tenseur sont des nombres réels. |
+| `B` | « bé » | Nombre de séquences dans le batch. |
+| `n` | « enne » | Nombre de positions dans une séquence, avec padding éventuel. |
+| `d` | « dé » | Nombre de caractéristiques par position. |
+| `B\times n\times d` | « bé par enne par dé » | Tailles des trois axes, dans cet ordre. |
+
+INTERPRÉTATION
+Pour chaque séquence et chaque position, le modèle manipule un vecteur de d nombres.
+
+POINT D’ATTENTION
+Le produit B fois n fois d donne le nombre total de valeurs, mais la forme du tenseur garde l’ordre et le rôle de ses axes.
+
 QUESTION À POSER
 Un token correspond-il toujours à un mot complet ?
 
@@ -1614,6 +2567,28 @@ Cette parenthèse explique la motivation historique, sans prétendre que la réc
 
 ÉQUATION — SOURCE LATEX
 h_t=\phi(W_xx_t+W_hh_{t-1}+b)
+
+LECTURE À VOIX HAUTE
+« h t vaut phi appliquée à W x fois x t, plus W h fois h t moins un, plus b. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `t` | « té » | Position courante dans la séquence. |
+| `x_t` | « x indice t » | Vecteur d’entrée à la position t. |
+| `h_t,\ h_{t-1}` | « ache t, ache t moins un » | État caché courant et état caché précédent. |
+| `W_x` | « w indice x » | Matrice qui transforme l’entrée courante. |
+| `W_h` | « w indice ache » | Matrice qui transforme l’état précédent. |
+| `b` | « bé » | Biais du calcul de l’état. |
+| `\phi` | « phi » | Activation appliquée composante par composante. |
+| `W_xx_t+W_hh_{t-1}+b` | « W x fois x t, plus W h fois h t moins un, plus b » | Combinaison de l’information nouvelle et de l’état mémorisé. |
+
+INTERPRÉTATION
+L’état courant dépend à la fois du token actuel et du résumé calculé au pas précédent.
+
+POINT D’ATTENTION
+Les mêmes matrices sont partagées entre les positions. Les indices x et h nomment le rôle des matrices, ils ne sont pas des variables qui multiplient W.
 
 QUESTION À POSER
 Quel compromis apparaît avec des interactions entre toutes les positions ?
@@ -1635,6 +2610,30 @@ Une entrée entière n'est pas une grandeur ordinale : l'identifiant 8 n'est pas
 ÉQUATION — SOURCE LATEX
 E\in\mathbb R^{V\times d},\qquad x_t=E[\operatorname{id}(t),:]
 
+LECTURE À VOIX HAUTE
+« E est une matrice réelle à V lignes et d colonnes. »
+« x t est la ligne de E correspondant à l’identifiant du token présent à la position t, en prenant toutes ses colonnes. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `E` | « e majuscule » | Table d’embeddings apprise. |
+| `V` | « vé majuscule » | Nombre de tokens du vocabulaire. |
+| `d` | « dé » | Dimension de chaque embedding. |
+| `\mathbb R^{V\times d}` | « matrices réelles à V lignes et d colonnes » | Une ligne par token et une colonne par caractéristique. |
+| `t` | « té » | Position du token dans la séquence. |
+| `\operatorname{id}(t)` | « identifiant du token à la position t » | Dans cette écriture, index de la ligne qui correspond au token observé. |
+| `E[\operatorname{id}(t),:]` | « E, ligne identifiant du token t, toutes les colonnes » | Sélection d’une ligne de la table. |
+| `x_t` | « x indice t » | Vecteur d’embedding renvoyé à cette position. |
+| ` : ` | « deux-points, toutes les colonnes » | Notation d’indexation qui sélectionne toutes les caractéristiques. |
+
+INTERPRÉTATION
+Une consultation de table remplace un identifiant discret par un vecteur continu.
+
+POINT D’ATTENTION
+L’identifiant du token n’est pas son numéro de position. V majuscule est ici la taille du vocabulaire, alors qu’il désigne les valeurs dans l’attention.
+
 QUESTION À POSER
 Combien de paramètres pour V=1000 et d=64 ?
 
@@ -1652,6 +2651,29 @@ La propriété de permutation concerne une auto-attention sans masque positionne
 
 ÉQUATION — SOURCE LATEX
 X_0=E[\text{tokens}]+P,\qquad\operatorname{SA}(\Pi X)=\Pi\operatorname{SA}(X)
+
+LECTURE À VOIX HAUTE
+« X zéro vaut les embeddings des tokens, plus leurs représentations de position P. »
+« Sans information ni masque de position, l’auto-attention appliquée à X dont on a permuté les lignes donne la même permutation des sorties de l’auto-attention. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `X_0` | « x indice zéro » | Représentations à l’entrée de la première couche Transformer. |
+| `E[\text{tokens}]` | « embeddings des tokens » | Lignes de la table d’embeddings sélectionnées pour la séquence. |
+| `P` | « pé majuscule » | Matrice d’informations de position, compatible avec la forme des embeddings. |
+| `+` | « plus » | Addition composante par composante des contenus et des positions. |
+| `\operatorname{SA}` | « auto-attention, ou self-attention » | Opération d’attention où les requêtes, clés et valeurs proviennent de la même séquence. |
+| `\Pi` | « pi majuscule » | Matrice qui permute l’ordre des lignes. |
+| `\Pi X` | « pi appliquée à X » | Séquence dont les positions ont été réordonnées. |
+| `\Pi\operatorname{SA}(X)` | « pi appliquée aux sorties de l’auto-attention » | Même permutation appliquée aux vecteurs de sortie. |
+
+INTERPRÉTATION
+La deuxième égalité exprime l’équivariance par permutation de l’auto-attention dépourvue de structure positionnelle.
+
+POINT D’ATTENTION
+Pi majuscule est ici une matrice de permutation, pas le produit de plusieurs termes. L’égalité suppose notamment l’absence de masque positionnel et des projections partagées.
 
 QUESTION À POSER
 Que signifie l’équivariance par permutation de l’auto-attention non masquée ?
@@ -1673,6 +2695,30 @@ Décrire t comme la position et i comme un index de paire de caractéristiques. 
 ÉQUATION — SOURCE LATEX
 PE_{t,2i}=\sin\!\left(\frac{t}{10000^{2i/d}}\right),\qquad PE_{t,2i+1}=\cos\!\left(\frac{t}{10000^{2i/d}}\right)
 
+LECTURE À VOIX HAUTE
+« P E, à la position t et à la coordonnée deux i, vaut le sinus de t divisé par dix mille à la puissance deux i sur d. »
+« P E, à la position t et à la coordonnée deux i plus un, vaut le cosinus du même quotient. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `PE_{t,2i}` | « P E indice t, deux i » | Valeur de l’encodage de position pour le token de position t, sur la coordonnée paire 2i. |
+| `PE_{t,2i+1}` | « P E indice t, deux i plus un » | Valeur sur la coordonnée impaire associée. |
+| `t` | « té » | Position du token dans la séquence, en commençant ici à zéro. |
+| `i` | « i » | Indice d’une paire de coordonnées ; ce n’est pas l’indice d’un token. |
+| `d` | « dé » | Dimension de la représentation du token ; on suppose ici d pair. |
+| `2i,\ 2i+1` | « deux i ; deux i plus un » | Deux coordonnées consécutives : une paire sinus/cosinus. |
+| `\sin,\ \cos` | « sinus ; cosinus » | Fonctions trigonométriques dont les arguments sont exprimés en radians. |
+| `10000^{2i/d}` | « dix mille puissance deux i sur d » | Facteur d’échelle qui varie selon la paire de coordonnées. Toute la fraction 2i/d est l’exposant. |
+| `\frac{t}{10000^{2i/d}}` | « t divisé par dix mille puissance deux i sur d » | Argument des fonctions : il associe la position à plusieurs fréquences. |
+
+INTERPRÉTATION
+Chaque position reçoit un vecteur déterministe. Les différentes coordonnées évoluent à des fréquences différentes, ce qui fournit au réseau une information d’ordre.
+
+POINT D’ATTENTION
+Les indices t et 2i identifient une case du tableau PE ; ce ne sont pas des puissances. La constante 10000 fixe une gamme de fréquences et n’est ni le nombre de tokens ni une probabilité.
+
 QUESTION À POSER
 L’encodage sinusoidal contient-il des paramètres entraînables ?
 
@@ -1692,6 +2738,31 @@ Cette écriture suffit à expliquer le mécanisme sans métaphore obligatoire. L
 
 ÉQUATION — SOURCE LATEX
 o_i=\sum_{j=1}^{n_k}\alpha_{ij}v_j,\qquad\sum_j\alpha_{ij}=1,\quad\alpha_{ij}\ge0
+
+LECTURE À VOIX HAUTE
+« o indice i est égal à la somme, pour j allant de un à n indice k, de alpha indice i j multiplié par v indice j. »
+« Pour une requête i fixée, la somme des alpha i j sur les clés j vaut un, et chaque alpha i j est positif ou nul. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `o_i` | « o indice i » | Vecteur de sortie de l’attention pour la requête i. |
+| `i` | « i » | Indice de la requête dont on calcule la représentation. |
+| `j` | « ji » | Indice d’une clé et du vecteur de valeur associé. |
+| `n_k` | « n indice k » | Nombre de clés et de valeurs disponibles. |
+| `\sum_{j=1}^{n_k}` | « somme pour j de un à n indice k » | Addition de la contribution de chaque valeur. |
+| `\alpha_{ij}` | « alpha indice i j » | Poids scalaire donné par la requête i à la valeur j. |
+| `v_j` | « vé indice j » | Vecteur de valeur associé à la clé j. |
+| `\alpha_{ij}v_j` | « alpha i j fois v j » | Multiplication de toutes les composantes de v_j par le même poids. |
+| `\sum_j\alpha_{ij}=1` | « la somme des alpha i j sur j vaut un » | Normalisation des poids d’une même requête. |
+| `\alpha_{ij}\ge0` | « alpha i j est supérieur ou égal à zéro » | Les poids sont non négatifs. |
+
+INTERPRÉTATION
+L’attention construit chaque sortie comme une moyenne pondérée des valeurs. Les poids changent avec la requête : deux tokens peuvent agréger différemment les mêmes valeurs.
+
+POINT D’ATTENTION
+La somme égale à un décrit les poids après softmax et avant un éventuel dropout d’attention. Un poids élevé indique une contribution à cette agrégation ; il ne constitue pas, à lui seul, une explication causale de la prédiction.
 
 QUESTION À POSER
 Sur quel axe les poids doivent-ils sommer à un ?
@@ -1713,6 +2784,29 @@ Ici, X a n lignes et d colonnes, en omettant le batch. Les matrices W ont donc l
 ÉQUATION — SOURCE LATEX
 Q=XW_Q,\qquad K=XW_K,\qquad V=XW_V\\W_Q,W_K\in\mathbb R^{d\times d_k},\quad W_V\in\mathbb R^{d\times d_v}
 
+LECTURE À VOIX HAUTE
+« Q vaut X fois W indice Q ; K vaut X fois W indice K ; V vaut X fois W indice V. »
+« W Q et W K appartiennent à l’espace des matrices réelles de dimension d par d indice k ; W V appartient à l’espace des matrices réelles de dimension d par d indice v. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `X` | « iks » | Matrice d’entrée de taille n × d : une ligne par token. La dimension de batch est omise. |
+| `Q,\ K,\ V` | « ku, ka, vé » | Matrices des requêtes, clés et valeurs. Leurs tailles sont n × d_k, n × d_k et n × d_v. |
+| `W_Q,\ W_K,\ W_V` | « double vé indice Q, K, V » | Trois matrices de paramètres appris qui projettent les mêmes entrées vers trois rôles. |
+| `XW_Q` | « X fois W Q » | Produit matriciel, pas multiplication composante par composante. |
+| `d` | « dé » | Dimension des représentations d’entrée. |
+| `d_k,\ d_v` | « d indice k ; d indice v » | Dimensions respectives des requêtes/clés et des valeurs pour cette tête. |
+| `\in` | « appartient à » | Indique le type et la dimension d’un objet. |
+| `\mathbb R^{d\times d_k}` | « espace des matrices réelles d par d k » | Matrices à d lignes et d_k colonnes ; le symbole × sépare ici des dimensions. |
+
+INTERPRÉTATION
+Les requêtes servent à chercher, les clés à mesurer la compatibilité et les valeurs à fournir le contenu agrégé. Ce sont trois transformations apprises, pas trois copies nécessairement identiques.
+
+POINT D’ATTENTION
+Q et K doivent avoir la même largeur pour calculer leurs produits scalaires. La largeur d_v des valeurs peut être différente. Les biais sont omis dans cette écriture simplifiée.
+
 QUESTION À POSER
 Q=K=V dans une auto-attention ?
 
@@ -1731,6 +2825,30 @@ EXPLICATION TECHNIQUE
 ÉQUATION — SOURCE LATEX
 S=\frac{QK^\top}{\sqrt{d_k}},\qquad S_{ij}=\frac{q_i^\top k_j}{\sqrt{d_k}}
 
+LECTURE À VOIX HAUTE
+« S vaut Q multiplié par K transposée, le tout divisé par la racine carrée de d indice k. »
+« Le score S indice i j vaut le produit scalaire de q indice i et k indice j, divisé par la racine carrée de d indice k. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `S` | « esse » | Matrice des scores, de taille n_q × n_k. |
+| `S_{ij}` | « esse indice i j » | Score entre la requête i et la clé j. |
+| `Q,\ K` | « ku ; ka » | Matrices des requêtes et des clés, de tailles n_q × d_k et n_k × d_k. |
+| `{}^\top` | « transposée » | Échange les lignes et les colonnes ; ce symbole n’est pas un exposant numérique. |
+| `QK^\top` | « Q fois K transposée » | Produit matriciel qui calcule tous les scores requête–clé. |
+| `q_i,\ k_j` | « ku indice i ; ka indice j » | Vecteurs représentant une requête et une clé. Dans q_i^T k_j, on les écrit comme des vecteurs colonnes. |
+| `q_i^\top k_j` | « q i transposée fois k j » | Produit scalaire : somme des produits de composantes correspondantes. |
+| `d_k` | « d indice k » | Nombre de composantes d’une requête ou d’une clé. |
+| `\sqrt{d_k}` | « racine carrée de d indice k » | Facteur qui contrôle l’échelle des scores. |
+
+INTERPRÉTATION
+Chaque ligne de S compare une requête avec toutes les clés. Le calcul matriciel rassemble ces comparaisons pour les effectuer efficacement en parallèle.
+
+POINT D’ATTENTION
+Un score peut être négatif ou supérieur à un : ce n’est pas encore une probabilité. Diviser par √d_k ne normalise pas q et k à une norme unitaire ; ce n’est donc pas un calcul de similarité cosinus.
+
 QUESTION À POSER
 Quelle est la forme si Q a 5 lignes et K en a 8 ?
 
@@ -1748,6 +2866,30 @@ Annoncer les hypothèses : composantes centrées, indépendantes, de variance un
 
 ÉQUATION — SOURCE LATEX
 \operatorname{Var}\!\left(\sum_{r=1}^{d_k}q_rk_r\right)\approx d_k\quad\Longrightarrow\quad\operatorname{Var}\!\left(\frac{q^\top k}{\sqrt{d_k}}\right)\approx1
+
+LECTURE À VOIX HAUTE
+« La variance de la somme, pour r de un à d indice k, des produits q indice r fois k indice r est approximativement égale à d indice k. »
+« Par conséquent, la variance du produit scalaire q transposée fois k, divisé par la racine carrée de d indice k, est approximativement égale à un. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\operatorname{Var}` | « variance » | Mesure la dispersion d’une variable aléatoire autour de sa moyenne. |
+| `r` | « erre » | Indice d’une composante des vecteurs q et k. |
+| `d_k` | « d indice k » | Nombre de composantes additionnées dans le produit scalaire. |
+| `q_r,\ k_r` | « ku indice r ; ka indice r » | Composantes aléatoires de la requête et de la clé. |
+| `\sum_{r=1}^{d_k}q_rk_r` | « somme pour r de un à d k de q r fois k r » | Écriture développée du produit scalaire. |
+| `q^\top k` | « q transposée fois k » | Même produit scalaire, en notation vectorielle. |
+| `\approx` | « approximativement égal à » | Relation utilisée comme modèle de l’ordre de grandeur. |
+| `\Longrightarrow` | « implique » ou « par conséquent » | Relie le constat sur la variance à l’effet de la mise à l’échelle. |
+| `\sqrt{d_k}` | « racine carrée de d k » | Diviser la variable par √d_k divise sa variance par d_k. |
+
+INTERPRÉTATION
+Sous des hypothèses d’indépendance et de variance unitaire, additionner d_k produits donne une variance d_k. La mise à l’échelle réduit le risque de scores extrêmes qui satureraient le softmax.
+
+POINT D’ATTENTION
+Le raisonnement suppose notamment des composantes centrées, de variance unitaire, des requêtes et clés indépendantes dans ce modèle simplifié, et des termes non corrélés entre coordonnées. Ces conditions ne sont pas garanties exactement dans un réseau entraîné.
 
 QUESTION À POSER
 Le facteur 1/√dₖ réalise-t-il une normalisation cosinus ?
@@ -1769,6 +2911,30 @@ Montrer que multiplier une matrice n_q×n_k par n_k×d_v produit n_q×d_v. Chaqu
 ÉQUATION — SOURCE LATEX
 A=\operatorname{softmax}_{\rm lignes}(S),\qquad O=AV\in\mathbb R^{n_q\times d_v}
 
+LECTURE À VOIX HAUTE
+« A vaut le softmax de S, appliqué ligne par ligne. »
+« O vaut A fois V et appartient à l’espace des matrices réelles à n indice q lignes et d indice v colonnes. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `S` | « esse » | Matrice des scores, de taille n_q × n_k. |
+| `\operatorname{softmax}_{\rm lignes}` | « softmax par lignes » | Transforme les scores d’une requête en poids normalisés sur toutes les clés. |
+| `A` | « a majuscule » | Matrice des poids d’attention, de même taille que S. |
+| `V` | « vé majuscule » | Matrice des valeurs, de taille n_k × d_v. |
+| `O` | « o majuscule » | Matrice des sorties d’attention, de taille n_q × d_v. |
+| `AV` | « A fois V » | Produit matriciel qui agrège les valeurs avec les poids d’attention. |
+| `n_q,\ n_k` | « n indice q ; n indice k » | Nombres de requêtes et de clés. |
+| `d_v` | « d indice v » | Dimension de chaque valeur et de chaque sortie pour cette tête. |
+| `\in\mathbb R^{n_q\times d_v}` | « appartient à l’espace des matrices réelles n q par d v » | Indique le nombre de lignes et de colonnes de la sortie. |
+
+INTERPRÉTATION
+Le softmax choisit combien chaque valeur contribue. Le produit A V applique ensuite ces poids à toutes les composantes des valeurs. Les deux étapes séparent le choix des poids du contenu agrégé.
+
+POINT D’ATTENTION
+Le softmax se fait sur les clés, donc sur les colonnes de chaque ligne. Ici O est une matrice de sortie ; sur la slide de complexité, O(·) désignera une notation asymptotique sans rapport.
+
 QUESTION À POSER
 Les colonnes de A doivent-elles aussi sommer à un ?
 
@@ -1787,6 +2953,30 @@ Calculer les scores avant le softmax : les éléments diagonaux valent 1/racine(
 ÉQUATION — SOURCE LATEX
 Q=K=\begin{bmatrix}1&0\\0&1\end{bmatrix},\quad V=\begin{bmatrix}1&0\\0&2\end{bmatrix}\\A\approx\begin{bmatrix}0.6698&0.3302\\0.3302&0.6698\end{bmatrix},\quad O\approx\begin{bmatrix}0.6698&0.6605\\0.3302&1.3395\end{bmatrix}
 
+LECTURE À VOIX HAUTE
+« Q et K sont égales à la matrice à deux lignes : première ligne, un puis zéro ; deuxième ligne, zéro puis un. V a pour première ligne un puis zéro, et pour deuxième ligne zéro puis deux. »
+« A vaut approximativement : première ligne, zéro virgule six six neuf huit, puis zéro virgule trois trois zéro deux ; deuxième ligne, zéro virgule trois trois zéro deux, puis zéro virgule six six neuf huit. »
+« O vaut approximativement : première ligne, zéro virgule six six neuf huit, puis zéro virgule six six zéro cinq ; deuxième ligne, zéro virgule trois trois zéro deux, puis un virgule trois trois neuf cinq. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `Q=K` | « Q égale K » | Dans cet exemple particulier, les deux matrices sont choisies identiques. |
+| `\begin{bmatrix}1&0\\0&1\end{bmatrix}` | « matrice identité de taille deux » | Deux lignes et deux colonnes ; chaque ligne est un vecteur de requête ou de clé. |
+| `V` | « vé » | Les valeurs sont (1, 0) et (0, 2), ce qui rend visible leur mélange. |
+| `d_k=2` | « d indice k vaut deux » | Les scores sont divisés par √2 avant softmax. |
+| `A` | « a majuscule » | Poids obtenus par softmax sur chaque ligne de QK^T/√2. |
+| `O=AV` | « O égale A fois V » | Sorties calculées à partir des poids et des valeurs. |
+| `\approx` | « approximativement égal à » | Les nombres affichés sont arrondis à quatre décimales. |
+| `0.6698,\ 0.3302` | « zéro virgule six six neuf huit ; zéro virgule trois trois zéro deux » | Poids arrondis d’une ligne. Les décimales du support utilisent le point de la notation informatique. |
+
+INTERPRÉTATION
+Les scores diagonaux valent 1/√2 et les autres zéro. Pour la première requête, le premier poids vaut exp(1/√2)/(exp(1/√2)+1), soit environ 0,6697615. La première sortie est donc (0,6697615 ; 2 × 0,3302385), soit environ (0,6698 ; 0,6605).
+
+POINT D’ATTENTION
+Les lignes de A somment à un ; celles de O n’ont aucune raison de sommer à un. Calculer avec les valeurs non arrondies puis arrondir le résultat évite de petits écarts de dernière décimale.
+
 QUESTION À POSER
 Pourquoi la seconde coordonnée de O₁ vaut-elle environ 0,6605 ?
 
@@ -1804,6 +2994,30 @@ Distinguer l'information temporelle interdite de l'information absente. Une lign
 
 ÉQUATION — SOURCE LATEX
 M_{ij}=\begin{cases}0&j\le i\\-\infty&j>i\end{cases},\qquad A=\operatorname{softmax}(S+M)
+
+LECTURE À VOIX HAUTE
+« M indice i j vaut zéro si j est inférieur ou égal à i, et moins l’infini si j est strictement supérieur à i. »
+« A vaut le softmax de la somme de S et de M, appliqué sur les clés de chaque requête. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `M` | « emme » | Matrice du masque additif, compatible avec la matrice des scores. |
+| `M_{ij}` | « emme indice i j » | Valeur du masque pour une requête à la position i et une clé à la position j. |
+| `\begin{cases}\cdots\end{cases}` | « défini par cas » | L’accolade indique qu’une valeur différente s’applique selon la condition. |
+| `j\le i` | « j inférieur ou égal à i » | La clé est à la position courante ou dans le passé ; elle est autorisée. |
+| `j>i` | « j strictement supérieur à i » | La clé est dans le futur ; elle est interdite. |
+| `0` | « zéro » | Ajouter zéro conserve le score d’une position autorisée. |
+| `-\infty` | « moins l’infini » | Valeur idéale qui annule le poids de la position après exponentiation et softmax. |
+| `S+M` | « S plus M » | Addition composante par composante des scores et du masque. |
+| `A=\operatorname{softmax}(S+M)` | « A égale softmax de S plus M » | Normalisation des seuls scores autorisés ; le softmax opère ligne par ligne. |
+
+INTERPRÉTATION
+Pour prédire le prochain token, une position ne doit pas exploiter les tokens suivants. Le masque causal conserve le passé et la position courante. Un masque de padding exclut, lui, les positions de remplissage.
+
+POINT D’ATTENTION
+Le zéro signifie ici « autorisé », car il s’agit d’un masque additif. Les conventions des masques booléens dépendent de l’API. Une ligne entièrement masquée nécessite un traitement explicite : le softmax de valeurs toutes égales à −∞ peut produire des NaN.
 
 QUESTION À POSER
 Multiplier les scores interdits par zéro suffit-il ?
@@ -1824,6 +3038,30 @@ Dans la configuration standard, d est divisible par h et chaque tête utilise d_
 
 ÉQUATION — SOURCE LATEX
 \operatorname{head}_r=\operatorname{Attn}(XW_Q^{(r)},XW_K^{(r)},XW_V^{(r)})\\\operatorname{MHA}(X)=\operatorname{Concat}(\operatorname{head}_1,\ldots,\operatorname{head}_h)W_O
+
+LECTURE À VOIX HAUTE
+« La tête r est obtenue en appliquant l’attention à X fois W Q de la tête r, X fois W K de la tête r, et X fois W V de la tête r. »
+« L’attention multi-têtes de X vaut la concaténation des têtes de un à h, multipliée par W indice O. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\operatorname{head}_r` | « tête r » | Sortie de la r-ième tête d’attention. |
+| `r,\ h` | « erre ; ache » | r est l’indice d’une tête ; h est le nombre total de têtes. |
+| `\operatorname{Attn}` | « attention » | Opération qui calcule les poids à partir des requêtes et clés, puis agrège les valeurs. |
+| `W_Q^{(r)},\ W_K^{(r)},\ W_V^{(r)}` | « W Q, W K et W V de la tête r » | Paramètres propres à une tête. Le (r) en haut est une étiquette, pas une puissance. |
+| `X` | « iks » | Matrice des représentations d’entrée, de taille n × d. |
+| `\operatorname{MHA}(X)` | « attention multi-têtes de X » | MHA signifie Multi-Head Attention. |
+| `\operatorname{Concat}` | « concaténation » | Juxtaposition des sorties sur l’axe des caractéristiques, pas addition des têtes. |
+| `\ldots` | « jusqu’à » | Les points de suspension représentent toutes les têtes intermédiaires. |
+| `W_O` | « W indice O » | Projection finale apprise de taille h d_v × d lorsque chaque tête produit d_v caractéristiques. |
+
+INTERPRÉTATION
+Les têtes calculent des agrégations dans plusieurs espaces appris. La concaténation rassemble leurs résultats, puis W_O les recombine dans la dimension attendue par le bloc.
+
+POINT D’ATTENTION
+Des têtes distinctes peuvent apprendre des comportements différents, mais leur spécialisation linguistique ou visuelle n’est pas garantie. Si d_v = d/h, la concaténation a exactement d caractéristiques.
 
 QUESTION À POSER
 Pour d=256 et h=8, quelle largeur par tête ?
@@ -1867,6 +3105,32 @@ Dans le Transformer étudié, chaque token est normalisé séparément sur son d
 ÉQUATION — SOURCE LATEX
 \mu_i=\frac1d\sum_{r=1}^{d}X_{ir},\quad\operatorname{LN}(X_i)=\gamma\odot\frac{X_i-\mu_i}{\sqrt{\sigma_i^2+\varepsilon}}+\beta
 
+LECTURE À VOIX HAUTE
+« Mu indice i vaut un sur d fois la somme, pour r de un à d, de X indice i r. »
+« La normalisation de couche de X indice i vaut gamma multiplié composante par composante par X i moins mu i, divisé par la racine carrée de sigma i au carré plus epsilon, puis plus bêta. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `i,\ r` | « i ; erre » | i repère un token ; r repère une caractéristique de ce token. |
+| `d` | « dé » | Nombre de caractéristiques sur lesquelles on normalise. |
+| `X_{ir},\ X_i` | « X indice i r ; X indice i » | X_ir est un nombre ; X_i est le vecteur complet du token i. |
+| `\mu_i` | « mu indice i » | Moyenne des d composantes du token i. |
+| `\frac1d\sum_{r=1}^d` | « un sur d fois la somme pour r de un à d » | Calcul d’une moyenne arithmétique. |
+| `\sigma_i^2` | « sigma indice i au carré » | Variance des caractéristiques du token i : moyenne des (X_ir − μ_i)². |
+| `\varepsilon` | « epsilon » | Petite constante positive ajoutée à la variance pour stabiliser la division. |
+| `\sqrt{\sigma_i^2+\varepsilon}` | « racine carrée de sigma i au carré plus epsilon » | Dénominateur complet ; epsilon est sous la racine. |
+| `\gamma,\ \beta` | « gamma ; bêta » | Vecteurs appris de taille d : échelle et décalage, partagés entre positions. |
+| `\odot` | « multiplié composante par composante » | Produit de Hadamard, à distinguer du produit matriciel. |
+| `\operatorname{LN}` | « layer norm » ou « normalisation de couche » | Normalisation ici sur les caractéristiques d’un token, indépendamment des autres tokens. |
+
+INTERPRÉTATION
+La moyenne et la variance sont recalculées pour chaque token. On centre et réduit son vecteur, puis on applique une transformation affine apprise. Les scalaires μ_i et σ_i sont diffusés sur les d composantes.
+
+POINT D’ATTENTION
+Cette formule ne moyenne pas sur le batch et n’utilise pas les moyennes mobiles de BatchNorm. Le symbole β désigne ici un décalage appris ; dans Adam, il désigne un coefficient de moyenne mobile.
+
 QUESTION À POSER
 LayerNorm transmet-elle de l’information d’un token au suivant ?
 
@@ -1887,6 +3151,30 @@ Le FFN n'est pas une attention supplémentaire. Il applique un MLP identique à 
 ÉQUATION — SOURCE LATEX
 \operatorname{FFN}(x)=W_2\,\phi(W_1x+b_1)+b_2,\qquad d\rightarrow d_{\rm ff}\rightarrow d
 
+LECTURE À VOIX HAUTE
+« Le réseau feed-forward de x vaut W deux fois phi de W un fois x plus b un, puis plus b deux. »
+« La dimension passe de d à d indice F F, puis revient à d. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\operatorname{FFN}` | « feed-forward network » ou « réseau à propagation avant » | Sous-réseau appliqué séparément à chaque position du Transformer. |
+| `x` | « iks » | Vecteur colonne d’un token, de dimension d dans cette convention. |
+| `W_1,\ W_2` | « W un ; W deux » | Matrices apprises de tailles d_ff × d et d × d_ff. |
+| `b_1,\ b_2` | « bé un ; bé deux » | Vecteurs de biais, de dimensions d_ff et d. |
+| `\phi` | « phi » | Fonction d’activation non linéaire, appliquée composante par composante, par exemple GELU. |
+| `W_1x+b_1` | « W un fois x plus b un » | Première transformation affine, qui produit d_ff caractéristiques. |
+| `W_2\phi(W_1x+b_1)+b_2` | « W deux fois phi de W un x plus b un, puis plus b deux » | Deuxième transformation affine après activation. |
+| `d,\ d_{\rm ff}` | « dé ; d indice F F » | Dimensions de représentation et de la couche interne du FFN. |
+| `\rightarrow` | « passe à » | Flèche indiquant une succession de dimensions, pas une limite mathématique. |
+
+INTERPRÉTATION
+L’attention mélange les informations entre positions ; le FFN transforme ensuite les caractéristiques de chaque position. Le même FFN, avec les mêmes poids, s’applique à tous les tokens.
+
+POINT D’ATTENTION
+La convention de vecteur colonne explique l’ordre W x ; d’autres slides emploient des tokens en lignes et écrivent X W. Ces écritures sont compatibles en transposant les matrices de paramètres.
+
 QUESTION À POSER
 Quelle partie du bloc mélange directement les positions ?
 
@@ -1904,6 +3192,29 @@ Le papier de 2017 emploie une organisation post-normalisation : normaliser aprè
 
 ÉQUATION — SOURCE LATEX
 U=X+\operatorname{MHA}(\operatorname{LN}_1(X))\\Y=U+\operatorname{FFN}(\operatorname{LN}_2(U))
+
+LECTURE À VOIX HAUTE
+« U vaut X plus l’attention multi-têtes appliquée à la première normalisation de couche de X. »
+« Y vaut U plus le réseau feed-forward appliqué à la deuxième normalisation de couche de U. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `X` | « iks » | Entrée du bloc, de taille B × n × d lorsque l’on explicite le batch. |
+| `U` | « u » | Représentation intermédiaire après l’attention et la première addition résiduelle. |
+| `Y` | « i grec » | Sortie du bloc, après le FFN et la deuxième addition résiduelle. |
+| `\operatorname{LN}_1,\ \operatorname{LN}_2` | « normalisation de couche un ; normalisation de couche deux » | Deux normalisations distinctes, avec leurs propres paramètres appris. |
+| `\operatorname{MHA}` | « attention multi-têtes » | Sous-couche qui agrège des informations entre positions. |
+| `\operatorname{FFN}` | « réseau feed-forward » | Sous-couche qui transforme les caractéristiques de chaque position. |
+| `+` | « plus » | Addition composante par composante de la branche transformée et de la branche résiduelle. |
+| `\operatorname{MHA}(\operatorname{LN}_1(X))` | « attention de la normalisation de X » | Composition : normaliser d’abord, appliquer l’attention ensuite. |
+
+INTERPRÉTATION
+Dans un bloc Pre-LN, la normalisation précède chaque sous-couche. Le chemin résiduel transmet X puis U directement, ce qui facilite la propagation du signal et des gradients.
+
+POINT D’ATTENTION
+Les deux termes de chaque addition doivent avoir la même forme. Les flèches de données ne sont pas des mises à jour de poids. Les dropout éventuels sont omis de cette formule.
 
 QUESTION À POSER
 Où se place la normalisation dans un bloc post-LN ?
@@ -1925,6 +3236,27 @@ Un encodeur bidirectionnel est utile lorsque toute l'entrée est disponible. Pou
 ÉQUATION — SOURCE LATEX
 X_L=\operatorname{Block}_L\circ\cdots\circ\operatorname{Block}_1(X_0)
 
+LECTURE À VOIX HAUTE
+« X indice L est obtenu en appliquant à X indice zéro le bloc un, puis les blocs suivants, jusqu’au bloc L. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `X_0` | « X indice zéro » | Représentations initiales des tokens, après incorporation de l’information de position. |
+| `X_L` | « X indice L » | Représentations contextualisées après les L blocs. |
+| `L` | « elle majuscule » | Nombre total de blocs de l’encodeur ; à distinguer de la fonction de perte ℒ. |
+| `\operatorname{Block}_1,\ \operatorname{Block}_L` | « bloc un ; bloc L » | Premier et dernier blocs du réseau. |
+| `\circ` | « composé avec » | Composition de fonctions : la fonction à droite s’applique en premier. |
+| `\cdots` | « et ainsi de suite » | Les blocs intermédiaires, de 2 à L − 1. |
+| `\operatorname{Block}_L\circ\cdots\circ\operatorname{Block}_1` | « bloc L composé avec les blocs précédents jusqu’au bloc un » | Notation compacte de l’empilement, qui se calcule de droite à gauche. |
+
+INTERPRÉTATION
+Chaque bloc reçoit les représentations calculées par le précédent. La succession affine leur contextualisation sans nécessairement changer le nombre de tokens ni leur dimension.
+
+POINT D’ATTENTION
+L’ordre de lecture écrit de la composition peut tromper : Block_1 agit en premier. Les blocs ont en général des paramètres distincts, même lorsqu’ils ont la même architecture.
+
 QUESTION À POSER
 Peut-on utiliser un encodeur non masqué pour prédire le prochain token sans fuite ?
 
@@ -1942,6 +3274,28 @@ Dans un Transformer encodeur-décodeur de traduction, l'encodeur produit une mé
 
 ÉQUATION — SOURCE LATEX
 Q=X_{\rm cible}W_Q,\quad K=H_{\rm source}W_K,\quad V=H_{\rm source}W_V
+
+LECTURE À VOIX HAUTE
+« Q vaut X cible fois W Q ; K vaut H source fois W K ; V vaut H source fois W V. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `X_{\rm cible}` | « X cible » | Représentations de la séquence cible qui formule les requêtes. |
+| `H_{\rm source}` | « ache source » | Représentations de la séquence source, par exemple produites par un encodeur. |
+| `Q` | « ku » | Requêtes calculées à partir de la cible. |
+| `K,\ V` | « ka ; vé » | Clés et valeurs calculées à partir de la source. |
+| `W_Q,\ W_K,\ W_V` | « W Q ; W K ; W V » | Projections apprises, de tailles adaptées aux dimensions d’entrée et de sortie. |
+| `X_{\rm cible}W_Q` | « X cible fois W Q » | Produit matriciel qui conserve le nombre de positions cibles. |
+| `H_{\rm source}W_K` | « H source fois W K » | Produit matriciel qui conserve le nombre de positions sources. |
+| `{}_{\rm cible},\ {}_{\rm source}` | « indice cible ; indice source » | Étiquettes qui indiquent l’origine des représentations, pas des variables à multiplier. |
+
+INTERPRÉTATION
+Chaque position cible interroge les représentations sources. Les poids ont une ligne par position cible et une colonne par position source ; la sortie conserve le nombre de positions cibles.
+
+POINT D’ATTENTION
+Le nombre de requêtes peut être différent du nombre de clés. Les dimensions projetées de Q et K doivent coïncider pour calculer les scores ; les dimensions initiales des séquences source et cible ne sont pas nécessairement identiques.
 
 QUESTION À POSER
 Quelle longueur retrouve-t-on en sortie de cross-attention ?
@@ -1982,6 +3336,31 @@ La matrice n×n apparaît pour chaque tête et chaque exemple lorsque l'impléme
 
 ÉQUATION — SOURCE LATEX
 T_{\rm attn}=O(n^2d),\quad T_{\rm proj+FFN}=O(nd^2)\\M_{\rm scores}=O(Bhn^2)\quad\text{si les scores sont materialises}
+
+LECTURE À VOIX HAUTE
+« Le coût de l’attention est en grand O de n au carré fois d ; le coût des projections et du FFN est en grand O de n fois d au carré. »
+« La mémoire des scores est en grand O de B fois h fois n au carré, si les scores sont matérialisés. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `T_{\rm attn}` | « té indice attention » | Ordre de grandeur du nombre d’opérations pour l’attention dense d’un bloc, par exemple. |
+| `T_{\rm proj+FFN}` | « té indice projections et FFN » | Ordre de grandeur du calcul des projections et du réseau feed-forward. |
+| `O(\cdot)` | « grand O de » | Notation asymptotique qui décrit une croissance en négligeant des constantes ; ce n’est pas une égalité de temps mesurés. |
+| `n` | « enne » | Longueur de la séquence en self-attention. |
+| `d` | « dé » | Dimension totale des représentations, répartie entre les têtes. |
+| `n^2d` | « n au carré fois d » | Coût des interactions entre toutes les paires de positions. |
+| `nd^2` | « n fois d au carré » | Coût des transformations des caractéristiques, si d_ff est proportionnel à d. |
+| `M_{\rm scores}` | « emme indice scores » | Nombre d’éléments des matrices de scores stockées. |
+| `B,\ h` | « bé majuscule ; ache » | Taille du batch et nombre de têtes. |
+| `Bhn^2` | « B fois h fois n au carré » | Une matrice n × n pour chaque tête de chaque exemple. |
+
+INTERPRÉTATION
+Doubler la longueur multiplie par quatre le terme quadratique de l’attention, mais seulement par deux les termes linéaires en n. Cela explique les contraintes des longues séquences.
+
+POINT D’ATTENTION
+La formule de calcul omet le facteur B et se lit par exemple. La formule mémoire compte des éléments : multiplier par le nombre d’octets par élément pour obtenir des octets. Les implémentations comme FlashAttention évitent de stocker toute la matrice des scores, sans supprimer le nombre quadratique d’interactions de l’attention dense.
 
 QUESTION À POSER
 Doubler n multiplie-t-il la taille de la matrice de scores par deux ?
@@ -2086,6 +3465,31 @@ La factorisation par la règle de la chaîne est exacte pour toute distribution 
 ÉQUATION — SOURCE LATEX
 p_\theta(x_{1:T})=\prod_{t=1}^{T}p_\theta(x_t\mid x_{<t})\\\mathcal L=-\frac1T\sum_{t=1}^{T}\log p_\theta(x_t\mid x_{<t})
 
+LECTURE À VOIX HAUTE
+« La probabilité, paramétrée par thêta, de la séquence x de un à T est le produit, pour t de un à T, des probabilités de x t sachant tous les tokens qui le précèdent. »
+« La perte L calligraphique vaut moins un sur T fois la somme, pour t de un à T, du logarithme de la probabilité de x t sachant ses prédécesseurs. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `p_\theta` | « pé indice thêta » | Distribution de probabilité du modèle dont les paramètres sont θ. |
+| `x_{1:T}` | « x de un à T » | Séquence des T tokens considérés. |
+| `x_t` | « x indice t » | Token observé à la position t. |
+| `x_{<t}` | « x avant t » ou « tokens précédant t » | Préfixe constitué des tokens de positions strictement inférieures à t. |
+| `\mid` | « sachant » | Barre de conditionnement probabiliste ; ce n’est ni une division ni une norme. |
+| `\prod_{t=1}^T` | « produit pour t allant de un à T » | Multiplication des probabilités conditionnelles de toutes les positions. |
+| `\mathcal L` | « L calligraphique » | Perte de log-vraisemblance négative moyenne. |
+| `\sum_{t=1}^T` | « somme pour t de un à T » | Addition des contributions des positions. |
+| `-\frac1T` | « moins un sur T » | Change le signe et moyenne sur les T positions. |
+| `\log` | « logarithme naturel » | Transforme le produit de probabilités en somme de logarithmes. |
+
+INTERPRÉTATION
+La règle de chaîne factorise la probabilité d’une séquence. Maximiser les probabilités des tokens attendus revient à minimiser leur log-vraisemblance négative moyenne.
+
+POINT D’ATTENTION
+Le premier token est conditionné sur un préfixe vide ou sur un token de début selon la convention. Ici toutes les T positions comptent ; avec du padding, on moyenne seulement sur les positions valides. T désigne une longueur, pas une transposée.
+
 QUESTION À POSER
 Pourquoi l’entraînement peut-il être parallèle alors que la génération est séquentielle ?
 
@@ -2103,6 +3507,28 @@ Montrer une séquence très courte avec des identifiants : [BOS,2,4,EOS]. L'entr
 
 ÉQUATION — SOURCE LATEX
 \text{inputs}=s_{0:T-1},\qquad\text{targets}=s_{1:T}
+
+LECTURE À VOIX HAUTE
+« Les entrées sont les tokens de la séquence s allant de l’indice zéro à l’indice T moins un inclus. Les cibles sont les tokens allant de l’indice un à l’indice T inclus. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `s` | « esse » | Séquence de T + 1 tokens, indexés de zéro à T. |
+| `\text{inputs}` | « entrées » | Suite des T tokens fournis au modèle. |
+| `\text{targets}` | « cibles » | Suite des T tokens que le modèle doit prédire. |
+| `s_{0:T-1}` | « s de zéro à T moins un » | Tokens d’indices 0, 1, …, T − 1, dans la convention inclusive de cette formule. |
+| `s_{1:T}` | « s de un à T » | Tokens d’indices 1, 2, …, T, dans la même convention. |
+| `:` | « de … à … » | Indique un intervalle d’indices dans cette notation mathématique. |
+| `T-1` | « T moins un » | Dernier indice de l’entrée ; la soustraction porte sur l’indice. |
+| `T` | « té majuscule » | Nombre de positions prédites et dernier indice de la séquence initiale. |
+
+INTERPRÉTATION
+Chaque entrée est associée au token suivant. Pour s = [BOS, a, b, EOS], les entrées sont [BOS, a, b] et les cibles [a, b, EOS]. Le masque causal empêche chaque entrée d’utiliser les tokens suivants.
+
+POINT D’ATTENTION
+Les bornes écrites ici sont inclusives. En Python, la borne de fin d’un slice est exclusive : utiliser s[:-1] et s[1:] pour réaliser ce décalage. Copier littéralement s[0:T-1] supprimerait un token de trop.
 
 QUESTION À POSER
 Une perte quasi nulle dès le départ peut-elle révéler un mauvais décalage ?
@@ -2137,6 +3563,29 @@ Une petite température concentre la masse vers les plus grands logits ; une gra
 ÉQUATION — SOURCE LATEX
 p_\tau(x_t=k\mid x_{<t})=\operatorname{softmax}(z/\tau)_k,\qquad\tau>0
 
+LECTURE À VOIX HAUTE
+« La probabilité, à température tau, que le token t soit k sachant le préfixe vaut la composante k du softmax des logits z divisés par tau, avec tau strictement positif. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `p_\tau` | « pé indice tau » | Distribution de génération après réglage de la température. |
+| `x_t=k` | « x indice t égal à k » | Événement : choisir le token d’identifiant k à la position t. |
+| `x_{<t}` | « tokens précédant t » | Contexte utilisé pour calculer les logits. |
+| `\mid` | « sachant » | Conditionnement sur le préfixe. |
+| `z` | « zède » | Vecteur des logits, avec une composante par token du vocabulaire. |
+| `\tau` | « tau » | Température, un scalaire positif qui règle la concentration de la distribution. |
+| `z/\tau` | « z divisé par tau » | Division de chaque logit par le même scalaire avant le softmax. |
+| `\operatorname{softmax}(z/\tau)_k` | « composante k du softmax de z sur tau » | Probabilité du token k après normalisation. |
+| `\tau>0` | « tau strictement supérieur à zéro » | Condition nécessaire à cette formule. |
+
+INTERPRÉTATION
+Une petite température accentue les écarts entre logits et concentre les probabilités. Une grande température les atténue et rend la distribution plus uniforme.
+
+POINT D’ATTENTION
+On divise les logits, pas les probabilités déjà normalisées. Tau égal à zéro rend l’écriture indéfinie ; le décodage glouton est un choix séparé, ou une limite quand tau tend vers zéro avec un maximum unique. Une température basse ne garantit pas l’exactitude de la réponse.
+
 QUESTION À POSER
 Une température plus faible garantit-elle une réponse correcte ?
 
@@ -2154,6 +3603,30 @@ V désigne ici l'ensemble des positions valides, et non la taille du vocabulaire
 
 ÉQUATION — SOURCE LATEX
 \operatorname{PPL}=\exp\!\left(-\frac1M\sum_{t\in\mathcal V}\log p_\theta(x_t\mid x_{<t})\right),\quad M=|\mathcal V|
+
+LECTURE À VOIX HAUTE
+« La perplexité vaut l’exponentielle de moins un sur M fois la somme, sur les positions t appartenant à V calligraphique, du logarithme de la probabilité du token x t sachant les tokens précédents. »
+« M est égal au cardinal de V calligraphique, c’est-à-dire au nombre de positions valides. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\operatorname{PPL}` | « perplexité » | Exponentielle de la perte moyenne de log-vraisemblance négative. |
+| `\exp` | « exponentielle » | Fonction inverse du logarithme naturel. |
+| `\mathcal V` | « V calligraphique » | Ensemble des positions valides, après exclusion du padding et des positions ignorées. |
+| `t\in\mathcal V` | « t appartient à V calligraphique » | Seules ces positions sont incluses dans la somme. |
+| `\sum_{t\in\mathcal V}` | « somme sur les t appartenant à V calligraphique » | Addition des log-probabilités de tous les tokens évalués. |
+| `M=\|\mathcal V\|` | « M égale le cardinal de V calligraphique » | M est le nombre de positions valides ; les barres simples désignent ici un cardinal. |
+| `p_\theta(x_t\mid x_{<t})` | « probabilité de x t sachant les précédents, sous le modèle thêta » | Probabilité attribuée par le modèle au token réellement observé. |
+| `\log` | « logarithme naturel » | Logarithme en base e, cohérent avec l’exponentielle utilisée. |
+| `-\frac1M` | « moins un sur M » | Calcule la moyenne négative, en supposant M strictement positif. |
+
+INTERPRÉTATION
+La perplexité est une transformation de la perte : une meilleure log-probabilité moyenne donne une perplexité plus faible. Une perte égale à log(8), par exemple, correspond à une perplexité de 8.
+
+POINT D’ATTENTION
+V calligraphique représente ici des positions, pas le vocabulaire ni la matrice des valeurs d’attention. Comparer des perplexités exige la même tokenisation et le même protocole d’évaluation. La moyenne se calcule sur tous les tokens valides, sans moyenner naïvement des moyennes de batches de tailles différentes.
 
 QUESTION À POSER
 Que vaut exp(log(8)) ?
@@ -2173,6 +3646,29 @@ Dans une multi-head attention standard, la largeur totale des clés et celle des
 ÉQUATION — SOURCE LATEX
 M_{KV}\approx2BLnd_{KV}\times\text{octets par element}
 
+LECTURE À VOIX HAUTE
+« La mémoire du cache clés-valeurs vaut approximativement deux fois B fois L fois n fois d indice K V, multiplié par le nombre d’octets par élément. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `M_{KV}` | « emme indice K V » | Mémoire totale du cache de clés et valeurs, exprimée ici en octets. |
+| `\approx` | « approximativement égal à » | Estimation qui ignore notamment les surcoûts d’allocation. |
+| `2` | « deux » | Deux familles de tenseurs à stocker : les clés et les valeurs. |
+| `B` | « bé majuscule » | Nombre de séquences dans le batch. |
+| `L` | « elle majuscule » | Nombre de couches dont on conserve le cache. |
+| `n` | « enne » | Nombre de positions déjà mises en cache par séquence. |
+| `d_{KV}` | « d indice K V » | Largeur totale des clés, ou des valeurs, toutes têtes KV réunies, pour un token et une couche. |
+| `\times` | « multiplié par » | Produit des dimensions et de la taille d’un élément. |
+| `\text{octets par element}` | « octets par élément » | Taille du type numérique utilisé : par exemple deux octets pour float16. |
+
+INTERPRÉTATION
+Le cache évite de recalculer les clés et valeurs des tokens précédents pendant la génération. Son volume croît linéairement avec le batch, le nombre de couches et la longueur mémorisée.
+
+POINT D’ATTENTION
+Le facteur deux suppose la même largeur et le même type numérique pour K et V. d_KV inclut déjà toutes les têtes KV : ne pas remultiplier par leur nombre. Cette estimation exclut les poids du modèle et les autres buffers. En attention multi-têtes standard d_KV = d ; le partage des têtes KV peut le réduire.
+
 QUESTION À POSER
 Le cache supprime-t-il le besoin de consulter les tokens passés ?
 
@@ -2190,6 +3686,31 @@ La formule suppose H et W divisibles par P et des patches carrés de côté P. C
 
 ÉQUATION — SOURCE LATEX
 n=\frac{HW}{P^2},\qquad x_i\in\mathbb R^{P^2C},\qquad z_i=x_iW_E+p_i
+
+LECTURE À VOIX HAUTE
+« Le nombre de patches n vaut H fois W divisé par P au carré. Chaque patch aplati x indice i appartient à l’espace réel de dimension P au carré fois C. »
+« z indice i vaut x indice i fois W indice E, plus p indice i. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `H,\ W` | « ache ; double vé » | Hauteur et largeur de l’image, en pixels. |
+| `P` | « pé majuscule » | Longueur du côté d’un patch carré, en pixels. |
+| `P^2` | « P au carré » | Nombre de pixels spatiaux d’un patch. |
+| `C` | « cé majuscule » | Nombre de canaux, par exemple trois pour une image RGB. |
+| `n=HW/P^2` | « n égale H fois W sur P au carré » | Nombre de patches non chevauchants, avant l’ajout éventuel de tokens spéciaux. |
+| `x_i\in\mathbb R^{P^2C}` | « x i appartient à l’espace réel de dimension P au carré fois C » | Vecteur des pixels du patch i, après aplatissement. |
+| `W_E` | « W indice E » | Matrice de projection apprise de taille (P²C) × d. |
+| `p_i` | « pé minuscule indice i » | Vecteur de position associé au patch i, de dimension d. |
+| `z_i` | « zède indice i » | Représentation du patch de dimension d, après projection et ajout de position. |
+| `x_iW_E` | « x i fois W E » | Produit matriciel écrit avec x_i sous forme de vecteur ligne. |
+
+INTERPRÉTATION
+Une image est convertie en séquence de patches. Chaque patch est aplati, projeté dans l’espace du Transformer, puis enrichi de son information de position.
+
+POINT D’ATTENTION
+On suppose H et W divisibles par P, avec des patches carrés non chevauchants. P désigne ici une taille de patch, pas un nombre de paramètres. Le p_i minuscule est un vecteur de position, pas une probabilité ; la formule de n exclut un éventuel token CLS.
 
 QUESTION À POSER
 Combien de valeurs dans un patch RGB 16×16 ?
@@ -2210,6 +3731,30 @@ Le dernier rapport porte uniquement sur les matrices d'attention des tokens visu
 
 ÉQUATION — SOURCE LATEX
 \left(\frac{224}{16}\right)^2=196,\qquad\left(\frac{224}{8}\right)^2=784\\\frac{784^2}{196^2}=16
+
+LECTURE À VOIX HAUTE
+« Deux cent vingt-quatre divisé par seize, le quotient au carré, vaut cent quatre-vingt-seize. »
+« Deux cent vingt-quatre divisé par huit, le quotient au carré, vaut sept cent quatre-vingt-quatre. »
+« Sept cent quatre-vingt-quatre au carré divisé par cent quatre-vingt-seize au carré vaut seize. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `224` | « deux cent vingt-quatre » | Hauteur et largeur en pixels de l’image carrée. |
+| `16,\ 8` | « seize ; huit » | Deux tailles possibles pour le côté d’un patch carré. |
+| `224/16,\ 224/8` | « deux cent vingt-quatre sur seize ; sur huit » | Nombres de patches le long d’un seul côté : 14 et 28. |
+| `(224/16)^2` | « le quotient deux cent vingt-quatre sur seize, au carré » | Nombre total de patches de 16 × 16 pixels : 14 × 14 = 196. |
+| `(224/8)^2` | « le quotient deux cent vingt-quatre sur huit, au carré » | Nombre total de patches de 8 × 8 pixels : 28 × 28 = 784. |
+| `196,\ 784` | « cent quatre-vingt-seize ; sept cent quatre-vingt-quatre » | Longueurs des deux séquences de patches, sans token spécial. |
+| `784^2/196^2` | « sept cent quatre-vingt-quatre au carré sur cent quatre-vingt-seize au carré » | Rapport des nombres de paires de patches dans l’attention dense. |
+| `16` | « seize » | Facteur de croissance du nombre de scores d’attention lorsque la taille du patch est divisée par deux. |
+
+INTERPRÉTATION
+Diviser par deux le côté des patches multiplie par quatre leur nombre. Comme chaque patch peut interagir avec tous les autres, le nombre de paires est alors multiplié par seize.
+
+POINT D’ATTENTION
+Le carré dans la première ligne compte les deux axes de l’image ; le carré dans la deuxième ligne compte les paires de tokens. Le facteur seize concerne les scores et le terme quadratique de l’attention, pas nécessairement le temps total du modèle ni toutes ses allocations mémoire.
 
 QUESTION À POSER
 Diviser la taille de patch par deux double-t-il n ?
@@ -2282,6 +3827,26 @@ Les quatre premiers symboles sont choisis dans un alphabet de huit possibilités
 
 ÉQUATION — SOURCE LATEX
 \langle BOS\rangle,\ a,b,c,d,\ a,b,c,d,\ a,b,c,d,\ \langle EOS\rangle
+
+LECTURE À VOIX HAUTE
+« Token de début de séquence, puis a, b, c, d ; à nouveau a, b, c, d ; une troisième fois a, b, c, d ; puis token de fin de séquence. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\langle BOS\rangle` | « token de début de séquence » | BOS signifie Begin Of Sequence. C’est un symbole spécial du vocabulaire. |
+| `\langle EOS\rangle` | « token de fin de séquence » | EOS signifie End Of Sequence. Le modèle apprend notamment à prédire ce symbole. |
+| `a,\ b,\ c,\ d` | « a ; bé ; cé ; dé » | Quatre tokens du motif à répéter ; ces lettres ne désignent ici ni des dimensions ni des paramètres. |
+| `\langle\ \rangle` | « chevrons » | Délimitent le nom d’un token spécial ; ils ne représentent pas un produit scalaire. |
+| `,` | « puis » | Sépare les positions successives dans cette représentation de la séquence. |
+| `a,b,c,d\;\text{repete trois fois}` | « le motif a, b, c, d répété trois fois » | Dépendance synthétique que le modèle doit apprendre à reproduire. |
+
+INTERPRÉTATION
+Cette tâche artificielle rend visibles les dépendances entre tokens : le modèle doit retrouver le motif, le répéter et s’arrêter. L’exemple comporte 14 tokens si l’on compte BOS et EOS.
+
+POINT D’ATTENTION
+L’exemple illustre la structure du jeu de données du TP, pas une équation algébrique. Prédire une répétition sur ce jeu ne démontre pas une compréhension générale du langage. L’entraînement doit toujours décaler les cibles d’un token.
 
 QUESTION À POSER
 Pourquoi ne pas exiger une perte globale nulle ?
@@ -2357,6 +3922,29 @@ Revenir à l'unité conceptuelle du cours. Un MLP, un CNN et un Transformer diff
 
 ÉQUATION — SOURCE LATEX
 \text{donnees}\ \longrightarrow\ f_\theta\ \longrightarrow\ \mathcal L\ \xrightarrow{\rm backprop}\ \nabla_\theta\mathcal L\ \xrightarrow{\rm optimiseur}\ \theta'
+
+LECTURE À VOIX HAUTE
+« Les données passent dans le modèle paramétré par thêta ; les prédictions permettent de calculer la perte L calligraphique ; la rétropropagation calcule son gradient par rapport à thêta ; l’optimiseur utilise ce gradient pour obtenir les paramètres mis à jour, thêta prime. »
+
+SYMBOLES : NOM À PRONONCER ET SENS
+
+| Symbole | Nom à prononcer | Sens ici |
+| --- | --- | --- |
+| `\text{donnees}` | « données » | Entrées du modèle ; les cibles participent aussi au calcul de la perte supervisée même si elles ne sont pas dessinées ici. |
+| `f_\theta` | « effe indice thêta » | Fonction représentée par le réseau, avec ses paramètres θ. |
+| `\mathcal L` | « L calligraphique » | Objectif scalaire calculé à partir des prédictions et des cibles dans le cadre supervisé. |
+| `\nabla` | « nabla » | Symbole qui désigne un gradient. |
+| `\nabla_\theta\mathcal L` | « gradient de L par rapport à thêta » | Ensemble des dérivées partielles de la perte par rapport à chacun des paramètres. |
+| `\xrightarrow{\rm backprop}` | « puis, par rétropropagation » | Étape qui applique la règle de la chaîne pour calculer les dérivées. |
+| `\xrightarrow{\rm optimiseur}` | « puis, par l’optimiseur » | Étape qui détermine la mise à jour à partir du gradient et, selon l’algorithme, de son état interne. |
+| `\theta'` | « thêta prime » | Nouvelles valeurs des paramètres après une étape ; le prime n’est pas ici une dérivée. |
+| `\longrightarrow` | « conduit à » ou « passe dans » | Flèche de déroulement du calcul ; elle n’exprime pas une égalité. |
+
+INTERPRÉTATION
+Ce schéma rassemble la boucle d’apprentissage : prédire, mesurer l’erreur, calculer les dérivées et mettre à jour les paramètres. Les nouvelles valeurs servent au passage suivant.
+
+POINT D’ATTENTION
+La rétropropagation calcule des gradients ; elle ne choisit pas à elle seule la mise à jour. C’est l’optimiseur qui effectue cette mise à jour. Le gradient n’est ni une probabilité ni une nouvelle prédiction.
 
 QUESTION À POSER
 Qu’est-ce qui change entre MLP, CNN et Transformer ?
@@ -2494,3 +4082,4 @@ EXPLICATION TECHNIQUE
 Inviter les étudiants à revenir sur une équation, un résultat de TP ou une erreur observée. Pour chaque question, partir du problème et des hypothèses avant de choisir une architecture. La conclusion attendue est une capacité à expliquer un calcul, à construire une expérience et à reconnaître les limites de ce que les résultats démontrent. Les suites possibles sont un projet de vision sur données réelles, une étude de modèles préentraînés ou une analyse plus avancée de l'optimisation et des architectures séquentielles.
 
 EXEMPLE ET EXPLICATION PÉDAGOGIQUES ORIGINAUX
+

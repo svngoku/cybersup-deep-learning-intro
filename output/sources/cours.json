@@ -71,7 +71,36 @@
         "fastai"
       ],
       "title": "LE DEEP LEARNING DANS LE MACHINE LEARNING",
-      "notes": "Définir le machine learning comme un ensemble de méthodes qui tirent des régularités des données pour accomplir une tâche. Il comprend notamment les modèles linéaires, les arbres, les méthodes à noyaux et les réseaux de neurones. Dans ce cours, le deep learning désigne l’apprentissage avec des réseaux comportant plusieurs transformations paramétrées successives. L’inclusion affichée est une carte des domaines, pas une échelle de qualité. Il n’existe pas de seuil universel de couches qui rendrait un modèle efficace ou pertinent. La profondeur d’un arbre de décision ne suffit pas à en faire un modèle de deep learning. Les transformations internes peuvent être apprises avec ou sans étiquettes externes. Notre première comparaison utilise l’apprentissage supervisé pour rendre la cible et la perte explicites. Une représentation apprise n’est pas forcément interprétable par un nom d’objet ou de contour."
+      "notes": "Définir le machine learning comme un ensemble de méthodes qui tirent des régularités des données pour accomplir une tâche. Il comprend notamment les modèles linéaires, les arbres, les méthodes à noyaux et les réseaux de neurones. Dans ce cours, le deep learning désigne l’apprentissage avec des réseaux comportant plusieurs transformations paramétrées successives. L’inclusion affichée est une carte des domaines, pas une échelle de qualité. Il n’existe pas de seuil universel de couches qui rendrait un modèle efficace ou pertinent. La profondeur d’un arbre de décision ne suffit pas à en faire un modèle de deep learning. Les transformations internes peuvent être apprises avec ou sans étiquettes externes. Notre première comparaison utilise l’apprentissage supervisé pour rendre la cible et la perte explicites. Une représentation apprise n’est pas forcément interprétable par un nom d’objet ou de contour.",
+      "lecture_formule": {
+        "lecture": [
+          "Le deep learning est inclus dans le machine learning, qui est lui-même inclus dans l’intelligence artificielle."
+        ],
+        "symboles": [
+          [
+            "\\mathrm{Deep\\ learning}",
+            "deep learning, ou apprentissage profond",
+            "Famille de méthodes fondées ici sur des réseaux à plusieurs niveaux de représentation."
+          ],
+          [
+            "\\mathrm{Machine\\ learning}",
+            "machine learning, ou apprentissage automatique",
+            "Domaine qui regroupe les méthodes apprenant à partir de données."
+          ],
+          [
+            "\\mathrm{IA}",
+            "i a",
+            "Intelligence artificielle."
+          ],
+          [
+            "\\subset",
+            "est inclus dans",
+            "Relation entre domaines. Tout élément du domaine de gauche appartient au domaine de droite."
+          ]
+        ],
+        "sens": "L’écriture situe des familles de méthodes. Elle ne donne pas un classement de leurs performances.",
+        "attention": "Le signe d’inclusion ne se lit pas « inférieur à »."
+      }
     },
     {
       "day": 0,
@@ -218,7 +247,62 @@
         "fastai"
       ],
       "title": "LE RÔLE DES REPRÉSENTATIONS",
-      "notes": "Définir N exemples étiquetés, x les observations, y les cibles et ell la perte. Dans la première ligne, phi est un descripteur fixé pour l’expérience. Seuls les paramètres theta du prédicteur g sont optimisés. Dans la seconde, h est un extracteur paramétré par psi. Si h et g sont différentiables, la règle de la chaîne permet d’ajuster psi et theta à partir d’un même objectif. Le gradient reçu par une couche dépend donc des transformations situées entre cette couche et la perte. C’est le sens de l’apprentissage de bout en bout. Cette comparaison concerne deux pipelines précis, pas toutes les méthodes de ML contre toutes les méthodes de DL. La PCA apprend déjà une représentation, les méthodes à noyaux changent l’espace de représentation, et un extracteur profond préentraîné peut être gelé. La formule du bas n’impose pas à elle seule la profondeur : celle-ci vient de la composition interne de h. Les prétraitements, la collecte et le choix de l’objectif restent nécessaires."
+      "notes": "Définir N exemples étiquetés, x les observations, y les cibles et ell la perte. Dans la première ligne, phi est un descripteur fixé pour l’expérience. Seuls les paramètres theta du prédicteur g sont optimisés. Dans la seconde, h est un extracteur paramétré par psi. Si h et g sont différentiables, la règle de la chaîne permet d’ajuster psi et theta à partir d’un même objectif. Le gradient reçu par une couche dépend donc des transformations situées entre cette couche et la perte. C’est le sens de l’apprentissage de bout en bout. Cette comparaison concerne deux pipelines précis, pas toutes les méthodes de ML contre toutes les méthodes de DL. La PCA apprend déjà une représentation, les méthodes à noyaux changent l’espace de représentation, et un extracteur profond préentraîné peut être gelé. La formule du bas n’impose pas à elle seule la profondeur : celle-ci vient de la composition interne de h. Les prétraitements, la collecte et le choix de l’objectif restent nécessaires.",
+      "lecture_formule": {
+        "lecture": [
+          "Descripteur fixe : on minimise, par rapport à thêta, un sur grand N fois la somme, pour i allant de un à grand N, de la perte entre g thêta appliqué à phi de x i et la cible y i.",
+          "Représentation apprise : on minimise la même moyenne par rapport à psi et à thêta, avec h psi de x i comme représentation."
+        ],
+        "symboles": [
+          [
+            "N,\\ i",
+            "grand n, i",
+            "Nombre d’exemples et indice d’un exemple."
+          ],
+          [
+            "x_i,\\ y_i",
+            "x indice i, y indice i",
+            "Observation et cible du i-ième exemple."
+          ],
+          [
+            "\\phi(x_i)",
+            "phi de x indice i",
+            "Descripteur fixé dans cette comparaison."
+          ],
+          [
+            "h_\\psi(x_i)",
+            "h paramétré par psi, appliqué à x indice i",
+            "Extracteur de représentation dont les paramètres sont psi."
+          ],
+          [
+            "g_\\theta",
+            "g paramétré par thêta",
+            "Prédicteur dont les paramètres sont theta."
+          ],
+          [
+            "\\ell(\\cdot,\\cdot)",
+            "ell de deux arguments",
+            "Perte qui compare une prédiction et sa cible."
+          ],
+          [
+            "\\frac1N\\sum_{i=1}^N",
+            "un sur grand n fois la somme pour i de un à grand n",
+            "Moyenne des pertes sur les exemples."
+          ],
+          [
+            "\\min_\\theta,\\ \\min_{\\psi,\\theta}",
+            "minimum par rapport à thêta ; minimum par rapport à psi et thêta",
+            "Variables ajustées par l’optimisation."
+          ],
+          [
+            "g_\\theta(h_\\psi(x_i))",
+            "g thêta de h psi de x i",
+            "On calcule d’abord la représentation h, puis la prédiction g."
+          ]
+        ],
+        "sens": "La différence porte sur les paramètres que la perte peut ajuster : seulement le prédicteur, ou aussi l’extracteur.",
+        "attention": "Min désigne la valeur minimale recherchée. Arg min désignerait les paramètres qui la réalisent. Phi est ici une fonction fixe, alors qu’il désigne des paramètres dans la formule du transfert."
+      }
     },
     {
       "day": 0,
@@ -394,7 +478,67 @@
       "bodyAfter": [
         "B : batch · n : longueur · d : dimension · K : classes",
         "Un produit matriciel doit toujours être vérifié par ses dimensions."
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "x appartient à l’espace des vecteurs réels de dimension d. W indice ell appartient à l’espace des matrices réelles à d ell lignes et d ell moins un colonnes.",
+          "Grand X contient B lignes et d colonnes. H ell vaut phi appliquée à X fois W ell transposée, plus le vecteur de uns fois b ell transposé."
+        ],
+        "symboles": [
+          [
+            "\\in,\\ \\mathbb R^d",
+            "appartient à ; R puissance d",
+            "Appartenance à l’espace des vecteurs réels à d composantes."
+          ],
+          [
+            "x,\\ X",
+            "x minuscule, grand x",
+            "Un exemple sous forme de vecteur colonne, puis un batch stocké en lignes."
+          ],
+          [
+            "B,\\ d",
+            "bé, dé",
+            "Nombre d’exemples dans le batch et dimension des entrées."
+          ],
+          [
+            "\\ell,\\ \\ell-1",
+            "ell, ell moins un",
+            "Indices de la couche courante et de la couche précédente."
+          ],
+          [
+            "d_\\ell,\\ d_{\\ell-1}",
+            "d indice ell, d indice ell moins un",
+            "Largeurs de sortie et d’entrée de la couche."
+          ],
+          [
+            "W_\\ell,\\ b_\\ell",
+            "w indice ell, b indice ell",
+            "Matrice de poids et vecteur de biais."
+          ],
+          [
+            "\\mathbb R^{m\\times n}",
+            "matrices réelles à m lignes et n colonnes",
+            "Le signe fois sépare ici des dimensions."
+          ],
+          [
+            "{}^\\top",
+            "transposé, ou transposée",
+            "Échange des lignes et des colonnes."
+          ],
+          [
+            "\\mathbf1",
+            "vecteur de uns",
+            "Vecteur colonne à B composantes, utilisé pour répéter le biais."
+          ],
+          [
+            "H_\\ell,\\ \\phi",
+            "h indice ell, phi",
+            "Activations du batch après application de la fonction non linéaire, composante par composante."
+          ]
+        ],
+        "sens": "Pour cette couche, les colonnes de X doivent correspondre à d ell moins un. Le produit X W transposée donne B par d ell et le biais s’ajoute à chacune des B lignes.",
+        "attention": "La juxtaposition X W transposée est un produit matriciel. Le T en exposant représente une transposition, pas une puissance."
+      }
     },
     {
       "day": 1,
@@ -471,7 +615,46 @@
       "answer": "Non : capacité, optimisation, données disponibles et biais inductif interagissent.",
       "refs": [
         "bigot"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "f paramétrée par thêta est la composée de f grand L, f grand L moins un, et ainsi de suite jusqu’à f un. On applique f un en premier."
+        ],
+        "symboles": [
+          [
+            "f_\\theta",
+            "f paramétrée par thêta",
+            "Fonction calculée par le réseau complet."
+          ],
+          [
+            "\\theta",
+            "thêta",
+            "Ensemble des paramètres du réseau."
+          ],
+          [
+            "L",
+            "grand ell",
+            "Nombre de transformations dans la composition."
+          ],
+          [
+            "f_1,\\ f_{L-1},\\ f_L",
+            "f un, f grand ell moins un, f grand ell",
+            "Première transformation, avant-dernière et dernière."
+          ],
+          [
+            "\\circ",
+            "rond, ou composée avec",
+            "Composition de fonctions. La fonction à droite agit d’abord."
+          ],
+          [
+            "\\cdots",
+            "et ainsi de suite",
+            "Transformations intermédiaires omises pour alléger l’écriture."
+          ]
+        ],
+        "sens": "Le résultat d’une couche devient l’entrée de la suivante.",
+        "attention": "Le rond de composition n’est ni une multiplication ordinaire ni un produit terme à terme."
+      }
     },
     {
       "day": 1,
@@ -487,7 +670,51 @@
       "answer": "d poids et un biais, soit d+1.",
       "refs": [
         "tavenard"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "z vaut w transposé fois x, plus b. a vaut phi de z."
+        ],
+        "symboles": [
+          [
+            "x",
+            "x",
+            "Vecteur d’entrée à d composantes."
+          ],
+          [
+            "w,\\ w^\\top",
+            "w, w transposé",
+            "Vecteur de poids puis sa transposée."
+          ],
+          [
+            "w^\\top x",
+            "produit scalaire de w et x",
+            "Somme des produits des composantes correspondantes."
+          ],
+          [
+            "b",
+            "bé",
+            "Biais scalaire ajouté au produit scalaire."
+          ],
+          [
+            "z",
+            "zède",
+            "Préactivation scalaire, avant la non-linéarité."
+          ],
+          [
+            "\\phi",
+            "phi",
+            "Fonction d’activation."
+          ],
+          [
+            "a=\\phi(z)",
+            "a égale phi de zède",
+            "Sortie du neurone après activation."
+          ]
+        ],
+        "sens": "Le neurone combine les entrées par un calcul affine puis applique une non-linéarité.",
+        "attention": "w transposé fois x est un scalaire. Phi de z se lit comme l’application d’une fonction, pas comme phi multiplié par z."
+      }
     },
     {
       "day": 1,
@@ -503,7 +730,51 @@
       "answer": "Une application affine unique, si des biais sont présents.",
       "refs": [
         "cnam"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "W deux appliqué à W un fois x plus b un, puis plus b deux, vaut W deux fois W un appliqué à x, plus W deux fois b un plus b deux."
+        ],
+        "symboles": [
+          [
+            "x",
+            "x",
+            "Vecteur d’entrée."
+          ],
+          [
+            "W_1,\\ W_2",
+            "w un, w deux",
+            "Matrices de la première et de la deuxième couche affine."
+          ],
+          [
+            "b_1,\\ b_2",
+            "b un, b deux",
+            "Vecteurs de biais des deux couches."
+          ],
+          [
+            "W_2W_1",
+            "w deux fois w un",
+            "Matrice composée. L’ordre des facteurs compte."
+          ],
+          [
+            "W_2b_1+b_2",
+            "w deux fois b un, plus b deux",
+            "Biais total obtenu après développement."
+          ],
+          [
+            "(\\cdot)",
+            "parenthèses",
+            "Regroupent un calcul à effectuer comme un tout."
+          ],
+          [
+            "=",
+            "égale",
+            "Les deux expressions calculent exactement la même fonction."
+          ]
+        ],
+        "sens": "Deux couches affines successives peuvent se remplacer par une seule couche affine.",
+        "attention": "On utilise la distributivité et l’associativité. On ne permute pas les matrices : W deux W un est généralement différent de W un W deux."
+      }
     },
     {
       "day": 1,
@@ -532,7 +803,58 @@
       "notes": "Retrouver la dérivée de la sigmoïde par la dérivation d'un inverse et d'une exponentielle. Son maximum est 1/4, ce qui prépare l'analyse de l'atténuation des gradients, sans suffire à elle seule à décrire un réseau complet : les matrices de poids interviennent aussi. Pour ReLU, la dérivée n'existe pas au point zéro ; la valeur zéro utilisée dans nos calculs est une convention pratique. Φ est la fonction de répartition de la loi normale centrée réduite. GELU ne doit pas être confondue avec une probabilité de sortie : c'est une activation.",
       "question": "La dérivée de ReLU vaut-elle 1 pour toute entrée ?",
       "answer": "Non : elle vaut zéro sur les entrées négatives.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Sigma prime de z vaut sigma de z fois un moins sigma de z.",
+          "La dérivée de ReLU en z vaut l’indicatrice de z strictement positif, pour z différent de zéro.",
+          "GELU de z vaut z fois grand phi de z."
+        ],
+        "symboles": [
+          [
+            "z",
+            "zède",
+            "Préactivation scalaire."
+          ],
+          [
+            "\\sigma(z)",
+            "sigma de zède",
+            "Sigmoïde logistique."
+          ],
+          [
+            "{}'",
+            "prime",
+            "Dérivée d’une fonction scalaire par rapport à son argument."
+          ],
+          [
+            "\\sigma'(z)",
+            "sigma prime de zède",
+            "Dérivée de la sigmoïde au point z."
+          ],
+          [
+            "\\phi_{\\rm ReLU}",
+            "phi indice rélu",
+            "Fonction ReLU : maximum entre zéro et z."
+          ],
+          [
+            "\\mathbf1_{z>0}",
+            "indicatrice de zède strictement positif",
+            "Vaut un si z est positif et zéro sinon."
+          ],
+          [
+            "\\Phi(z)",
+            "grand phi de zède",
+            "Fonction de répartition de la loi normale centrée réduite."
+          ],
+          [
+            "\\operatorname{GELU}(z)",
+            "gélu de zède",
+            "Activation obtenue ici par z multiplié par la probabilité Phi de z."
+          ]
+        ],
+        "sens": "Les dérivées déterminent comment le signal de gradient traverse les activations.",
+        "attention": "La dérivée de ReLU n’existe pas en zéro. Mettre zéro à cet endroit est une convention de calcul. Sigma, phi et grand Phi désignent trois fonctions différentes."
+      }
     },
     {
       "day": 1,
@@ -546,7 +868,52 @@
       "notes": "Écrire la forme de chaque objet : a précédent a d précédent composantes, W a d courant lignes et d précédent colonnes, b a d courant composantes. Le comptage inclut exactement un biais par neurone de sortie. Pour 784 entrées et 128 unités, la couche contient 784 × 128 + 128 = 100480 paramètres. Le nombre de paramètres ne dépend pas de B, même si la mémoire des activations et le coût du calcul en dépendent. Dans PyTorch, nn.Linear(in_features, out_features) stocke précisément une matrice out_features × in_features.",
       "question": "Une couche 64 → 10 contient combien de paramètres ?",
       "answer": "64×10+10 = 650.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "a indice ell vaut phi indice ell appliquée à W ell fois a ell moins un, plus b ell.",
+          "Le nombre P ell de paramètres vaut d ell fois la quantité d ell moins un plus un."
+        ],
+        "symboles": [
+          [
+            "\\ell,\\ \\ell-1",
+            "ell, ell moins un",
+            "Numéros des couches courante et précédente."
+          ],
+          [
+            "a_{\\ell-1},\\ a_\\ell",
+            "a indice ell moins un, a indice ell",
+            "Entrée et sortie de la couche."
+          ],
+          [
+            "W_\\ell",
+            "w indice ell",
+            "Matrice à d ell lignes et d ell moins un colonnes."
+          ],
+          [
+            "b_\\ell",
+            "b indice ell",
+            "Un biais par neurone de sortie."
+          ],
+          [
+            "\\phi_\\ell",
+            "phi indice ell",
+            "Activation appliquée à chaque préactivation."
+          ],
+          [
+            "P_\\ell",
+            "pé indice ell",
+            "Nombre total de poids et de biais de la couche."
+          ],
+          [
+            "d_\\ell(d_{\\ell-1}+1)",
+            "d ell fois, entre parenthèses, d ell moins un plus un",
+            "Chaque sortie utilise d ell moins un poids et un biais."
+          ]
+        ],
+        "sens": "La formule de calcul et la formule de comptage décrivent la même couche dense.",
+        "attention": "Dans l’indice d ell moins un, « moins un » fait partie du numéro de couche. Ce n’est pas la largeur d ell diminuée de un."
+      }
     },
     {
       "day": 1,
@@ -609,7 +976,62 @@
       "answer": "3 avec la convention de cette diapositive.",
       "refs": [
         "tavenard"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "La perte de y chapeau et y vaut un demi de la norme deux de leur différence, au carré.",
+          "Le gradient de ell par rapport à y chapeau vaut y chapeau moins y."
+        ],
+        "symboles": [
+          [
+            "\\ell",
+            "ell minuscule",
+            "Fonction de perte."
+          ],
+          [
+            "\\hat y",
+            "y chapeau",
+            "Prédiction du modèle, scalaire ou vecteur."
+          ],
+          [
+            "y",
+            "y",
+            "Valeur cible attendue."
+          ],
+          [
+            "\\frac12",
+            "un demi",
+            "Facteur qui simplifie la dérivée du carré."
+          ],
+          [
+            "\\hat y-y",
+            "y chapeau moins y",
+            "Écart entre la prédiction et la cible."
+          ],
+          [
+            "\\|\\hat y-y\\|_2",
+            "norme deux de y chapeau moins y",
+            "Longueur euclidienne du vecteur des écarts. Les doubles barres désignent une norme et le deux en indice indique son type."
+          ],
+          [
+            "{}^2",
+            "au carré",
+            "On élève la norme entière au carré, ce qui donne la somme des carrés des écarts."
+          ],
+          [
+            "\\nabla",
+            "nabla",
+            "Notation d’un gradient."
+          ],
+          [
+            "\\nabla_{\\hat y}\\ell",
+            "gradient de ell par rapport à y chapeau",
+            "Vecteur des dérivées partielles de la perte par rapport aux composantes de la prédiction."
+          ]
+        ],
+        "sens": "Le carré pénalise les écarts dans les deux sens. Par exemple, pour une sortie scalaire y chapeau égale trois et y égale un, la perte vaut deux et le gradient vaut deux.",
+        "attention": "La cible y reste fixée pendant cette dérivation. Le gradient pointe localement vers l’augmentation de la perte. La descente utilise son opposé. Une moyenne sur les composantes ajouterait un facteur de normalisation."
+      }
     },
     {
       "day": 1,
@@ -625,7 +1047,62 @@
       "answer": "L’accuracy ne dépend que de l’argmax ; la perte dépend des probabilités.",
       "refs": [
         "cedoc"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "p indice k vaut l’exponentielle du logit z k, divisée par la somme des exponentielles de tous les logits.",
+          "La perte de z et y vaut moins la somme, pour k de un à grand K, de y k fois le logarithme de p k."
+        ],
+        "symboles": [
+          [
+            "z,\\ z_k",
+            "zède, zède indice k",
+            "Vecteur des logits et score brut de la classe k."
+          ],
+          [
+            "e^{z_k}",
+            "exponentielle de zède indice k",
+            "Transforme un score en quantité strictement positive."
+          ],
+          [
+            "p_k",
+            "pé indice k",
+            "Probabilité prédite pour la classe k après softmax."
+          ],
+          [
+            "\\sum_j e^{z_j}",
+            "somme sur j des exponentielles de z j",
+            "Normalisation calculée sur toutes les classes."
+          ],
+          [
+            "K,\\ k,\\ j",
+            "grand k, k, j",
+            "Nombre de classes et indices qui parcourent les classes."
+          ],
+          [
+            "y_k",
+            "y indice k",
+            "Composante de la cible. En one-hot, elle vaut un pour la classe correcte et zéro ailleurs."
+          ],
+          [
+            "\\log p_k",
+            "logarithme de pé indice k",
+            "Logarithme naturel de la probabilité prédite."
+          ],
+          [
+            "-\\sum_{k=1}^K y_k\\log p_k",
+            "moins la somme des y k logarithme de p k",
+            "Entropie croisée entre la cible et la distribution prédite."
+          ],
+          [
+            "\\ell(z,y)",
+            "ell de zède et y",
+            "Perte scalaire associée aux logits et à la cible."
+          ]
+        ],
+        "sens": "Avec une cible one-hot de classe c, la perte devient moins le logarithme de la probabilité de c.",
+        "attention": "La perte reçoit ici des logits z. Il ne faut pas appliquer deux fois softmax si la fonction de bibliothèque le calcule déjà."
+      }
     },
     {
       "day": 1,
@@ -641,7 +1118,52 @@
       "answer": "Non : fournir les logits et des étiquettes entières dans notre configuration.",
       "refs": [
         "cedoc"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "La perte de z et de la classe c vaut moins z indice c, plus m, plus le logarithme de la somme des exponentielles de z j moins m.",
+          "m est le maximum des logits z j."
+        ],
+        "symboles": [
+          [
+            "z_j,\\ z_c",
+            "zède indice j, zède indice c",
+            "Score d’une classe quelconque et score de la classe correcte."
+          ],
+          [
+            "c",
+            "cé",
+            "Indice entier de la classe cible."
+          ],
+          [
+            "m=\\max_j z_j",
+            "m égale le maximum, sur j, de z j",
+            "Plus grand logit de l’exemple."
+          ],
+          [
+            "e^{z_j-m}",
+            "exponentielle de z j moins m",
+            "Exponentielle d’un score décalé, dont l’exposant est inférieur ou égal à zéro."
+          ],
+          [
+            "\\sum_j",
+            "somme sur j",
+            "Somme sur toutes les classes."
+          ],
+          [
+            "\\log",
+            "logarithme",
+            "Logarithme naturel."
+          ],
+          [
+            "\\ell(z,c)",
+            "ell de zède et cé",
+            "Entropie croisée calculée avec la classe cible c."
+          ]
+        ],
+        "sens": "Soustraire le maximum avant l’exponentielle évite les très grandes exponentielles tout en conservant la même perte mathématique.",
+        "attention": "Le m ajouté hors du logarithme compense le décalage. Le calcul stabilisé ne consiste pas à supprimer le terme m."
+      }
     },
     {
       "day": 1,
@@ -658,7 +1180,67 @@
       "refs": [
         "bigot",
         "daniel"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "R chapeau de thêta vaut un sur grand N fois la somme des pertes sur les N exemples.",
+          "Thêta chapeau est approximativement un argument qui minimise R chapeau par rapport à thêta."
+        ],
+        "symboles": [
+          [
+            "\\hat R(\\theta)",
+            "R chapeau de thêta",
+            "Risque empirique : perte moyenne mesurée sur l’échantillon."
+          ],
+          [
+            "\\theta",
+            "thêta",
+            "Paramètres du modèle."
+          ],
+          [
+            "\\hat\\theta",
+            "thêta chapeau",
+            "Paramètres estimés par l’apprentissage."
+          ],
+          [
+            "N,\\ i",
+            "grand n, i",
+            "Nombre d’exemples et indice d’exemple."
+          ],
+          [
+            "x_i,\\ y_i",
+            "x i, y i",
+            "Entrée et cible du i-ième exemple."
+          ],
+          [
+            "f_\\theta(x_i)",
+            "f thêta de x i",
+            "Prédiction pour cet exemple."
+          ],
+          [
+            "\\ell",
+            "ell",
+            "Fonction de perte d’un exemple."
+          ],
+          [
+            "\\frac1N\\sum_{i=1}^N",
+            "un sur N fois la somme de i égale un à N",
+            "Moyenne arithmétique des pertes."
+          ],
+          [
+            "\\arg\\min_\\theta",
+            "argument du minimum par rapport à thêta",
+            "Paramètres qui minimisent la fonction, plutôt que valeur minimale de cette fonction."
+          ],
+          [
+            "\\approx",
+            "est approximativement égal à",
+            "L’optimisation numérique ne garantit pas ici un minimum global exact."
+          ]
+        ],
+        "sens": "L’apprentissage cherche des paramètres qui rendent faible la perte moyenne d’entraînement.",
+        "attention": "Le chapeau de R rappelle l’estimation à partir d’un échantillon. Un faible risque empirique ne suffit pas à établir un faible risque sur de nouvelles données."
+      }
     },
     {
       "day": 1,
@@ -674,7 +1256,46 @@
       "answer": "Non : le pas et l’approximation stochastique interviennent.",
       "refs": [
         "cnam"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "Thêta à l’itération t plus un vaut thêta à l’itération t, moins êta t fois le gradient, par rapport à thêta, du risque empirique évalué en thêta t."
+        ],
+        "symboles": [
+          [
+            "t,\\ t+1",
+            "té, té plus un",
+            "Itération courante et itération suivante."
+          ],
+          [
+            "\\theta_t,\\ \\theta_{t+1}",
+            "thêta indice t, thêta indice t plus un",
+            "Paramètres avant et après la mise à jour."
+          ],
+          [
+            "\\eta_t",
+            "êta indice t",
+            "Taux d’apprentissage, positif, éventuellement variable selon l’itération."
+          ],
+          [
+            "\\nabla_\\theta",
+            "gradient par rapport à thêta",
+            "Vecteur des dérivées partielles selon les paramètres."
+          ],
+          [
+            "\\hat R(\\theta_t)",
+            "R chapeau évalué en thêta t",
+            "Risque empirique au point courant."
+          ],
+          [
+            "-\\eta_t\\nabla_\\theta\\hat R(\\theta_t)",
+            "moins êta t fois le gradient du risque",
+            "Déplacement choisi dans la direction opposée au gradient."
+          ]
+        ],
+        "sens": "Le gradient indique une direction d’augmentation locale. Le signe moins choisit la direction de descente.",
+        "attention": "Le gradient doit être évalué aux paramètres courants. Un pas trop grand peut augmenter la perte malgré le signe moins."
+      }
     },
     {
       "day": 1,
@@ -690,7 +1311,52 @@
       "answer": "On somme les contributions de ses deux utilisations.",
       "refs": [
         "cnam"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "z vaut g de x et u vaut h de z.",
+          "La dérivée partielle de ell par rapport à x vaut la dérivée de ell par rapport à u, fois la dérivée de u par rapport à z, fois la dérivée de z par rapport à x."
+        ],
+        "symboles": [
+          [
+            "x,\\ z,\\ u",
+            "x, zède, u",
+            "Variables scalaires successives du calcul."
+          ],
+          [
+            "g,\\ h",
+            "gé, ache",
+            "Fonctions qui relient ces variables."
+          ],
+          [
+            "\\ell",
+            "ell",
+            "Perte scalaire finale."
+          ],
+          [
+            "\\partial",
+            "dérivée partielle, ou d rond",
+            "Symbole de dérivation en faisant varier une variable et en fixant les autres variables indépendantes."
+          ],
+          [
+            "\\frac{\\partial\\ell}{\\partial x}",
+            "dérivée partielle de ell par rapport à x",
+            "Sensibilité finale recherchée."
+          ],
+          [
+            "\\frac{\\partial\\ell}{\\partial u},\\ \\frac{\\partial u}{\\partial z},\\ \\frac{\\partial z}{\\partial x}",
+            "dérivées de ell selon u, de u selon z et de z selon x",
+            "Sensibilités locales le long de la chaîne."
+          ],
+          [
+            "\\frac{\\partial\\ell}{\\partial u}\\frac{\\partial u}{\\partial z}\\frac{\\partial z}{\\partial x}",
+            "produit des trois dérivées locales",
+            "Propagation de la sensibilité finale à travers les opérations intermédiaires."
+          ]
+        ],
+        "sens": "Une petite variation de x modifie z, puis u, puis la perte. Le produit combine ces effets.",
+        "attention": "La diapositive traite une chaîne scalaire. Pour des vecteurs, il faut des jacobiennes et des conventions de dimensions. Sur plusieurs chemins, on additionne les contributions."
+      }
     },
     {
       "day": 1,
@@ -704,7 +1370,62 @@
       "notes": "Calculer d'abord z=1, puis a=1/(1+exp(-1)). Le résidu est négatif car la sortie est inférieure à la cible. Sa multiplication par la dérivée de la sigmoïde, puis par x, donne un gradient d'environ -0,10575. Pour le biais, le même calcul omet le facteur x et donne environ -0,05288. La mise à jour produit w≈0,51058 et b≈0,00529. Recalculer ensuite la perte et vérifier qu'elle diminue pour ce pas précis. Cet exemple concerne une sigmoïde associée à une perte quadratique, et non la simplification softmax-entropie croisée présentée ensuite.",
       "question": "Quel facteur disparaît dans la dérivée par rapport au biais ?",
       "answer": "Le facteur x ; la dérivée de wx+b par rapport à b vaut 1.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Ell vaut un demi de a moins y, au carré. a vaut la sigmoïde de w fois x plus b.",
+          "La dérivée de ell par rapport à w vaut a moins y, fois a, fois un moins a, fois x. Elle vaut ici environ moins zéro virgule un zéro cinq huit."
+        ],
+        "symboles": [
+          [
+            "\\ell",
+            "ell",
+            "Perte quadratique scalaire."
+          ],
+          [
+            "a,\\ y",
+            "a, y",
+            "Prédiction du neurone et cible."
+          ],
+          [
+            "\\tfrac12(a-y)^2",
+            "un demi de a moins y au carré",
+            "Carré de l’erreur, multiplié par un demi."
+          ],
+          [
+            "x,\\ w,\\ b",
+            "x, w, bé",
+            "Entrée scalaire, poids et biais."
+          ],
+          [
+            "\\sigma(wx+b)",
+            "sigma de w x plus b",
+            "Sigmoïde de la préactivation."
+          ],
+          [
+            "\\frac{\\partial\\ell}{\\partial w}",
+            "dérivée partielle de ell par rapport à w",
+            "Variation locale de la perte quand seul le poids varie."
+          ],
+          [
+            "a(1-a)",
+            "a fois un moins a",
+            "Dérivée de la sigmoïde exprimée à partir de sa sortie."
+          ],
+          [
+            "(a-y)a(1-a)x",
+            "a moins y, fois a, fois un moins a, fois x",
+            "Produit des trois facteurs de la règle de la chaîne."
+          ],
+          [
+            "\\approx-0.1058",
+            "environ moins zéro virgule un zéro cinq huit",
+            "Valeur arrondie du gradient dans l’exemple."
+          ]
+        ],
+        "sens": "Les trois facteurs sont la dérivée de la perte selon a, celle de a selon la préactivation et celle de la préactivation selon w.",
+        "attention": "Le gradient négatif entraîne une augmentation de w lors d’une descente. Il ne signifie pas que la perte est négative."
+      }
     },
     {
       "day": 1,
@@ -718,7 +1439,57 @@
       "notes": "Développer moins la somme y_i log(p_i), puis appliquer la dérivée de chaque p_i par rapport à z_j. La somme des y_i vaut un ; on obtient p_j-y_j. Pour la bonne classe, le gradient est négatif tant que la probabilité n'atteint pas un ; pour les autres classes, il est positif. La somme des composantes du gradient vaut zéro, conformément à l'invariance de softmax à l'ajout d'une constante. Avec une moyenne sur B exemples, le facteur 1/B doit être appliqué une fois, soit ici soit dans l'agrégation, pas deux fois.",
       "question": "Pourquoi les gradients des logits somment-ils à zéro ?",
       "answer": "Parce que les distributions p et y ont toutes deux une somme égale à un.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "La dérivée de p i par rapport à z j vaut p i fois delta i j moins p j.",
+          "Le gradient de ell par rapport au vecteur z vaut p moins y."
+        ],
+        "symboles": [
+          [
+            "p_i,\\ p_j",
+            "pé indice i, pé indice j",
+            "Probabilités de deux classes après softmax."
+          ],
+          [
+            "z_j",
+            "zède indice j",
+            "Logit de la classe j."
+          ],
+          [
+            "\\frac{\\partial p_i}{\\partial z_j}",
+            "dérivée de pé i par rapport à zède j",
+            "Une entrée de la jacobienne de softmax."
+          ],
+          [
+            "\\delta_{ij}",
+            "delta de Kronecker, indices i j",
+            "Vaut un si i égale j et zéro sinon."
+          ],
+          [
+            "\\ell",
+            "ell",
+            "Entropie croisée pour un exemple."
+          ],
+          [
+            "\\frac{\\partial\\ell}{\\partial z}",
+            "gradient de ell par rapport à zède",
+            "Vecteur des dérivées par rapport à tous les logits."
+          ],
+          [
+            "p-y",
+            "pé moins y",
+            "Différence composante par composante entre distribution prédite et cible."
+          ],
+          [
+            "i,\\ j",
+            "i, j",
+            "Indices de classes."
+          ]
+        ],
+        "sens": "La combinaison softmax et entropie croisée conduit à un gradient simple malgré les dépendances entre toutes les classes.",
+        "attention": "La cible doit sommer à un pour cette simplification. Delta i j est ici une indicatrice, alors que delta ell désignera un signal de gradient dans les couches."
+      }
     },
     {
       "day": 1,
@@ -734,7 +1505,68 @@
       "answer": "Il contient une dérivée pour chacun de ses paramètres scalaires.",
       "refs": [
         "bigot"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "Delta ell est le gradient de la perte par rapport à la préactivation z ell.",
+          "Le gradient selon W ell vaut delta ell fois a ell moins un transposé. Le gradient selon b ell vaut delta ell.",
+          "Le gradient selon a ell moins un vaut W ell transposée fois delta ell."
+        ],
+        "symboles": [
+          [
+            "\\ell",
+            "ell minuscule",
+            "Fonction de perte dans les dérivées."
+          ],
+          [
+            "{}_{\\ell},\\ {}_{\\ell-1}",
+            "indice ell, indice ell moins un",
+            "Indices de couche. Le même caractère ell a ici un rôle distinct de celui de la perte."
+          ],
+          [
+            "z_\\ell",
+            "zède indice ell",
+            "Vecteur des préactivations de la couche."
+          ],
+          [
+            "\\delta_\\ell",
+            "delta indice ell",
+            "Gradient de la perte selon les préactivations de la couche."
+          ],
+          [
+            "W_\\ell,\\ b_\\ell",
+            "w indice ell, b indice ell",
+            "Matrice des poids et vecteur des biais."
+          ],
+          [
+            "a_{\\ell-1}",
+            "a indice ell moins un",
+            "Vecteur colonne des activations d’entrée."
+          ],
+          [
+            "{}^\\top",
+            "transposé",
+            "Échange des lignes et colonnes."
+          ],
+          [
+            "\\delta_\\ell a_{\\ell-1}^\\top",
+            "delta ell fois a ell moins un transposé",
+            "Produit extérieur : matrice de la même forme que W ell."
+          ],
+          [
+            "\\nabla_{W_\\ell}\\ell,\\ \\nabla_{b_\\ell}\\ell",
+            "gradient de ell selon W ell ; selon b ell",
+            "Dérivées par rapport à chaque poids et à chaque biais."
+          ],
+          [
+            "W_\\ell^\\top\\delta_\\ell",
+            "W ell transposée fois delta ell",
+            "Gradient transmis à la couche précédente."
+          ]
+        ],
+        "sens": "Chaque poids reçoit la sensibilité de son neurone de sortie multipliée par l’activation qui lui arrive.",
+        "attention": "Ces expressions concernent un exemple. Une perte moyennée sur un batch exige une réduction cohérente des contributions."
+      }
     },
     {
       "day": 1,
@@ -748,7 +1580,46 @@
       "notes": "La multiplication par W transposée distribue le signal d'erreur vers les unités de la couche précédente. Le produit de Hadamard filtre ensuite ce signal par la sensibilité locale de l'activation. Pour ReLU, les préactivations négatives ne transmettent aucun gradient par cette branche. Expliquer pourquoi il faut utiliser les poids du passage avant pour tout le passage arrière : mettre W à jour avant de calculer les gradients des couches précédentes mélangerait deux états du modèle. L'optimiseur intervient après que tous les gradients nécessaires ont été calculés.",
       "question": "Peut-on mettre les poids à jour pendant que l’on remonte les couches ?",
       "answer": "Pas dans la rétropropagation standard : on utilise un même état des poids.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Delta ell vaut W ell plus un transposée fois delta ell plus un, puis ce résultat multiplié terme à terme par phi ell prime de z ell."
+        ],
+        "symboles": [
+          [
+            "\\delta_\\ell,\\ \\delta_{\\ell+1}",
+            "delta ell, delta ell plus un",
+            "Gradients selon les préactivations de la couche courante et de la suivante."
+          ],
+          [
+            "W_{\\ell+1}^\\top",
+            "W de la couche ell plus un, transposée",
+            "Matrice qui ramène la sensibilité depuis la couche suivante."
+          ],
+          [
+            "\\phi_\\ell'(z_\\ell)",
+            "phi ell prime de zède ell",
+            "Dérivée de l’activation, évaluée à chaque préactivation."
+          ],
+          [
+            "\\odot",
+            "produit de Hadamard, ou produit terme à terme",
+            "Chaque composante est multipliée par la composante correspondante."
+          ],
+          [
+            "\\ell+1",
+            "ell plus un",
+            "Indice de la couche suivante."
+          ],
+          [
+            "z_\\ell",
+            "zède ell",
+            "Valeurs calculées avant l’activation lors du passage avant."
+          ]
+        ],
+        "sens": "La propagation arrière combine l’effet des poids de la couche suivante et la dérivée locale de l’activation.",
+        "attention": "Le premier produit est matriciel. Le symbole cercle avec point demande ensuite un produit terme à terme, avec deux vecteurs de même taille."
+      }
     },
     {
       "day": 1,
@@ -762,7 +1633,67 @@
       "notes": "Prendre B=32, une entrée de largeur 16 et une sortie de largeur 10. H est 32×16, W est 10×16, Z et D sont 32×10. D transposée multipliée par H donne 10×16. Dans nos implémentations NumPy, D contient déjà la division par B issue de la perte moyenne ; on ne divise donc pas à nouveau le gradient des poids. Les biais sont broadcastés pendant le passage avant : le passage arrière doit inverser cette opération en sommant sur les axes répétés. Ce principe s'applique à de nombreux bugs d'autograd manuel.",
       "question": "Si D=(p-y)/B, faut-il encore diviser DᵀH par B ?",
       "answer": "Non : cela réduirait le gradient d’un facteur B supplémentaire.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Z vaut H fois W transposée, plus le vecteur de uns fois b transposé. D est le gradient de la perte totale par rapport à Z.",
+          "Le gradient selon W vaut D transposée fois H. Celui selon b est la somme des lignes de D. Celui selon H vaut D fois W."
+        ],
+        "symboles": [
+          [
+            "H,\\ W,\\ Z",
+            "grand ache, w, zède",
+            "Activations d’entrée B par d entrée, poids d sortie par d entrée, préactivations B par d sortie."
+          ],
+          [
+            "B",
+            "bé",
+            "Nombre d’exemples du batch."
+          ],
+          [
+            "b,\\ \\mathbf1 b^\\top",
+            "bé ; vecteur de uns fois b transposé",
+            "Vecteur des biais, puis matrice qui répète ce biais sur chaque ligne."
+          ],
+          [
+            "\\mathcal L",
+            "grand ell calligraphique",
+            "Perte agrégée sur le batch, avec une réduction définie."
+          ],
+          [
+            "D=\\frac{\\partial\\mathcal L}{\\partial Z}",
+            "D égale le gradient de grand ell selon Z",
+            "Matrice des sensibilités, de même forme que Z."
+          ],
+          [
+            "D^\\top H",
+            "D transposée fois H",
+            "Gradient des poids, de même forme que W."
+          ],
+          [
+            "D_{i,:}",
+            "ligne i de D, toutes les colonnes",
+            "Sensibilités correspondant à l’exemple i. Le deux-points sélectionne toutes les colonnes."
+          ],
+          [
+            "\\sum_{i=1}^B D_{i,:}",
+            "somme des lignes de D, de i égale un à B",
+            "Gradient du biais partagé entre les exemples."
+          ],
+          [
+            "DW",
+            "D fois W",
+            "Gradient des activations d’entrée H."
+          ],
+          [
+            "\\nabla",
+            "nabla, gradient",
+            "Dérivées par rapport à l’objet indiqué en indice."
+          ]
+        ],
+        "sens": "Les produits matriciels regroupent les calculs de chaque exemple sans changer les dérivées.",
+        "attention": "Si D contient déjà le facteur un sur B d’une perte moyenne, il ne faut pas diviser encore une fois le gradient des poids."
+      }
     },
     {
       "day": 1,
@@ -776,7 +1707,67 @@
       "notes": "Une vérification numérique est un outil de diagnostic, pas une méthode pratique d'entraînement : elle exige deux évaluations de la perte par paramètre testé. Une valeur epsilon trop grande produit une erreur de troncature ; trop petite, une erreur d'arrondi. Une plage autour de 10 puissance moins cinq convient souvent en double précision, sans être une constante universelle. Désactiver le dropout et contrôler toute source d'aléa. Si la perturbation traverse zéro pour une ReLU, les dérivées peuvent différer sans que la règle de propagation soit incorrecte. Le TP vérifie séparément chaque tableau de paramètres.",
       "question": "Pourquoi la différence finie est-elle coûteuse pour un grand réseau ?",
       "answer": "Son coût croît avec le nombre de paramètres vérifiés.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Le gradient numérique de coordonnée j vaut la perte en thêta plus epsilon e j, moins la perte en thêta moins epsilon e j, le tout divisé par deux epsilon.",
+          "r est la norme de la différence des gradients, divisée par la somme de leurs normes et de dix puissance moins douze."
+        ],
+        "symboles": [
+          [
+            "g_j^{\\rm num}",
+            "g indice j, exposant num",
+            "Approximation numérique de la j-ième composante du gradient. Num est une étiquette, pas une puissance."
+          ],
+          [
+            "\\theta",
+            "thêta",
+            "Vecteur des paramètres au point testé."
+          ],
+          [
+            "\\varepsilon",
+            "epsilon",
+            "Petit pas utilisé pour perturber un paramètre."
+          ],
+          [
+            "e_j",
+            "e indice j",
+            "Vecteur de base : un à la position j et zéro ailleurs."
+          ],
+          [
+            "\\mathcal L(\\theta\\pm\\varepsilon e_j)",
+            "perte en thêta plus ou moins epsilon e j",
+            "Deux évaluations de la perte, de part et d’autre du point courant."
+          ],
+          [
+            "2\\varepsilon",
+            "deux epsilon",
+            "Distance entre les deux points de calcul."
+          ],
+          [
+            "g^{\\rm num},\\ g",
+            "g numérique, g",
+            "Gradient approché et gradient analytique à comparer."
+          ],
+          [
+            "\\|\\cdot\\|_2",
+            "norme deux",
+            "Longueur euclidienne du vecteur."
+          ],
+          [
+            "r",
+            "erre",
+            "Écart relatif normalisé entre les deux gradients."
+          ],
+          [
+            "10^{-12}",
+            "dix puissance moins douze",
+            "Petit terme qui évite un dénominateur exactement nul."
+          ]
+        ],
+        "sens": "La différence centrale estime une dérivée en observant la variation de la perte autour du point courant.",
+        "attention": "Le petit pas epsilon n’est pas une variable à apprendre. Trop petit, il amplifie l’erreur d’arrondi. Les tirages aléatoires doivent rester identiques entre les deux évaluations."
+      }
     },
     {
       "day": 1,
@@ -966,7 +1957,57 @@
       "notes": "Le gradient de mini-batch est un estimateur du gradient empirique lorsque l'échantillonnage est approprié. Sa variabilité influence la trajectoire de l'optimisation, sans constituer une garantie de meilleure généralisation. Doubler le batch réduit le nombre d'étapes par époque ; comparer seulement le nombre d'époques peut donc masquer un changement de budget de mises à jour. La mémoire des activations croît avec B, alors que celle des paramètres reste fixe. Les relations simples de redimensionnement du taux d'apprentissage sont des heuristiques qui nécessitent une validation.",
       "question": "Si N=1000 et B=128 sans drop_last, combien d’étapes par époque ?",
       "answer": "8, dont une dernière étape de 104 exemples.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "g t vaut un sur B fois la somme des gradients des pertes des exemples dont l’indice appartient au mini-batch à l’itération t.",
+          "Thêta t plus un vaut thêta t moins êta t fois g t."
+        ],
+        "symboles": [
+          [
+            "g_t",
+            "gé indice t",
+            "Gradient moyen du mini-batch courant."
+          ],
+          [
+            "B",
+            "bé",
+            "Nombre d’exemples du mini-batch."
+          ],
+          [
+            "\\mathcal B_t",
+            "bé calligraphique indice t",
+            "Ensemble des indices des exemples choisis à l’itération t."
+          ],
+          [
+            "i\\in\\mathcal B_t",
+            "i appartient au mini-batch bé t",
+            "La somme porte seulement sur ces exemples."
+          ],
+          [
+            "\\ell_i(\\theta_t)",
+            "ell indice i évaluée en thêta t",
+            "Perte de l’exemple i avec les paramètres courants."
+          ],
+          [
+            "\\nabla_\\theta",
+            "gradient par rapport à thêta",
+            "Dérivées selon les paramètres du modèle."
+          ],
+          [
+            "\\eta_t",
+            "êta indice t",
+            "Taux d’apprentissage de cette mise à jour."
+          ],
+          [
+            "\\theta_t,\\ \\theta_{t+1}",
+            "thêta t, thêta t plus un",
+            "Paramètres courants et paramètres mis à jour."
+          ]
+        ],
+        "sens": "SGD remplace le gradient de tout l’échantillon par une estimation calculée sur un sous-ensemble.",
+        "attention": "B est une taille, alors que B calligraphique t est un ensemble d’indices. L’échelle du gradient dépend du choix somme ou moyenne."
+      }
     },
     {
       "day": 2,
@@ -980,7 +2021,52 @@
       "notes": "Présenter explicitement la convention employée : ici, on n'introduit pas le facteur 1-beta devant g. Une autre écriture utilise une moyenne exponentielle normalisée et nécessite un taux effectif différent. Lorsque les gradients gardent un même signe, leur contribution s'accumule et accélère le mouvement ; lorsqu'ils oscillent, une partie se compense. Une mémoire importante peut aussi provoquer un dépassement ou retarder un changement de direction. Le momentum n'élimine donc pas le choix du taux d'apprentissage. Initialiser v à zéro et calculer deux étapes pour un gradient constant.",
       "question": "Avec β=0,9, v0=0 et g=1, quelles sont v1 et v2 ?",
       "answer": "1 puis 1,9 dans cette convention.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "v t vaut bêta fois v t moins un, plus g t.",
+          "Thêta t plus un vaut thêta t moins êta fois v t."
+        ],
+        "symboles": [
+          [
+            "v_t",
+            "vé indice t",
+            "Accumulateur de gradients, ou vitesse, au pas courant."
+          ],
+          [
+            "v_{t-1}",
+            "vé indice t moins un",
+            "État de l’accumulateur au pas précédent."
+          ],
+          [
+            "\\beta",
+            "bêta",
+            "Coefficient de mémoire, généralement entre zéro inclus et un exclu."
+          ],
+          [
+            "g_t",
+            "gé indice t",
+            "Gradient courant."
+          ],
+          [
+            "\\eta",
+            "êta",
+            "Taux d’apprentissage."
+          ],
+          [
+            "\\theta_t,\\ \\theta_{t+1}",
+            "thêta t, thêta t plus un",
+            "Paramètres avant et après la mise à jour."
+          ],
+          [
+            "t-1",
+            "té moins un",
+            "Itération précédente, et non soustraction de un à la valeur de v."
+          ]
+        ],
+        "sens": "La direction du pas tient compte de plusieurs gradients successifs.",
+        "attention": "Cette convention du momentum n’ajoute pas de facteur un moins bêta devant g. D’autres conventions normalisent l’accumulateur différemment."
+      }
     },
     {
       "day": 2,
@@ -996,7 +2082,73 @@
       "answer": "Non : c’est un second moment non centré.",
       "refs": [
         "adam"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "m t vaut bêta un fois m t moins un, plus un moins bêta un fois le gradient g t.",
+          "v t vaut bêta deux fois v t moins un, plus un moins bêta deux fois g t au carré, composante par composante.",
+          "Thêta t plus un vaut thêta t moins êta fois le premier moment corrigé, divisé composante par composante par la racine du second moment corrigé plus epsilon."
+        ],
+        "symboles": [
+          [
+            "g_t",
+            "gé indice t",
+            "Gradient au pas t."
+          ],
+          [
+            "m_t,\\ m_{t-1}",
+            "m t, m t moins un",
+            "Moyenne mobile des gradients, courante et précédente."
+          ],
+          [
+            "v_t,\\ v_{t-1}",
+            "vé t, vé t moins un",
+            "Moyenne mobile des carrés des gradients."
+          ],
+          [
+            "\\beta_1,\\ \\beta_2",
+            "bêta un, bêta deux",
+            "Coefficients de mémoire des deux moyennes."
+          ],
+          [
+            "g_t^2",
+            "gé t au carré, terme à terme",
+            "Chaque composante du gradient est élevée au carré."
+          ],
+          [
+            "\\beta_1^t,\\ \\beta_2^t",
+            "bêta un puissance t, bêta deux puissance t",
+            "Puissances utilisées pour corriger l’initialisation à zéro des moments."
+          ],
+          [
+            "m_t/(1-\\beta_1^t)",
+            "m t divisé par un moins bêta un puissance t",
+            "Premier moment corrigé."
+          ],
+          [
+            "v_t/(1-\\beta_2^t)",
+            "vé t divisé par un moins bêta deux puissance t",
+            "Second moment corrigé."
+          ],
+          [
+            "\\sqrt{\\cdot}",
+            "racine carrée",
+            "Racine prise composante par composante."
+          ],
+          [
+            "\\eta,\\ \\varepsilon",
+            "êta, epsilon",
+            "Taux d’apprentissage et petit stabilisateur numérique du dénominateur."
+          ],
+          [
+            "\\theta_t,\\ \\theta_{t+1}",
+            "thêta t, thêta t plus un",
+            "Paramètres avant et après la mise à jour."
+          ]
+        ],
+        "sens": "Adam mémorise la direction moyenne du gradient et adapte l’échelle du pas à chaque paramètre.",
+        "attention": "v est un second moment non centré, pas une variance centrée. Les divisions sont terme à terme. Epsilon se trouve hors de la racine dans la convention affichée."
+      }
     },
     {
       "day": 2,
@@ -1010,7 +2162,57 @@
       "notes": "L'argument de variance suppose approximativement des composantes indépendantes et centrées. Une somme de d contributions indépendantes additionne leurs variances ; il faut donc compenser l'augmentation de fan-in. ReLU élimine une partie du signal, d'où le facteur deux dans l'heuristique de He. Ces conditions idéalisées ne prouvent pas la stabilité de tout réseau réel, mais fournissent un point de départ utile. Les biais peuvent être initialisés à zéro sans rendre tous les neurones identiques si les poids sont aléatoires. Ne pas dire que tous les paramètres doivent nécessairement être aléatoires.",
       "question": "Pourquoi ne pas initialiser tous les poids d’une couche à la même valeur ?",
       "answer": "Les neurones peuvent rester symétriques et apprendre des représentations identiques.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "W i j suit une loi normale de moyenne zéro et de variance deux sur d entrée, pour l’initialisation adaptée à ReLU.",
+          "Pour Xavier, la variance de W i j vaut approximativement deux divisé par d entrée plus d sortie."
+        ],
+        "symboles": [
+          [
+            "W_{ij}",
+            "w indices i j",
+            "Poids reliant une composante d’entrée à une unité de sortie."
+          ],
+          [
+            "\\sim",
+            "suit la loi",
+            "Le poids est tiré aléatoirement selon la distribution indiquée."
+          ],
+          [
+            "\\mathcal N(0,v)",
+            "loi normale de moyenne zéro et de variance vé",
+            "Dans cette convention, le deuxième argument est la variance."
+          ],
+          [
+            "d_{\\rm in},\\ d_{\\rm out}",
+            "d entrée, d sortie",
+            "Nombre de connexions d’entrée et nombre d’unités de sortie de la couche."
+          ],
+          [
+            "\\operatorname{Var}(W_{ij})",
+            "variance de w i j",
+            "Dispersion des tirages de ce poids autour de leur moyenne."
+          ],
+          [
+            "2/d_{\\rm in}",
+            "deux sur d entrée",
+            "Variance de l’initialisation indiquée pour ReLU."
+          ],
+          [
+            "2/(d_{\\rm in}+d_{\\rm out})",
+            "deux sur la somme de d entrée et d sortie",
+            "Variance utilisée dans l’heuristique de Xavier."
+          ],
+          [
+            "\\approx",
+            "environ égal à",
+            "Expression inscrite dans une analyse simplifiée des variances."
+          ]
+        ],
+        "sens": "L’échelle des poids compense le nombre de contributions additionnées par chaque neurone.",
+        "attention": "La variance deux sur d entrée n’est pas l’écart-type. L’écart-type correspondant est sa racine carrée."
+      }
     },
     {
       "day": 2,
@@ -1024,7 +2226,51 @@
       "notes": "Une succession d'opérateurs contractants peut atténuer le signal, tandis que des directions amplifiées peuvent le faire exploser. Les normes spectrales donnent une intuition, mais la direction effective du gradient et les corrélations entre matrices comptent aussi. Le clipping par norme limite la magnitude d'un gradient déjà calculé ; il ne restaure pas un gradient disparu et ne corrige pas un masque erroné. Observer les normes par couche avant de proposer une intervention. Les connexions résiduelles introduisent un chemin identité, que nous retrouverons dans ResNet et dans les Transformers.",
       "question": "Le clipping permet-il de récupérer des gradients proches de zéro ?",
       "answer": "Non : il borne les grands gradients, il ne recrée pas les petits.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Le gradient de la perte selon a zéro vaut J un transposée, fois J deux transposée, et ainsi de suite jusqu’à J grand L transposée, appliquées au gradient de la perte selon a grand L."
+        ],
+        "symboles": [
+          [
+            "a_0,\\ a_L",
+            "a zéro, a grand ell",
+            "Activations d’entrée et de sortie de la pile."
+          ],
+          [
+            "L",
+            "grand ell",
+            "Nombre de couches ou de transformations."
+          ],
+          [
+            "J_\\ell",
+            "ji indice ell",
+            "Jacobienne de a ell par rapport à a ell moins un : matrice des dérivées locales."
+          ],
+          [
+            "J_\\ell^\\top",
+            "ji indice ell transposée",
+            "Opérateur qui propage un gradient colonne vers la couche précédente."
+          ],
+          [
+            "\\frac{\\partial\\ell}{\\partial a_0}",
+            "gradient de ell par rapport à a zéro",
+            "Sensibilité de la perte aux activations d’entrée."
+          ],
+          [
+            "\\frac{\\partial\\ell}{\\partial a_L}",
+            "gradient de ell par rapport à a grand ell",
+            "Gradient disponible au sommet de la pile."
+          ],
+          [
+            "\\cdots",
+            "et ainsi de suite",
+            "Produits des jacobiennes des couches intermédiaires."
+          ]
+        ],
+        "sens": "La rétropropagation applique successivement les transformations locales au gradient de sortie.",
+        "attention": "Dans le produit écrit, J grand L transposée agit d’abord sur le vecteur à droite. Une accumulation de contractions ou d’amplifications peut modifier fortement la norme du gradient."
+      }
     },
     {
       "day": 2,
@@ -1040,7 +2286,57 @@
       "answer": "Non, notamment avec les optimiseurs adaptatifs.",
       "refs": [
         "adamw"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "La perte régularisée vaut la perte de données plus lambda sur deux fois la norme deux de thêta au carré.",
+          "Son gradient vaut le gradient de la perte de données plus lambda fois thêta."
+        ],
+        "symboles": [
+          [
+            "\\mathcal L,\\ \\mathcal L_{\\rm reg}",
+            "grand ell, grand ell indice reg",
+            "Perte de données et perte avec pénalisation."
+          ],
+          [
+            "\\theta",
+            "thêta",
+            "Vecteur des paramètres auxquels on applique la pénalisation."
+          ],
+          [
+            "\\lambda",
+            "lambda",
+            "Coefficient non négatif qui règle la force de la pénalisation."
+          ],
+          [
+            "\\|\\theta\\|_2",
+            "norme deux de thêta",
+            "Longueur euclidienne du vecteur des paramètres."
+          ],
+          [
+            "\\|\\theta\\|_2^2",
+            "norme deux de thêta au carré",
+            "Somme des carrés des paramètres."
+          ],
+          [
+            "\\lambda/2",
+            "lambda sur deux",
+            "Facteur choisi pour que la dérivée de la pénalisation soit lambda thêta."
+          ],
+          [
+            "\\nabla",
+            "nabla, gradient",
+            "Toutes les dérivées de cette ligne sont prises par rapport à theta."
+          ],
+          [
+            "\\lambda\\theta",
+            "lambda fois thêta",
+            "Contribution de la pénalisation au gradient."
+          ]
+        ],
+        "sens": "La pénalisation ajoute un coût lorsque les coefficients deviennent grands.",
+        "attention": "Le gradient de la perte et celui de la pénalisation s’additionnent. Dans Adam, pénalisation L2 et weight decay découplé ne sont pas généralement équivalents."
+      }
     },
     {
       "day": 2,
@@ -1056,7 +2352,53 @@
       "answer": "Pour conserver l’espérance de l’activation dans le dropout inversé.",
       "refs": [
         "tavenard"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "m j suit une loi de Bernoulli dont la probabilité de conservation est un moins p.",
+          "a tilde j vaut m j divisé par un moins p, puis multiplié par a j.",
+          "L’espérance de a tilde j vaut a j."
+        ],
+        "symboles": [
+          [
+            "a_j",
+            "a indice j",
+            "Activation avant dropout."
+          ],
+          [
+            "m_j",
+            "m indice j",
+            "Masque aléatoire égal à zéro ou à un."
+          ],
+          [
+            "p,\\ 1-p",
+            "pé, un moins pé",
+            "Probabilité de suppression et probabilité de conservation. On suppose zéro inférieur ou égal à p et p strictement inférieur à un."
+          ],
+          [
+            "\\sim\\operatorname{Bernoulli}(1-p)",
+            "suit une loi de Bernoulli de paramètre un moins p",
+            "Le masque vaut un avec probabilité un moins p."
+          ],
+          [
+            "\\tilde a_j",
+            "a tilde indice j",
+            "Activation après application du masque et remise à l’échelle."
+          ],
+          [
+            "\\frac{m_j}{1-p}a_j",
+            "m j sur un moins p, fois a j",
+            "Activation annulée ou amplifiée pour préserver son espérance."
+          ],
+          [
+            "\\mathbb E[\\tilde a_j]",
+            "espérance de a tilde j",
+            "Moyenne théorique sur les tirages du masque, pour a j fixé."
+          ]
+        ],
+        "sens": "Le dropout inversé conserve en moyenne chaque activation grâce à la division par la probabilité de conservation.",
+        "attention": "Le tilde marque ici une activation modifiée, pas une estimation de probabilité. Préserver l’espérance de cette activation ne préserve pas forcément celle de toute la sortie du réseau."
+      }
     },
     {
       "day": 2,
@@ -1073,7 +2415,57 @@
       "refs": [
         "bn",
         "ln"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "x chapeau vaut x moins mu, le tout divisé par la racine carrée de sigma au carré plus epsilon.",
+          "y vaut gamma fois x chapeau plus bêta."
+        ],
+        "symboles": [
+          [
+            "x,\\ \\hat x",
+            "x, x chapeau",
+            "Activation initiale puis activation normalisée."
+          ],
+          [
+            "\\mu",
+            "mu",
+            "Moyenne calculée sur les axes retenus par la normalisation."
+          ],
+          [
+            "\\sigma^2",
+            "sigma au carré",
+            "Variance sur ces mêmes axes."
+          ],
+          [
+            "\\varepsilon",
+            "epsilon",
+            "Petit nombre positif qui stabilise le dénominateur."
+          ],
+          [
+            "\\sqrt{\\sigma^2+\\varepsilon}",
+            "racine carrée de sigma au carré plus epsilon",
+            "Échelle de normalisation."
+          ],
+          [
+            "\\gamma,\\ \\beta",
+            "gamma, bêta",
+            "Gain multiplicatif et décalage appris."
+          ],
+          [
+            "y",
+            "y",
+            "Activation de sortie après transformation affine."
+          ],
+          [
+            "\\hat x",
+            "chapeau",
+            "Indique ici une normalisation, alors que y chapeau désigne une prédiction dans la perte de régression."
+          ]
+        ],
+        "sens": "On centre l’activation, on ajuste son échelle, puis on lui applique un gain et un décalage appris.",
+        "attention": "Les axes des statistiques dépendent de la méthode : BatchNorm et LayerNorm ne calculent pas les mêmes moyennes. Sigma au carré est une variance, pas l’activation sigmoïde."
+      }
     },
     {
       "day": 2,
@@ -1120,7 +2512,66 @@
       "answer": "Non : il contient 3×3×3 = 27 poids, plus un biais éventuel.",
       "refs": [
         "convdoc"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "Y aux indices o, i, j vaut le biais du canal o plus une somme sur les canaux c, les décalages verticaux u et horizontaux v, des poids W o c u v multipliés par les entrées X c, i plus u, j plus v."
+        ],
+        "symboles": [
+          [
+            "X,\\ Y",
+            "grand x, grand y",
+            "Tenseur d’entrée et tenseur de sortie. L’axe batch est omis ici."
+          ],
+          [
+            "o,\\ c",
+            "o, cé",
+            "Indice du canal de sortie et indice du canal d’entrée."
+          ],
+          [
+            "i,\\ j",
+            "i, j",
+            "Position spatiale de la sortie."
+          ],
+          [
+            "u,\\ v",
+            "u, vé",
+            "Décalages à l’intérieur du noyau."
+          ],
+          [
+            "C_{\\rm in}",
+            "cé entrée",
+            "Nombre de canaux d’entrée."
+          ],
+          [
+            "k_h,\\ k_w",
+            "k hauteur, k largeur",
+            "Hauteur et largeur du noyau."
+          ],
+          [
+            "W_{o,c,u,v}",
+            "w indices o, c, u, v",
+            "Coefficient du noyau reliant le canal c au canal o au décalage u, v."
+          ],
+          [
+            "X_{c,i+u,j+v}",
+            "x au canal c, ligne i plus u, colonne j plus v",
+            "Valeur d’entrée couverte par ce coefficient."
+          ],
+          [
+            "b_o",
+            "bé indice o",
+            "Biais commun à toutes les positions du canal de sortie o."
+          ],
+          [
+            "\\sum_c\\sum_u\\sum_v",
+            "somme sur c, puis sur u, puis sur v",
+            "Addition de toutes les contributions des canaux et de la fenêtre."
+          ]
+        ],
+        "sens": "Une valeur de sortie combine une fenêtre locale de tous les canaux d’entrée avec les coefficients d’un filtre.",
+        "attention": "C’est la corrélation croisée utilisée par Conv2d, avec stride un, dilation un et sans padding dans cet exemple. Les indices u et v commencent à zéro."
+      }
     },
     {
       "day": 2,
@@ -1134,7 +2585,48 @@
       "notes": "Faire remplir les quatre cases avant d'afficher le calcul oralement. La première vaut 1×1+2×0+0×0+1×(-1)=0. La deuxième vaut 2-3=-1, la troisième 0-1=-1 et la quatrième 1-0=1. Insister sur le fait qu'un seul jeu de quatre poids a produit toutes les sorties. Un biais s'ajouterait à chaque case du même canal. Ce noyau est fixé à titre pédagogique ; dans un CNN, il est généralement appris. Le calcul est une corrélation croisée valide et ne doit pas être mélangé à une convention de noyau retourné.",
       "question": "Combien de paramètres seraient appris avec un biais ?",
       "answer": "5 : quatre poids et un biais.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "X est une matrice trois par trois. Ses lignes sont : un, deux, zéro ; zéro, un, trois ; deux, un, zéro.",
+          "W est une matrice deux par deux dont les lignes sont un, zéro, puis zéro, moins un.",
+          "Y est la matrice deux par deux : zéro, moins un, puis moins un, un."
+        ],
+        "symboles": [
+          [
+            "X",
+            "grand x",
+            "Image d’entrée de hauteur trois et de largeur trois."
+          ],
+          [
+            "W",
+            "w",
+            "Noyau de hauteur deux et de largeur deux."
+          ],
+          [
+            "Y",
+            "grand y",
+            "Carte de sortie, obtenue avec un pas de un et sans padding."
+          ],
+          [
+            "\\begin{bmatrix}a&b\\\\c&d\\end{bmatrix}",
+            "matrice deux par deux, première ligne a b, deuxième ligne c d",
+            "Les crochets regroupent des valeurs en lignes et colonnes."
+          ],
+          [
+            "-1",
+            "moins un",
+            "Poids négatif du coin inférieur droit du noyau, ou valeur négative de sortie selon sa position."
+          ],
+          [
+            "=",
+            "égale",
+            "Attribue explicitement ses valeurs à chaque matrice."
+          ]
+        ],
+        "sens": "À chaque position, le noyau soustrait le coin inférieur droit de la fenêtre à son coin supérieur gauche. La première sortie vaut un moins un, donc zéro.",
+        "attention": "Le noyau n’est pas retourné dans ce calcul. La lecture de la matrice se fait ligne par ligne, sans traiter les crochets comme une norme."
+      }
     },
     {
       "day": 2,
@@ -1150,7 +2642,56 @@
       "answer": "26.",
       "refs": [
         "convdoc"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "H sortie vaut la partie entière inférieure de la quantité H plus deux p, moins d fois k moins un, moins un, divisée par s, puis plus un."
+        ],
+        "symboles": [
+          [
+            "H,\\ H_{\\rm out}",
+            "ache, ache sortie",
+            "Hauteur de l’entrée et hauteur de la sortie."
+          ],
+          [
+            "p",
+            "pé",
+            "Nombre de lignes de padding ajoutées de chaque côté."
+          ],
+          [
+            "d",
+            "dé",
+            "Dilation, c’est-à-dire espacement des coefficients du noyau."
+          ],
+          [
+            "k",
+            "ka",
+            "Taille du noyau selon cet axe."
+          ],
+          [
+            "s",
+            "esse",
+            "Stride, ou pas de déplacement de la fenêtre."
+          ],
+          [
+            "d(k-1)+1",
+            "d fois k moins un, plus un",
+            "Taille effective du noyau après dilation."
+          ],
+          [
+            "\\lfloor\\cdot\\rfloor",
+            "partie entière inférieure, ou plancher",
+            "Plus grand entier inférieur ou égal à la valeur entre les crochets."
+          ],
+          [
+            "2p",
+            "deux pé",
+            "Padding total, réparti symétriquement sur les deux bords."
+          ]
+        ],
+        "sens": "On compte le nombre de positions de la fenêtre qui tiennent dans l’entrée après padding.",
+        "attention": "Les crochets de plancher demandent d’arrondir vers le bas. Ici d est une dilation, pas une dimension d’embedding. La même formule s’applique indépendamment à la largeur."
+      }
     },
     {
       "day": 2,
@@ -1208,7 +2749,57 @@
       "answer": "Non, à noyau et nombres de canaux constants.",
       "refs": [
         "convdoc"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "Le nombre de paramètres vaut C sortie multiplié par la somme de C entrée fois k hauteur fois k largeur et de un.",
+          "Le nombre de multiplications-accumulations vaut approximativement H sortie fois W sortie fois C sortie fois C entrée fois k hauteur fois k largeur."
+        ],
+        "symboles": [
+          [
+            "P",
+            "pé",
+            "Nombre de paramètres appris, biais inclus."
+          ],
+          [
+            "C_{\\rm in},\\ C_{\\rm out}",
+            "cé entrée, cé sortie",
+            "Nombre de canaux d’entrée et de sortie."
+          ],
+          [
+            "k_h,\\ k_w",
+            "k hauteur, k largeur",
+            "Dimensions du noyau."
+          ],
+          [
+            "C_{\\rm in}k_hk_w",
+            "cé entrée fois k hauteur fois k largeur",
+            "Nombre de poids utilisés pour une valeur de sortie."
+          ],
+          [
+            "+1",
+            "plus un",
+            "Un biais supplémentaire par canal de sortie."
+          ],
+          [
+            "H_{\\rm out},\\ W_{\\rm out}",
+            "ache sortie, w sortie",
+            "Hauteur et largeur de la carte de sortie."
+          ],
+          [
+            "\\operatorname{MACs}",
+            "macs, multiplications-accumulations",
+            "Nombre de produits ajoutés à un accumulateur, pour un exemple."
+          ],
+          [
+            "\\approx",
+            "approximativement égal à",
+            "Le comptage du calcul omet notamment les biais et d’autres opérations."
+          ]
+        ],
+        "sens": "Les paramètres sont partagés entre les positions, mais le calcul doit être répété à chacune d’elles.",
+        "attention": "La formule suppose une convolution non groupée. P désigne ici un nombre de paramètres, alors qu’il désigne la taille d’un patch dans la partie ViT."
+      }
     },
     {
       "day": 2,
@@ -1222,7 +2813,47 @@
       "notes": "Expliquer la différence du passage arrière : le max transmet le gradient à une position sélectionnée, tandis que la moyenne le répartit également sur toutes les positions. Les égalités au maximum nécessitent une convention d'implémentation. Le sous-échantillonnage réduit la mémoire et augmente le champ réceptif des couches suivantes, mais détruit de l'information de position. Il ne procure pas une invariance parfaite aux translations. Une convolution à stride supérieur à un peut jouer un rôle de réduction de résolution tout en apprenant sa transformation, avec un autre coût en paramètres.",
       "question": "Où va le gradient d’un max pooling 2×2 sans égalité ?",
       "answer": "Vers l’entrée qui a produit le maximum.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Le max-pooling de la fenêtre contenant un, quatre, deux et trois vaut quatre.",
+          "Le pooling moyen de la même fenêtre vaut deux virgule cinq."
+        ],
+        "symboles": [
+          [
+            "\\operatorname{maxpool}",
+            "max-pooling, ou agrégation par maximum",
+            "Sélection de la plus grande valeur de la fenêtre."
+          ],
+          [
+            "\\operatorname{avgpool}",
+            "average-pooling, ou agrégation par moyenne",
+            "Moyenne arithmétique des valeurs de la fenêtre."
+          ],
+          [
+            "\\begin{bmatrix}1&4\\\\2&3\\end{bmatrix}",
+            "matrice deux par deux : un quatre, puis deux trois",
+            "Fenêtre locale examinée."
+          ],
+          [
+            "4",
+            "quatre",
+            "Valeur maximale de la fenêtre."
+          ],
+          [
+            "2.5",
+            "deux virgule cinq",
+            "Moyenne : un plus quatre plus deux plus trois, divisés par quatre."
+          ],
+          [
+            "=",
+            "égale",
+            "Résultat scalaire de l’agrégation."
+          ]
+        ],
+        "sens": "Les quatre valeurs de la fenêtre se réduisent à une seule valeur par canal.",
+        "attention": "Le point de 2.5 est un séparateur décimal dans la formule. Le lire « virgule » en français. Ces opérations de pooling ne possèdent pas de poids appris."
+      }
     },
     {
       "day": 2,
@@ -1236,7 +2867,58 @@
       "notes": "Faire le calcul pour Conv3 stride1, Pool2 stride2, Conv3 stride1. Après la première convolution, r=3 et j=1 ; après le pooling, r=4 et j=2 ; après la seconde convolution, r=8 et j=2. Deux convolutions 3×3 à stride un donnent en revanche un champ de 5×5 avant tout pooling. Le padding déplace les centres et traite les bords, mais n'augmente pas le nombre de pixels réels disponibles en dehors de l'image. Le champ réceptif effectif décrit les influences effectivement importantes, qui dépendent des poids et des données.",
       "question": "Quel champ obtient-on avec deux convolutions 3×3 sans stride ?",
       "answer": "5×5 dans le cas standard.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Le saut j de la couche ell vaut le saut précédent multiplié par le stride de cette couche.",
+          "Le champ réceptif r de la couche ell vaut le champ précédent, plus k ell moins un, fois la dilation d ell, fois le saut précédent.",
+          "Au départ, r zéro et j zéro valent un."
+        ],
+        "symboles": [
+          [
+            "\\ell,\\ \\ell-1",
+            "ell, ell moins un",
+            "Indices de la couche courante et de la couche précédente."
+          ],
+          [
+            "j_\\ell",
+            "ji indice ell",
+            "Écart entre deux positions voisines de cette couche, mesuré en pixels de l’entrée."
+          ],
+          [
+            "s_\\ell",
+            "esse indice ell",
+            "Stride de la couche."
+          ],
+          [
+            "r_\\ell",
+            "erre indice ell",
+            "Taille du champ réceptif théorique sur un axe."
+          ],
+          [
+            "k_\\ell",
+            "ka indice ell",
+            "Taille du noyau de la couche."
+          ],
+          [
+            "d_\\ell",
+            "dé indice ell",
+            "Dilation de cette couche."
+          ],
+          [
+            "(k_\\ell-1)d_\\ell j_{\\ell-1}",
+            "k ell moins un, fois d ell, fois j ell moins un",
+            "Étendue supplémentaire couverte dans les coordonnées de l’entrée."
+          ],
+          [
+            "r_0=j_0=1",
+            "r zéro et j zéro valent un",
+            "Un pixel de l’entrée couvre un pixel et deux pixels voisins sont séparés d’un pas."
+          ]
+        ],
+        "sens": "Le stride change l’espacement entre les sorties. Les tailles de noyau et les dilations agrandissent le champ couvert.",
+        "attention": "j est ici un saut spatial, pas un indice de colonne comme dans la convolution. Le champ réceptif théorique ne mesure pas l’influence effective de chaque pixel."
+      }
     },
     {
       "day": 2,
@@ -1250,7 +2932,52 @@
       "notes": "Sur un domaine infini ou avec des conditions adaptées, une convolution à stride un commute avec une translation entière. Sur une image finie, le padding et les bords limitent cette égalité. Avec un stride supérieur à un, seules certaines translations s'alignent sur la grille de sous-échantillonnage. Un classifieur peut rechercher une certaine invariance via l'agrégation spatiale ou l'augmentation, mais cela n'est pas une conséquence absolue du mot CNN. Pour la segmentation, on souhaite plutôt préserver une relation spatiale entre entrée et sortie ; l'invariance totale serait indésirable.",
       "question": "Une segmentation d’image doit-elle être totalement invariante à la translation ?",
       "answer": "Non : le masque devrait généralement se déplacer avec les objets.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "f appliquée à T de x est égale à T appliquée à f de x : c’est l’équivariance.",
+          "g appliquée à T de x est égale à g de x : c’est l’invariance."
+        ],
+        "symboles": [
+          [
+            "x",
+            "x",
+            "Entrée du modèle."
+          ],
+          [
+            "T",
+            "té majuscule",
+            "Transformation de l’entrée, par exemple une translation."
+          ],
+          [
+            "Tx",
+            "té appliquée à x",
+            "Entrée après transformation."
+          ],
+          [
+            "f,\\ g",
+            "effe, gé",
+            "Fonctions dont on étudie le comportement."
+          ],
+          [
+            "Tf(x)",
+            "té appliquée à effe de x",
+            "Transformation correspondante de la sortie."
+          ],
+          [
+            "f(Tx)=Tf(x)",
+            "transformer l’entrée puis calculer, ou calculer puis transformer",
+            "La sortie se transforme de façon cohérente avec l’entrée."
+          ],
+          [
+            "g(Tx)=g(x)",
+            "la sortie de g reste la même après transformation de l’entrée",
+            "La sortie ne dépend pas de cette transformation."
+          ]
+        ],
+        "sens": "Équivariance : la sortie suit la transformation. Invariance : la sortie reste identique.",
+        "attention": "Le même T représente les actions compatibles dans l’espace d’entrée et de sortie. Les bords, le padding et le sous-échantillonnage peuvent limiter ces égalités."
+      }
     },
     {
       "day": 2,
@@ -1423,7 +3150,57 @@
       "notes": "Un noyau 1×1 n'est pas une opération inutile : il réalise une projection sur les canaux, avec les mêmes poids à chaque position. Il est employé pour réduire ou augmenter la dimension et pour aligner les branches résiduelles. L'agrégation globale par moyenne réduit la dépendance de la tête à la taille spatiale et peut réduire fortement le nombre de paramètres. Elle détruit toutefois la localisation fine ; ce choix convient plus naturellement à certaines tâches de classification qu'à une reconstruction dense. Comparer son coût à celui d'une grande couche dense après aplatissement.",
       "question": "Une convolution 1×1 peut-elle modifier le nombre de canaux ?",
       "answer": "Oui, via une projection apprise partagée à chaque position.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Y du canal o à la position i j vaut b o plus la somme, sur les canaux c, de W o c fois X c i j.",
+          "g c vaut un sur H W fois la somme de X c i j sur toutes les positions spatiales."
+        ],
+        "symboles": [
+          [
+            "X_{c,i,j},\\ Y_{o,i,j}",
+            "x canal c position i j ; y canal o position i j",
+            "Activations d’entrée et de sortie à une même position."
+          ],
+          [
+            "c,\\ o",
+            "cé, o",
+            "Canal d’entrée et canal de sortie."
+          ],
+          [
+            "W_{o,c},\\ b_o",
+            "w indices o c, b indice o",
+            "Poids du mélange des canaux et biais du canal de sortie."
+          ],
+          [
+            "\\sum_c",
+            "somme sur cé",
+            "Addition des contributions de tous les canaux d’entrée."
+          ],
+          [
+            "H,\\ W",
+            "ache, w",
+            "Hauteur et largeur de la carte dans la seconde formule."
+          ],
+          [
+            "HW",
+            "ache fois w",
+            "Nombre total de positions spatiales."
+          ],
+          [
+            "\\sum_{i,j}",
+            "somme sur i et j",
+            "Somme sur toutes les lignes et colonnes."
+          ],
+          [
+            "g_c",
+            "gé indice cé",
+            "Moyenne spatiale du canal c."
+          ]
+        ],
+        "sens": "La convolution un par un mélange les canaux à position fixe. La moyenne globale réduit chaque canal à un scalaire.",
+        "attention": "W avec des indices est un poids, tandis que W seul dans H W désigne la largeur. Les deux opérations décrites ont des rôles distincts."
+      }
     },
     {
       "day": 3,
@@ -1439,7 +3216,57 @@
       "answer": "Non : elles dépendent aussi du mode train/eval de BatchNorm.",
       "refs": [
         "bn"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "Mu c vaut la somme des activations du canal c sur le batch et les positions spatiales, divisée par B fois H fois W.",
+          "X chapeau aux indices b c i j vaut X b c i j moins mu c, divisé par la racine de sigma c au carré plus epsilon."
+        ],
+        "symboles": [
+          [
+            "B,\\ H,\\ W",
+            "bé, ache, w",
+            "Taille du batch, hauteur et largeur des cartes."
+          ],
+          [
+            "b,\\ c,\\ i,\\ j",
+            "bé, cé, i, j",
+            "Indices de l’exemple, du canal, de la ligne et de la colonne."
+          ],
+          [
+            "X_{b,c,i,j}",
+            "x indices b c i j",
+            "Une activation du tenseur d’entrée."
+          ],
+          [
+            "\\mu_c",
+            "mu indice cé",
+            "Moyenne du canal c sur les B H W valeurs du batch."
+          ],
+          [
+            "\\sum_{b,i,j}",
+            "somme sur b, i et j",
+            "Agrégation sur les exemples et les positions, en gardant le canal fixé."
+          ],
+          [
+            "\\sigma_c^2",
+            "sigma indice cé au carré",
+            "Variance calculée sur ces mêmes axes."
+          ],
+          [
+            "\\varepsilon",
+            "epsilon",
+            "Terme positif de stabilisation."
+          ],
+          [
+            "\\hat X_{b,c,i,j}",
+            "x chapeau indices b c i j",
+            "Activation centrée et normalisée."
+          ]
+        ],
+        "sens": "BatchNorm2d calcule une paire de statistiques pour chaque canal.",
+        "attention": "b minuscule est ici un indice d’exemple et non un biais. L’écriture montre la normalisation du batch. En évaluation, BatchNorm utilise normalement ses statistiques enregistrées. Le gain gamma et le biais beta peuvent ensuite compléter le calcul."
+      }
     },
     {
       "day": 3,
@@ -1455,7 +3282,47 @@
       "answer": "Non : il faut aligner les dimensions par une projection adaptée.",
       "refs": [
         "resnet"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "y vaut x plus F de x.",
+          "La jacobienne de y par rapport à x vaut la matrice identité plus la jacobienne de F par rapport à x."
+        ],
+        "symboles": [
+          [
+            "x,\\ y",
+            "x, y",
+            "Entrée et sortie du bloc, de formes compatibles pour l’addition."
+          ],
+          [
+            "F(x)",
+            "grand effe de x",
+            "Transformation calculée par la branche résiduelle."
+          ],
+          [
+            "+",
+            "plus",
+            "Addition des deux branches, composante par composante."
+          ],
+          [
+            "\\frac{\\partial y}{\\partial x}",
+            "jacobienne de y par rapport à x",
+            "Matrice des dérivées de chaque composante de sortie selon chaque composante d’entrée."
+          ],
+          [
+            "I",
+            "i majuscule, matrice identité",
+            "Dérivée du chemin direct x."
+          ],
+          [
+            "\\frac{\\partial F}{\\partial x}",
+            "jacobienne de grand effe par rapport à x",
+            "Dérivée de la branche transformée."
+          ]
+        ],
+        "sens": "Le chemin direct contribue une identité à la dérivée, en plus du chemin qui traverse la transformation F.",
+        "attention": "Il s’agit d’une jacobienne lorsque x et y sont vectoriels. Une branche projetée possède la dérivée de sa projection au lieu d’une identité stricte."
+      }
     },
     {
       "day": 3,
@@ -1469,7 +3336,56 @@
       "notes": "Une rotation légère peut être acceptable pour certains chiffres, mais une rotation de 180 degrés peut échanger des significations. Un retournement horizontal peut être adapté à une photographie d'objet et incorrect pour du texte. Pour une segmentation, il faut transformer la cible spatiale de façon cohérente. La formule suppose ici que T conserve la classe ; cette hypothèse doit être vérifiée. Une augmentation ne crée pas un nouvel individu indépendant pour le test : toutes les variantes d'une même observation doivent rester dans la même partition. Documenter la politique et ses probabilités dans le compte rendu.",
       "question": "Pourquoi ne pas répartir des augmentations d’une même image entre train et test ?",
       "answer": "Cela crée une dépendance et une fuite entre les partitions.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "La perte avec augmentation est l’espérance, sur les exemples x y, de l’espérance sur une transformation T tirée selon la politique A, de la perte entre la prédiction sur T x et la cible y."
+        ],
+        "symboles": [
+          [
+            "\\mathcal L_{\\rm aug}",
+            "grand ell indice aug",
+            "Perte qui tient compte des transformations aléatoires des entrées."
+          ],
+          [
+            "\\mathbb E",
+            "espérance",
+            "Moyenne théorique selon la distribution indiquée en indice."
+          ],
+          [
+            "(x,y)",
+            "couple x y",
+            "Observation et cible associée."
+          ],
+          [
+            "T",
+            "té majuscule",
+            "Transformation aléatoire appliquée à une entrée."
+          ],
+          [
+            "T\\sim\\mathcal A",
+            "té tirée selon a calligraphique",
+            "La politique d’augmentation A définit les transformations et leurs probabilités."
+          ],
+          [
+            "Tx",
+            "té appliquée à x",
+            "Exemple transformé."
+          ],
+          [
+            "f_\\theta(Tx)",
+            "f thêta de té x",
+            "Prédiction du modèle sur cet exemple transformé."
+          ],
+          [
+            "\\ell(f_\\theta(Tx),y)",
+            "perte entre la prédiction transformée et y",
+            "Erreur d’apprentissage avec la cible de classe conservée."
+          ]
+        ],
+        "sens": "L’objectif demande au modèle de fonctionner sur plusieurs transformations admissibles du même exemple.",
+        "attention": "La formule suppose que T conserve la cible. Pour une segmentation, la transformation spatiale doit aussi s’appliquer à la cible."
+      }
     },
     {
       "day": 3,
@@ -1542,7 +3458,53 @@
       "notes": "Pour une classe donnée, considérer cette classe comme positive et toutes les autres comme négatives. Dans la matrice de confusion des notebooks, les lignes sont les vraies classes et les colonnes les prédictions ; annoncer cette convention. Une classe rare peut avoir un rappel faible tout en contribuant peu à l'accuracy globale. Le macro-F1 moyenne les F1 calculés séparément par classe ; ce n'est pas le F1 calculé à partir d'une précision macro et d'un rappel macro. Prévoir une convention lorsque le dénominateur est nul et afficher les effectifs pour contextualiser les métriques.",
       "question": "Le macro-F1 est-il le F1 de la précision et du rappel moyens ?",
       "answer": "Non : il moyenne les F1 calculés classe par classe.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "La précision vaut le nombre de vrais positifs divisé par le nombre de prédictions positives, soit vrais positifs plus faux positifs.",
+          "Le rappel vaut les vrais positifs divisés par vrais positifs plus faux négatifs.",
+          "F un vaut deux fois P fois R, divisé par P plus R."
+        ],
+        "symboles": [
+          [
+            "TP",
+            "vrais positifs, ou té pé",
+            "Exemples de la classe positive prédits positifs."
+          ],
+          [
+            "FP",
+            "faux positifs, ou effe pé",
+            "Exemples négatifs prédits positifs."
+          ],
+          [
+            "FN",
+            "faux négatifs, ou effe enne",
+            "Exemples positifs prédits négatifs."
+          ],
+          [
+            "P",
+            "pé",
+            "Précision : fraction des prédictions positives qui sont correctes."
+          ],
+          [
+            "R",
+            "erre",
+            "Rappel : fraction des positifs réels qui sont retrouvés."
+          ],
+          [
+            "F_1",
+            "effe un",
+            "Moyenne harmonique de la précision et du rappel."
+          ],
+          [
+            "2PR/(P+R)",
+            "deux pé erre divisé par pé plus erre",
+            "Formule de la moyenne harmonique pour deux valeurs."
+          ]
+        ],
+        "sens": "La précision décrit la fiabilité des alertes positives. Le rappel décrit la couverture des vrais positifs.",
+        "attention": "Ces formules concernent une classe positive définie. Si un dénominateur est nul, la convention de calcul doit être précisée. En multiclasse, indiquer aussi le type de moyenne."
+      }
     },
     {
       "day": 3,
@@ -1556,7 +3518,52 @@
       "notes": "Séparer backbone et tête dans l'équation. Les poids du backbone contiennent une représentation issue d'un entraînement antérieur ; ils ne sont pas universellement pertinents. Dans le TP, la source contient les chiffres 0 à 4 et la cible les chiffres 5 à 9. Les espaces d'étiquettes sont disjoints, mais le type d'image reste proche. C'est un transfert pédagogique contrôlé, distinct d'un réseau préentraîné sur ImageNet. Le coût de préentraînement source doit être annoncé quand on compare les budgets, même s'il est partagé entre plusieurs tâches cibles.",
       "question": "Pourquoi remplacer la dernière couche ?",
       "answer": "Parce que les classes et éventuellement le nombre de sorties de la cible changent.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "f de x vaut h psi appliquée à g phi de x.",
+          "On initialise phi avec les paramètres source et psi avec de nouveaux paramètres."
+        ],
+        "symboles": [
+          [
+            "f(x)",
+            "effe de x",
+            "Modèle complet appliqué à l’entrée."
+          ],
+          [
+            "g_\\phi(x)",
+            "gé paramétré par phi, appliqué à x",
+            "Extracteur de caractéristiques, ou backbone."
+          ],
+          [
+            "h_\\psi",
+            "ache paramétré par psi",
+            "Tête qui transforme les caractéristiques en prédiction."
+          ],
+          [
+            "\\phi,\\ \\psi",
+            "phi, psi",
+            "Paramètres de l’extracteur et paramètres de la tête."
+          ],
+          [
+            "\\leftarrow",
+            "reçoit, ou est initialisé avec",
+            "Affectation d’une valeur, pas une égalité à démontrer."
+          ],
+          [
+            "\\phi_{\\rm source}",
+            "phi source",
+            "Paramètres provenant d’un entraînement antérieur."
+          ],
+          [
+            "\\psi_{\\rm nouvelle}",
+            "psi nouvelle",
+            "Paramètres d’une tête adaptée à la nouvelle tâche."
+          ]
+        ],
+        "sens": "Le transfert réutilise un extracteur et lui associe une tête correspondant à la tâche cible.",
+        "attention": "Dans cette formule, phi et psi sont des ensembles de paramètres. Le rôle de g et h diffère de la notation de l’introduction : il faut toujours relire les définitions locales."
+      }
     },
     {
       "day": 3,
@@ -1806,7 +3813,51 @@
       "notes": "Donner plusieurs exemples de tokens : sous-mots en texte, instants d'une série temporelle ou patches d'une image. Le vocabulaire et la tokenisation déterminent l'espace d'entrée ; des modèles avec des tokenisations différentes ne sont pas comparables directement par la seule perplexité. Les séquences peuvent avoir des longueurs variées. Le padding est une commodité de calcul, pas une observation : il doit être exclu de l'attention et, selon la tâche, de la perte. Distinguer la dimension d d'une représentation continue et la taille V du vocabulaire d'identifiants discrets.",
       "question": "Un token correspond-il toujours à un mot complet ?",
       "answer": "Non : il peut représenter un sous-mot, un caractère, un patch ou un autre élément.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Grand X appartient à l’espace des tenseurs réels de taille B par n par d."
+        ],
+        "symboles": [
+          [
+            "X",
+            "grand x",
+            "Tenseur représentant un batch de séquences."
+          ],
+          [
+            "\\in",
+            "appartient à",
+            "Indique le type d’objet mathématique."
+          ],
+          [
+            "\\mathbb R",
+            "erre, ensemble des réels",
+            "Les composantes du tenseur sont des nombres réels."
+          ],
+          [
+            "B",
+            "bé",
+            "Nombre de séquences dans le batch."
+          ],
+          [
+            "n",
+            "enne",
+            "Nombre de positions dans une séquence, avec padding éventuel."
+          ],
+          [
+            "d",
+            "dé",
+            "Nombre de caractéristiques par position."
+          ],
+          [
+            "B\\times n\\times d",
+            "bé par enne par dé",
+            "Tailles des trois axes, dans cet ordre."
+          ]
+        ],
+        "sens": "Pour chaque séquence et chaque position, le modèle manipule un vecteur de d nombres.",
+        "attention": "Le produit B fois n fois d donne le nombre total de valeurs, mais la forme du tenseur garde l’ordre et le rôle de ses axes."
+      }
     },
     {
       "day": 4,
@@ -1822,7 +3873,56 @@
       "answer": "Un chemin plus direct, mais davantage de calcul et de mémoire selon l’implémentation.",
       "refs": [
         "tavenard"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "h t vaut phi appliquée à W x fois x t, plus W h fois h t moins un, plus b."
+        ],
+        "symboles": [
+          [
+            "t",
+            "té",
+            "Position courante dans la séquence."
+          ],
+          [
+            "x_t",
+            "x indice t",
+            "Vecteur d’entrée à la position t."
+          ],
+          [
+            "h_t,\\ h_{t-1}",
+            "ache t, ache t moins un",
+            "État caché courant et état caché précédent."
+          ],
+          [
+            "W_x",
+            "w indice x",
+            "Matrice qui transforme l’entrée courante."
+          ],
+          [
+            "W_h",
+            "w indice ache",
+            "Matrice qui transforme l’état précédent."
+          ],
+          [
+            "b",
+            "bé",
+            "Biais du calcul de l’état."
+          ],
+          [
+            "\\phi",
+            "phi",
+            "Activation appliquée composante par composante."
+          ],
+          [
+            "W_xx_t+W_hh_{t-1}+b",
+            "W x fois x t, plus W h fois h t moins un, plus b",
+            "Combinaison de l’information nouvelle et de l’état mémorisé."
+          ]
+        ],
+        "sens": "L’état courant dépend à la fois du token actuel et du résumé calculé au pas précédent.",
+        "attention": "Les mêmes matrices sont partagées entre les positions. Les indices x et h nomment le rôle des matrices, ils ne sont pas des variables qui multiplient W."
+      }
     },
     {
       "day": 4,
@@ -1836,7 +3936,62 @@
       "notes": "Une entrée entière n'est pas une grandeur ordinale : l'identifiant 8 n'est pas intrinsèquement plus proche de 9 que de 2. L'embedding transforme cet index en vecteur continu. Sa table comporte V×d paramètres, ce qui peut devenir coûteux pour un grand vocabulaire. Seules les lignes utilisées contribuent directement à une étape donnée, selon le calcul et l'optimiseur. La proximité géométrique des vecteurs est une conséquence de l'objectif appris et ne garantit pas une relation sémantique précise. Pour le mini-Transformer, les tokens sont volontairement de petits symboles entiers afin d'isoler le mécanisme.",
       "question": "Combien de paramètres pour V=1000 et d=64 ?",
       "answer": "64 000, sans biais.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "E est une matrice réelle à V lignes et d colonnes.",
+          "x t est la ligne de E correspondant à l’identifiant du token présent à la position t, en prenant toutes ses colonnes."
+        ],
+        "symboles": [
+          [
+            "E",
+            "e majuscule",
+            "Table d’embeddings apprise."
+          ],
+          [
+            "V",
+            "vé majuscule",
+            "Nombre de tokens du vocabulaire."
+          ],
+          [
+            "d",
+            "dé",
+            "Dimension de chaque embedding."
+          ],
+          [
+            "\\mathbb R^{V\\times d}",
+            "matrices réelles à V lignes et d colonnes",
+            "Une ligne par token et une colonne par caractéristique."
+          ],
+          [
+            "t",
+            "té",
+            "Position du token dans la séquence."
+          ],
+          [
+            "\\operatorname{id}(t)",
+            "identifiant du token à la position t",
+            "Dans cette écriture, index de la ligne qui correspond au token observé."
+          ],
+          [
+            "E[\\operatorname{id}(t),:]",
+            "E, ligne identifiant du token t, toutes les colonnes",
+            "Sélection d’une ligne de la table."
+          ],
+          [
+            "x_t",
+            "x indice t",
+            "Vecteur d’embedding renvoyé à cette position."
+          ],
+          [
+            " : ",
+            "deux-points, toutes les colonnes",
+            "Notation d’indexation qui sélectionne toutes les caractéristiques."
+          ]
+        ],
+        "sens": "Une consultation de table remplace un identifiant discret par un vecteur continu.",
+        "attention": "L’identifiant du token n’est pas son numéro de position. V majuscule est ici la taille du vocabulaire, alors qu’il désigne les valeurs dans l’attention."
+      }
     },
     {
       "day": 4,
@@ -1852,7 +4007,57 @@
       "answer": "Permuter les tokens permute les sorties correspondantes.",
       "refs": [
         "attention"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "X zéro vaut les embeddings des tokens, plus leurs représentations de position P.",
+          "Sans information ni masque de position, l’auto-attention appliquée à X dont on a permuté les lignes donne la même permutation des sorties de l’auto-attention."
+        ],
+        "symboles": [
+          [
+            "X_0",
+            "x indice zéro",
+            "Représentations à l’entrée de la première couche Transformer."
+          ],
+          [
+            "E[\\text{tokens}]",
+            "embeddings des tokens",
+            "Lignes de la table d’embeddings sélectionnées pour la séquence."
+          ],
+          [
+            "P",
+            "pé majuscule",
+            "Matrice d’informations de position, compatible avec la forme des embeddings."
+          ],
+          [
+            "+",
+            "plus",
+            "Addition composante par composante des contenus et des positions."
+          ],
+          [
+            "\\operatorname{SA}",
+            "auto-attention, ou self-attention",
+            "Opération d’attention où les requêtes, clés et valeurs proviennent de la même séquence."
+          ],
+          [
+            "\\Pi",
+            "pi majuscule",
+            "Matrice qui permute l’ordre des lignes."
+          ],
+          [
+            "\\Pi X",
+            "pi appliquée à X",
+            "Séquence dont les positions ont été réordonnées."
+          ],
+          [
+            "\\Pi\\operatorname{SA}(X)",
+            "pi appliquée aux sorties de l’auto-attention",
+            "Même permutation appliquée aux vecteurs de sortie."
+          ]
+        ],
+        "sens": "La deuxième égalité exprime l’équivariance par permutation de l’auto-attention dépourvue de structure positionnelle.",
+        "attention": "Pi majuscule est ici une matrice de permutation, pas le produit de plusieurs termes. L’égalité suppose notamment l’absence de masque positionnel et des projections partagées."
+      }
     },
     {
       "day": 4,
@@ -1868,7 +4073,62 @@
       "answer": "Pas dans sa forme déterministe standard.",
       "refs": [
         "attention"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "P E, à la position t et à la coordonnée deux i, vaut le sinus de t divisé par dix mille à la puissance deux i sur d.",
+          "P E, à la position t et à la coordonnée deux i plus un, vaut le cosinus du même quotient."
+        ],
+        "symboles": [
+          [
+            "PE_{t,2i}",
+            "P E indice t, deux i",
+            "Valeur de l’encodage de position pour le token de position t, sur la coordonnée paire 2i."
+          ],
+          [
+            "PE_{t,2i+1}",
+            "P E indice t, deux i plus un",
+            "Valeur sur la coordonnée impaire associée."
+          ],
+          [
+            "t",
+            "té",
+            "Position du token dans la séquence, en commençant ici à zéro."
+          ],
+          [
+            "i",
+            "i",
+            "Indice d’une paire de coordonnées ; ce n’est pas l’indice d’un token."
+          ],
+          [
+            "d",
+            "dé",
+            "Dimension de la représentation du token ; on suppose ici d pair."
+          ],
+          [
+            "2i,\\ 2i+1",
+            "deux i ; deux i plus un",
+            "Deux coordonnées consécutives : une paire sinus/cosinus."
+          ],
+          [
+            "\\sin,\\ \\cos",
+            "sinus ; cosinus",
+            "Fonctions trigonométriques dont les arguments sont exprimés en radians."
+          ],
+          [
+            "10000^{2i/d}",
+            "dix mille puissance deux i sur d",
+            "Facteur d’échelle qui varie selon la paire de coordonnées. Toute la fraction 2i/d est l’exposant."
+          ],
+          [
+            "\\frac{t}{10000^{2i/d}}",
+            "t divisé par dix mille puissance deux i sur d",
+            "Argument des fonctions : il associe la position à plusieurs fréquences."
+          ]
+        ],
+        "sens": "Chaque position reçoit un vecteur déterministe. Les différentes coordonnées évoluent à des fréquences différentes, ce qui fournit au réseau une information d’ordre.",
+        "attention": "Les indices t et 2i identifient une case du tableau PE ; ce ne sont pas des puissances. La constante 10000 fixe une gamme de fréquences et n’est ni le nombre de tokens ni une probabilité."
+      }
     },
     {
       "day": 4,
@@ -1884,7 +4144,67 @@
       "answer": "Sur l’axe des clés consultées par chaque requête.",
       "refs": [
         "tavenard"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "o indice i est égal à la somme, pour j allant de un à n indice k, de alpha indice i j multiplié par v indice j.",
+          "Pour une requête i fixée, la somme des alpha i j sur les clés j vaut un, et chaque alpha i j est positif ou nul."
+        ],
+        "symboles": [
+          [
+            "o_i",
+            "o indice i",
+            "Vecteur de sortie de l’attention pour la requête i."
+          ],
+          [
+            "i",
+            "i",
+            "Indice de la requête dont on calcule la représentation."
+          ],
+          [
+            "j",
+            "ji",
+            "Indice d’une clé et du vecteur de valeur associé."
+          ],
+          [
+            "n_k",
+            "n indice k",
+            "Nombre de clés et de valeurs disponibles."
+          ],
+          [
+            "\\sum_{j=1}^{n_k}",
+            "somme pour j de un à n indice k",
+            "Addition de la contribution de chaque valeur."
+          ],
+          [
+            "\\alpha_{ij}",
+            "alpha indice i j",
+            "Poids scalaire donné par la requête i à la valeur j."
+          ],
+          [
+            "v_j",
+            "vé indice j",
+            "Vecteur de valeur associé à la clé j."
+          ],
+          [
+            "\\alpha_{ij}v_j",
+            "alpha i j fois v j",
+            "Multiplication de toutes les composantes de v_j par le même poids."
+          ],
+          [
+            "\\sum_j\\alpha_{ij}=1",
+            "la somme des alpha i j sur j vaut un",
+            "Normalisation des poids d’une même requête."
+          ],
+          [
+            "\\alpha_{ij}\\ge0",
+            "alpha i j est supérieur ou égal à zéro",
+            "Les poids sont non négatifs."
+          ]
+        ],
+        "sens": "L’attention construit chaque sortie comme une moyenne pondérée des valeurs. Les poids changent avec la requête : deux tokens peuvent agréger différemment les mêmes valeurs.",
+        "attention": "La somme égale à un décrit les poids après softmax et avant un éventuel dropout d’attention. Un poids élevé indique une contribution à cette agrégation ; il ne constitue pas, à lui seul, une explication causale de la prédiction."
+      }
     },
     {
       "day": 4,
@@ -1898,7 +4218,57 @@
       "notes": "Ici, X a n lignes et d colonnes, en omettant le batch. Les matrices W ont donc l'orientation entrée×sortie, contrairement à la convention de stockage de nn.Linear exposée plus tôt. Le calcul reste identique : une bibliothèque stockant sortie×entrée applique la transposée. Q et K ont n×d_k éléments, V en a n×d_v. Les trois matrices sont différentes en général, même si leur entrée est commune. Le gradient traverse à la fois les valeurs et les scores qui règlent leur mélange ; l'attention est entraînée de bout en bout.",
       "question": "Q=K=V dans une auto-attention ?",
       "answer": "Pas en général : l’entrée est commune, les projections apprises sont distinctes.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Q vaut X fois W indice Q ; K vaut X fois W indice K ; V vaut X fois W indice V.",
+          "W Q et W K appartiennent à l’espace des matrices réelles de dimension d par d indice k ; W V appartient à l’espace des matrices réelles de dimension d par d indice v."
+        ],
+        "symboles": [
+          [
+            "X",
+            "iks",
+            "Matrice d’entrée de taille n × d : une ligne par token. La dimension de batch est omise."
+          ],
+          [
+            "Q,\\ K,\\ V",
+            "ku, ka, vé",
+            "Matrices des requêtes, clés et valeurs. Leurs tailles sont n × d_k, n × d_k et n × d_v."
+          ],
+          [
+            "W_Q,\\ W_K,\\ W_V",
+            "double vé indice Q, K, V",
+            "Trois matrices de paramètres appris qui projettent les mêmes entrées vers trois rôles."
+          ],
+          [
+            "XW_Q",
+            "X fois W Q",
+            "Produit matriciel, pas multiplication composante par composante."
+          ],
+          [
+            "d",
+            "dé",
+            "Dimension des représentations d’entrée."
+          ],
+          [
+            "d_k,\\ d_v",
+            "d indice k ; d indice v",
+            "Dimensions respectives des requêtes/clés et des valeurs pour cette tête."
+          ],
+          [
+            "\\in",
+            "appartient à",
+            "Indique le type et la dimension d’un objet."
+          ],
+          [
+            "\\mathbb R^{d\\times d_k}",
+            "espace des matrices réelles d par d k",
+            "Matrices à d lignes et d_k colonnes ; le symbole × sépare ici des dimensions."
+          ]
+        ],
+        "sens": "Les requêtes servent à chercher, les clés à mesurer la compatibilité et les valeurs à fournir le contenu agrégé. Ce sont trois transformations apprises, pas trois copies nécessairement identiques.",
+        "attention": "Q et K doivent avoir la même largeur pour calculer leurs produits scalaires. La largeur d_v des valeurs peut être différente. Les biais sont omis dans cette écriture simplifiée."
+      }
     },
     {
       "day": 4,
@@ -1912,7 +4282,62 @@
       "notes": "Écrire explicitement un produit scalaire entre une ligne de Q et une ligne de K. La transposition de K permet de calculer tous ces produits en une seule opération. Les lignes n'ont pas besoin d'avoir la même longueur en cross-attention : n_q peut être la longueur cible et n_k la longueur source. La largeur d_k doit en revanche être la même pour les deux. Le facteur racine carrée sera justifié ensuite. Une carte de scores brute n'est pas encore une carte de probabilités : ses valeurs peuvent être positives ou négatives et leur somme est quelconque.",
       "question": "Quelle est la forme si Q a 5 lignes et K en a 8 ?",
       "answer": "5 × 8, avec une largeur d_k commune.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "S vaut Q multiplié par K transposée, le tout divisé par la racine carrée de d indice k.",
+          "Le score S indice i j vaut le produit scalaire de q indice i et k indice j, divisé par la racine carrée de d indice k."
+        ],
+        "symboles": [
+          [
+            "S",
+            "esse",
+            "Matrice des scores, de taille n_q × n_k."
+          ],
+          [
+            "S_{ij}",
+            "esse indice i j",
+            "Score entre la requête i et la clé j."
+          ],
+          [
+            "Q,\\ K",
+            "ku ; ka",
+            "Matrices des requêtes et des clés, de tailles n_q × d_k et n_k × d_k."
+          ],
+          [
+            "{}^\\top",
+            "transposée",
+            "Échange les lignes et les colonnes ; ce symbole n’est pas un exposant numérique."
+          ],
+          [
+            "QK^\\top",
+            "Q fois K transposée",
+            "Produit matriciel qui calcule tous les scores requête–clé."
+          ],
+          [
+            "q_i,\\ k_j",
+            "ku indice i ; ka indice j",
+            "Vecteurs représentant une requête et une clé. Dans q_i^T k_j, on les écrit comme des vecteurs colonnes."
+          ],
+          [
+            "q_i^\\top k_j",
+            "q i transposée fois k j",
+            "Produit scalaire : somme des produits de composantes correspondantes."
+          ],
+          [
+            "d_k",
+            "d indice k",
+            "Nombre de composantes d’une requête ou d’une clé."
+          ],
+          [
+            "\\sqrt{d_k}",
+            "racine carrée de d indice k",
+            "Facteur qui contrôle l’échelle des scores."
+          ]
+        ],
+        "sens": "Chaque ligne de S compare une requête avec toutes les clés. Le calcul matriciel rassemble ces comparaisons pour les effectuer efficacement en parallèle.",
+        "attention": "Un score peut être négatif ou supérieur à un : ce n’est pas encore une probabilité. Diviser par √d_k ne normalise pas q et k à une norme unitaire ; ce n’est donc pas un calcul de similarité cosinus."
+      }
     },
     {
       "day": 4,
@@ -1928,7 +4353,62 @@
       "answer": "Non : il ne divise pas par les normes individuelles de q et k.",
       "refs": [
         "attention"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "La variance de la somme, pour r de un à d indice k, des produits q indice r fois k indice r est approximativement égale à d indice k.",
+          "Par conséquent, la variance du produit scalaire q transposée fois k, divisé par la racine carrée de d indice k, est approximativement égale à un."
+        ],
+        "symboles": [
+          [
+            "\\operatorname{Var}",
+            "variance",
+            "Mesure la dispersion d’une variable aléatoire autour de sa moyenne."
+          ],
+          [
+            "r",
+            "erre",
+            "Indice d’une composante des vecteurs q et k."
+          ],
+          [
+            "d_k",
+            "d indice k",
+            "Nombre de composantes additionnées dans le produit scalaire."
+          ],
+          [
+            "q_r,\\ k_r",
+            "ku indice r ; ka indice r",
+            "Composantes aléatoires de la requête et de la clé."
+          ],
+          [
+            "\\sum_{r=1}^{d_k}q_rk_r",
+            "somme pour r de un à d k de q r fois k r",
+            "Écriture développée du produit scalaire."
+          ],
+          [
+            "q^\\top k",
+            "q transposée fois k",
+            "Même produit scalaire, en notation vectorielle."
+          ],
+          [
+            "\\approx",
+            "approximativement égal à",
+            "Relation utilisée comme modèle de l’ordre de grandeur."
+          ],
+          [
+            "\\Longrightarrow",
+            "implique » ou « par conséquent",
+            "Relie le constat sur la variance à l’effet de la mise à l’échelle."
+          ],
+          [
+            "\\sqrt{d_k}",
+            "racine carrée de d k",
+            "Diviser la variable par √d_k divise sa variance par d_k."
+          ]
+        ],
+        "sens": "Sous des hypothèses d’indépendance et de variance unitaire, additionner d_k produits donne une variance d_k. La mise à l’échelle réduit le risque de scores extrêmes qui satureraient le softmax.",
+        "attention": "Le raisonnement suppose notamment des composantes centrées, de variance unitaire, des requêtes et clés indépendantes dans ce modèle simplifié, et des termes non corrélés entre coordonnées. Ces conditions ne sont pas garanties exactement dans un réseau entraîné."
+      }
     },
     {
       "day": 4,
@@ -1942,7 +4422,62 @@
       "notes": "Montrer que multiplier une matrice n_q×n_k par n_k×d_v produit n_q×d_v. Chaque requête obtient sa propre combinaison de valeurs. La même clé peut contribuer fortement à plusieurs requêtes ; il n'y a pas de contrainte de somme un par colonne. Le mécanisme n'est donc pas un appariement exclusif. Pour un batch multi-têtes, les axes batch et tête sont indépendants et le softmax reste appliqué sur le dernier axe des clés. Une erreur d'axe peut produire des tenseurs de formes plausibles tout en changeant complètement l'opération.",
       "question": "Les colonnes de A doivent-elles aussi sommer à un ?",
       "answer": "Non : seule chaque distribution sur les clés, donc chaque ligne, est normalisée.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "A vaut le softmax de S, appliqué ligne par ligne.",
+          "O vaut A fois V et appartient à l’espace des matrices réelles à n indice q lignes et d indice v colonnes."
+        ],
+        "symboles": [
+          [
+            "S",
+            "esse",
+            "Matrice des scores, de taille n_q × n_k."
+          ],
+          [
+            "\\operatorname{softmax}_{\\rm lignes}",
+            "softmax par lignes",
+            "Transforme les scores d’une requête en poids normalisés sur toutes les clés."
+          ],
+          [
+            "A",
+            "a majuscule",
+            "Matrice des poids d’attention, de même taille que S."
+          ],
+          [
+            "V",
+            "vé majuscule",
+            "Matrice des valeurs, de taille n_k × d_v."
+          ],
+          [
+            "O",
+            "o majuscule",
+            "Matrice des sorties d’attention, de taille n_q × d_v."
+          ],
+          [
+            "AV",
+            "A fois V",
+            "Produit matriciel qui agrège les valeurs avec les poids d’attention."
+          ],
+          [
+            "n_q,\\ n_k",
+            "n indice q ; n indice k",
+            "Nombres de requêtes et de clés."
+          ],
+          [
+            "d_v",
+            "d indice v",
+            "Dimension de chaque valeur et de chaque sortie pour cette tête."
+          ],
+          [
+            "\\in\\mathbb R^{n_q\\times d_v}",
+            "appartient à l’espace des matrices réelles n q par d v",
+            "Indique le nombre de lignes et de colonnes de la sortie."
+          ]
+        ],
+        "sens": "Le softmax choisit combien chaque valeur contribue. Le produit A V applique ensuite ces poids à toutes les composantes des valeurs. Les deux étapes séparent le choix des poids du contenu agrégé.",
+        "attention": "Le softmax se fait sur les clés, donc sur les colonnes de chaque ligne. Ici O est une matrice de sortie ; sur la slide de complexité, O(·) désignera une notation asymptotique sans rapport."
+      }
     },
     {
       "day": 4,
@@ -1956,7 +4491,58 @@
       "notes": "Calculer les scores avant le softmax : les éléments diagonaux valent 1/racine(2) et les autres zéro. Le poids diagonal est exp(1/racine(2))/(exp(1/racine(2))+1), soit environ 0,6697615. Multiplier ensuite les poids de chaque ligne par V. La deuxième composante de la première sortie vaut deux fois 0,3302385, soit 0,660477. L'exemple volontairement petit montre que la sortie ne copie pas nécessairement un token unique. Le notebook refait le calcul en NumPy puis le compare à la version PyTorch, avec des assertions sur les valeurs et les sommes des lignes.",
       "question": "Pourquoi la seconde coordonnée de O₁ vaut-elle environ 0,6605 ?",
       "answer": "La seconde valeur contient 2, pondéré par environ 0,3302.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Q et K sont égales à la matrice à deux lignes : première ligne, un puis zéro ; deuxième ligne, zéro puis un. V a pour première ligne un puis zéro, et pour deuxième ligne zéro puis deux.",
+          "A vaut approximativement : première ligne, zéro virgule six six neuf huit, puis zéro virgule trois trois zéro deux ; deuxième ligne, zéro virgule trois trois zéro deux, puis zéro virgule six six neuf huit.",
+          "O vaut approximativement : première ligne, zéro virgule six six neuf huit, puis zéro virgule six six zéro cinq ; deuxième ligne, zéro virgule trois trois zéro deux, puis un virgule trois trois neuf cinq."
+        ],
+        "symboles": [
+          [
+            "Q=K",
+            "Q égale K",
+            "Dans cet exemple particulier, les deux matrices sont choisies identiques."
+          ],
+          [
+            "\\begin{bmatrix}1&0\\\\0&1\\end{bmatrix}",
+            "matrice identité de taille deux",
+            "Deux lignes et deux colonnes ; chaque ligne est un vecteur de requête ou de clé."
+          ],
+          [
+            "V",
+            "vé",
+            "Les valeurs sont (1, 0) et (0, 2), ce qui rend visible leur mélange."
+          ],
+          [
+            "d_k=2",
+            "d indice k vaut deux",
+            "Les scores sont divisés par √2 avant softmax."
+          ],
+          [
+            "A",
+            "a majuscule",
+            "Poids obtenus par softmax sur chaque ligne de QK^T/√2."
+          ],
+          [
+            "O=AV",
+            "O égale A fois V",
+            "Sorties calculées à partir des poids et des valeurs."
+          ],
+          [
+            "\\approx",
+            "approximativement égal à",
+            "Les nombres affichés sont arrondis à quatre décimales."
+          ],
+          [
+            "0.6698,\\ 0.3302",
+            "zéro virgule six six neuf huit ; zéro virgule trois trois zéro deux",
+            "Poids arrondis d’une ligne. Les décimales du support utilisent le point de la notation informatique."
+          ]
+        ],
+        "sens": "Les scores diagonaux valent 1/√2 et les autres zéro. Pour la première requête, le premier poids vaut exp(1/√2)/(exp(1/√2)+1), soit environ 0,6697615. La première sortie est donc (0,6697615 ; 2 × 0,3302385), soit environ (0,6698 ; 0,6605).",
+        "attention": "Les lignes de A somment à un ; celles de O n’ont aucune raison de sommer à un. Calculer avec les valeurs non arrondies puis arrondir le résultat évite de petits écarts de dernière décimale."
+      }
     },
     {
       "day": 4,
@@ -1972,7 +4558,62 @@
       "answer": "Non : exp(0) reste positif. Il faut les exclure avant la normalisation.",
       "refs": [
         "attndoc"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "M indice i j vaut zéro si j est inférieur ou égal à i, et moins l’infini si j est strictement supérieur à i.",
+          "A vaut le softmax de la somme de S et de M, appliqué sur les clés de chaque requête."
+        ],
+        "symboles": [
+          [
+            "M",
+            "emme",
+            "Matrice du masque additif, compatible avec la matrice des scores."
+          ],
+          [
+            "M_{ij}",
+            "emme indice i j",
+            "Valeur du masque pour une requête à la position i et une clé à la position j."
+          ],
+          [
+            "\\begin{cases}\\cdots\\end{cases}",
+            "défini par cas",
+            "L’accolade indique qu’une valeur différente s’applique selon la condition."
+          ],
+          [
+            "j\\le i",
+            "j inférieur ou égal à i",
+            "La clé est à la position courante ou dans le passé ; elle est autorisée."
+          ],
+          [
+            "j>i",
+            "j strictement supérieur à i",
+            "La clé est dans le futur ; elle est interdite."
+          ],
+          [
+            "0",
+            "zéro",
+            "Ajouter zéro conserve le score d’une position autorisée."
+          ],
+          [
+            "-\\infty",
+            "moins l’infini",
+            "Valeur idéale qui annule le poids de la position après exponentiation et softmax."
+          ],
+          [
+            "S+M",
+            "S plus M",
+            "Addition composante par composante des scores et du masque."
+          ],
+          [
+            "A=\\operatorname{softmax}(S+M)",
+            "A égale softmax de S plus M",
+            "Normalisation des seuls scores autorisés ; le softmax opère ligne par ligne."
+          ]
+        ],
+        "sens": "Pour prédire le prochain token, une position ne doit pas exploiter les tokens suivants. Le masque causal conserve le passé et la position courante. Un masque de padding exclut, lui, les positions de remplissage.",
+        "attention": "Le zéro signifie ici « autorisé », car il s’agit d’un masque additif. Les conventions des masques booléens dépendent de l’API. Une ligne entièrement masquée nécessite un traitement explicite : le softmax de valeurs toutes égales à −∞ peut produire des NaN."
+      }
     },
     {
       "day": 4,
@@ -1988,7 +4629,62 @@
       "answer": "32.",
       "refs": [
         "attention"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "La tête r est obtenue en appliquant l’attention à X fois W Q de la tête r, X fois W K de la tête r, et X fois W V de la tête r.",
+          "L’attention multi-têtes de X vaut la concaténation des têtes de un à h, multipliée par W indice O."
+        ],
+        "symboles": [
+          [
+            "\\operatorname{head}_r",
+            "tête r",
+            "Sortie de la r-ième tête d’attention."
+          ],
+          [
+            "r,\\ h",
+            "erre ; ache",
+            "r est l’indice d’une tête ; h est le nombre total de têtes."
+          ],
+          [
+            "\\operatorname{Attn}",
+            "attention",
+            "Opération qui calcule les poids à partir des requêtes et clés, puis agrège les valeurs."
+          ],
+          [
+            "W_Q^{(r)},\\ W_K^{(r)},\\ W_V^{(r)}",
+            "W Q, W K et W V de la tête r",
+            "Paramètres propres à une tête. Le (r) en haut est une étiquette, pas une puissance."
+          ],
+          [
+            "X",
+            "iks",
+            "Matrice des représentations d’entrée, de taille n × d."
+          ],
+          [
+            "\\operatorname{MHA}(X)",
+            "attention multi-têtes de X",
+            "MHA signifie Multi-Head Attention."
+          ],
+          [
+            "\\operatorname{Concat}",
+            "concaténation",
+            "Juxtaposition des sorties sur l’axe des caractéristiques, pas addition des têtes."
+          ],
+          [
+            "\\ldots",
+            "jusqu’à",
+            "Les points de suspension représentent toutes les têtes intermédiaires."
+          ],
+          [
+            "W_O",
+            "W indice O",
+            "Projection finale apprise de taille h d_v × d lorsque chaque tête produit d_v caractéristiques."
+          ]
+        ],
+        "sens": "Les têtes calculent des agrégations dans plusieurs espaces appris. La concaténation rassemble leurs résultats, puis W_O les recombine dans la dimension attendue par le bloc.",
+        "attention": "Des têtes distinctes peuvent apprendre des comportements différents, mais leur spécialisation linguistique ou visuelle n’est pas garantie. Si d_v = d/h, la concaténation a exactement d caractéristiques."
+      }
     },
     {
       "day": 4,
@@ -2051,7 +4747,72 @@
       "answer": "Pas lorsqu’elle ne normalise que les caractéristiques de chaque token.",
       "refs": [
         "ln"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "Mu indice i vaut un sur d fois la somme, pour r de un à d, de X indice i r.",
+          "La normalisation de couche de X indice i vaut gamma multiplié composante par composante par X i moins mu i, divisé par la racine carrée de sigma i au carré plus epsilon, puis plus bêta."
+        ],
+        "symboles": [
+          [
+            "i,\\ r",
+            "i ; erre",
+            "i repère un token ; r repère une caractéristique de ce token."
+          ],
+          [
+            "d",
+            "dé",
+            "Nombre de caractéristiques sur lesquelles on normalise."
+          ],
+          [
+            "X_{ir},\\ X_i",
+            "X indice i r ; X indice i",
+            "X_ir est un nombre ; X_i est le vecteur complet du token i."
+          ],
+          [
+            "\\mu_i",
+            "mu indice i",
+            "Moyenne des d composantes du token i."
+          ],
+          [
+            "\\frac1d\\sum_{r=1}^d",
+            "un sur d fois la somme pour r de un à d",
+            "Calcul d’une moyenne arithmétique."
+          ],
+          [
+            "\\sigma_i^2",
+            "sigma indice i au carré",
+            "Variance des caractéristiques du token i : moyenne des (X_ir − μ_i)²."
+          ],
+          [
+            "\\varepsilon",
+            "epsilon",
+            "Petite constante positive ajoutée à la variance pour stabiliser la division."
+          ],
+          [
+            "\\sqrt{\\sigma_i^2+\\varepsilon}",
+            "racine carrée de sigma i au carré plus epsilon",
+            "Dénominateur complet ; epsilon est sous la racine."
+          ],
+          [
+            "\\gamma,\\ \\beta",
+            "gamma ; bêta",
+            "Vecteurs appris de taille d : échelle et décalage, partagés entre positions."
+          ],
+          [
+            "\\odot",
+            "multiplié composante par composante",
+            "Produit de Hadamard, à distinguer du produit matriciel."
+          ],
+          [
+            "\\operatorname{LN}",
+            "layer norm » ou « normalisation de couche",
+            "Normalisation ici sur les caractéristiques d’un token, indépendamment des autres tokens."
+          ]
+        ],
+        "sens": "La moyenne et la variance sont recalculées pour chaque token. On centre et réduit son vecteur, puis on applique une transformation affine apprise. Les scalaires μ_i et σ_i sont diffusés sur les d composantes.",
+        "attention": "Cette formule ne moyenne pas sur le batch et n’utilise pas les moyennes mobiles de BatchNorm. Le symbole β désigne ici un décalage appris ; dans Adam, il désigne un coefficient de moyenne mobile."
+      }
     },
     {
       "day": 4,
@@ -2065,7 +4826,62 @@
       "notes": "Le FFN n'est pas une attention supplémentaire. Il applique un MLP identique à chaque token ; l'échange d'information entre positions a lieu dans l'attention. Avec d_ff=4d et en négligeant les biais, les deux matrices du FFN contiennent 8d² paramètres. Les projections Q, K, V et O d'une auto-attention standard contiennent environ 4d² paramètres : le FFN peut donc représenter une part importante du bloc. L'activation du papier original est ReLU ; nos petits modèles utilisent GELU. Cette différence de variante doit être annoncée sans changer l'explication fondamentale.",
       "question": "Quelle partie du bloc mélange directement les positions ?",
       "answer": "L’attention ; le FFN mélange les caractéristiques de chaque position.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Le réseau feed-forward de x vaut W deux fois phi de W un fois x plus b un, puis plus b deux.",
+          "La dimension passe de d à d indice F F, puis revient à d."
+        ],
+        "symboles": [
+          [
+            "\\operatorname{FFN}",
+            "feed-forward network » ou « réseau à propagation avant",
+            "Sous-réseau appliqué séparément à chaque position du Transformer."
+          ],
+          [
+            "x",
+            "iks",
+            "Vecteur colonne d’un token, de dimension d dans cette convention."
+          ],
+          [
+            "W_1,\\ W_2",
+            "W un ; W deux",
+            "Matrices apprises de tailles d_ff × d et d × d_ff."
+          ],
+          [
+            "b_1,\\ b_2",
+            "bé un ; bé deux",
+            "Vecteurs de biais, de dimensions d_ff et d."
+          ],
+          [
+            "\\phi",
+            "phi",
+            "Fonction d’activation non linéaire, appliquée composante par composante, par exemple GELU."
+          ],
+          [
+            "W_1x+b_1",
+            "W un fois x plus b un",
+            "Première transformation affine, qui produit d_ff caractéristiques."
+          ],
+          [
+            "W_2\\phi(W_1x+b_1)+b_2",
+            "W deux fois phi de W un x plus b un, puis plus b deux",
+            "Deuxième transformation affine après activation."
+          ],
+          [
+            "d,\\ d_{\\rm ff}",
+            "dé ; d indice F F",
+            "Dimensions de représentation et de la couche interne du FFN."
+          ],
+          [
+            "\\rightarrow",
+            "passe à",
+            "Flèche indiquant une succession de dimensions, pas une limite mathématique."
+          ]
+        ],
+        "sens": "L’attention mélange les informations entre positions ; le FFN transforme ensuite les caractéristiques de chaque position. Le même FFN, avec les mêmes poids, s’applique à tous les tokens.",
+        "attention": "La convention de vecteur colonne explique l’ordre W x ; d’autres slides emploient des tokens en lignes et écrivent X W. Ces écritures sont compatibles en transposant les matrices de paramètres."
+      }
     },
     {
       "day": 4,
@@ -2081,7 +4897,57 @@
       "answer": "Après la somme entre l’entrée résiduelle et la sortie de la sous-couche.",
       "refs": [
         "preln"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "U vaut X plus l’attention multi-têtes appliquée à la première normalisation de couche de X.",
+          "Y vaut U plus le réseau feed-forward appliqué à la deuxième normalisation de couche de U."
+        ],
+        "symboles": [
+          [
+            "X",
+            "iks",
+            "Entrée du bloc, de taille B × n × d lorsque l’on explicite le batch."
+          ],
+          [
+            "U",
+            "u",
+            "Représentation intermédiaire après l’attention et la première addition résiduelle."
+          ],
+          [
+            "Y",
+            "i grec",
+            "Sortie du bloc, après le FFN et la deuxième addition résiduelle."
+          ],
+          [
+            "\\operatorname{LN}_1,\\ \\operatorname{LN}_2",
+            "normalisation de couche un ; normalisation de couche deux",
+            "Deux normalisations distinctes, avec leurs propres paramètres appris."
+          ],
+          [
+            "\\operatorname{MHA}",
+            "attention multi-têtes",
+            "Sous-couche qui agrège des informations entre positions."
+          ],
+          [
+            "\\operatorname{FFN}",
+            "réseau feed-forward",
+            "Sous-couche qui transforme les caractéristiques de chaque position."
+          ],
+          [
+            "+",
+            "plus",
+            "Addition composante par composante de la branche transformée et de la branche résiduelle."
+          ],
+          [
+            "\\operatorname{MHA}(\\operatorname{LN}_1(X))",
+            "attention de la normalisation de X",
+            "Composition : normaliser d’abord, appliquer l’attention ensuite."
+          ]
+        ],
+        "sens": "Dans un bloc Pre-LN, la normalisation précède chaque sous-couche. Le chemin résiduel transmet X puis U directement, ce qui facilite la propagation du signal et des gradients.",
+        "attention": "Les deux termes de chaque addition doivent avoir la même forme. Les flèches de données ne sont pas des mises à jour de poids. Les dropout éventuels sont omis de cette formule."
+      }
     },
     {
       "day": 4,
@@ -2095,7 +4961,51 @@
       "notes": "Un encodeur bidirectionnel est utile lorsque toute l'entrée est disponible. Pour une classification de séquence, une représentation spéciale ou une agrégation masquée peut alimenter la tête. Pour une étiquette par token, la tête est appliquée à chaque position. Il faut traiter le padding de manière cohérente dans l'attention, l'agrégation et la perte. L'adjectif bidirectionnel n'implique pas une récurrence : il décrit l'accès aux positions à gauche et à droite. Le même bloc peut être employé avec un masque causal dans une implémentation, mais le régime d'information change alors.",
       "question": "Peut-on utiliser un encodeur non masqué pour prédire le prochain token sans fuite ?",
       "answer": "Non si les tokens futurs sont présents dans son entrée.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "X indice L est obtenu en appliquant à X indice zéro le bloc un, puis les blocs suivants, jusqu’au bloc L."
+        ],
+        "symboles": [
+          [
+            "X_0",
+            "X indice zéro",
+            "Représentations initiales des tokens, après incorporation de l’information de position."
+          ],
+          [
+            "X_L",
+            "X indice L",
+            "Représentations contextualisées après les L blocs."
+          ],
+          [
+            "L",
+            "elle majuscule",
+            "Nombre total de blocs de l’encodeur ; à distinguer de la fonction de perte ℒ."
+          ],
+          [
+            "\\operatorname{Block}_1,\\ \\operatorname{Block}_L",
+            "bloc un ; bloc L",
+            "Premier et dernier blocs du réseau."
+          ],
+          [
+            "\\circ",
+            "composé avec",
+            "Composition de fonctions : la fonction à droite s’applique en premier."
+          ],
+          [
+            "\\cdots",
+            "et ainsi de suite",
+            "Les blocs intermédiaires, de 2 à L − 1."
+          ],
+          [
+            "\\operatorname{Block}_L\\circ\\cdots\\circ\\operatorname{Block}_1",
+            "bloc L composé avec les blocs précédents jusqu’au bloc un",
+            "Notation compacte de l’empilement, qui se calcule de droite à gauche."
+          ]
+        ],
+        "sens": "Chaque bloc reçoit les représentations calculées par le précédent. La succession affine leur contextualisation sans nécessairement changer le nombre de tokens ni leur dimension.",
+        "attention": "L’ordre de lecture écrit de la composition peut tromper : Block_1 agit en premier. Les blocs ont en général des paramètres distincts, même lorsqu’ils ont la même architecture."
+      }
     },
     {
       "day": 4,
@@ -2111,7 +5021,56 @@
       "answer": "La longueur des requêtes, donc celle de la cible ici.",
       "refs": [
         "attention"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "Q vaut X cible fois W Q ; K vaut H source fois W K ; V vaut H source fois W V."
+        ],
+        "symboles": [
+          [
+            "X_{\\rm cible}",
+            "X cible",
+            "Représentations de la séquence cible qui formule les requêtes."
+          ],
+          [
+            "H_{\\rm source}",
+            "ache source",
+            "Représentations de la séquence source, par exemple produites par un encodeur."
+          ],
+          [
+            "Q",
+            "ku",
+            "Requêtes calculées à partir de la cible."
+          ],
+          [
+            "K,\\ V",
+            "ka ; vé",
+            "Clés et valeurs calculées à partir de la source."
+          ],
+          [
+            "W_Q,\\ W_K,\\ W_V",
+            "W Q ; W K ; W V",
+            "Projections apprises, de tailles adaptées aux dimensions d’entrée et de sortie."
+          ],
+          [
+            "X_{\\rm cible}W_Q",
+            "X cible fois W Q",
+            "Produit matriciel qui conserve le nombre de positions cibles."
+          ],
+          [
+            "H_{\\rm source}W_K",
+            "H source fois W K",
+            "Produit matriciel qui conserve le nombre de positions sources."
+          ],
+          [
+            "{}_{\\rm cible},\\ {}_{\\rm source}",
+            "indice cible ; indice source",
+            "Étiquettes qui indiquent l’origine des représentations, pas des variables à multiplier."
+          ]
+        ],
+        "sens": "Chaque position cible interroge les représentations sources. Les poids ont une ligne par position cible et une colonne par position source ; la sortie conserve le nombre de positions cibles.",
+        "attention": "Le nombre de requêtes peut être différent du nombre de clés. Les dimensions projetées de Q et K doivent coïncider pour calculer les scores ; les dimensions initiales des séquences source et cible ne sont pas nécessairement identiques."
+      }
     },
     {
       "day": 4,
@@ -2162,7 +5121,67 @@
       "notes": "La matrice n×n apparaît pour chaque tête et chaque exemple lorsque l'implémentation la matérialise. Pour n=2048 et h=8, on obtient 33554432 éléments par exemple ; en float32, les seuls scores représentent 128 MiB, avant les gradients et les autres activations. Ce calcul ne constitue pas la mémoire totale d'un modèle. Des algorithmes optimisés évitent de conserver toute la matrice en mémoire tout en calculant l'attention exacte. Ils ne rendent pas automatiquement les interactions denses linéaires en calcul. Le FFN peut dominer pour certaines dimensions et longueurs.",
       "question": "Doubler n multiplie-t-il la taille de la matrice de scores par deux ?",
       "answer": "Non : par quatre, à batch et nombre de têtes constants.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Le coût de l’attention est en grand O de n au carré fois d ; le coût des projections et du FFN est en grand O de n fois d au carré.",
+          "La mémoire des scores est en grand O de B fois h fois n au carré, si les scores sont matérialisés."
+        ],
+        "symboles": [
+          [
+            "T_{\\rm attn}",
+            "té indice attention",
+            "Ordre de grandeur du nombre d’opérations pour l’attention dense d’un bloc, par exemple."
+          ],
+          [
+            "T_{\\rm proj+FFN}",
+            "té indice projections et FFN",
+            "Ordre de grandeur du calcul des projections et du réseau feed-forward."
+          ],
+          [
+            "O(\\cdot)",
+            "grand O de",
+            "Notation asymptotique qui décrit une croissance en négligeant des constantes ; ce n’est pas une égalité de temps mesurés."
+          ],
+          [
+            "n",
+            "enne",
+            "Longueur de la séquence en self-attention."
+          ],
+          [
+            "d",
+            "dé",
+            "Dimension totale des représentations, répartie entre les têtes."
+          ],
+          [
+            "n^2d",
+            "n au carré fois d",
+            "Coût des interactions entre toutes les paires de positions."
+          ],
+          [
+            "nd^2",
+            "n fois d au carré",
+            "Coût des transformations des caractéristiques, si d_ff est proportionnel à d."
+          ],
+          [
+            "M_{\\rm scores}",
+            "emme indice scores",
+            "Nombre d’éléments des matrices de scores stockées."
+          ],
+          [
+            "B,\\ h",
+            "bé majuscule ; ache",
+            "Taille du batch et nombre de têtes."
+          ],
+          [
+            "Bhn^2",
+            "B fois h fois n au carré",
+            "Une matrice n × n pour chaque tête de chaque exemple."
+          ]
+        ],
+        "sens": "Doubler la longueur multiplie par quatre le terme quadratique de l’attention, mais seulement par deux les termes linéaires en n. Cela explique les contraintes des longues séquences.",
+        "attention": "La formule de calcul omet le facteur B et se lit par exemple. La formule mémoire compte des éléments : multiplier par le nombre d’octets par élément pour obtenir des octets. Les implémentations comme FlashAttention évitent de stocker toute la matrice des scores, sans supprimer le nombre quadratique d’interactions de l’attention dense."
+      }
     },
     {
       "day": 4,
@@ -2298,7 +5317,67 @@
       "notes": "La factorisation par la règle de la chaîne est exacte pour toute distribution de séquence ; le choix architectural détermine comment les probabilités conditionnelles sont paramétrées. Le token de début permet de définir le premier contexte. La moyenne doit ignorer les cibles de padding quand elles ne représentent pas une observation. En entraînement, toutes les positions peuvent être calculées en parallèle grâce au masque causal, même si la génération sera séquentielle. Une séquence avec plusieurs documents concaténés exige une décision sur les frontières et l'information autorisée entre documents.",
       "question": "Pourquoi l’entraînement peut-il être parallèle alors que la génération est séquentielle ?",
       "answer": "Les vrais préfixes sont disponibles au train ; à l’inférence les prochains tokens restent à produire.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "La probabilité, paramétrée par thêta, de la séquence x de un à T est le produit, pour t de un à T, des probabilités de x t sachant tous les tokens qui le précèdent.",
+          "La perte L calligraphique vaut moins un sur T fois la somme, pour t de un à T, du logarithme de la probabilité de x t sachant ses prédécesseurs."
+        ],
+        "symboles": [
+          [
+            "p_\\theta",
+            "pé indice thêta",
+            "Distribution de probabilité du modèle dont les paramètres sont θ."
+          ],
+          [
+            "x_{1:T}",
+            "x de un à T",
+            "Séquence des T tokens considérés."
+          ],
+          [
+            "x_t",
+            "x indice t",
+            "Token observé à la position t."
+          ],
+          [
+            "x_{<t}",
+            "x avant t » ou « tokens précédant t",
+            "Préfixe constitué des tokens de positions strictement inférieures à t."
+          ],
+          [
+            "\\mid",
+            "sachant",
+            "Barre de conditionnement probabiliste ; ce n’est ni une division ni une norme."
+          ],
+          [
+            "\\prod_{t=1}^T",
+            "produit pour t allant de un à T",
+            "Multiplication des probabilités conditionnelles de toutes les positions."
+          ],
+          [
+            "\\mathcal L",
+            "L calligraphique",
+            "Perte de log-vraisemblance négative moyenne."
+          ],
+          [
+            "\\sum_{t=1}^T",
+            "somme pour t de un à T",
+            "Addition des contributions des positions."
+          ],
+          [
+            "-\\frac1T",
+            "moins un sur T",
+            "Change le signe et moyenne sur les T positions."
+          ],
+          [
+            "\\log",
+            "logarithme naturel",
+            "Transforme le produit de probabilités en somme de logarithmes."
+          ]
+        ],
+        "sens": "La règle de chaîne factorise la probabilité d’une séquence. Maximiser les probabilités des tokens attendus revient à minimiser leur log-vraisemblance négative moyenne.",
+        "attention": "Le premier token est conditionné sur un préfixe vide ou sur un token de début selon la convention. Ici toutes les T positions comptent ; avec du padding, on moyenne seulement sur les positions valides. T désigne une longueur, pas une transposée."
+      }
     },
     {
       "day": 5,
@@ -2312,7 +5391,56 @@
       "notes": "Montrer une séquence très courte avec des identifiants : [BOS,2,4,EOS]. L'entrée est [BOS,2,4] et la cible [2,4,EOS]. La sortie à la position de 2 doit prédire 4 en ayant accès à BOS et 2, mais pas à 4 en entrée future. Si l'on donne la même séquence comme entrée et cible, le modèle peut apprendre à copier le token qu'il voit déjà. Ce bug peut produire une perte très faible et une génération inutile. Le test de causalité et la lecture du décalage sont donc complémentaires.",
       "question": "Une perte quasi nulle dès le départ peut-elle révéler un mauvais décalage ?",
       "answer": "Oui : le modèle peut voir directement le token qu’on lui demande de prédire.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Les entrées sont les tokens de la séquence s allant de l’indice zéro à l’indice T moins un inclus. Les cibles sont les tokens allant de l’indice un à l’indice T inclus."
+        ],
+        "symboles": [
+          [
+            "s",
+            "esse",
+            "Séquence de T + 1 tokens, indexés de zéro à T."
+          ],
+          [
+            "\\text{inputs}",
+            "entrées",
+            "Suite des T tokens fournis au modèle."
+          ],
+          [
+            "\\text{targets}",
+            "cibles",
+            "Suite des T tokens que le modèle doit prédire."
+          ],
+          [
+            "s_{0:T-1}",
+            "s de zéro à T moins un",
+            "Tokens d’indices 0, 1, …, T − 1, dans la convention inclusive de cette formule."
+          ],
+          [
+            "s_{1:T}",
+            "s de un à T",
+            "Tokens d’indices 1, 2, …, T, dans la même convention."
+          ],
+          [
+            ":",
+            "de … à …",
+            "Indique un intervalle d’indices dans cette notation mathématique."
+          ],
+          [
+            "T-1",
+            "T moins un",
+            "Dernier indice de l’entrée ; la soustraction porte sur l’indice."
+          ],
+          [
+            "T",
+            "té majuscule",
+            "Nombre de positions prédites et dernier indice de la séquence initiale."
+          ]
+        ],
+        "sens": "Chaque entrée est associée au token suivant. Pour s = [BOS, a, b, EOS], les entrées sont [BOS, a, b] et les cibles [a, b, EOS]. Le masque causal empêche chaque entrée d’utiliser les tokens suivants.",
+        "attention": "Les bornes écrites ici sont inclusives. En Python, la borne de fin d’un slice est exclusive : utiliser s[:-1] et s[1:] pour réaliser ce décalage. Copier littéralement s[0:T-1] supprimerait un token de trop."
+      }
     },
     {
       "day": 5,
@@ -2340,7 +5468,61 @@
       "notes": "Une petite température concentre la masse vers les plus grands logits ; une grande température aplatit la distribution. La limite vers zéro approche une sélection des maxima, mais diviser effectivement par zéro est une erreur. Top-k garde un nombre fixe de candidats ; top-p conserve un ensemble dont la masse cumulée atteint un seuil selon la règle employée. Ces transformations changent la distribution de génération et ne corrigent pas une connaissance erronée. Dans le TP, commencer par un décodage glouton pour comprendre le mécanisme, puis varier la température avec une graine de tirage explicite.",
       "question": "Une température plus faible garantit-elle une réponse correcte ?",
       "answer": "Non : elle concentre la distribution du modèle, y compris sur ses erreurs.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "La probabilité, à température tau, que le token t soit k sachant le préfixe vaut la composante k du softmax des logits z divisés par tau, avec tau strictement positif."
+        ],
+        "symboles": [
+          [
+            "p_\\tau",
+            "pé indice tau",
+            "Distribution de génération après réglage de la température."
+          ],
+          [
+            "x_t=k",
+            "x indice t égal à k",
+            "Événement : choisir le token d’identifiant k à la position t."
+          ],
+          [
+            "x_{<t}",
+            "tokens précédant t",
+            "Contexte utilisé pour calculer les logits."
+          ],
+          [
+            "\\mid",
+            "sachant",
+            "Conditionnement sur le préfixe."
+          ],
+          [
+            "z",
+            "zède",
+            "Vecteur des logits, avec une composante par token du vocabulaire."
+          ],
+          [
+            "\\tau",
+            "tau",
+            "Température, un scalaire positif qui règle la concentration de la distribution."
+          ],
+          [
+            "z/\\tau",
+            "z divisé par tau",
+            "Division de chaque logit par le même scalaire avant le softmax."
+          ],
+          [
+            "\\operatorname{softmax}(z/\\tau)_k",
+            "composante k du softmax de z sur tau",
+            "Probabilité du token k après normalisation."
+          ],
+          [
+            "\\tau>0",
+            "tau strictement supérieur à zéro",
+            "Condition nécessaire à cette formule."
+          ]
+        ],
+        "sens": "Une petite température accentue les écarts entre logits et concentre les probabilités. Une grande température les atténue et rend la distribution plus uniforme.",
+        "attention": "On divise les logits, pas les probabilités déjà normalisées. Tau égal à zéro rend l’écriture indéfinie ; le décodage glouton est un choix séparé, ou une limite quand tau tend vers zéro avec un maximum unique. Une température basse ne garantit pas l’exactitude de la réponse."
+      }
     },
     {
       "day": 5,
@@ -2354,7 +5536,62 @@
       "notes": "V désigne ici l'ensemble des positions valides, et non la taille du vocabulaire utilisée précédemment ; le préciser oralement. Pour éviter l'ambiguïté, parler de positions évaluées. Une distribution uniforme sur dix tokens a une perplexité de dix lorsque ces dix tokens sont les cibles possibles. Une perplexité de un correspond à une probabilité un sur les cibles observées dans cette évaluation, limite idéale. La perplexité d'un modèle à caractères et celle d'un modèle à sous-mots n'ont pas la même unité de normalisation. Dans le TP, les premiers symboles aléatoires restent intrinsèquement difficiles à prédire.",
       "question": "Que vaut exp(log(8)) ?",
       "answer": "8 ; c’est la perplexité d’un choix uniforme parmi huit possibilités.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "La perplexité vaut l’exponentielle de moins un sur M fois la somme, sur les positions t appartenant à V calligraphique, du logarithme de la probabilité du token x t sachant les tokens précédents.",
+          "M est égal au cardinal de V calligraphique, c’est-à-dire au nombre de positions valides."
+        ],
+        "symboles": [
+          [
+            "\\operatorname{PPL}",
+            "perplexité",
+            "Exponentielle de la perte moyenne de log-vraisemblance négative."
+          ],
+          [
+            "\\exp",
+            "exponentielle",
+            "Fonction inverse du logarithme naturel."
+          ],
+          [
+            "\\mathcal V",
+            "V calligraphique",
+            "Ensemble des positions valides, après exclusion du padding et des positions ignorées."
+          ],
+          [
+            "t\\in\\mathcal V",
+            "t appartient à V calligraphique",
+            "Seules ces positions sont incluses dans la somme."
+          ],
+          [
+            "\\sum_{t\\in\\mathcal V}",
+            "somme sur les t appartenant à V calligraphique",
+            "Addition des log-probabilités de tous les tokens évalués."
+          ],
+          [
+            "M=|\\mathcal V|",
+            "M égale le cardinal de V calligraphique",
+            "M est le nombre de positions valides ; les barres simples désignent ici un cardinal."
+          ],
+          [
+            "p_\\theta(x_t\\mid x_{<t})",
+            "probabilité de x t sachant les précédents, sous le modèle thêta",
+            "Probabilité attribuée par le modèle au token réellement observé."
+          ],
+          [
+            "\\log",
+            "logarithme naturel",
+            "Logarithme en base e, cohérent avec l’exponentielle utilisée."
+          ],
+          [
+            "-\\frac1M",
+            "moins un sur M",
+            "Calcule la moyenne négative, en supposant M strictement positif."
+          ]
+        ],
+        "sens": "La perplexité est une transformation de la perte : une meilleure log-probabilité moyenne donne une perplexité plus faible. Une perte égale à log(8), par exemple, correspond à une perplexité de 8.",
+        "attention": "V calligraphique représente ici des positions, pas le vocabulaire ni la matrice des valeurs d’attention. Comparer des perplexités exige la même tokenisation et le même protocole d’évaluation. La moyenne se calcule sur tous les tokens valides, sans moyenner naïvement des moyennes de batches de tailles différentes."
+      }
     },
     {
       "day": 5,
@@ -2368,7 +5605,61 @@
       "notes": "Dans une multi-head attention standard, la largeur totale des clés et celle des valeurs valent souvent d, donc d_KV=d. Des variantes à clés et valeurs partagées changent ce facteur. Le cache contient un tenseur K et un tenseur V par couche, batch et position. Pour chaque nouveau token, on ne recalcule pas les projections du passé, mais on doit toujours comparer sa requête aux clés conservées. La mémoire croît donc avec la longueur de contexte. Le mini-modèle du TP recalcule volontairement le préfixe complet pour rester lisible ; il n'implémente pas de cache.",
       "question": "Le cache supprime-t-il le besoin de consulter les tokens passés ?",
       "answer": "Non : il réutilise leurs clés et valeurs déjà calculées.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "La mémoire du cache clés-valeurs vaut approximativement deux fois B fois L fois n fois d indice K V, multiplié par le nombre d’octets par élément."
+        ],
+        "symboles": [
+          [
+            "M_{KV}",
+            "emme indice K V",
+            "Mémoire totale du cache de clés et valeurs, exprimée ici en octets."
+          ],
+          [
+            "\\approx",
+            "approximativement égal à",
+            "Estimation qui ignore notamment les surcoûts d’allocation."
+          ],
+          [
+            "2",
+            "deux",
+            "Deux familles de tenseurs à stocker : les clés et les valeurs."
+          ],
+          [
+            "B",
+            "bé majuscule",
+            "Nombre de séquences dans le batch."
+          ],
+          [
+            "L",
+            "elle majuscule",
+            "Nombre de couches dont on conserve le cache."
+          ],
+          [
+            "n",
+            "enne",
+            "Nombre de positions déjà mises en cache par séquence."
+          ],
+          [
+            "d_{KV}",
+            "d indice K V",
+            "Largeur totale des clés, ou des valeurs, toutes têtes KV réunies, pour un token et une couche."
+          ],
+          [
+            "\\times",
+            "multiplié par",
+            "Produit des dimensions et de la taille d’un élément."
+          ],
+          [
+            "\\text{octets par element}",
+            "octets par élément",
+            "Taille du type numérique utilisé : par exemple deux octets pour float16."
+          ]
+        ],
+        "sens": "Le cache évite de recalculer les clés et valeurs des tokens précédents pendant la génération. Son volume croît linéairement avec le batch, le nombre de couches et la longueur mémorisée.",
+        "attention": "Le facteur deux suppose la même largeur et le même type numérique pour K et V. d_KV inclut déjà toutes les têtes KV : ne pas remultiplier par leur nombre. Cette estimation exclut les poids du modèle et les autres buffers. En attention multi-têtes standard d_KV = d ; le partage des têtes KV peut le réduire."
+      }
     },
     {
       "day": 5,
@@ -2384,7 +5675,67 @@
       "answer": "16×16×3 = 768.",
       "refs": [
         "vit"
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "Le nombre de patches n vaut H fois W divisé par P au carré. Chaque patch aplati x indice i appartient à l’espace réel de dimension P au carré fois C.",
+          "z indice i vaut x indice i fois W indice E, plus p indice i."
+        ],
+        "symboles": [
+          [
+            "H,\\ W",
+            "ache ; double vé",
+            "Hauteur et largeur de l’image, en pixels."
+          ],
+          [
+            "P",
+            "pé majuscule",
+            "Longueur du côté d’un patch carré, en pixels."
+          ],
+          [
+            "P^2",
+            "P au carré",
+            "Nombre de pixels spatiaux d’un patch."
+          ],
+          [
+            "C",
+            "cé majuscule",
+            "Nombre de canaux, par exemple trois pour une image RGB."
+          ],
+          [
+            "n=HW/P^2",
+            "n égale H fois W sur P au carré",
+            "Nombre de patches non chevauchants, avant l’ajout éventuel de tokens spéciaux."
+          ],
+          [
+            "x_i\\in\\mathbb R^{P^2C}",
+            "x i appartient à l’espace réel de dimension P au carré fois C",
+            "Vecteur des pixels du patch i, après aplatissement."
+          ],
+          [
+            "W_E",
+            "W indice E",
+            "Matrice de projection apprise de taille (P²C) × d."
+          ],
+          [
+            "p_i",
+            "pé minuscule indice i",
+            "Vecteur de position associé au patch i, de dimension d."
+          ],
+          [
+            "z_i",
+            "zède indice i",
+            "Représentation du patch de dimension d, après projection et ajout de position."
+          ],
+          [
+            "x_iW_E",
+            "x i fois W E",
+            "Produit matriciel écrit avec x_i sous forme de vecteur ligne."
+          ]
+        ],
+        "sens": "Une image est convertie en séquence de patches. Chaque patch est aplati, projeté dans l’espace du Transformer, puis enrichi de son information de position.",
+        "attention": "On suppose H et W divisibles par P, avec des patches carrés non chevauchants. P désigne ici une taille de patch, pas un nombre de paramètres. Le p_i minuscule est un vecteur de position, pas une probabilité ; la formule de n exclut un éventuel token CLS."
+      }
     },
     {
       "day": 5,
@@ -2398,7 +5749,58 @@
       "notes": "Le dernier rapport porte uniquement sur les matrices d'attention des tokens visuels sans token de classification. En ajoutant ce token, le rapport exact devient 785²/197², légèrement différent de seize. Cette précision montre l'intérêt de distinguer une approximation d'ordre de grandeur d'un calcul exact. La projection de chaque patch change aussi avec P ; tout le coût du modèle ne suit donc pas nécessairement le même facteur. Des patches plus petits gardent une granularité spatiale plus fine, mais le compromis dépend de la tâche, des données et du budget.",
       "question": "Diviser la taille de patch par deux double-t-il n ?",
       "answer": "Non : n est multiplié par quatre pour une image 2D.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Deux cent vingt-quatre divisé par seize, le quotient au carré, vaut cent quatre-vingt-seize.",
+          "Deux cent vingt-quatre divisé par huit, le quotient au carré, vaut sept cent quatre-vingt-quatre.",
+          "Sept cent quatre-vingt-quatre au carré divisé par cent quatre-vingt-seize au carré vaut seize."
+        ],
+        "symboles": [
+          [
+            "224",
+            "deux cent vingt-quatre",
+            "Hauteur et largeur en pixels de l’image carrée."
+          ],
+          [
+            "16,\\ 8",
+            "seize ; huit",
+            "Deux tailles possibles pour le côté d’un patch carré."
+          ],
+          [
+            "224/16,\\ 224/8",
+            "deux cent vingt-quatre sur seize ; sur huit",
+            "Nombres de patches le long d’un seul côté : 14 et 28."
+          ],
+          [
+            "(224/16)^2",
+            "le quotient deux cent vingt-quatre sur seize, au carré",
+            "Nombre total de patches de 16 × 16 pixels : 14 × 14 = 196."
+          ],
+          [
+            "(224/8)^2",
+            "le quotient deux cent vingt-quatre sur huit, au carré",
+            "Nombre total de patches de 8 × 8 pixels : 28 × 28 = 784."
+          ],
+          [
+            "196,\\ 784",
+            "cent quatre-vingt-seize ; sept cent quatre-vingt-quatre",
+            "Longueurs des deux séquences de patches, sans token spécial."
+          ],
+          [
+            "784^2/196^2",
+            "sept cent quatre-vingt-quatre au carré sur cent quatre-vingt-seize au carré",
+            "Rapport des nombres de paires de patches dans l’attention dense."
+          ],
+          [
+            "16",
+            "seize",
+            "Facteur de croissance du nombre de scores d’attention lorsque la taille du patch est divisée par deux."
+          ]
+        ],
+        "sens": "Diviser par deux le côté des patches multiplie par quatre leur nombre. Comme chaque patch peut interagir avec tous les autres, le nombre de paires est alors multiplié par seize.",
+        "attention": "Le carré dans la première ligne compte les deux axes de l’image ; le carré dans la deuxième ligne compte les paires de tokens. Le facteur seize concerne les scores et le terme quadratique de l’attention, pas nécessairement le temps total du modèle ni toutes ses allocations mémoire."
+      }
     },
     {
       "day": 5,
@@ -2489,7 +5891,46 @@
       "notes": "Les quatre premiers symboles sont choisis dans un alphabet de huit possibilités. Ils ne peuvent pas tous être déduits du préfixe ; une partie de la perte est donc irréductible pour cette distribution. Les répétitions suivantes constituent les positions de copie prévisibles. Le découpage se fait sur les motifs de quatre symboles, avant la répétition, pour éviter qu'une séquence identique soit présente dans plusieurs partitions. Il s'agit d'une tâche synthétique de structure séquentielle, pas d'une évaluation linguistique. La métrique de copie complète la perplexité et permet de distinguer apprentissage de la règle et prédiction des symboles initiaux.",
       "question": "Pourquoi ne pas exiger une perte globale nulle ?",
       "answer": "Les symboles initiaux du motif sont aléatoires et ne sont pas entièrement prévisibles.",
-      "refs": []
+      "refs": [],
+      "lecture_formule": {
+        "lecture": [
+          "Token de début de séquence, puis a, b, c, d ; à nouveau a, b, c, d ; une troisième fois a, b, c, d ; puis token de fin de séquence."
+        ],
+        "symboles": [
+          [
+            "\\langle BOS\\rangle",
+            "token de début de séquence",
+            "BOS signifie Begin Of Sequence. C’est un symbole spécial du vocabulaire."
+          ],
+          [
+            "\\langle EOS\\rangle",
+            "token de fin de séquence",
+            "EOS signifie End Of Sequence. Le modèle apprend notamment à prédire ce symbole."
+          ],
+          [
+            "a,\\ b,\\ c,\\ d",
+            "a ; bé ; cé ; dé",
+            "Quatre tokens du motif à répéter ; ces lettres ne désignent ici ni des dimensions ni des paramètres."
+          ],
+          [
+            "\\langle\\ \\rangle",
+            "chevrons",
+            "Délimitent le nom d’un token spécial ; ils ne représentent pas un produit scalaire."
+          ],
+          [
+            ",",
+            "puis",
+            "Sépare les positions successives dans cette représentation de la séquence."
+          ],
+          [
+            "a,b,c,d\\;\\text{repete trois fois}",
+            "le motif a, b, c, d répété trois fois",
+            "Dépendance synthétique que le modèle doit apprendre à reproduire."
+          ]
+        ],
+        "sens": "Cette tâche artificielle rend visibles les dépendances entre tokens : le modèle doit retrouver le motif, le répéter et s’arrêter. L’exemple comporte 14 tokens si l’on compte BOS et EOS.",
+        "attention": "L’exemple illustre la structure du jeu de données du TP, pas une équation algébrique. Prédire une répétition sur ce jeu ne démontre pas une compréhension générale du langage. L’entraînement doit toujours décaler les cibles d’un token."
+      }
     },
     {
       "day": 5,
@@ -2605,7 +6046,61 @@
         "MLP : mélange dense des caractéristiques.",
         "CNN : localité et partage spatial.",
         "Transformer : interactions dépendant du contenu."
-      ]
+      ],
+      "lecture_formule": {
+        "lecture": [
+          "Les données passent dans le modèle paramétré par thêta ; les prédictions permettent de calculer la perte L calligraphique ; la rétropropagation calcule son gradient par rapport à thêta ; l’optimiseur utilise ce gradient pour obtenir les paramètres mis à jour, thêta prime."
+        ],
+        "symboles": [
+          [
+            "\\text{donnees}",
+            "données",
+            "Entrées du modèle ; les cibles participent aussi au calcul de la perte supervisée même si elles ne sont pas dessinées ici."
+          ],
+          [
+            "f_\\theta",
+            "effe indice thêta",
+            "Fonction représentée par le réseau, avec ses paramètres θ."
+          ],
+          [
+            "\\mathcal L",
+            "L calligraphique",
+            "Objectif scalaire calculé à partir des prédictions et des cibles dans le cadre supervisé."
+          ],
+          [
+            "\\nabla",
+            "nabla",
+            "Symbole qui désigne un gradient."
+          ],
+          [
+            "\\nabla_\\theta\\mathcal L",
+            "gradient de L par rapport à thêta",
+            "Ensemble des dérivées partielles de la perte par rapport à chacun des paramètres."
+          ],
+          [
+            "\\xrightarrow{\\rm backprop}",
+            "puis, par rétropropagation",
+            "Étape qui applique la règle de la chaîne pour calculer les dérivées."
+          ],
+          [
+            "\\xrightarrow{\\rm optimiseur}",
+            "puis, par l’optimiseur",
+            "Étape qui détermine la mise à jour à partir du gradient et, selon l’algorithme, de son état interne."
+          ],
+          [
+            "\\theta'",
+            "thêta prime",
+            "Nouvelles valeurs des paramètres après une étape ; le prime n’est pas ici une dérivée."
+          ],
+          [
+            "\\longrightarrow",
+            "conduit à » ou « passe dans",
+            "Flèche de déroulement du calcul ; elle n’exprime pas une égalité."
+          ]
+        ],
+        "sens": "Ce schéma rassemble la boucle d’apprentissage : prédire, mesurer l’erreur, calculer les dérivées et mettre à jour les paramètres. Les nouvelles valeurs servent au passage suivant.",
+        "attention": "La rétropropagation calcule des gradients ; elle ne choisit pas à elle seule la mise à jour. C’est l’optimiseur qui effectue cette mise à jour. Le gradient n’est ni une probabilité ni une nouvelle prédiction."
+      }
     },
     {
       "day": 5,

@@ -6,8 +6,8 @@ from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
-PDF = "CYBERSUP-Deep-Learning-M2-35h-v3.pdf"
-PPTX = "CYBERSUP-Deep-Learning-M2-35h-v3.pptx"
+PDF = "CYBERSUP-Deep-Learning-M2-35h-v4.pdf"
+PPTX = "CYBERSUP-Deep-Learning-M2-35h-v4.pptx"
 
 
 def expected_files():
@@ -23,7 +23,7 @@ def expected_files():
     selected += sorted((ROOT / "docs").glob("*.md"))
     selected += sorted((ROOT / "notebooks/_shared").glob("*.py"))
     selected += sorted((ROOT / "scripts").glob("*.py"))
-    selected += [OUT / "sources/formules.tex", OUT / "sources/cours.json"]
+    selected += [OUT / "sources/formules.tex", OUT / "sources/cours.json", OUT / "sources/lecture-formules.json"]
     selected += [OUT / "sources/illustrations.md"]
     selected += sorted((OUT / "sources/images").glob("*.png"))
     teacher = {p.relative_to(ROOT).as_posix(): p for p in selected}

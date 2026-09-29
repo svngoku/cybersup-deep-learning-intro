@@ -24,12 +24,12 @@ Chaque journée totalise 420 minutes de formation effective ; pauses et déjeune
 
 ## Supports du cours
 
-- [PowerPoint avec les notes techniques](output/CYBERSUP-Deep-Learning-M2-35h-v3.pptx) et [PDF des diapositives](output/CYBERSUP-Deep-Learning-M2-35h-v3.pdf).
+- [PowerPoint avec les notes techniques](output/CYBERSUP-Deep-Learning-M2-35h-v4.pptx) et [PDF des diapositives](output/CYBERSUP-Deep-Learning-M2-35h-v4.pdf).
 - [Guide du formateur](output/Guide-formateur.md), [corrigés des notebooks](notebooks/formateur/) et [sources LaTeX](output/sources/formules.tex).
 - [Pack étudiant](output/CYBERSUP-Deep-Learning-M2-Pack-etudiant.zip) et [pack formateur complet](output/CYBERSUP-Deep-Learning-M2-Pack-formateur.zip).
 - [Guide Colab](docs/COLAB.md) : accès privé, sauvegarde, export des résultats et dépannage.
 
-Dans PowerPoint, ouvrir le volet **Notes** ou le **mode Présentateur**. Les 69 équations sont composées depuis LaTeX et insérées en vectoriel ; les sources permettent de les modifier. Les textes et tableaux sont éditables. Les deux extraits O'Reilly restent des images et leurs [références sont documentées](output/sources/illustrations.md). Les polices du template sont Archivo Black, DM Sans et Roboto Mono. La version courante est la v3 ; la v2 est conservée comme version antérieure.
+Dans PowerPoint, ouvrir le volet **Notes** ou le **mode Présentateur**. Les 69 équations sont composées depuis LaTeX et insérées en vectoriel ; les sources permettent de les modifier. Les notes de chacune des 69 diapositives avec formule donnent sa lecture à voix haute, le tableau « symbole — nom à prononcer — sens ici », son interprétation et les points d’attention. Ces ajouts restent dans les notes et leur miroir dans le guide formateur ; les 135 diapositives projetées gardent leur contenu. Les textes et tableaux sont éditables. Les deux extraits O'Reilly restent des images et leurs [références sont documentées](output/sources/illustrations.md). Les polices du template sont Archivo Black, DM Sans et Roboto Mono. La version courante est la v4 ; les versions précédentes sont conservées.
 
 ## Organisation du dépôt
 
@@ -56,6 +56,7 @@ python -m pip install -r requirements.txt
 python -m ipykernel install --user --name cybersup-dl --display-name "Cybersup Deep Learning"
 python scripts/prepare_notebooks.py --check
 python scripts/validate_notebooks.py --execute --kernel cybersup-dl
+python scripts/prepare_formula_notes.py --check
 python scripts/build_packs.py --check
 ```
 
